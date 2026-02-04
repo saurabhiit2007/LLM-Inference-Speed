@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Flash Attention - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Decoding</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../decoding/decoding_strategies/" class="dropdown-item">Decoding strategies</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Memory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../memory/kv_caching/" class="dropdown-item">Kv caching</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Speed</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Flash Attention</a>
+</li>
+                                    
+<li>
+    <a href="../speculative_decoding/" class="dropdown-item">Speculative decoding</a>
+</li>
+                                    
+<li>
+    <a href="../vllm/" class="dropdown-item">Vllm</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../memory/kv_caching/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../speculative_decoding/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#flash-attention" class="nav-link">Flash Attention</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="flash-attention">Flash Attention</h1>
+<h3 id="1-overview">1. Overview</h3>
+<p>FlashAttention is a fast and memory-efficient implementation of the attention mechanism used in Transformer models. This repository explains what FlashAttention is, why it is faster than standard attention, and how it works under the hood, with a focus on interview preparation and practical understanding.</p>
+<hr />
+<h3 id="2-motivation">2. Motivation</h3>
+<p>Attention is the core operation behind Transformers, but standard attention becomes a major bottleneck for long sequences. The main problem is not only compute, but <strong>memory movement</strong>, which is often the true limiter on modern GPUs.</p>
+<p>FlashAttention was introduced to:</p>
+<ul>
+<li>Reduce memory usage  </li>
+<li>Minimize expensive GPU memory reads and writes  </li>
+<li>Scale efficiently to long sequences  </li>
+</ul>
+<hr />
+<h3 id="3-standard-attention-and-its-limitations">3. Standard Attention and Its Limitations</h3>
+<p>Given query, key, and value matrices:</p>
+<p>$$
+\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+$$</p>
+<p>While simple and elegant, this formulation has serious performance and memory issues for long sequences.</p>
+<h4 id="31-quadratic-memory-growth">3.1 Quadratic Memory Growth</h4>
+<p>Assume:</p>
+<ul>
+<li>Sequence length (N = 16{,}384)  </li>
+<li>FP16 precision (2 bytes per element)  </li>
+</ul>
+<p>The attention score matrix (QK^T) has:</p>
+<p>$$
+N^2 = 16{,}384^2 \approx 268 \text{ million elements}
+$$</p>
+<p>Memory required just for the attention matrix:</p>
+<p>$$
+268\text{M} \times 2 \text{ bytes} \approx 512 \text{ MB}
+$$</p>
+<p>This does not include the softmax output, gradients during training, or activations from other layers, which can easily exceed GPU memory limits.</p>
+<hr />
+<h4 id="32-excessive-memory-traffic">3.2 Excessive Memory Traffic</h4>
+<p>Standard attention performs multiple memory-heavy steps:</p>
+<ol>
+<li>Compute $QK^T$ and write to GPU global memory  </li>
+<li>Read $QK^T$ back to apply softmax  </li>
+<li>Write softmax output back to memory  </li>
+<li>Read softmax output again to compute weighted sum with (V)  </li>
+</ol>
+<p>Even with fast compute, repeated <strong>global memory reads and writes</strong> dominate runtime, making GPUs often memory-bound rather than compute-bound.</p>
+<hr />
+<h4 id="33-inefficient-for-long-sequences-code-example">3.3 Inefficient for Long Sequences (Code Example)</h4>
+<p>A simplified PyTorch-style implementation:</p>
+<pre><code class="language-python">import torch
+import math
+
+# Q, K, V shape: (batch, seq_len, num_heads, head_dim)
+scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d)
+attn = torch.softmax(scores, dim=-1)
+output = torch.matmul(attn, V)
+</code></pre>
+<p>What happens internally:</p>
+<ul>
+<li>scores materializes a full $N×N$ tensor</li>
+<li>attn creates another $N×N$ tensor</li>
+<li>Both tensors live in global memory</li>
+</ul>
+<p>As N grows, memory usage and latency grow quadratically.</p>
+<h4 id="34-numerical-issues-with-low-precision">3.4 Numerical Issues with Low Precision</h4>
+<p>With FP16 or BF16:</p>
+<ul>
+<li>Large dot products in $QK^T$ can overflow</li>
+<li>Small values can underflow to zero</li>
+</ul>
+<p>Standard attention often requires casting to FP32 for stability, which further increases memory usage and slows execution.</p>
+<h3 id="4-what-is-flashattention-and-how-it-works">4. What Is FlashAttention and How It Works</h3>
+<p>FlashAttention is an <strong>exact, memory-efficient attention algorithm</strong>. It computes the same result as standard attention but avoids materializing the full $N \times N$ attention matrix. This makes it much faster and reduces GPU memory usage, especially for long sequences.</p>
+<p>Key advantages:</p>
+<ul>
+<li>Handles long sequences efficiently (e.g., 4k+ tokens)  </li>
+<li>Works in FP16 and BF16 without numerical issues  </li>
+<li>Reduces memory bandwidth usage with minimal extra compute  </li>
+</ul>
+<p>FlashAttention achieves this through three main ideas: <strong>tiling</strong>, <strong>fused computation</strong>, and <strong>single-pass attention with online softmax</strong>.</p>
+<hr />
+<h4 id="41-tiling">4.1 Tiling</h4>
+<p>Instead of computing attention for the full sequence at once, FlashAttention splits the query, key, and value matrices into <strong>small tiles</strong> that fit into GPU shared memory.</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li>Sequence length: $N = 16{,}384$</li>
+<li>Tile size: $B = 128$  </li>
+</ul>
+<p>Memory usage for a tile: $128 \times 128 = 16{,}384$ elements (much smaller than $(16{,}384)^2$)  </p>
+<p><strong>Code-style intuition:</strong></p>
+<pre><code class="language-python"># pseudo-code for tiling
+for q_tile in Q_tiles:
+    for k_tile, v_tile in zip(K_tiles, V_tiles):
+        partial_scores = q_tile @ k_tile.T
+        # accumulate results incrementally
+
+</code></pre>
+<p>Benefit: Only a small block is in memory at a time, reducing GPU memory footprint dramatically.</p>
+<h4 id="42-fused-computation">4.2 Fused Computation</h4>
+<p>FlashAttention fuses multiple steps into a single kernel:</p>
+<ol>
+<li>Matrix multiplication $(Q \cdot K^T)$  </li>
+<li>Scaling by $(1/\sqrt{d})$  </li>
+<li>Softmax computation  </li>
+<li>Weighted sum with $(V)$  </li>
+</ol>
+<p><strong>Why this matters:</strong>  </p>
+<ul>
+<li>Standard attention performs each step separately, writing intermediate results to global memory.  </li>
+<li>FlashAttention keeps all intermediate computations <strong>in shared memory</strong>, avoiding costly reads/writes.</li>
+</ul>
+<p><strong>Example intuition:</strong></p>
+<pre><code class="language-python"># pseudo-code for fused attention
+output_tile = flash_attention(q_tile, k_tile, v_tile)
+</code></pre>
+<p>Here, flash_attention does all four steps at once, producing the final output for that tile.</p>
+<h4 id="43-single-pass-attention-and-online-softmax">4.3 Single-Pass Attention and Online Softmax</h4>
+<p>FlashAttention computes attention in one streaming pass:</p>
+<ul>
+<li>Compute partial scores for each tile</li>
+<li>Update running maximum and normalization term for softmax</li>
+<li>Accumulate output incrementally</li>
+</ul>
+<p>This allows numerically stable softmax in FP16/BF16 without ever storing the full attention matrix.</p>
+<p>Example numerical intuition:</p>
+<ul>
+<li>Tile 1 contributes scores [0.1, 0.5, 0.3]</li>
+<li>Tile 2 contributes [0.2, 0.4, 0.1]</li>
+<li>Running softmax computes the final normalized weights across tiles incrementally</li>
+</ul>
+<p>Benefit:</p>
+<ul>
+<li>Exact same result as full attention</li>
+<li>Avoids overflow/underflow in low precision</li>
+<li>Reduces memory reads/writes drastically</li>
+</ul>
+<h4 id="44-practical-impact">4.4 Practical Impact</h4>
+<ul>
+<li>Memory complexity reduced from $O(N^2) → O(N⋅B)$ where $B$ is tile size</li>
+<li>Enables training with longer sequences or larger batch sizes</li>
+<li>Provides 2–4x speedups for long sequences on modern GPUs</li>
+</ul>
+<p>Code example using PyTorch API:</p>
+<pre><code class="language-python">from flash_attn import flash_attn_func
+
+# q, k, v shape: (batch, seq_len, num_heads, head_dim)
+output = flash_attn_func(q, k, v, dropout_p=0.0, causal=False)
+</code></pre>
+<p>This produces exact attention results while being faster and more memory-efficient than standard attention.</p>
+<h3 id="5-when-flashattention-helps-and-when-it-does-not">5. When FlashAttention Helps (and When It Does Not)</h3>
+<p>Works best when:</p>
+<ul>
+<li>Sequence length is large (typically 2k tokens or more)</li>
+<li>Using FP16 or BF16</li>
+<li>Running on modern NVIDIA GPUs with fast shared memory</li>
+</ul>
+<p>Less useful when:</p>
+<ul>
+<li>Sequence length is very short</li>
+<li>CPU-based inference</li>
+<li>Custom attention patterns not supported by FlashAttention kernels</li>
+</ul>
+<h3 id="6-why-is-online-softmax-needed">6. Why is online softmax needed?</h3>
+<h4 id="61-numerical-stability-problem">6.1. Numerical Stability Problem</h4>
+<p>Standard softmax is computed as:</p>
+<p>$$
+\text{Softmax}(x_i) = \frac{e^{x_i}}{\sum_j e^{x_j}}
+$$</p>
+<p><strong>Issue in FP16/BF16:</strong></p>
+<ul>
+<li>FP16 has limited precision (~3–4 decimal digits) and a small exponent range.  </li>
+<li>Large values of $(x_i)$ (e.g., 50) cause (e^{x_i}) to <strong>overflow</strong>.  </li>
+<li>Very negative values of $(x_i)$ (e.g., -50) cause $(e^{x_i})$ to <strong>underflow</strong> to zero.  </li>
+<li>Long sequences exacerbate the problem because summing hundreds or thousands of exponentials increases the risk of overflow/underflow.  </li>
+</ul>
+<p>Without precautions, computing softmax in FP16 can produce <strong>NaNs or zeros</strong>, breaking both training and inference.</p>
+<h4 id="62-why-online-softmax-helps">6.2. Why “Online” Softmax Helps</h4>
+<p>FlashAttention computes attention <strong>tile by tile</strong>, so it cannot store the full $N \times N$ attention matrix. To compute softmax correctly across the entire sequence in FP16/BF16, it uses <strong>online softmax</strong>.</p>
+<h4 id="how-it-works">How It Works</h4>
+<ol>
+<li>
+<p>Maintain a <strong>running maximum</strong> $m$ across tiles.</p>
+<ul>
+<li>Shift scores before exponentiating: $e^{x_i - m}$</li>
+<li>Prevents overflow in exponential.</li>
+</ul>
+</li>
+<li>
+<p>Maintain a <strong>running sum</strong> of exponentials across tiles.</p>
+<ul>
+<li>Partial sums from each tile are combined incrementally.  </li>
+<li>Ensures correct normalization for the softmax over the full sequence.</li>
+</ul>
+</li>
+<li>
+<p>Compute the weighted sum with $V$ <strong>incrementally</strong>.</p>
+<ul>
+<li>No full softmax matrix is stored in memory.  </li>
+<li>Output is accumulated as each tile is processed.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="example">Example</h4>
+<p>Suppose we have <strong>2 tiles</strong> with attention scores:</p>
+<ul>
+<li>Tile 1: <code>[0.1, 0.5, 0.3]</code>  </li>
+<li>Tile 2: <code>[0.2, 0.4, 0.1]</code></li>
+</ul>
+<p><strong>Standard softmax</strong> (if we could store all scores):</p>
+<p>$$
+\text{softmax}([0.1, 0.5, 0.3, 0.2, 0.4, 0.1])
+$$</p>
+<p><strong>Online softmax computation:</strong></p>
+<ol>
+<li>
+<p><strong>Tile 1</strong>  </p>
+<ul>
+<li>Running max (m = 0.5)  </li>
+<li>Compute shifted exponentials: <code>[exp(0.1-0.5), exp(0.5-0.5), exp(0.3-0.5)] ≈ [0.67, 1.0, 0.82]</code>  </li>
+<li>Running sum (s = 0.67 + 1.0 + 0.82 = 2.49)  </li>
+<li>Partial weighted sum with $V$ stored in output</li>
+</ul>
+</li>
+<li>
+<p><strong>Tile 2</strong>  </p>
+<ul>
+<li>New max $m = \max(0.5, 0.4) = 0.5$ (same in this case)  </li>
+<li>Shifted exponentials: <code>[exp(0.2-0.5), exp(0.4-0.5), exp(0.1-0.5)] ≈ [0.74, 0.90, 0.61]</code>  </li>
+<li>Update running sum: (s = 2.49 + 0.74 + 0.90 + 0.61 = 4.74)  </li>
+<li>Accumulate weighted sum with $V$</li>
+</ul>
+</li>
+<li>
+<p><strong>Normalization</strong>  </p>
+<ul>
+<li>Each accumulated output is divided by the final sum (s = 4.74)  </li>
+<li>Produces <strong>exact same softmax result</strong> as computing on the full sequence</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="key-benefits">Key Benefits</h4>
+<ul>
+<li>Computes <strong>exact attention</strong> even in FP16/BF16  </li>
+<li>Works efficiently with <strong>long sequences</strong> and <strong>large tiles</strong>  </li>
+<li>Avoids storing huge intermediate matrices  </li>
+<li>Reduces GPU memory usage and memory bandwidth overhead</li>
+</ul>
+<blockquote>
+<p>In short: Online softmax allows FlashAttention to compute attention tile by tile while staying numerically stable and memory-efficient.</p>
+</blockquote>
+<h3 id="7-end-to-end-flashattention-example">7. End-to-End FlashAttention Example</h3>
+<p>Suppose we have:</p>
+<ul>
+<li>Sequence length $N = 8$ (small for simplicity)  </li>
+<li>Head dimension $d = 2$  </li>
+<li>Tile size $B = 4$  </li>
+</ul>
+<p>We want to compute attention for a single head:</p>
+<p>$$
+\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+$$</p>
+<hr />
+<h4 id="step-1-prepare-q-k-v">Step 1: Prepare Q, K, V</h4>
+<pre><code class="language-python">import torch
+import math
+
+Q = torch.tensor([[0.1, 0.2],
+                  [0.3, 0.1],
+                  [0.0, 0.4],
+                  [0.5, 0.2],
+                  [0.3, 0.3],
+                  [0.1, 0.5],
+                  [0.4, 0.0],
+                  [0.2, 0.1]])  # shape: (8, 2)
+
+K = Q.clone()  # for simplicity
+V = torch.arange(8*2).reshape(8,2).float()  # dummy value matrix
+</code></pre>
+<h4 id="step-2-split-into-tiles">Step 2: Split into Tiles</h4>
+<p>To reduce memory usage, FlashAttention splits the sequence into smaller <strong>tiles</strong> that fit into GPU shared memory.</p>
+<ul>
+<li>Tile size (B=4) → 2 tiles along the sequence  </li>
+</ul>
+<pre><code class="language-python"># Split Q, K, V into tiles
+Q_tiles = [Q[:4], Q[4:]]  # tile 1 and tile 2
+K_tiles = [K[:4], K[4:]]
+V_tiles = [V[:4], V[4:]]
+</code></pre>
+<p>Benefit: Only a small portion of the sequence is in memory at a time, avoiding the need to materialize the full attention matrix.</p>
+<h4 id="step-3-process-tile-1">Step 3: Process Tile 1</h4>
+<ol>
+<li>
+<p>Compute partial scores in shared memory:</p>
+<p>$$
+\text{scores} = Q_\text{tile1} \cdot K_\text{tile1}^T / \sqrt{d}
+$$</p>
+<p><code>python
+scores_tile1 = Q_tiles[0] @ K_tiles[0].T / math.sqrt(2)</code></p>
+</li>
+<li>
+<p>Apply online softmax:</p>
+<ul>
+<li>Compute max of scores: m = scores_tile1.max(dim=1)</li>
+<li>Shift and exponentiate: exp_scores = torch.exp(scores_tile1 - m)</li>
+<li>Running sum: s = exp_scores.sum(dim=1)</li>
+<li>Partial weighted sum with V: output_tile1 = (exp_scores @ V_tiles[0]) / s</li>
+</ul>
+</li>
+</ol>
+<p>Memory benefit: only a 4×4 matrix exists at a time.</p>
+<h4 id="step-4-process-tile-2-incrementally">Step 4: Process Tile 2 Incrementally</h4>
+<ul>
+<li>Compute partial scores of Q_tile1 × K_tile2^T</li>
+<li>Update running max and running sum for online softmax</li>
+<li>Accumulate weighted outputs with V_tile2</li>
+<li>Repeat for Q_tile2 × K_tile1^T and Q_tile2 × K_tile2^T</li>
+</ul>
+<p>No full 8×8 attention matrix is ever materialized.</p>
+<h4 id="step-5-accumulate-output">Step 5: Accumulate Output</h4>
+<ul>
+<li>Incrementally compute the weighted sum across all tiles</li>
+<li>Resulting output shape (8, 2) matches standard attention</li>
+<li>Softmax computed exactly using online normalization</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

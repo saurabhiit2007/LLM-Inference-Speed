@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Decoding strategies - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Decoding</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Decoding strategies</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Memory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../memory/kv_caching/" class="dropdown-item">Kv caching</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Speed</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../speed/flash_attention/" class="dropdown-item">Flash Attention</a>
+</li>
+                                    
+<li>
+    <a href="../../speed/speculative_decoding/" class="dropdown-item">Speculative decoding</a>
+</li>
+                                    
+<li>
+    <a href="../../speed/vllm/" class="dropdown-item">Vllm</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../.." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../memory/kv_caching/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#decoding-strategies" class="nav-link">📦 Decoding Strategies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="decoding-strategies">📦 Decoding Strategies</h2>
+<h3 id="1-overview">1. Overview</h3>
+<p>Large Language Models output a probability distribution over the vocabulary at each decoding step. A <strong>decoding strategy</strong> defines how the next token is selected from this distribution.</p>
+<p>This page covers five commonly used decoding strategies:</p>
+<ol>
+<li>Greedy decoding  </li>
+<li>Beam search  </li>
+<li>Temperature sampling  </li>
+<li>Top-k sampling  </li>
+<li>Top-p sampling (nucleus sampling)</li>
+</ol>
+<hr />
+<h3 id="2-decoding-strategies-explained-with-examples">2. Decoding Strategies Explained with examples</h3>
+<p>Toy probability distribution used in examples. Assume the model predicts the next token after:</p>
+<pre><code>**"The cat sat on the"**
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>roof</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>moon</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>pizza</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="21-greedy-decoding">2.1. Greedy Decoding</h3>
+<h4 id="idea">Idea</h4>
+<p>Always select the token with the highest probability.</p>
+<h4 id="algorithm">Algorithm</h4>
+<pre><code>next_token = argmax(probabilities)
+Highest probability token is `mat`.
+Output: The cat sat on the mat
+</code></pre>
+<h4 id="edge-case">Edge Case</h4>
+<pre><code>If probabilities are very close: A: 0.31, B: 0.30, C: 0.29
+Greedy decoding always selects `A`, even when the model is uncertain.
+
+This often leads to repetitive or dull outputs.
+</code></pre>
+<h4 id="when-to-use">When to use</h4>
+<ul>
+<li>Debugging</li>
+<li>Baselines</li>
+<li>Deterministic generation</li>
+</ul>
+<h4 id="python-example">Python example</h4>
+<pre><code class="language-python">import torch
+
+probs = torch.tensor([0.40, 0.25, 0.15, 0.10, 0.05, 0.03, 0.02])
+next_token = torch.argmax(probs)
+print(next_token.item())
+</code></pre>
+<hr />
+<h3 id="22-beam-search">2.2 Beam Search</h3>
+<h4 id="idea_1">Idea</h4>
+<p>Beam search keeps multiple candidate sequences at each decoding step instead of a single one. It selects the sequence with the highest <strong>overall probability</strong>, not just the best local choice.</p>
+<h4 id="algorithm_1">Algorithm</h4>
+<ol>
+<li>Maintain <strong>B beams</strong>, where B is the beam width  </li>
+<li>At each step, expand every beam with all possible next tokens  </li>
+<li>Compute cumulative log probability for each expanded sequence  </li>
+<li>Keep the top B sequences  </li>
+<li>Repeat until an end condition is met</li>
+</ol>
+<h4 id="example">Example</h4>
+<blockquote>
+<p>Assume the next-token probabilities after:</p>
+<p><strong>"The cat sat on the"</strong></p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Beam width = 2</strong></p>
+<p><strong>Step 1</strong></p>
+<ul>
+<li>Beam 1: <code>"mat"</code> score = log(0.40)</li>
+<li>Beam 2: <code>"floor"</code> score = log(0.25)</li>
+</ul>
+<p><strong>Step 2</strong></p>
+<ul>
+<li><code>"mat → quietly"</code> score = log(0.40) + log(0.30)</li>
+<li><code>"floor → loudly"</code> score = log(0.25) + log(0.50)</li>
+</ul>
+<p>Even if <code>"quietly"</code> was locally better, <code>"floor → loudly"</code> may win due to higher cumulative probability.</p>
+<p>Final output is the sequence with the highest total score.</p>
+</blockquote>
+<hr />
+<h4 id="edge-case_1">Edge Case</h4>
+<p>Beam search tends to favor <strong>safe, high-probability continuations</strong>, which can reduce diversity. This behavior becomes obvious in conversational or creative tasks.</p>
+<blockquote>
+<p>Assume the model is generating the next phrase after:</p>
+<p><strong>"I think that"</strong></p>
+<p>At a certain step, the model assigns probabilities like:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the</td>
+<td>0.35</td>
+</tr>
+<tr>
+<td>we</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>this</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>pizza</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>unicorn</td>
+<td>0.10</td>
+</tr>
+</tbody>
+</table>
+<p>With <strong>beam width = 3</strong>:</p>
+<p>All beams will keep continuations starting with:
+<code>"the"</code>
+<code>"we"</code>
+<code>"this"</code></p>
+<p>Tokens like <code>"pizza"</code> and <code>"unicorn"</code> are discarded early because their probabilities are lower.</p>
+<p>As decoding continues, beams converge to similar phrases:</p>
+<ul>
+<li>I think that the best way to...</li>
+<li>I think that we should...</li>
+<li>I think that this is...</li>
+</ul>
+<p>All beams are grammatically correct but <strong>nearly identical</strong>.</p>
+<p>If <strong>top-p sampling</strong> is used instead:</p>
+<ul>
+<li>Tokens like <code>"pizza"</code> or <code>"unicorn"</code> may occasionally be sampled</li>
+<li>
+<p>Outputs become more diverse:</p>
+<ul>
+<li>I think that pizza could solve this</li>
+<li>I think that unicorn stories are fun</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="when-to-use-beam-search">When to use beam search</h4>
+<ul>
+<li>Machine translation  </li>
+<li>Speech recognition  </li>
+<li>Structured text generation  </li>
+<li>Tasks where correctness matters more than diversity</li>
+</ul>
+<h4 id="when-not-to-use-beam-search">When not to use beam search</h4>
+<ul>
+<li>Chatbots  </li>
+<li>Story generation  </li>
+<li>Creative writing  </li>
+<li>Conversational agents</li>
+</ul>
+<h4 id="python-example-simplified">Python example (simplified)</h4>
+<pre><code class="language-python">from heapq import nlargest
+import math
+
+def beam_search_step(beams, probs, beam_width):
+    new_beams = []
+    for seq, score in beams:
+        for i, p in enumerate(probs):
+            new_seq = seq + [i]
+            new_score = score + math.log(p)
+            new_beams.append((new_seq, new_score))
+    return nlargest(beam_width, new_beams, key=lambda x: x[1])
+
+# Initial beam
+beams = [([], 0.0)]
+probs = [0.40, 0.25, 0.15]
+
+beams = beam_search_step(beams, probs, beam_width=2)
+print(beams)
+</code></pre>
+<hr />
+<h3 id="23-temperature-sampling">2.3 Temperature Sampling</h3>
+<h4 id="idea_2">Idea</h4>
+<p>Temperature controls how random the next-token selection is by scaling the model logits before applying softmax.</p>
+<p>It does not change which tokens are possible.<br />
+It changes <strong>how strongly the model prefers high-probability tokens</strong>.</p>
+<h4 id="formula">Formula</h4>
+<p>$$p_i = \text{softmax}(\text{logits}_i / T)$$</p>
+<p>Where:</p>
+<ul>
+<li><code>T</code> is the temperature</li>
+<li>lower <code>T</code> sharpens the distribution</li>
+<li>higher <code>T</code> flattens the distribution</li>
+</ul>
+<h4 id="effect-of-temperature">Effect of temperature</h4>
+<table>
+<thead>
+<tr>
+<th>Temperature</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T &lt; 1</td>
+<td>More deterministic</td>
+</tr>
+<tr>
+<td>T = 1</td>
+<td>Original distribution</td>
+</tr>
+<tr>
+<td>T &gt; 1</td>
+<td>More random</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_1">Example</h4>
+<blockquote>
+<p>Assume the next-token probabilities are:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>roof</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>moon</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>pizza</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Low temperature (T = 0.3)</strong></p>
+<ul>
+<li>Distribution becomes very sharp</li>
+<li><code>mat</code> dominates even more</li>
+</ul>
+<p>Output:
+The cat sat on the mat</p>
+<p>This behaves almost like greedy decoding.</p>
+<p><strong>High temperature (T = 1.5)</strong></p>
+<ul>
+<li>Distribution becomes flatter</li>
+<li>Low-probability tokens become more likely</li>
+</ul>
+<p>Possible output:
+The cat sat on the moon</p>
+</blockquote>
+<h4 id="edge-case_2">Edge Case</h4>
+<p>With very high temperature:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.18</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.17</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.16</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>roof</td>
+<td>0.14</td>
+</tr>
+<tr>
+<td>moon</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>pizza</td>
+<td>0.10</td>
+</tr>
+</tbody>
+</table>
+<p>The model loses strong preferences and may generate incoherent text:</p>
+<pre><code>The cat sat on pizza quantum sky
+</code></pre>
+<h4 id="when-temperature-helps">When temperature helps</h4>
+<ul>
+<li>Creative writing</li>
+<li>Brainstorming</li>
+<li>Open-ended dialogue</li>
+</ul>
+<h4 id="when-temperature-hurts">When temperature hurts</h4>
+<ul>
+<li>Factual tasks</li>
+<li>Code generation</li>
+<li>Structured outputs</li>
+</ul>
+<h4 id="python-example_1">Python example</h4>
+<pre><code class="language-python">import torch
+
+logits = torch.log(torch.tensor([0.40, 0.25, 0.15, 0.10, 0.05, 0.03, 0.02]))
+temperature = 1.2
+
+scaled_logits = logits / temperature
+probs = torch.softmax(scaled_logits, dim=0)
+
+next_token = torch.multinomial(probs, 1)
+print(next_token.item())
+</code></pre>
+<blockquote>
+<p>Note: Temperature controls randomness, not feasibility.
+It is usually combined with top-p or top-k sampling to avoid incoherent outputs.</p>
+</blockquote>
+<h3 id="24-top-k-sampling">2.4 Top-k Sampling</h3>
+<h4 id="idea_3">Idea</h4>
+<p>Top-k sampling restricts the model to sample only from the <strong>K most probable tokens</strong> at each decoding step. This prevents extremely unlikely tokens from being selected while still allowing randomness.</p>
+<h4 id="algorithm_2">Algorithm</h4>
+<ol>
+<li>Sort all tokens by probability  </li>
+<li>Keep only the top K tokens  </li>
+<li>Renormalize their probabilities  </li>
+<li>Sample one token  </li>
+</ol>
+<h3 id="example_2">Example</h3>
+<blockquote>
+<p>Assume the next-token probabilities are:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>roof</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>moon</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>pizza</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Top-k with k = 3</strong></p>
+<p>Tokens kept:</p>
+<ul>
+<li>mat</li>
+<li>floor</li>
+<li>sofa</li>
+</ul>
+<p>Tokens removed:</p>
+<ul>
+<li>bed, roof, moon, pizza</li>
+</ul>
+<p>Possible output: The cat sat on the sofa</p>
+</blockquote>
+<h4 id="edge-case_3">Edge Case</h4>
+<p><strong>Flat probability distribution</strong></p>
+<p>Assume: A: 0.11, B: 0.10, C: 0.10, D: 0.10, E: 0.10, F: 0.10, G: 0.10</p>
+<p>With <code>k = 3</code>:</p>
+<ul>
+<li>Only A, B, C are considered</li>
+<li>D, E, F, G are removed despite being equally likely</li>
+</ul>
+<p>This makes top-k <strong>sensitive to the choice of K</strong> and blind to the shape of the distribution.</p>
+<h4 id="when-top-k-works-well">When top-k works well</h4>
+<ul>
+<li>Moderate creativity with controlled randomness</li>
+<li>General text generation</li>
+<li>Chat systems with fixed diversity constraints</li>
+</ul>
+<h4 id="when-top-k-works-poorly">When top-k works poorly</h4>
+<ul>
+<li>Highly uncertain distributions</li>
+<li>Long-form creative writing</li>
+<li>Prompts with many equally valid continuations</li>
+</ul>
+<h4 id="python-example_2">Python example</h4>
+<pre><code class="language-python">import torch
+
+def top_k_sampling(probs, k):
+    topk_probs, topk_idx = torch.topk(probs, k)
+    topk_probs = topk_probs / topk_probs.sum()
+    sampled = torch.multinomial(topk_probs, 1)
+    return topk_idx[sampled]
+
+probs = torch.tensor([0.40, 0.25, 0.15, 0.10, 0.05, 0.03, 0.02])
+token = top_k_sampling(probs, k=3)
+print(token.item())
+</code></pre>
+<blockquote>
+<p>Note: Top-k sampling fixes the number of candidate tokens regardless of model confidence.
+This makes it simpler than top-p but less adaptive in practice.</p>
+</blockquote>
+<h3 id="25-top-p-sampling-nucleus-sampling">2.5 Top-p Sampling (Nucleus Sampling)</h3>
+<h4 id="idea_4">Idea</h4>
+<p>Top-p sampling selects the <strong>smallest possible set of tokens</strong> whose cumulative probability is at least <code>p</code>,<br />
+then samples from that set. Unlike top-k, the number of candidate tokens <strong>changes dynamically</strong> based on model confidence.</p>
+<h4 id="algorithm_3">Algorithm</h4>
+<ol>
+<li>Sort tokens by probability in descending order  </li>
+<li>Add tokens until cumulative probability ≥ <code>p</code>  </li>
+<li>Renormalize probabilities within this set  </li>
+<li>Sample one token  </li>
+</ol>
+<h4 id="example_3">Example</h4>
+<blockquote>
+<p>Assume the next-token probabilities are:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>roof</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>moon</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>pizza</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Top-p with p = 0.9</strong></p>
+<p>Cumulative probability:</p>
+<ul>
+<li>mat → 0.40  </li>
+<li>floor → 0.65  </li>
+<li>sofa → 0.80  </li>
+<li>bed → 0.90  </li>
+</ul>
+<p>Tokens selected:</p>
+<ul>
+<li>mat</li>
+<li>floor</li>
+<li>sofa</li>
+<li>bed</li>
+</ul>
+<p>Possible output: The cat sat on the bed</p>
+</blockquote>
+<h4 id="edge-case-key-difference-from-top-k">Edge Case (Key Difference from Top-k)</h4>
+<blockquote>
+<p><strong>Highly confident model</strong></p>
+<p>Assume: A: 0.85, B: 0.07, C: 0.03, D: 0.03, E: 0.02</p>
+<p>With <code>p = 0.9</code>:</p>
+<ul>
+<li>Selected tokens: A, B  </li>
+<li>Effective K = 2</li>
+</ul>
+<p>With top-k (k = 5):</p>
+<ul>
+<li>Selected tokens: A, B, C, D, E  </li>
+</ul>
+<p>Top-p automatically reduces randomness when the model is confident.</p>
+</blockquote>
+<h4 id="another-edge-case">Another Edge Case</h4>
+<blockquote>
+<p><strong>Uncertain model</strong></p>
+<p>Assume: A: 0.20, B: 0.20, C: 0.20, D: 0.20, E: 0.20</p>
+<p>With <code>p = 0.9</code>:</p>
+<ul>
+<li>Selected tokens: A, B, C, D, E  </li>
+<li>Effective K = 5</li>
+</ul>
+<p>Top-p expands the candidate set when uncertainty is high.</p>
+</blockquote>
+<h4 id="when-top-p-works-well">When top-p works well</h4>
+<ul>
+<li>Conversational agents</li>
+<li>Long-form text generation</li>
+<li>Creative writing with coherence</li>
+</ul>
+<h4 id="when-top-p-works-poorly">When top-p works poorly</h4>
+<ul>
+<li>Strictly deterministic tasks</li>
+<li>Code generation with exact formatting requirements</li>
+</ul>
+<h4 id="python-example_3">Python example</h4>
+<pre><code class="language-python">import torch
+
+def top_p_sampling(probs, p):
+    sorted_probs, sorted_idx = torch.sort(probs, descending=True)
+    cumulative = torch.cumsum(sorted_probs, dim=0)
+
+    cutoff_mask = cumulative &lt;= p
+    cutoff_mask[cutoff_mask.sum()] = True
+
+    filtered_probs = sorted_probs[cutoff_mask]
+    filtered_probs = filtered_probs / filtered_probs.sum()
+
+    sampled = torch.multinomial(filtered_probs, 1)
+    return sorted_idx[cutoff_mask][sampled]
+
+probs = torch.tensor([0.40, 0.25, 0.15, 0.10, 0.05, 0.03, 0.02])
+token = top_p_sampling(probs, p=0.9)
+print(token.item())
+</code></pre>
+<blockquote>
+<p>Note : Top-p sampling adapts to the probability distribution shape,
+making it more robust than top-k for real-world language generation.</p>
+</blockquote>
+<h3 id="3-pros-and-cons-of-decoding-strategies-in-large-language-models">3. Pros and Cons of Decoding Strategies in Large Language Models</h3>
+<h4 id="31-greedy-decoding">3.1 Greedy Decoding</h4>
+<h4 id="pros">Pros</h4>
+<ul>
+<li>Extremely fast and simple</li>
+<li>Fully deterministic and reproducible</li>
+<li>Easy to debug and analyze</li>
+<li>Works well when the model is very confident</li>
+</ul>
+<h4 id="cons">Cons</h4>
+<ul>
+<li>No diversity at all</li>
+<li>Easily gets stuck in repetitive loops</li>
+<li>Early mistakes cannot be corrected</li>
+<li>Often produces dull or incomplete responses</li>
+<li>Poor performance for long or open-ended generation</li>
+</ul>
+<hr />
+<h4 id="32-beam-search">3.2 Beam Search</h4>
+<h4 id="pros_1">Pros</h4>
+<ul>
+<li>Optimizes global sequence likelihood</li>
+<li>Reduces early local decision errors</li>
+<li>Produces fluent and grammatically correct text</li>
+<li>Effective for tasks with a single correct output</li>
+</ul>
+<h4 id="cons_1">Cons</h4>
+<ul>
+<li>Computationally expensive</li>
+<li>Produces generic and safe outputs</li>
+<li>Very low diversity</li>
+<li>All beams often converge to similar sequences</li>
+<li>Performs poorly for dialogue and creative tasks</li>
+</ul>
+<hr />
+<h4 id="33-temperature-sampling">3.3 Temperature Sampling</h4>
+<h4 id="pros_2">Pros</h4>
+<ul>
+<li>Simple and intuitive control over randomness</li>
+<li>Enables creative and diverse outputs</li>
+<li>Easy to combine with other sampling methods</li>
+<li>Useful for brainstorming and storytelling</li>
+</ul>
+<h4 id="cons_2">Cons</h4>
+<ul>
+<li>High temperature can cause incoherent text</li>
+<li>Low temperature collapses to greedy behavior</li>
+<li>Does not prevent sampling of very unlikely tokens</li>
+<li>Sensitive to temperature tuning</li>
+</ul>
+<hr />
+<h4 id="34-top-k-sampling">3.4 Top-k Sampling</h4>
+<h4 id="pros_3">Pros</h4>
+<ul>
+<li>Prevents extremely low-probability tokens</li>
+<li>Provides controlled randomness</li>
+<li>Simple to implement</li>
+<li>More diverse than greedy and beam search</li>
+</ul>
+<h4 id="cons_3">Cons</h4>
+<ul>
+<li>Fixed K ignores distribution shape</li>
+<li>Sensitive to the choice of K</li>
+<li>Removes valid tokens in flat distributions</li>
+<li>Not adaptive to model confidence</li>
+</ul>
+<hr />
+<h4 id="35-top-p-sampling-nucleus-sampling">3.5 Top-p Sampling (Nucleus Sampling)</h4>
+<h4 id="pros_4">Pros</h4>
+<ul>
+<li>Adapts automatically to model confidence</li>
+<li>Better diversity-quality tradeoff than top-k</li>
+<li>Stable across different prompts</li>
+<li>Widely used in modern chat models</li>
+</ul>
+<h4 id="cons_4">Cons</h4>
+<ul>
+<li>Slightly more complex than top-k</li>
+<li>Still stochastic and non-deterministic</li>
+<li>Can include many tokens in very flat distributions</li>
+<li>Less suitable for strictly deterministic tasks</li>
+</ul>
+<hr />
+<h3 id="4-high-level-comparison">4. High-level Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Diversity</th>
+<th>Determinism</th>
+<th>Adaptivity</th>
+<th>Typical Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Greedy</td>
+<td>Very low</td>
+<td>High</td>
+<td>No</td>
+<td>Baselines, debugging</td>
+</tr>
+<tr>
+<td>Beam Search</td>
+<td>Low</td>
+<td>Medium</td>
+<td>No</td>
+<td>Translation, ASR</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Medium to high</td>
+<td>Low</td>
+<td>Partial</td>
+<td>Creative text</td>
+</tr>
+<tr>
+<td>Top-k</td>
+<td>Medium</td>
+<td>Low</td>
+<td>No</td>
+<td>General generation</td>
+</tr>
+<tr>
+<td>Top-p</td>
+<td>Medium to high</td>
+<td>Low</td>
+<td>Yes</td>
+<td>Chat and dialogue</td>
+</tr>
+</tbody>
+</table>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
