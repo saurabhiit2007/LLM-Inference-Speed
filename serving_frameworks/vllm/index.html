@@ -13,23 +13,21 @@
       
       
       
-        <link rel="prev" href="decoding_strategies/decoding_strategies/">
       
       
-      
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
     
     
       
-        <title>Fine-Tuning Methods Documentation</title>
+        <title>Vllm - Fine-Tuning Methods Documentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#1-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +88,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Fine-Tuning Methods Documentation" class="md-header__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-header__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Vllm
             
           </span>
         </div>
@@ -223,7 +221,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Fine-Tuning Methods Documentation" class="md-nav__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-nav__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -250,32 +248,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -286,44 +262,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project layout
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -375,7 +313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="attention_optimization/flash_attention/" class="md-nav__link">
+      <a href="../../attention_optimization/flash_attention/" class="md-nav__link">
         
   
   
@@ -398,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="attention_optimization/speculative_decoding.md" class="md-nav__link">
+      <a href="../../attention_optimization/speculative_decoding.md" class="md-nav__link">
         
   
   
@@ -421,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="attention_optimization/vllm.md" class="md-nav__link">
+      <a href="../../attention_optimization/vllm.md" class="md-nav__link">
         
   
   
@@ -491,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="decoding_strategies/decoding_strategies/" class="md-nav__link">
+      <a href="../../decoding_strategies/decoding_strategies/" class="md-nav__link">
         
   
   
@@ -561,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="memory/kv_caching.md" class="md-nav__link">
+      <a href="../../memory/kv_caching.md" class="md-nav__link">
         
   
   
@@ -588,32 +526,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -624,44 +540,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project layout
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -683,8 +561,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -693,18 +569,162 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#2-the-kv-cache-bottleneck-in-llm-inference" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      2. The KV Cache Bottleneck in LLM Inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The KV Cache Bottleneck in LLM Inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-why-the-kv-cache-dominates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Why the KV Cache Dominates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-core-technology-pagedattention" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. The Core Technology: PagedAttention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The Core Technology: PagedAttention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-fragmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: Fragmentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-pagedattention" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: PagedAttention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-scheduling-continuous-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Scheduling: Continuous Batching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-modern-2025-2026-advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Modern (2025-2026) Advanced Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Modern (2025-2026) Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-speculative-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Speculative Decoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-automatic-prefix-caching-apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Automatic Prefix Caching (APC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-multi-lora-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Multi-LoRA Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-prefill-vs-decode-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Prefill vs Decode: Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-memory-pressure-and-preemption" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Memory Pressure and Preemption
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-architectural-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Architectural Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-useful-memory-approximation" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Useful Memory Approximation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q-as" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q &amp; As
     </span>
   </a>
   
@@ -729,21 +749,167 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
+  <h1>Vllm</h1>
+
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p><strong>vLLM</strong> is an open-source inference engine optimized for high-throughput, low-latency serving of large language models. Its core innovation, <strong>PagedAttention</strong>, rethinks KV cache management by applying principles similar to virtual memory systems in operating systems.</p>
+<p>The key contribution of vLLM is not faster kernels alone, but <strong>dramatically improved GPU memory utilization</strong>, enabling higher batch sizes, better multi-tenancy, and more predictable latency under load.</p>
+<hr />
+<hr />
+<h2 id="2-the-kv-cache-bottleneck-in-llm-inference">2. The KV Cache Bottleneck in LLM Inference<a class="headerlink" href="#2-the-kv-cache-bottleneck-in-llm-inference" title="Permanent link">&para;</a></h2>
+<h3 id="21-why-the-kv-cache-dominates">2.1 Why the KV Cache Dominates<a class="headerlink" href="#21-why-the-kv-cache-dominates" title="Permanent link">&para;</a></h3>
+<p>During autoregressive decoding, each generated token appends <strong>Key and Value tensors</strong> for every transformer layer. Over long sequences or many concurrent requests, the KV cache quickly becomes the dominant consumer of GPU memory.</p>
+<p>Key properties:
+- Grows linearly with sequence length
+- Must be retained across decoding steps
+- Is memory-bandwidth bound during decode</p>
+<hr />
+<hr />
+<h2 id="3-the-core-technology-pagedattention">3. The Core Technology: PagedAttention<a class="headerlink" href="#3-the-core-technology-pagedattention" title="Permanent link">&para;</a></h2>
+<p>The KV cache (the memory storing previous tokens to predict the next one) is the primary bottleneck in scaling LLMs.</p>
+<h3 id="the-problem-fragmentation">The Problem: Fragmentation<a class="headerlink" href="#the-problem-fragmentation" title="Permanent link">&para;</a></h3>
+<p>Standard inference engines allocate a contiguous "max-length" chunk of memory for every request.</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><strong>Over-reservation:</strong> Reserving 2048 tokens for a request that only generates 50.</li>
+<li><strong>Internal Fragmentation:</strong> Memory wasted inside the reserved block.</li>
+<li><strong>Waste:</strong> Up to 60-80% of VRAM is often left unused but "reserved."</li>
 </ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+<h3 id="the-solution-pagedattention">The Solution: PagedAttention<a class="headerlink" href="#the-solution-pagedattention" title="Permanent link">&para;</a></h3>
+<p>vLLM breaks the KV cache into fixed-size <strong>blocks</strong> (pages).</p>
+<ul>
+<li><strong>Logical Blocks:</strong> Sequential tokens in the prompt.</li>
+<li><strong>Physical Blocks:</strong> Non-contiguous memory addresses on the GPU.</li>
+<li><strong>Block Table:</strong> A mapping system that allows the model to access these blocks as if they were one continuous string.</li>
+</ul>
+<p><strong>Result:</strong> Waste is reduced to <strong>&lt;4%</strong>, allowing for significantly larger batch sizes.</p>
+<hr />
+<hr />
+<h2 id="4-scheduling-continuous-batching">4. Scheduling: Continuous Batching<a class="headerlink" href="#4-scheduling-continuous-batching" title="Permanent link">&para;</a></h2>
+<p>Traditional engines use "Static Batching," where the entire batch must finish before new requests start.</p>
+<ul>
+<li><strong>Iteration-Level Scheduling:</strong> vLLM schedules at the level of individual iterations. </li>
+<li><strong>Mechanism:</strong> As soon as one sequence in a batch hits an <code>&lt;EOS&gt;</code> (End of Sentence) token, a new request from the queue is inserted into its spot in the next iteration.</li>
+<li><strong>Outcome:</strong> Eliminates "bubbles" (idle time) in GPU utilization.</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-modern-2025-2026-advanced-features">5. Modern (2025-2026) Advanced Features<a class="headerlink" href="#5-modern-2025-2026-advanced-features" title="Permanent link">&para;</a></h2>
+<h3 id="a-speculative-decoding">A. Speculative Decoding<a class="headerlink" href="#a-speculative-decoding" title="Permanent link">&para;</a></h3>
+<p>vLLM implements speculative decoding where a <strong>smaller draft model</strong> (e.g., a 100M parameter model) predicts several tokens, and a <strong>larger target model</strong> (e.g., Llama 3 70B) verifies them in a single pass.
+* <strong>Benefit:</strong> Reduces latency by 2-3x for heavy models.</p>
+<h3 id="b-automatic-prefix-caching-apc">B. Automatic Prefix Caching (APC)<a class="headerlink" href="#b-automatic-prefix-caching-apc" title="Permanent link">&para;</a></h3>
+<p>For RAG or multi-turn chat, vLLM caches the KV blocks of common prefixes (like system prompts).
+* If two users share the same 1,000-token system prompt, vLLM stores it <strong>once</strong> in physical memory, and both requests point to the same blocks.</p>
+<h3 id="c-multi-lora-support">C. Multi-LoRA Support<a class="headerlink" href="#c-multi-lora-support" title="Permanent link">&para;</a></h3>
+<p>vLLM can serve one base model with hundreds of different fine-tuned "adapters" (LoRAs) simultaneously. 
+* It uses specialized <strong>SGMV (Shrink-Generalized Matrix-Vector)</strong> kernels to compute multiple different LoRAs in a single batch without a significant performance hit.</p>
+<hr />
+<hr />
+<h2 id="6-prefill-vs-decode-performance-characteristics">6. Prefill vs Decode: Performance Characteristics<a class="headerlink" href="#6-prefill-vs-decode-performance-characteristics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Characteristics</th>
+<th>Bottleneck</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prefill</td>
+<td>Parallel over tokens</td>
+<td>Compute-bound</td>
+</tr>
+<tr>
+<td>Decode</td>
+<td>Sequential token-by-token</td>
+<td>Memory-bandwidth-bound</td>
+</tr>
+</tbody>
+</table>
+<p>vLLM introduces <strong>Chunked Prefill</strong> to prevent long prompts from blocking decode for other users.</p>
+<hr />
+<hr />
+<h2 id="8-memory-pressure-and-preemption">8. Memory Pressure and Preemption<a class="headerlink" href="#8-memory-pressure-and-preemption" title="Permanent link">&para;</a></h2>
+<p>When GPU memory becomes constrained, vLLM supports <strong>preemption</strong> strategies:</p>
+<ul>
+<li><strong>Swap:</strong> Move KV blocks to CPU memory</li>
+<li><strong>Recompute:</strong> Drop KV blocks and recompute them later</li>
+</ul>
+<p>Recompute trades extra compute for lower memory pressure and is often preferred on fast GPUs.</p>
+<hr />
+<hr />
+<h2 id="9-architectural-comparison">9. Architectural Comparison<a class="headerlink" href="#9-architectural-comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">vLLM</th>
+<th style="text-align: left;">Hugging Face TGI</th>
+<th style="text-align: left;">NVIDIA TensorRT-LLM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Memory Mgmt</strong></td>
+<td style="text-align: left;">PagedAttention</td>
+<td style="text-align: left;">FlashAttention</td>
+<td style="text-align: left;">Paged KV Cache</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ease of Use</strong></td>
+<td style="text-align: left;">High (Pythonic)</td>
+<td style="text-align: left;">Medium (Rust/Go)</td>
+<td style="text-align: left;">Low (Complex Build)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Best For</strong></td>
+<td style="text-align: left;">General Throughput</td>
+<td style="text-align: left;">Stability/HF ecosystem</td>
+<td style="text-align: left;">Peak NVIDIA Perf</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="10-useful-memory-approximation">10. Useful Memory Approximation<a class="headerlink" href="#10-useful-memory-approximation" title="Permanent link">&para;</a></h2>
+<p>Approximate KV cache memory usage in bytes:</p>
+<div class="arithmatex">\[
+\text{KV Memory} \;\approx\; 2 \times L \times T \times H \times D_h \times B
+\]</div>
+<p>Where:
+- 2 accounts for <strong>Keys and Values</strong>
+- <span class="arithmatex">\(L\)</span> is the number of layers<br />
+- <span class="arithmatex">\(H\)</span> is the number of attention heads 
+- <span class="arithmatex">\(B\)</span> is the number of bytes per element (2 for FP16, 1 for FP8)
+- <span class="arithmatex">\(D_h\)</span> is the per-head hidden dimension
+- <span class="arithmatex">\(T\)</span> is the sequence length (number of cached tokens)</p>
+<p><strong>Example:</strong></p>
+<p>For <strong>Llama-3 8B</strong>:</p>
+<ul>
+<li><span class="arithmatex">\(L = 32\)</span></li>
+<li><span class="arithmatex">\(D_{\text{model}} = 4096\)</span></li>
+<li><span class="arithmatex">\(B = 2\)</span> (FP16)</li>
+</ul>
+<p>Per token KV cache memory:</p>
+<div class="arithmatex">\[
+2 \times 32 \times 4096 \times 2
+\approx 524{,}288 \text{ bytes} \approx 0.5 \text{ MB}
+\]</div>
+<p>Approximate totals:
+- 2k tokens → ~1 GB KV cache
+- 8k tokens → ~4 GB KV cache</p>
+<p>This linear scaling with sequence length explains why <strong>KV cache memory becomes the dominant bottleneck</strong> and motivates techniques such as <strong>PagedAttention</strong> in vLLM.</p>
+<hr />
+<hr />
+<h2 id="q-as">Q &amp; As<a class="headerlink" href="#q-as" title="Permanent link">&para;</a></h2>
+<p><strong>Q1: How does vLLM handle a situation where the GPU runs out of memory during a request?</strong>
+* <strong>A:</strong> It uses <strong>Preemption</strong>. It can either "Swap" (move blocks to CPU RAM) or "Recompute" (drop the blocks and re-calculate them later when memory is free).</p>
+<p><strong>Q2: What is the difference between the 'Prefill' and 'Decode' phases?</strong>
+* <strong>A:</strong> <strong>Prefill</strong> processes the input prompt (parallel/compute-bound). <strong>Decode</strong> generates tokens one by one (sequential/memory-bound). vLLM uses <strong>Chunked Prefill</strong> to prevent large prompts from stalling the generation of other users.</p>
+<p><strong>Q3: Why is vLLM better for multi-tenant SaaS?</strong>
+* <strong>A:</strong> Because of PagedAttention and Multi-LoRA support. It allows hosting many different "specialized" models on a single GPU cluster with minimal overhead.</p>
+<hr />
 
 
 
@@ -798,10 +964,10 @@ docs/
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "mathjax"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "mathjax"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

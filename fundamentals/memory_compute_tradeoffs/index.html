@@ -1,0 +1,1307 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A technical reference for LoRA, QLoRA, and other fine-tuning techniques.">
+      
+      
+        <meta name="author" content="Saurabh Goyal">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Memory compute tradeoffs - Fine-Tuning Methods Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-the-core-tradeoff" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-header__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Fine-Tuning Methods Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Memory compute tradeoffs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="lime"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/saurabhiit2007/LLM-Finetuning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-nav__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Fine-Tuning Methods Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/saurabhiit2007/LLM-Finetuning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Speed
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speed
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/flash_attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flash Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/speculative_decoding.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Speculative Decoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/vllm.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vLLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Decoding
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Decoding
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decoding_strategies/decoding_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decoding Strategies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Memory
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/kv_caching.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KV Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-core-tradeoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. The Core Tradeoff
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-memory-bottlenecks-in-llm-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Memory Bottlenecks in LLM Inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Memory Bottlenecks in LLM Inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-model-weights-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Model Weights (Static)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-kv-cache-dynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. KV Cache (Dynamic)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-activations-temporary" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Activations (Temporary)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quantization-trading-precision-for-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Quantization: Trading Precision for Memory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Quantization: Trading Precision for Memory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#weight-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weight Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kv-cache-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      KV Cache Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixed-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed Precision
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-kv-cache-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. KV Cache Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. KV Cache Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-query-attention-mqa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Query Attention (MQA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grouped-query-attention-gqa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grouped Query Attention (GQA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paged-attention-vllm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paged Attention (vLLM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-token-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Token Prediction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-recomputation-vs-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Recomputation vs Caching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Recomputation vs Caching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#activation-checkpointing-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activation Checkpointing (Training)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selective-recomputation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selective Recomputation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-architecture-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Model Architecture Choices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Model Architecture Choices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#width-vs-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Width vs Depth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ffn-expansion-ratio" class="md-nav__link">
+    <span class="md-ellipsis">
+      FFN Expansion Ratio
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-hardware-specific-tradeoffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Hardware-Specific Tradeoffs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Hardware-Specific Tradeoffs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memory-bandwidth-vs-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Bandwidth vs Compute
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tensor-core-utilization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Core Utilization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-memory-compute-decision-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Memory-Compute Decision Matrix
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Common Interview Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-modern-techniques-2024-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Modern Techniques (2024-2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Modern Techniques (2024-2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#awq-activation-aware-weight-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      AWQ (Activation-Aware Weight Quantization)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smoothquant" class="md-nav__link">
+    <span class="md-ellipsis">
+      SmoothQuant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fp8-h100" class="md-nav__link">
+    <span class="md-ellipsis">
+      FP8 (H100)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quip-aqlm" class="md-nav__link">
+    <span class="md-ellipsis">
+      QuIP# / AQLM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-practical-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Practical Guidelines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Key Takeaways
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Memory compute tradeoffs</h1>
+
+<h2 id="1-the-core-tradeoff">1. The Core Tradeoff<a class="headerlink" href="#1-the-core-tradeoff" title="Permanent link">&para;</a></h2>
+<p><strong>Memory Savings → Compute Overhead (Usually)</strong></p>
+<p>Techniques that reduce memory often require:</p>
+<ul>
+<li>Additional computation (quantization/dequantization)</li>
+<li>Recomputation instead of caching</li>
+<li>More complex kernels</li>
+</ul>
+<hr />
+<hr />
+<h2 id="2-memory-bottlenecks-in-llm-inference">2. Memory Bottlenecks in LLM Inference<a class="headerlink" href="#2-memory-bottlenecks-in-llm-inference" title="Permanent link">&para;</a></h2>
+<h3 id="1-model-weights-static">1. Model Weights (Static)<a class="headerlink" href="#1-model-weights-static" title="Permanent link">&para;</a></h3>
+<ul>
+<li>70B model in FP16: 140 GB</li>
+<li>Must fit in GPU memory</li>
+<li>Loaded repeatedly during decode (memory bandwidth bound)</li>
+</ul>
+<hr />
+<h3 id="2-kv-cache-dynamic">2. KV Cache (Dynamic)<a class="headerlink" href="#2-kv-cache-dynamic" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Grows with sequence length and batch size</li>
+<li>Often largest memory consumer in production</li>
+<li><strong>Formula</strong>: <code>2 × B × S × L × H × D × bytes</code></li>
+<li>B=batch, S=seq_len, L=layers, H=heads, D=head_dim</li>
+</ul>
+<hr />
+<h3 id="3-activations-temporary">3. Activations (Temporary)<a class="headerlink" href="#3-activations-temporary" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Intermediate tensors during forward pass</li>
+<li>Recomputed in inference (no backprop needed)</li>
+<li>~5-10% of total memory</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-quantization-trading-precision-for-memory">3. Quantization: Trading Precision for Memory<a class="headerlink" href="#3-quantization-trading-precision-for-memory" title="Permanent link">&para;</a></h2>
+<h3 id="weight-quantization">Weight Quantization<a class="headerlink" href="#weight-quantization" title="Permanent link">&para;</a></h3>
+<p><strong>FP16 → INT8 (8-bit)</strong></p>
+<ul>
+<li>2x memory reduction (2 bytes → 1 byte)</li>
+<li>Minimal accuracy loss (&lt;1% typically)</li>
+<li>Faster on hardware with INT8 support (Tensor Cores)</li>
+<li><strong>Compute</strong>: Dequantize to FP16 for matmul (overhead ~10%)</li>
+</ul>
+<hr />
+<p><strong>FP16 → INT4 (4-bit)</strong></p>
+<ul>
+<li>4x memory reduction</li>
+<li>Quality degradation possible (1-3% on benchmarks)</li>
+<li>Requires calibration data</li>
+<li><strong>Compute</strong>: More dequant overhead (~20-30%)</li>
+</ul>
+<hr />
+<p><strong>Techniques</strong>:</p>
+<div class="highlight"><pre><span></span><code>Per-Tensor: Single scale for entire tensor
+Per-Channel: Scale per output channel (better quality)
+Group Quantization: Scale per 128 elements (GPTQ, AWQ)
+
+GPTQ: Layer-wise quantization, minimizes error
+AWQ: Activation-aware, protects important weights
+</code></pre></div>
+<hr />
+<h3 id="kv-cache-quantization">KV Cache Quantization<a class="headerlink" href="#kv-cache-quantization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>KV cache in INT8 instead of FP16</li>
+<li>2x memory savings → 2x larger batch or sequence length</li>
+<li>Quality loss typically &lt;0.5%</li>
+<li>Growing adoption in production (2024+)</li>
+</ul>
+<hr />
+<h3 id="mixed-precision">Mixed Precision<a class="headerlink" href="#mixed-precision" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Keep critical layers in FP16 (first/last, attention)</li>
+<li>Quantize FFN layers to INT4</li>
+<li>Balance quality and memory</li>
+</ul>
+<hr />
+<hr />
+<h2 id="4-kv-cache-optimization">4. KV Cache Optimization<a class="headerlink" href="#4-kv-cache-optimization" title="Permanent link">&para;</a></h2>
+<h3 id="multi-query-attention-mqa">Multi-Query Attention (MQA)<a class="headerlink" href="#multi-query-attention-mqa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Standard: num_kv_heads = num_query_heads (e.g., 32)
+MQA: num_kv_heads = 1
+
+Memory reduction: 32x fewer KV parameters
+Tradeoff: Slight quality degradation
+Used in: Falcon, StarCoder
+</code></pre></div>
+<hr />
+<h3 id="grouped-query-attention-gqa">Grouped Query Attention (GQA)<a class="headerlink" href="#grouped-query-attention-gqa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>num_kv_heads &lt; num_query_heads
+Example: 8 KV heads, 32 query heads (4 queries per KV)
+
+Memory reduction: 4x fewer KV parameters
+Tradeoff: Minimal quality loss
+Used in: LLaMA-2, Mistral, GPT-4 (rumored)
+</code></pre></div>
+<hr />
+<h3 id="paged-attention-vllm">Paged Attention (vLLM)<a class="headerlink" href="#paged-attention-vllm" title="Permanent link">&para;</a></h3>
+<ul>
+<li>KV cache in non-contiguous "pages" (like OS virtual memory)</li>
+<li>Eliminates fragmentation</li>
+<li>Enables ~2x higher batch size for same memory</li>
+<li><strong>Compute</strong>: Slight overhead for page lookup</li>
+</ul>
+<hr />
+<h3 id="multi-token-prediction">Multi-Token Prediction<a class="headerlink" href="#multi-token-prediction" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cache prefixes for common prompts</li>
+<li>Reduces redundant computation</li>
+<li>Memory: Store prompt KV cache (shared across requests)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="4-recomputation-vs-caching">4. Recomputation vs Caching<a class="headerlink" href="#4-recomputation-vs-caching" title="Permanent link">&para;</a></h2>
+<h3 id="activation-checkpointing-training">Activation Checkpointing (Training)<a class="headerlink" href="#activation-checkpointing-training" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Not used in inference (no backprop)</li>
+<li>Mentioned for completeness</li>
+</ul>
+<hr />
+<h3 id="selective-recomputation">Selective Recomputation<a class="headerlink" href="#selective-recomputation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Recompute cheap operations instead of storing</li>
+<li>Example: Recompute layer norm instead of caching</li>
+<li>Memory savings: ~10-20%</li>
+<li>Compute overhead: ~5-10%</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-model-architecture-choices">5. Model Architecture Choices<a class="headerlink" href="#5-model-architecture-choices" title="Permanent link">&para;</a></h2>
+<h3 id="width-vs-depth">Width vs Depth<a class="headerlink" href="#width-vs-depth" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Wide: More hidden dimensions, fewer layers
+- More memory for weights
+- Less memory for KV cache (fewer layers)
+
+Deep: More layers, smaller hidden dimensions
+- Less memory for weights  
+- More memory for KV cache (more layers)
+</code></pre></div>
+<hr />
+<h3 id="ffn-expansion-ratio">FFN Expansion Ratio<a class="headerlink" href="#ffn-expansion-ratio" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Standard: <code>d_ff = 4 × d_model</code></li>
+<li>Smaller ratio (2x or 3x): Less memory, potential quality loss</li>
+<li>MoE: Sparse activation, more parameters but same compute</li>
+</ul>
+<hr />
+<hr />
+<h2 id="6-hardware-specific-tradeoffs">6. Hardware-Specific Tradeoffs<a class="headerlink" href="#6-hardware-specific-tradeoffs" title="Permanent link">&para;</a></h2>
+<h3 id="memory-bandwidth-vs-compute">Memory Bandwidth vs Compute<a class="headerlink" href="#memory-bandwidth-vs-compute" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>A100: 1,935 GB/s bandwidth, 312 TFLOPS (FP16)
+H100: 3,350 GB/s bandwidth, 989 TFLOPS (FP16)
+
+Bandwidth-to-Compute Ratio:
+A100: 6.2 GB/s per TFLOP
+H100: 3.4 GB/s per TFLOP
+</code></pre></div>
+<p><strong>Implication</strong>: H100 relatively more compute-bound, benefits more from quantization compute overhead</p>
+<hr />
+<h3 id="tensor-core-utilization">Tensor Core Utilization<a class="headerlink" href="#tensor-core-utilization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FP16: Full tensor core speed</li>
+<li>INT8: 2x faster on Ampere/Hopper with DP4A</li>
+<li>INT4: 4x faster (requires specialized kernels)</li>
+</ul>
+<p><strong>Tradeoff</strong>: Quantization compute overhead offset by faster matmul</p>
+<hr />
+<hr />
+<h2 id="7-memory-compute-decision-matrix">7. Memory-Compute Decision Matrix<a class="headerlink" href="#7-memory-compute-decision-matrix" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Memory Saved</th>
+<th>Compute Overhead</th>
+<th>Quality Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INT8 Quantization</td>
+<td>2x</td>
+<td>+10%</td>
+<td>&lt;1%</td>
+</tr>
+<tr>
+<td>INT4 Quantization</td>
+<td>4x</td>
+<td>+30%</td>
+<td>1-3%</td>
+</tr>
+<tr>
+<td>GQA (4:1)</td>
+<td>4x KV cache</td>
+<td>Minimal</td>
+<td>&lt;0.5%</td>
+</tr>
+<tr>
+<td>MQA</td>
+<td>32x KV cache</td>
+<td>Minimal</td>
+<td>1-2%</td>
+</tr>
+<tr>
+<td>KV Cache INT8</td>
+<td>2x KV cache</td>
+<td>+5%</td>
+<td>&lt;0.5%</td>
+</tr>
+<tr>
+<td>FlashAttention</td>
+<td>Minimal</td>
+<td>-30% latency</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="8-common-interview-questions">8. Common Interview Questions<a class="headerlink" href="#8-common-interview-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q: You have a 70B model but only 40GB GPU memory. What do you do?</strong></p>
+<div class="highlight"><pre><span></span><code>Options:
+1. INT4 quantization: 140GB → 35GB ✓
+2. INT8 + model parallelism across 2 GPUs
+3. Offload layers to CPU (slow, not recommended)
+4. Use smaller model variant (13B/7B)
+</code></pre></div>
+<hr />
+<p><strong>Q: Explain the tradeoff in GQA (Grouped Query Attention)</strong></p>
+<ul>
+<li>Save memory: Fewer KV heads → smaller KV cache</li>
+<li>Minimal compute overhead: Attention computation slightly changes</li>
+<li>Quality: Negligible impact (&lt;0.5% on benchmarks)</li>
+<li>Production: Widely adopted (Mistral, LLaMA-2)</li>
+</ul>
+<hr />
+<p><strong>Q: Why is decode phase memory-bound?</strong></p>
+<ul>
+<li>Single token generation: Low arithmetic intensity</li>
+<li>Must fetch entire weight matrix from memory</li>
+<li>Memory bandwidth saturated, compute underutilized</li>
+<li><strong>Arithmetic Intensity</strong>: FLOPs / Bytes Loaded ≈ 1-2 (very low)</li>
+</ul>
+<hr />
+<p><strong>Q: When does quantization hurt performance?</strong></p>
+<ul>
+<li>Small batch size: Dequant overhead dominates</li>
+<li>Compute-bound workloads: Adding compute makes it worse</li>
+<li>Old hardware: No INT8 tensor core support</li>
+<li><strong>Generally</strong>: Decode phase on modern GPUs (H100) benefits from quantization</li>
+</ul>
+<hr />
+<p><strong>Q: Calculate KV cache size: LLaMA-2-70B, batch=16, seq=4096, FP16</strong></p>
+<div class="highlight"><pre><span></span><code>GQA with 8 KV heads (70B uses this)
+2 × 16 × 4096 × 80_layers × 8_heads × 128_dim × 2_bytes
+= 2 × 16 × 4096 × 80 × 8 × 128 × 2
+= 1,073,741,824 bytes ≈ 1 GB per sample × 16 = 16 GB total
+
+(If standard MHA with 64 heads: 128 GB - impractical!)
+</code></pre></div>
+<hr />
+<p><strong>Q: How does FlashAttention affect memory-compute tradeoff?</strong></p>
+<ul>
+<li>Reduces memory: Avoids materializing full attention matrix</li>
+<li>Reduces compute time: Fused kernel, better cache locality</li>
+<li><strong>Win-win</strong>: Memory AND compute improvement</li>
+<li>No quality impact (mathematically equivalent)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="9-modern-techniques-2024-2025">9. Modern Techniques (2024-2025)<a class="headerlink" href="#9-modern-techniques-2024-2025" title="Permanent link">&para;</a></h2>
+<h3 id="awq-activation-aware-weight-quantization">AWQ (Activation-Aware Weight Quantization)<a class="headerlink" href="#awq-activation-aware-weight-quantization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Protect weights with high activation magnitude</li>
+<li>Better quality than naive INT4</li>
+<li>Used in production (Hugging Face TGI)</li>
+</ul>
+<hr />
+<h3 id="smoothquant">SmoothQuant<a class="headerlink" href="#smoothquant" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Migrate difficulty from weights to activations</li>
+<li>Enables better INT8 quantization</li>
+<li>Particularly for older models not trained for quantization</li>
+</ul>
+<hr />
+<h3 id="fp8-h100">FP8 (H100)<a class="headerlink" href="#fp8-h100" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Native FP8 support on Hopper</li>
+<li>2x memory saving vs FP16</li>
+<li>Minimal quality loss</li>
+<li><strong>Compute</strong>: Faster than FP16 (2x with tensor cores)</li>
+</ul>
+<hr />
+<h3 id="quip-aqlm">QuIP# / AQLM<a class="headerlink" href="#quip-aqlm" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Extreme quantization (2-3 bits)</li>
+<li>Lattice-based, better than naive 2-bit</li>
+<li>Research stage, not production yet</li>
+</ul>
+<hr />
+<hr />
+<h2 id="10-practical-guidelines">10. Practical Guidelines<a class="headerlink" href="#10-practical-guidelines" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Start with INT8</strong>: Minimal quality loss, 2x memory saving</li>
+<li><strong>Use GQA architecture</strong>: If designing new models</li>
+<li><strong>Enable KV cache quantization</strong>: Production-ready in vLLM</li>
+<li><strong>FlashAttention is mandatory</strong>: No downside</li>
+<li><strong>INT4 for large models</strong>: When GPU memory is the constraint</li>
+<li><strong>Monitor quality</strong>: Always benchmark on your task</li>
+</ol>
+<hr />
+<hr />
+<h2 id="11-key-takeaways">11. Key Takeaways<a class="headerlink" href="#11-key-takeaways" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Most memory optimizations have negligible compute cost (GQA, FlashAttention)</li>
+<li>Quantization is a clear win on modern hardware (INT8 tensor cores)</li>
+<li>KV cache often dominates memory in long-context scenarios</li>
+<li>Decode phase is memory-bound: Reducing memory access helps latency</li>
+<li>Hardware matters: H100 handles quantization overhead better than A100</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "mathjax"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

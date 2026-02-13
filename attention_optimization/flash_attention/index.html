@@ -1,0 +1,1382 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A technical reference for LoRA, QLoRA, and other fine-tuning techniques.">
+      
+      
+        <meta name="author" content="Saurabh Goyal">
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../decoding_strategies/decoding_strategies/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Flash Attention - Fine-Tuning Methods Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-header__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Fine-Tuning Methods Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flash Attention
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="lime"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/saurabhiit2007/LLM-Finetuning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-nav__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Fine-Tuning Methods Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/saurabhiit2007/LLM-Finetuning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Speed
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speed
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Flash Attention
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flash Attention
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-why-standard-attention-is-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Why Standard Attention is Slow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Why Standard Attention is Slow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-1-quadratic-memory-growth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 1: Quadratic Memory Growth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-2-excessive-memory-traffic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 2: Excessive Memory Traffic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-3-numerical-instability-in-fp16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3: Numerical Instability in FP16
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-how-flashattention-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. How FlashAttention Works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. How FlashAttention Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-tiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Tiling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-kernel-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Kernel Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-online-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Online Softmax
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-performance-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Performance Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Performance Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memory-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Complexity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speedup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Speedup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-flashattention-helps-most" class="md-nav__link">
+    <span class="md-ellipsis">
+      When FlashAttention Helps Most
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Interview Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Interview Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-why-is-flashattention-faster-than-standard-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1: Why is FlashAttention faster than standard attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-does-flashattention-approximate-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2: Does FlashAttention approximate attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-explain-online-softmax-why-is-it-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3: Explain online softmax. Why is it needed?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-what-is-the-memory-complexity-of-flashattention-vs-standard-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4: What is the memory complexity of FlashAttention vs standard attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-can-flashattention-be-used-for-any-attention-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5: Can FlashAttention be used for any attention mechanism?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-why-does-flashattention-require-modern-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6: Why does FlashAttention require modern GPUs?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-walk-through-how-flashattention-processes-a-single-tile-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q7: Walk through how FlashAttention processes a single tile pair.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-what-trade-offs-does-flashattention-make" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q8: What trade-offs does FlashAttention make?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q9-how-does-tiling-affect-the-computational-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q9: How does tiling affect the computational complexity?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q10-can-you-explain-the-difference-between-shared-memory-and-global-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q10: Can you explain the difference between shared memory and global memory?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-key-takeaways-for-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Key Takeaways for Interviews
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speculative_decoding.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Speculative Decoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vllm.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vLLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Decoding
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Decoding
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decoding_strategies/decoding_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decoding Strategies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Memory
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Memory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/kv_caching.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KV Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-why-standard-attention-is-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Why Standard Attention is Slow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Why Standard Attention is Slow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-1-quadratic-memory-growth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 1: Quadratic Memory Growth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-2-excessive-memory-traffic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 2: Excessive Memory Traffic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-3-numerical-instability-in-fp16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3: Numerical Instability in FP16
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-how-flashattention-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. How FlashAttention Works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. How FlashAttention Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-tiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Tiling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-kernel-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Kernel Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-online-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Online Softmax
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-performance-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Performance Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Performance Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memory-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Complexity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speedup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Speedup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-flashattention-helps-most" class="md-nav__link">
+    <span class="md-ellipsis">
+      When FlashAttention Helps Most
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Interview Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Interview Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-why-is-flashattention-faster-than-standard-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1: Why is FlashAttention faster than standard attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-does-flashattention-approximate-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2: Does FlashAttention approximate attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-explain-online-softmax-why-is-it-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3: Explain online softmax. Why is it needed?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-what-is-the-memory-complexity-of-flashattention-vs-standard-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4: What is the memory complexity of FlashAttention vs standard attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-can-flashattention-be-used-for-any-attention-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5: Can FlashAttention be used for any attention mechanism?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-why-does-flashattention-require-modern-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6: Why does FlashAttention require modern GPUs?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-walk-through-how-flashattention-processes-a-single-tile-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q7: Walk through how FlashAttention processes a single tile pair.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-what-trade-offs-does-flashattention-make" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q8: What trade-offs does FlashAttention make?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q9-how-does-tiling-affect-the-computational-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q9: How does tiling affect the computational complexity?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q10-can-you-explain-the-difference-between-shared-memory-and-global-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q10: Can you explain the difference between shared memory and global memory?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-key-takeaways-for-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Key Takeaways for Interviews
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Flash Attention</h1>
+
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p>FlashAttention is a fast and memory-efficient attention algorithm that computes <strong>exact</strong> attention without materializing the full <span class="arithmatex">\(N \times N\)</span> attention matrix. It's especially critical for long sequences (4k+ tokens) in modern LLMs.</p>
+<p><strong>Key insight:</strong> The bottleneck in attention isn't compute—it's <strong>memory bandwidth</strong> (moving data between GPU memory hierarchies).</p>
+<hr />
+<hr />
+<h2 id="2-why-standard-attention-is-slow">2. Why Standard Attention is Slow<a class="headerlink" href="#2-why-standard-attention-is-slow" title="Permanent link">&para;</a></h2>
+<p>Standard attention formula:
+$$
+\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+$$</p>
+<hr />
+<h3 id="problem-1-quadratic-memory-growth">Problem 1: Quadratic Memory Growth<a class="headerlink" href="#problem-1-quadratic-memory-growth" title="Permanent link">&para;</a></h3>
+<p>For sequence length <span class="arithmatex">\(N = 16{,}384\)</span> in FP16:
+- Attention matrix: <span class="arithmatex">\(N^2 = 268M\)</span> elements
+- Memory: <span class="arithmatex">\(268M \times 2\)</span> bytes <span class="arithmatex">\(≈ 512\)</span> MB (per layer, per head!)</p>
+<hr />
+<h3 id="problem-2-excessive-memory-traffic">Problem 2: Excessive Memory Traffic<a class="headerlink" href="#problem-2-excessive-memory-traffic" title="Permanent link">&para;</a></h3>
+<p>Standard attention performs multiple memory-heavy steps:
+1. Compute <span class="arithmatex">\(QK^T\)</span> → write to global memory
+2. Read <span class="arithmatex">\(QK^T\)</span> → apply softmax → write back
+3. Read softmax output → compute with <span class="arithmatex">\(V\)</span> → write output</p>
+<p>Result: GPUs become <strong>memory-bound</strong>, not compute-bound.</p>
+<hr />
+<h3 id="problem-3-numerical-instability-in-fp16">Problem 3: Numerical Instability in FP16<a class="headerlink" href="#problem-3-numerical-instability-in-fp16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Large values in <span class="arithmatex">\(QK^T\)</span> cause overflow in <span class="arithmatex">\(e^x\)</span></li>
+<li>Small values underflow to zero</li>
+<li>Standard attention often requires FP32, increasing memory usage</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-how-flashattention-works">3. How FlashAttention Works<a class="headerlink" href="#3-how-flashattention-works" title="Permanent link">&para;</a></h2>
+<p>FlashAttention uses three key techniques:</p>
+<h3 id="31-tiling">3.1 Tiling<a class="headerlink" href="#31-tiling" title="Permanent link">&para;</a></h3>
+<p>Split Q, K, V into small <strong>tiles</strong> that fit in GPU shared memory (SRAM).</p>
+<p><strong>Example:</strong>
+- Sequence length: <span class="arithmatex">\(N = 16{,}384\)</span>
+- Tile size: <span class="arithmatex">\(B = 128\)</span>
+- Memory per tile: <span class="arithmatex">\(128 \times 128 = 16{,}384\)</span> elements (vs. <span class="arithmatex">\(268M\)</span> for full matrix)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Conceptual tiling</span>
+<span class="k">for</span> <span class="n">q_tile</span> <span class="ow">in</span> <span class="n">Q_tiles</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k_tile</span><span class="p">,</span> <span class="n">v_tile</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">K_tiles</span><span class="p">,</span> <span class="n">V_tiles</span><span class="p">):</span>
+        <span class="n">partial_scores</span> <span class="o">=</span> <span class="n">q_tile</span> <span class="o">@</span> <span class="n">k_tile</span><span class="o">.</span><span class="n">T</span>
+        <span class="c1"># accumulate incrementally</span>
+</code></pre></div>
+<hr />
+<h3 id="32-kernel-fusion">3.2 Kernel Fusion<a class="headerlink" href="#32-kernel-fusion" title="Permanent link">&para;</a></h3>
+<p>Fuse all operations into a single kernel to keep intermediate results in fast shared memory:
+1. Matrix multiplication (<span class="arithmatex">\(Q \cdot K^T\)</span>)
+2. Scaling (<span class="arithmatex">\(1/\sqrt{d}\)</span>)
+3. Softmax
+4. Weighted sum with <span class="arithmatex">\(V\)</span></p>
+<p>Standard attention writes/reads from global memory between each step. FlashAttention does everything in one pass.</p>
+<hr />
+<h3 id="33-online-softmax">3.3 Online Softmax<a class="headerlink" href="#33-online-softmax" title="Permanent link">&para;</a></h3>
+<p>Compute softmax incrementally across tiles without storing the full attention matrix.</p>
+<p><strong>Numerically stable approach:</strong>
+1. Maintain <strong>running maximum</strong> <span class="arithmatex">\(m\)</span> across tiles
+   - Compute: <span class="arithmatex">\(e^{x_i - m}\)</span> (prevents overflow)
+2. Maintain <strong>running sum</strong> of exponentials
+3. Accumulate weighted output incrementally</p>
+<p><strong>Example with 2 tiles:</strong></p>
+<p>Tile 1: <code>[0.1, 0.5, 0.3]</code>, Tile 2: <code>[0.2, 0.4, 0.1]</code></p>
+<p>Processing:
+1. <strong>Tile 1:</strong> <span class="arithmatex">\(m = 0.5\)</span>, shifted exps: <span class="arithmatex">\([e^{-0.4}, e^{0}, e^{-0.2}]\)</span>, running sum <span class="arithmatex">\(s_1\)</span>
+2. <strong>Tile 2:</strong> update <span class="arithmatex">\(m\)</span>, reweight previous results, add new exps, update sum <span class="arithmatex">\(s_2\)</span>
+3. <strong>Final:</strong> divide accumulated output by <span class="arithmatex">\(s_2\)</span></p>
+<p>Result: <strong>Exact same output</strong> as standard attention, but in FP16/BF16 without overflow.</p>
+<hr />
+<hr />
+<h2 id="4-performance-impact">4. Performance Impact<a class="headerlink" href="#4-performance-impact" title="Permanent link">&para;</a></h2>
+<h3 id="memory-complexity">Memory Complexity<a class="headerlink" href="#memory-complexity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Standard: <span class="arithmatex">\(O(N^2)\)</span></li>
+<li>FlashAttention: <span class="arithmatex">\(O(N \cdot B)\)</span> where <span class="arithmatex">\(B\)</span> is tile size</li>
+</ul>
+<h3 id="speedup">Speedup<a class="headerlink" href="#speedup" title="Permanent link">&para;</a></h3>
+<ul>
+<li>2–4x faster for long sequences on modern GPUs</li>
+<li>Enables 2–4x longer sequences or larger batch sizes</li>
+</ul>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flash_attn</span> <span class="kn">import</span> <span class="n">flash_attn_func</span>
+
+<span class="c1"># q, k, v shape: (batch, seq_len, num_heads, head_dim)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">flash_attn_func</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dropout_p</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">causal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="when-flashattention-helps-most">When FlashAttention Helps Most<a class="headerlink" href="#when-flashattention-helps-most" title="Permanent link">&para;</a></h3>
+<p>✅ Long sequences (2k+ tokens)<br />
+✅ FP16/BF16 precision<br />
+✅ Modern NVIDIA GPUs with fast shared memory  </p>
+<p>❌ Very short sequences<br />
+❌ CPU-based inference<br />
+❌ Custom attention patterns not supported by the kernels  </p>
+<hr />
+<hr />
+<h2 id="5-interview-questions">5. Interview Questions<a class="headerlink" href="#5-interview-questions" title="Permanent link">&para;</a></h2>
+<h3 id="q1-why-is-flashattention-faster-than-standard-attention">Q1: Why is FlashAttention faster than standard attention?<a class="headerlink" href="#q1-why-is-flashattention-faster-than-standard-attention" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong> The bottleneck is memory bandwidth, not compute. Standard attention writes intermediate results (attention matrix, softmax output) to slow GPU global memory and reads them back multiple times. FlashAttention uses tiling and kernel fusion to keep all intermediate computations in fast shared memory, drastically reducing memory traffic.</p>
+<hr />
+<h3 id="q2-does-flashattention-approximate-attention">Q2: Does FlashAttention approximate attention?<a class="headerlink" href="#q2-does-flashattention-approximate-attention" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong> No, it computes <strong>exact</strong> attention. It produces identical results to standard attention by using online softmax to correctly compute the softmax normalization across tiles without storing the full attention matrix.</p>
+<hr />
+<h3 id="q3-explain-online-softmax-why-is-it-needed">Q3: Explain online softmax. Why is it needed?<a class="headerlink" href="#q3-explain-online-softmax-why-is-it-needed" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong> When processing tiles, we can't store the full <span class="arithmatex">\(N \times N\)</span> attention matrix. Online softmax maintains a running maximum and running sum across tiles to compute the exact softmax incrementally. This also provides numerical stability in FP16/BF16 by shifting scores before exponentiation to prevent overflow: <span class="arithmatex">\(e^{x_i - m}\)</span> instead of <span class="arithmatex">\(e^{x_i}\)</span>.</p>
+<hr />
+<h3 id="q4-what-is-the-memory-complexity-of-flashattention-vs-standard-attention">Q4: What is the memory complexity of FlashAttention vs standard attention?<a class="headerlink" href="#q4-what-is-the-memory-complexity-of-flashattention-vs-standard-attention" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong>
+- Standard attention: <span class="arithmatex">\(O(N^2)\)</span> to store full attention matrix
+- FlashAttention: <span class="arithmatex">\(O(N \cdot B)\)</span> where <span class="arithmatex">\(B\)</span> is tile size (typically 128-256)
+- For <span class="arithmatex">\(N=16k\)</span>, this reduces memory from ~512MB to ~4-8MB per head</p>
+<hr />
+<h3 id="q5-can-flashattention-be-used-for-any-attention-mechanism">Q5: Can FlashAttention be used for any attention mechanism?<a class="headerlink" href="#q5-can-flashattention-be-used-for-any-attention-mechanism" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong> FlashAttention works best for standard scaled dot-product attention. Variants exist for:
+- Causal (autoregressive) attention ✅
+- Cross-attention ✅
+- Sparse attention patterns ⚠️ (limited support, depends on sparsity structure)</p>
+<p>Custom attention patterns may require specialized kernels.</p>
+<hr />
+<h3 id="q6-why-does-flashattention-require-modern-gpus">Q6: Why does FlashAttention require modern GPUs?<a class="headerlink" href="#q6-why-does-flashattention-require-modern-gpus" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong> FlashAttention relies on:
+1. <strong>Fast shared memory (SRAM)</strong> - to store tiles and perform fused operations
+2. <strong>High memory bandwidth</strong> - to maximize benefit from reduced memory traffic
+3. <strong>Tensor cores</strong> - for fast matrix multiplications</p>
+<p>Older GPUs or CPUs don't have the same memory hierarchy, so the benefits are minimal.</p>
+<hr />
+<h3 id="q7-walk-through-how-flashattention-processes-a-single-tile-pair">Q7: Walk through how FlashAttention processes a single tile pair.<a class="headerlink" href="#q7-walk-through-how-flashattention-processes-a-single-tile-pair" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong>
+1. Load <span class="arithmatex">\(Q_{tile}\)</span> and <span class="arithmatex">\(K_{tile}\)</span> into shared memory
+2. Compute scores: <span class="arithmatex">\(S = Q_{tile} \cdot K_{tile}^T / \sqrt{d}\)</span>
+3. Track running max <span class="arithmatex">\(m\)</span> for numerical stability
+4. Compute: <span class="arithmatex">\(e^{S - m}\)</span> (stays in shared memory)
+5. Update running sum for normalization
+6. Load <span class="arithmatex">\(V_{tile}\)</span>, compute weighted sum, accumulate to output
+7. Move to next tile, repeat</p>
+<p>All intermediate values stay in fast SRAM, not global memory.</p>
+<hr />
+<h3 id="q8-what-trade-offs-does-flashattention-make">Q8: What trade-offs does FlashAttention make?<a class="headerlink" href="#q8-what-trade-offs-does-flashattention-make" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong>
+- ✅ Gains: 2-4x speedup, drastically reduced memory
+- ⚠️ Complexity: More complex implementation than standard attention
+- ⚠️ Flexibility: Limited support for custom sparse attention patterns
+- ⚠️ Hardware: Requires modern GPUs to realize full benefits</p>
+<p>The trade-offs are generally worth it for production LLM serving and training.</p>
+<hr />
+<h3 id="q9-how-does-tiling-affect-the-computational-complexity">Q9: How does tiling affect the computational complexity?<a class="headerlink" href="#q9-how-does-tiling-affect-the-computational-complexity" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong> Tiling doesn't change the computational complexity (still <span class="arithmatex">\(O(N^2)\)</span> FLOPs), but it changes the <strong>I/O complexity</strong>:
+- Standard: <span class="arithmatex">\(O(N^2)\)</span> memory reads/writes
+- FlashAttention: <span class="arithmatex">\(O(N^2/B)\)</span> memory reads/writes, where <span class="arithmatex">\(B\)</span> is tile size</p>
+<p>Since memory bandwidth is the bottleneck, this provides significant speedup.</p>
+<hr />
+<h3 id="q10-can-you-explain-the-difference-between-shared-memory-and-global-memory">Q10: Can you explain the difference between shared memory and global memory?<a class="headerlink" href="#q10-can-you-explain-the-difference-between-shared-memory-and-global-memory" title="Permanent link">&para;</a></h3>
+<p><strong>Answer:</strong>
+- <strong>Shared memory (SRAM):</strong> Fast (~20 TB/s), small (~100 KB per SM), explicitly managed
+- <strong>Global memory (HBM):</strong> Slower (~1-2 TB/s), large (16-80 GB), high latency</p>
+<p>FlashAttention keeps working data in shared memory to minimize expensive global memory accesses. This is the key to its performance gains.</p>
+<hr />
+<h2 id="6-key-takeaways-for-interviews">6. Key Takeaways for Interviews<a class="headerlink" href="#6-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Main idea:</strong> Avoid materializing the <span class="arithmatex">\(N \times N\)</span> attention matrix by using tiling and kernel fusion</li>
+<li><strong>Core techniques:</strong> Tiling + Kernel Fusion + Online Softmax</li>
+<li><strong>Why it's fast:</strong> Reduces memory bandwidth usage (the real bottleneck)</li>
+<li><strong>Memory savings:</strong> <span class="arithmatex">\(O(N^2) → O(N \cdot B)\)</span></li>
+<li><strong>Exact computation:</strong> Not an approximation—produces identical results to standard attention</li>
+<li><strong>Numerical stability:</strong> Online softmax enables stable FP16/BF16 computation for long sequences</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "mathjax"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
