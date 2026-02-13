@@ -30,17 +30,37 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Speed:
+  - Fundamentals:
+      - Inference Basics: ./fundamentals/inference_basics.md
+      - Bottleneck Analysis: ./fundamentals/bottleneck_analysis.md
+      - Latency vs Throughput: ./fundamentals/latency_vs_throughput.md
+      - Memory Compute Tradeoffs: ./fundamentals/memory_compute_tradeoffs.md
+  - Attention Optimization:
       - Flash Attention: ./attention_optimization/flash_attention.md
-      - Speculative Decoding: ./attention_optimization/speculative_decoding.md
+      - Flash Attention 2: ./attention_optimization/flash_attention.md
+      - KV Caching: ./attention_optimization/kv_caching.md
       - vLLM: ./attention_optimization/vllm.md
-  - Decoding:
-      - Decoding Strategies: ./decoding_strategies/decoding_strategies.md
-  - Memory:
-      - KV Caching: ./memory/kv_caching.md
-
-
-
+  - Decoding Strategies:
+      - Greedy Decoding: ./decoding_strategies/greedy_decoding.md
+      - Beam Search: ./decoding_strategies/beam_search.md
+      - Sampling Methods: ./decoding_strategies/sampling_methods.md
+      - Speculative Decoding: ./attention_optimization/speculative_decoding.md
+  - Batching Strategies: ./batching_strategies.md
+  - Quantization:
+      - Quantization Basics: ./quantization/quantization_basics.md
+      - INT8 Quantization: ./quantization/int8_quantization.md
+      - INT4 Quantization: ./quantization/int4_quantization.md
+      - GPTQ: ./quantization/gptq.md
+      - GGUF GGML: ./quantization/gguf_ggml.md
+      - AWQ: ./quantization/awq.md
+      - SmoothQuant: ./quantization/smoothquant.md
+      - Quantization Tradeoffs: ./quantization/quantization_tradeoffs.md
+  - Serving Frameworks:
+      - DeepSpeed Inference: ./serving_frameworks/deepspeed_inference.md
+      - TensorRT LLM: ./serving_frameworks/tensorrt_llm.md
+      - vLLM: ./serving_frameworks/vllm.md
+      - Text Generation Inference: ./serving_frameworks/text_generation_inference.md
+      - Triton Inference Server: ./serving_frameworks/triton_inference_server.md
   - References: index.md
 
 markdown_extensions:
