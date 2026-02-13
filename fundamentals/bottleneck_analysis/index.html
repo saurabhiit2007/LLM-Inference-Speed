@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../inference_basics/">
+      
+      
+        <link rel="next" href="../latency_vs_throughput/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Bottleneck analysis - Fine-Tuning Methods Documentation</title>
+        <title>Bottleneck Analysis - Fine-Tuning Methods Documentation</title>
       
     
     
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Bottleneck analysis
+              Bottleneck Analysis
             
           </span>
         </div>
@@ -270,6 +274,468 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference_basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inference Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Bottleneck Analysis
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bottleneck Analysis
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-understanding-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Understanding Bottlenecks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Understanding Bottlenecks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-three-primary-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Three Primary Bottlenecks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-roofline-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Roofline Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Roofline Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-h100-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: H100 GPU
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-identifying-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Identifying Bottlenecks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Identifying Bottlenecks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-gpu-utilization-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method 1: GPU Utilization Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-profiling-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method 2: Profiling Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-3-microbenchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method 3: Microbenchmarks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-common-bottleneck-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Common Bottleneck Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Common Bottleneck Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-1-decode-phase-memory-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern 1: Decode Phase (Memory-Bound)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-2-prefill-phase-compute-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern 2: Prefill Phase (Compute-Bound)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-3-kv-cache-transfer-memory-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern 3: KV Cache Transfer (Memory-Bound)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-4-kernel-launch-overhead" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern 4: Kernel Launch Overhead
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-5-cpu-gpu-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern 5: CPU-GPU Synchronization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-systematic-analysis-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Systematic Analysis Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Systematic Analysis Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-measure-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Measure Baseline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-profile-critical-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Profile Critical Path
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-apply-targeted-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Apply Targeted Optimizations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-validate-improvement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Validate Improvement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-profiling-example-llama-2-7b" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Profiling Example: LLaMA-2-7B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Profiling Example: LLaMA-2-7B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#baseline-batch1-seq512" class="md-nav__link">
+    <span class="md-ellipsis">
+      Baseline (Batch=1, Seq=512)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      After Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Common Interview Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-advanced-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Advanced Profiling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Advanced Profiling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-core-utilization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Core Utilization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-transaction-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Transaction Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Key Takeaways
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latency_vs_throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Latency vs Throughput
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memory_compute_tradeoffs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Memory Compute Tradeoffs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
   
   
     
@@ -283,15 +749,15 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Speed
+    Attention Optimization
     
   </span>
   
@@ -299,10 +765,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Speed
+            Attention Optimization
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -336,12 +802,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/speculative_decoding.md" class="md-nav__link">
+      <a href="../../attention_optimization/flash_attention/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Speculative Decoding
+    Flash Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/kv_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KV Caching
     
   </span>
   
@@ -399,15 +888,15 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Decoding
+    Decoding Strategies
     
   </span>
   
@@ -415,10 +904,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Decoding
+            Decoding Strategies
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -429,12 +918,334 @@
   
   
     <li class="md-nav__item">
-      <a href="../../decoding_strategies/decoding_strategies/" class="md-nav__link">
+      <a href="../../decoding_strategies/greedy_decoding/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Decoding Strategies
+    Greedy Decoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decoding_strategies/beam_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beam Search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decoding_strategies/sampling_methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sampling Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/speculative_decoding.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Speculative Decoding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../batching_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Batching Strategies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Quantization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Quantization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/quantization_basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quantization Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/int8_quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    INT8 Quantization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/int4_quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    INT4 Quantization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/gptq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GPTQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/gguf_ggml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GGUF GGML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/awq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/smoothquant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SmoothQuant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantization/quantization_tradeoffs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quantization Tradeoffs
     
   </span>
   
@@ -469,15 +1280,15 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Memory
+    Serving Frameworks
     
   </span>
   
@@ -485,10 +1296,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            Memory
+            Serving Frameworks
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -499,12 +1310,104 @@
   
   
     <li class="md-nav__item">
-      <a href="../../memory/kv_caching.md" class="md-nav__link">
+      <a href="../../serving_frameworks/deepspeed_inference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    KV Caching
+    DeepSpeed Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/tensorrt_llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TensorRT LLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/vllm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vLLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/text_generation_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Text Generation Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/triton_inference_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Triton Inference Server
     
   </span>
   
@@ -872,7 +1775,7 @@
   
 
 
-  <h1>Bottleneck analysis</h1>
+  <h1>Bottleneck Analysis</h1>
 
 <h2 id="1-understanding-bottlenecks">1. Understanding Bottlenecks<a class="headerlink" href="#1-understanding-bottlenecks" title="Permanent link">&para;</a></h2>
 <h3 id="the-three-primary-bottlenecks">The Three Primary Bottlenecks<a class="headerlink" href="#the-three-primary-bottlenecks" title="Permanent link">&para;</a></h3>
