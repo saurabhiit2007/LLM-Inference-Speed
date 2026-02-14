@@ -51,9 +51,9 @@ nav:
       - INT8 Quantization: ./quantization/int8_quantization.md
       - INT4 Quantization: ./quantization/int4_quantization.md
       - GPTQ: ./quantization/gptq.md
-      - GGUF GGML: ./quantization/gguf_ggml.md
       - AWQ: ./quantization/awq.md
       - SmoothQuant: ./quantization/smoothquant.md
+      - GGUF GGML: ./quantization/gguf_ggml.md
       - Quantization Tradeoffs: ./quantization/quantization_tradeoffs.md
   - Serving Frameworks:
       - DeepSpeed Inference: ./serving_frameworks/deepspeed_inference.md
