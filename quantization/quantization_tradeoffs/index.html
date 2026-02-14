@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../smoothquant/">
+        <link rel="prev" href="../gguf_ggml/">
       
       
         <link rel="next" href="../../serving_frameworks/deepspeed_inference/">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#1-memory-vs-quality-spectrum" class="md-skip">
           Skip to content
         </a>
       
@@ -848,29 +848,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    GGUF GGML
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../awq/" class="md-nav__link">
         
   
@@ -914,6 +891,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../gguf_ggml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GGUF GGML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -922,8 +922,6 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
-      
-        
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -957,8 +955,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -967,18 +963,249 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-memory-vs-quality-spectrum" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Memory vs. Quality Spectrum
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#speed-vs-quality" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      Speed vs. Quality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Speed vs. Quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inference-latency-7b-model-batch1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inference Latency (7B model, batch=1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization-method-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Method Selection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantization Method Selection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decision-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision Tree
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-wise-quantization-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer-wise Quantization Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer-wise Quantization Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typical-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typical Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-precision-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed Precision Strategies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mixed Precision Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w4a8-weight-4-bit-activation-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      W4A8 (Weight 4-bit, Activation 8-bit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w8a8-both-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      W8A8 (Both 8-bit)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardware Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nvidia-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIDIA GPUs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amd-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      AMD GPUs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apple-silicon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apple Silicon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-x86" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU (x86)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calibration-data-tradeoffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calibration Data Tradeoffs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Calibration Data Tradeoffs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diversity-vs-representativeness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diversity vs. Representativeness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-vs-static-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic vs. Static Quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dynamic vs. Static Quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-ptq" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static (PTQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Interview Questions
     </span>
   </a>
   
@@ -1201,8 +1428,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1211,18 +1436,249 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-memory-vs-quality-spectrum" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Memory vs. Quality Spectrum
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#speed-vs-quality" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      Speed vs. Quality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Speed vs. Quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inference-latency-7b-model-batch1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inference Latency (7B model, batch=1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization-method-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Method Selection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantization Method Selection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decision-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision Tree
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-wise-quantization-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer-wise Quantization Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer-wise Quantization Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typical-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typical Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-precision-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed Precision Strategies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mixed Precision Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w4a8-weight-4-bit-activation-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      W4A8 (Weight 4-bit, Activation 8-bit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w8a8-both-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      W8A8 (Both 8-bit)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardware Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nvidia-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIDIA GPUs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amd-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      AMD GPUs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apple-silicon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apple Silicon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-x86" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU (x86)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calibration-data-tradeoffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calibration Data Tradeoffs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Calibration Data Tradeoffs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diversity-vs-representativeness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diversity vs. Representativeness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-vs-static-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic vs. Static Quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dynamic vs. Static Quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-ptq" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static (PTQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Interview Questions
     </span>
   </a>
   
@@ -1247,21 +1703,229 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+  <h1>Quantization Tradeoffs</h1>
+
+<h2 id="1-memory-vs-quality-spectrum">1. Memory vs. Quality Spectrum<a class="headerlink" href="#1-memory-vs-quality-spectrum" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Precision</th>
+<th>Memory (7B)</th>
+<th>Typical PPL Δ</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP16</td>
+<td>14 GB</td>
+<td>0.0 (baseline)</td>
+<td>Training, high-quality inference</td>
+</tr>
+<tr>
+<td>INT8</td>
+<td>7 GB</td>
+<td>+0.1-0.5</td>
+<td>Production standard</td>
+</tr>
+<tr>
+<td>INT4 (GPTQ/AWQ)</td>
+<td>3.5 GB</td>
+<td>+0.5-1.5</td>
+<td>Commodity GPU inference</td>
+</tr>
+<tr>
+<td>3-bit</td>
+<td>2.6 GB</td>
+<td>+1.5-3.0</td>
+<td>Extreme compression</td>
+</tr>
+<tr>
+<td>Q2_K</td>
+<td>2 GB</td>
+<td>+3.0-5.0</td>
+<td>Last resort</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="speed-vs-quality">Speed vs. Quality<a class="headerlink" href="#speed-vs-quality" title="Permanent link">&para;</a></h2>
+<h3 id="inference-latency-7b-model-batch1">Inference Latency (7B model, batch=1)<a class="headerlink" href="#inference-latency-7b-model-batch1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>GPU (A100)</th>
+<th>CPU (32-core)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP16</td>
+<td>20 ms/token</td>
+<td>N/A (OOM)</td>
+</tr>
+<tr>
+<td>INT8</td>
+<td>10 ms/token</td>
+<td>N/A (OOM)</td>
+</tr>
+<tr>
+<td>INT4 (AWQ)</td>
+<td>7 ms/token</td>
+<td>80 ms/token</td>
+</tr>
+<tr>
+<td>GGUF Q4_K_M</td>
+<td>8 ms/token</td>
+<td>35 ms/token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key insight</strong>: CPU competitive for quantized models, especially with optimized kernels.</p>
+<hr />
+<hr />
+<h2 id="quantization-method-selection">Quantization Method Selection<a class="headerlink" href="#quantization-method-selection" title="Permanent link">&para;</a></h2>
+<h3 id="decision-tree">Decision Tree<a class="headerlink" href="#decision-tree" title="Permanent link">&para;</a></h3>
+<p><strong>Need extreme compression (2-3 bit)?</strong>
+→ GPTQ (best quality at extreme compression)</p>
+<p><strong>Standard 4-bit, fast quantization needed?</strong>
+→ AWQ (10 min vs 4 hours for GPTQ, similar quality)</p>
+<p><strong>CPU deployment?</strong>
+→ GGUF with llama.cpp (optimized CPU kernels)</p>
+<p><strong>GPU deployment, production quality?</strong>
+→ INT8 with SmoothQuant (robust, well-supported)</p>
+<p><strong>Fine-tuning on limited memory?</strong>
+→ QLoRA with NF4 (efficient training)</p>
+<hr />
+<hr />
+<h2 id="layer-wise-quantization-strategy">Layer-wise Quantization Strategy<a class="headerlink" href="#layer-wise-quantization-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="typical-configuration">Typical Configuration<a class="headerlink" href="#typical-configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Embeddings: FP16 (critical for semantic space)
+Attention Weights (Q, K, V): INT4/INT8
+Attention Output: INT8
+FFN Weights: INT4 (largest, most compressible)
+FFN Activations: INT8
+Layer Norm: FP16 (small, sensitive)
+Final Layer: FP16 or INT8
 </code></pre></div>
+<hr />
+<h3 id="rationale">Rationale<a class="headerlink" href="#rationale" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>FFN</strong>: 66% of parameters, less sensitive → aggressive INT4</li>
+<li><strong>Attention</strong>: 33% of parameters, more sensitive → INT8 or careful INT4</li>
+<li><strong>Norms/Embeddings</strong>: &lt;1% of parameters → keep FP16</li>
+</ul>
+<hr />
+<hr />
+<h2 id="mixed-precision-strategies">Mixed Precision Strategies<a class="headerlink" href="#mixed-precision-strategies" title="Permanent link">&para;</a></h2>
+<h3 id="w4a8-weight-4-bit-activation-8-bit">W4A8 (Weight 4-bit, Activation 8-bit)<a class="headerlink" href="#w4a8-weight-4-bit-activation-8-bit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Best of both worlds for many use cases</li>
+<li>Weights: AWQ/GPTQ 4-bit</li>
+<li>Activations: SmoothQuant INT8</li>
+<li>6-8× memory reduction, &lt;1% quality loss</li>
+</ul>
+<hr />
+<h3 id="w8a8-both-8-bit">W8A8 (Both 8-bit)<a class="headerlink" href="#w8a8-both-8-bit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Production standard for quality-critical apps</li>
+<li>4× memory reduction</li>
+<li>Hardware-accelerated on all modern platforms</li>
+<li>&lt;0.5% quality loss with SmoothQuant</li>
+</ul>
+<hr />
+<hr />
+<h2 id="hardware-considerations">Hardware Considerations<a class="headerlink" href="#hardware-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="nvidia-gpus">NVIDIA GPUs<a class="headerlink" href="#nvidia-gpus" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tensor Cores</strong>: INT8 (Turing+), INT4 (Hopper)</li>
+<li><strong>Recommendation</strong>: INT8 for A100, INT4 for H100</li>
+<li><strong>Custom kernels</strong>: AWQ's TinyChat, ExLlamaV2 for GPTQ</li>
+</ul>
+<hr />
+<h3 id="amd-gpus">AMD GPUs<a class="headerlink" href="#amd-gpus" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ROCm</strong>: INT8 support</li>
+<li><strong>Recommendation</strong>: INT8, limited INT4 optimization</li>
+<li><strong>Ecosystem</strong>: Less mature than NVIDIA</li>
+</ul>
+<hr />
+<h3 id="apple-silicon">Apple Silicon<a class="headerlink" href="#apple-silicon" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Metal</strong>: INT8, INT4 via llama.cpp</li>
+<li><strong>Recommendation</strong>: GGUF Q4_K_M or Q6_K</li>
+<li><strong>Strength</strong>: Unified memory architecture</li>
+</ul>
+<hr />
+<h3 id="cpu-x86">CPU (x86)<a class="headerlink" href="#cpu-x86" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>VNNI (Cascade Lake+)</strong>: INT8 acceleration</li>
+<li><strong>AVX512</strong>: INT8/INT4 kernels</li>
+<li><strong>Recommendation</strong>: GGUF with llama.cpp, Q4_K_M sweet spot</li>
+</ul>
+<hr />
+<hr />
+<h2 id="calibration-data-tradeoffs">Calibration Data Tradeoffs<a class="headerlink" href="#calibration-data-tradeoffs" title="Permanent link">&para;</a></h2>
+<h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>100 samples</strong>: Usually sufficient, fast</li>
+<li><strong>1000 samples</strong>: Marginal quality improvement</li>
+<li><strong>10000 samples</strong>: No additional benefit, waste of time</li>
+</ul>
+<hr />
+<h3 id="diversity-vs-representativeness">Diversity vs. Representativeness<a class="headerlink" href="#diversity-vs-representativeness" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>In-domain</strong>: Better for specialized models</li>
+<li><strong>General (WikiText)</strong>: Better for general models</li>
+<li><strong>Mixed</strong>: Best for production</li>
+</ul>
+<hr />
+<hr />
+<h2 id="dynamic-vs-static-quantization">Dynamic vs. Static Quantization<a class="headerlink" href="#dynamic-vs-static-quantization" title="Permanent link">&para;</a></h2>
+<h3 id="static-ptq">Static (PTQ)<a class="headerlink" href="#static-ptq" title="Permanent link">&para;</a></h3>
+<p><strong>Pros</strong>: Faster inference, lower memory
+<strong>Cons</strong>: Fixed scales, may underfit outliers
+<strong>Best for</strong>: Stable input distributions</p>
+<hr />
+<h3 id="dynamic">Dynamic<a class="headerlink" href="#dynamic" title="Permanent link">&para;</a></h3>
+<p><strong>Pros</strong>: Adapts to inputs, better quality
+<strong>Cons</strong>: Runtime overhead (scale computation)
+<strong>Best for</strong>: Varied input distributions, activation quantization</p>
+<hr />
+<hr />
+<h2 id="common-interview-questions">Common Interview Questions<a class="headerlink" href="#common-interview-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q1: When would you use INT8 over INT4?</strong>
+A: (1) Quality-critical applications where 0.5% matters, (2) Hardware with INT8 acceleration but no INT4, (3) Activations (INT4 activations too lossy).</p>
+<hr />
+<p><strong>Q2: What's the minimum model size for effective quantization?</strong>
+A: ~1B parameters. Smaller models have less redundancy, quantization hurts more. &lt;500M models: stick to FP16.</p>
+<hr />
+<p><strong>Q3: How do you decide between GPTQ and AWQ?</strong>
+A: GPTQ for 3-bit or when quality is paramount. AWQ for 4-bit, faster iteration, production deadlines. Quality difference minimal at 4-bit.</p>
+<hr />
+<p><strong>Q4: What's the biggest failure mode of quantization?</strong>
+A: Outlier channels not handled properly. SmoothQuant, AWQ, or mixed-precision decomposition (LLM.int8()) essential for robust quantization.</p>
+<hr />
+<p><strong>Q5: Can you quantize a fine-tuned model?</strong>
+A: Yes, but better to fine-tune with QLoRA (quantize-aware fine-tuning). Post-hoc quantization of fine-tuned models can be more sensitive than base models.</p>
+<hr />
+<p><strong>Q6: What's the practical lower bound for useful quantization?</strong>
+A: 2-bit with current methods. Below that, quality degrades unacceptably even for large models (70B+). Active research on sub-2-bit.</p>
+<hr />
+<p><strong>Q7: How much quality loss is acceptable?</strong>
+A: Domain-dependent. Chatbots: 2-3% acceptable. Code generation: &lt;1%. Reasoning tasks: &lt;0.5%. Benchmark on your specific use case.</p>
+<hr />
+<p><strong>Q8: Should you quantize KV cache?</strong>
+A: Yes for long context (4K+). INT8 KV cache with SmoothQuant: 2× memory savings, &lt;0.5% quality loss. Critical for 32K+ context.</p>
+<hr />
+<p><strong>Q9: What's the ROI of quantization engineering time?</strong>
+A: High. 4 hours GPTQ quantization → 8× memory reduction → 8× more users per GPU → 8× cost reduction. One-time cost, continuous savings.</p>
+<hr />
+<p><strong>Q10: Biggest misconception about quantization?</strong>
+A: "Lower bits always means faster." Reality: memory-bound scenarios see speedup, compute-bound scenarios don't. Batch size, context length matter more than bit width for speed.</p>
+<hr />
 
 
 

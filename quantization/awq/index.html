@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../gguf_ggml/">
+        <link rel="prev" href="../gptq/">
       
       
         <link rel="next" href="../smoothquant/">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#1-paper" class="md-skip">
           Skip to content
         </a>
       
@@ -845,29 +845,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    GGUF GGML
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -876,8 +853,6 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
-      
-        
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -911,8 +886,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -921,18 +894,132 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-paper" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Paper
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#2-core-insight" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      2. Core Insight
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-key-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Key Observation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identify-salient-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Identify Salient Channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-per-channel-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Per-Channel Scaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-search-optimal-scales" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Search Optimal Scales
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-why-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Why It Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Specifications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-performance-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Performance Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-advantages-over-gptq" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Advantages over GPTQ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tinychat-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. TinyChat Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Common Interview Questions
     </span>
   </a>
   
@@ -960,6 +1047,29 @@
   
   <span class="md-ellipsis">
     SmoothQuant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gguf_ggml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GGUF GGML
     
   </span>
   
@@ -1201,8 +1311,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1211,18 +1319,132 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-paper" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Paper
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#2-core-insight" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      2. Core Insight
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-key-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Key Observation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identify-salient-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Identify Salient Channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-per-channel-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Per-Channel Scaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-search-optimal-scales" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Search Optimal Scales
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-why-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Why It Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Specifications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-performance-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Performance Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-advantages-over-gptq" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Advantages over GPTQ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tinychat-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. TinyChat Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Common Interview Questions
     </span>
   </a>
   
@@ -1247,21 +1469,139 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+  <h1>AWQ</h1>
+
+<h2 id="1-paper">1. Paper<a class="headerlink" href="#1-paper" title="Permanent link">&para;</a></h2>
+<p>Lin et al., 2023 - "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration"</p>
+<hr />
+<hr />
+<h2 id="2-core-insight">2. Core Insight<a class="headerlink" href="#2-core-insight" title="Permanent link">&para;</a></h2>
+<p><strong>Not all weights are equal</strong> - 1% of salient weights (channels) matter disproportionately for model quality.</p>
+<hr />
+<hr />
+<h2 id="3-key-observation">3. Key Observation<a class="headerlink" href="#3-key-observation" title="Permanent link">&para;</a></h2>
+<p>Salient weight channels correlate with large activation magnitudes. Protect these during quantization.</p>
+<hr />
+<hr />
+<h2 id="4-algorithm">4. Algorithm<a class="headerlink" href="#4-algorithm" title="Permanent link">&para;</a></h2>
+<h3 id="1-identify-salient-channels">1. Identify Salient Channels<a class="headerlink" href="#1-identify-salient-channels" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Collect activation statistics</span>
+<span class="n">salient_scores</span> <span class="o">=</span> <span class="n">activation_magnitude</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+<span class="c1"># Top 1% channels by activation magnitude</span>
 </code></pre></div>
+<hr />
+<h3 id="2-per-channel-scaling">2. Per-Channel Scaling<a class="headerlink" href="#2-per-channel-scaling" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Scale up salient weights BEFORE quantization</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">compute_optimal_scale</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>  <span class="c1"># Based on activation distribution</span>
+<span class="n">W_scaled</span> <span class="o">=</span> <span class="n">W</span> <span class="o">*</span> <span class="n">s</span>  <span class="c1"># Per-channel scale</span>
+<span class="n">W_quantized</span> <span class="o">=</span> <span class="n">quantize</span><span class="p">(</span><span class="n">W_scaled</span><span class="p">)</span>
+
+<span class="c1"># At inference: </span>
+<span class="c1"># output = (W_quantized / s) @ X = W_quantized @ (X * s)</span>
+<span class="c1"># Move scaling to activations (cheap)</span>
+</code></pre></div>
+<hr />
+<h3 id="3-search-optimal-scales">3. Search Optimal Scales<a class="headerlink" href="#3-search-optimal-scales" title="Permanent link">&para;</a></h3>
+<p>Minimize: <code>||W·X - Q(W·s)·(X/s)||</code></p>
+<p>Grid search over s ∈ [0.5, 1.5] per channel</p>
+<hr />
+<hr />
+<h2 id="5-why-it-works">5. Why It Works<a class="headerlink" href="#5-why-it-works" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Increases effective resolution for important weights</li>
+<li>Shifts dynamic range to match activation distribution</li>
+<li>Quantization error on salient weights reduced by 2-4×</li>
+</ul>
+<hr />
+<hr />
+<h2 id="6-specifications">6. Specifications<a class="headerlink" href="#6-specifications" title="Permanent link">&para;</a></h2>
+<p><strong>Calibration</strong>: 128 samples
+<strong>Quantization Time</strong>: ~10 minutes for 7B model (much faster than GPTQ)
+<strong>Group Size</strong>: 128 typical
+<strong>Bits</strong>: Optimized for 4-bit, works for 3-bit</p>
+<hr />
+<hr />
+<h2 id="7-performance-comparison">7. Performance Comparison<a class="headerlink" href="#7-performance-comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>LLaMA-7B (4-bit)</th>
+<th>Quantization Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTN</td>
+<td>73.2 PPL</td>
+<td>seconds</td>
+</tr>
+<tr>
+<td>GPTQ</td>
+<td>68.4 PPL</td>
+<td>4 hours</td>
+</tr>
+<tr>
+<td>AWQ</td>
+<td>68.1 PPL</td>
+<td>10 min</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="8-advantages-over-gptq">8. Advantages over GPTQ<a class="headerlink" href="#8-advantages-over-gptq" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Speed</strong>: 20-30× faster quantization</li>
+<li><strong>Simplicity</strong>: No Hessian computation</li>
+<li><strong>Hardware-friendly</strong>: Simple per-channel scales</li>
+</ol>
+<hr />
+<hr />
+<h2 id="9-tinychat-integration">9. TinyChat Integration<a class="headerlink" href="#9-tinychat-integration" title="Permanent link">&para;</a></h2>
+<p>AWQ includes custom CUDA kernels for efficient INT4 inference:
+- Fused dequantization + GEMM
+- 3-4× speedup over FP16 on consumer GPUs</p>
+<hr />
+<hr />
+<h2 id="10-implementation">10. Implementation<a class="headerlink" href="#10-implementation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">awq</span> <span class="kn">import</span> <span class="n">AutoAWQForCausalLM</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoAWQForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;model_name&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span>
+    <span class="n">calib_data</span><span class="o">=</span><span class="s2">&quot;wikitext&quot;</span><span class="p">,</span>
+    <span class="n">w_bit</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">q_group_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;GEMM&quot;</span>  <span class="c1"># Inference kernel</span>
+<span class="p">)</span>
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="11-common-interview-questions">11. Common Interview Questions<a class="headerlink" href="#11-common-interview-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q1: How does AWQ differ from GPTQ philosophically?</strong> <br>
+A: GPTQ compensates errors across all weights. AWQ protects important weights from error in the first place. Prevention vs. compensation.</p>
+<hr />
+<p><strong>Q2: Why is AWQ faster to quantize?</strong> <br>
+A: No iterative weight updates or Hessian computation. Just statistics collection + grid search for scales. Embarrassingly parallel.</p>
+<hr />
+<p><strong>Q3: What's the "1% salient weights" finding?</strong> <br>
+A: 1% of weight channels (those with highest activation magnitude) contribute disproportionately. Protecting them preserves 90%+ of model quality.</p>
+<hr />
+<p><strong>Q4: How are scales applied at inference?</strong> <br>
+A: Mathematically equivalent to scale weights (expensive) or scale activations (cheap). AWQ scales activations: <code>(W/s) @ X = (W) @ (X/s)</code>.</p>
+<hr />
+<p><strong>Q5: Can AWQ work for INT8?</strong> <br>
+A: Yes, but less beneficial. INT8 already preserves most weights well. AWQ's advantage is strongest at 3-4 bits where bit budget is tight.</p>
+<hr />
+<p><strong>Q6: What's the memory overhead of scales?</strong> <br>
+A: Per-channel FP16 scales: 0.1-0.2% overhead. Negligible compared to 8× weight reduction.</p>
+<hr />
+<p><strong>Q7: AWQ vs. SmoothQuant?</strong> <br>
+A: SmoothQuant smooths activations for easier quantization. AWQ protects important weights. Can be combined: SmoothQuant for activation quantization, AWQ for weights.</p>
+<hr />
+<p><strong>Q8: Why grid search for scales?</strong> <br>
+A: Closed-form solution doesn't exist for optimal scales. Grid search over reasonable range [0.5, 1.5] is fast and effective. Can use gradient-based for better results but slower.</p>
+<hr />
 
 
 

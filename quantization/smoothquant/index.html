@@ -16,7 +16,7 @@
         <link rel="prev" href="../awq/">
       
       
-        <link rel="next" href="../quantization_tradeoffs/">
+        <link rel="next" href="../gguf_ggml/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#1-paper" class="md-skip">
           Skip to content
         </a>
       
@@ -848,29 +848,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    GGUF GGML
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../awq/" class="md-nav__link">
         
   
@@ -899,8 +876,6 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
-      
-        
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -934,8 +909,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -944,18 +917,153 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-paper" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Paper
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#2-problem-statement" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      2. Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-idea-smoothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Core Idea: Smoothing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Core Idea: Smoothing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identify-outlier-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Identify Outlier Channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-compute-smoothing-scales" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Compute Smoothing Scales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-apply-smoothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Apply Smoothing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-migration-strength" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Migration Strength α
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-per-token-vs-per-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Per-Token vs. Per-Tensor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-integration-with-other-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Integration with Other Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Common Interview Questions
     </span>
   </a>
   
@@ -965,6 +1073,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gguf_ggml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GGUF GGML
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1201,8 +1332,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1211,18 +1340,153 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-paper" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. Paper
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#2-problem-statement" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      2. Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-idea-smoothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Core Idea: Smoothing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Core Idea: Smoothing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identify-outlier-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Identify Outlier Channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-compute-smoothing-scales" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Compute Smoothing Scales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-apply-smoothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Apply Smoothing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-migration-strength" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Migration Strength α
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-per-token-vs-per-tensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Per-Token vs. Per-Tensor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-integration-with-other-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Integration with Other Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Common Interview Questions
     </span>
   </a>
   
@@ -1247,21 +1511,148 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
+  <h1>SmoothQuant</h1>
+
+<h2 id="1-paper">1. Paper<a class="headerlink" href="#1-paper" title="Permanent link">&para;</a></h2>
+<p>Xiao et al., 2022 - "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models"</p>
+<hr />
+<hr />
+<h2 id="2-problem-statement">2. Problem Statement<a class="headerlink" href="#2-problem-statement" title="Permanent link">&para;</a></h2>
+<p><strong>Activation outliers</strong> make INT8 quantization difficult. Weights quantize well, activations don't.</p>
+<h3 id="observation">Observation<a class="headerlink" href="#observation" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li>Weight range: typically within [-3σ, 3σ]</li>
+<li>Activation range: 10-100× larger due to systematic outliers in specific channels</li>
 </ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<hr />
+<hr />
+<h2 id="3-core-idea-smoothing">3. Core Idea: Smoothing<a class="headerlink" href="#3-core-idea-smoothing" title="Permanent link">&para;</a></h2>
+<p><strong>Migrate difficulty from activations to weights</strong> via mathematically equivalent transformation.</p>
+<h3 id="key-transformation">Key Transformation<a class="headerlink" href="#key-transformation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Y = XW = (X / s) · (W · s)
 </code></pre></div>
+<p>Where <code>s</code> is per-channel smoothing factor.</p>
+<ul>
+<li>Divide activations by s → reduces outliers</li>
+<li>Multiply weights by s → increases weight range (but weights easier to quantize)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="4-algorithm">4. Algorithm<a class="headerlink" href="#4-algorithm" title="Permanent link">&para;</a></h2>
+<h3 id="1-identify-outlier-channels">1. Identify Outlier Channels<a class="headerlink" href="#1-identify-outlier-channels" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Collect calibration statistics</span>
+<span class="n">alpha_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">|</span><span class="n">X</span><span class="o">|</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">tokens</span><span class="p">)</span>  <span class="c1"># Per-channel activation range</span>
+<span class="n">alpha_w</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">|</span><span class="n">W</span><span class="o">|</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">input_dim</span><span class="p">)</span>  <span class="c1"># Per-channel weight range</span>
+</code></pre></div>
+<hr />
+<h3 id="2-compute-smoothing-scales">2. Compute Smoothing Scales<a class="headerlink" href="#2-compute-smoothing-scales" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Migration strength α ∈ [0, 1]</span>
+<span class="c1"># α=0: no smoothing, α=1: full migration</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">alpha_x</span><span class="o">^</span><span class="n">α</span> <span class="o">/</span> <span class="n">alpha_w</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">α</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="3-apply-smoothing">3. Apply Smoothing<a class="headerlink" href="#3-apply-smoothing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Offline transformation</span>
+<span class="n">W_smooth</span> <span class="o">=</span> <span class="n">W</span> <span class="o">*</span> <span class="n">s</span>  <span class="c1"># Fold into weights</span>
+<span class="c1"># At runtime: X_smooth = X / s</span>
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="5-migration-strength">5. Migration Strength α<a class="headerlink" href="#5-migration-strength" title="Permanent link">&para;</a></h2>
+<p><strong>α = 0.5</strong>: Balanced migration (default) <br>
+- Geometric mean of activation and weight ranges
+- Empirically optimal for most models</p>
+<p><strong>α = 0.75</strong>: More aggressive activation smoothing <br>
+- Better for models with severe outliers (OPT)</p>
+<hr />
+<hr />
+<h2 id="6-per-token-vs-per-tensor">6. Per-Token vs. Per-Tensor<a class="headerlink" href="#6-per-token-vs-per-tensor" title="Permanent link">&para;</a></h2>
+<p><strong>Per-Tensor Dynamic</strong>: Single scale per activation tensor (fast, less accurate)
+<strong>Per-Token Dynamic</strong>: Scale per token in sequence (better accuracy, slower)</p>
+<p>SmoothQuant enables <strong>per-tensor</strong> quantization by smoothing outliers beforehand.</p>
+<hr />
+<hr />
+<h2 id="7-performance">7. Performance<a class="headerlink" href="#7-performance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>W8A8 Accuracy</th>
+<th>vs FP16</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OPT-175B</td>
+<td>66.7%</td>
+<td>-0.1%</td>
+</tr>
+<tr>
+<td>BLOOM-176B</td>
+<td>68.4%</td>
+<td>-0.3%</td>
+</tr>
+<tr>
+<td>LLaMA-65B</td>
+<td>69.2%</td>
+<td>-0.2%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Speedup</strong>: 1.5-2× on A100 (INT8 Tensor Cores)</p>
+<hr />
+<hr />
+<h2 id="8-integration-with-other-methods">8. Integration with Other Methods<a class="headerlink" href="#8-integration-with-other-methods" title="Permanent link">&para;</a></h2>
+<p><strong>SmoothQuant + AWQ</strong>: <br>
+- SmoothQuant for activation INT8
+- AWQ for weight INT4
+- Hybrid W4A8 quantization</p>
+<p><strong>SmoothQuant + LLM.int8()</strong>: <br>
+- SmoothQuant pre-processing
+- LLM.int8() for outlier handling
+- Complementary techniques</p>
+<hr />
+<hr />
+<h2 id="9-implementation">9. Implementation<a class="headerlink" href="#9-implementation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">smoothquant.smooth</span> <span class="kn">import</span> <span class="n">smooth_lm</span>
+
+<span class="c1"># Apply smoothing transformation</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">smooth_lm</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">calibration_data</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># Migration strength</span>
+<span class="p">)</span>
+
+<span class="c1"># Then quantize with standard tools</span>
+<span class="n">quantized</span> <span class="o">=</span> <span class="n">quantize_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">w_bit</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">a_bit</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="10-common-interview-questions">10. Common Interview Questions<a class="headerlink" href="#10-common-interview-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q1: Why do LLM activations have outliers?</strong> <br>
+A: Systematic outliers in specific channels across all tokens, likely due to attention patterns and positional encodings. Some channels accumulate large values.</p>
+<hr />
+<p><strong>Q2: How does smoothing preserve mathematical equivalence?</strong> <br>
+A: Matrix multiplication property: <code>(X/s) @ (W*s) = X @ W</code>. Division and multiplication by same per-channel scales cancel out.</p>
+<hr />
+<p><strong>Q3: Why can't we just clip outliers?</strong> <br>
+A: Clipping loses information and degrades quality significantly (5-10%). Smoothing redistributes dynamic range without information loss.</p>
+<hr />
+<p><strong>Q4: What's the overhead of smoothing at runtime?</strong> <br>
+A: Negligible. Smoothing scales folded into weights offline. Only <code>X/s</code> at runtime (cheap element-wise division before matmul).</p>
+<hr />
+<p><strong>Q5: Does SmoothQuant help with KV cache quantization?</strong> <br>
+A: Yes! KV cache contains activations. Smoothing reduces outliers, enabling INT8 KV cache with minimal quality loss.</p>
+<hr />
+<p><strong>Q6: Why is α=0.5 optimal?</strong> <br>
+A: Balances difficulty migration. Too low → activations still hard. Too high → weights become hard. Geometric mean (0.5) is empirical sweet spot.</p>
+<hr />
+<p><strong>Q7: Can SmoothQuant be applied per-layer?</strong> <br>
+A: Yes, α can be tuned per-layer. Some layers benefit from more aggressive smoothing (α=0.7), others from less (α=0.3).</p>
+<hr />
+<p><strong>Q8: SmoothQuant vs. absmax/percentile scaling?</strong> <br>
+A: Those methods scale after observing outliers. SmoothQuant prevents outliers from forming. More fundamental solution.</p>
+<hr />
 
 
 

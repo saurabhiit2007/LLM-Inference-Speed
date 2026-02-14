@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../gptq/">
+        <link rel="prev" href="../smoothquant/">
       
       
-        <link rel="next" href="../awq/">
+        <link rel="next" href="../quantization_tradeoffs/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#1-ggml-georgi-gerganov-machine-learning" class="md-skip">
           Skip to content
         </a>
       
@@ -845,89 +845,6 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    GGUF GGML
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    GGUF GGML
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project layout
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
@@ -965,6 +882,220 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    GGUF GGML
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    GGUF GGML
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ggml-georgi-gerganov-machine-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. GGML (Georgi Gerganov Machine Learning)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gguf-ggml-universal-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      GGUF (GGML Universal Format)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GGUF (GGML Universal Format)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantization Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-quantization-k-quants" class="md-nav__link">
+    <span class="md-ellipsis">
+      K-Quantization (K-quants)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#legacy-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Legacy Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importance-matrix-i-quants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importance Matrix (I-quants)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#llamacpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      llama.cpp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU Optimizations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kernel Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache-friendly-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache-Friendly Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantized-matrix-multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantized Matrix Multiply
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Interview Questions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1201,8 +1332,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1211,18 +1340,153 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#1-ggml-georgi-gerganov-machine-learning" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      1. GGML (Georgi Gerganov Machine Learning)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#gguf-ggml-universal-format" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      GGUF (GGML Universal Format)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GGUF (GGML Universal Format)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantization Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-quantization-k-quants" class="md-nav__link">
+    <span class="md-ellipsis">
+      K-Quantization (K-quants)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#legacy-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Legacy Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importance-matrix-i-quants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importance Matrix (I-quants)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#llamacpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      llama.cpp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPU Optimizations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kernel Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache-friendly-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache-Friendly Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantized-matrix-multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantized Matrix Multiply
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Interview Questions
     </span>
   </a>
   
@@ -1247,21 +1511,184 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+  <h1>GGUF GGML</h1>
+
+<h2 id="1-ggml-georgi-gerganov-machine-learning">1. GGML (Georgi Gerganov Machine Learning)<a class="headerlink" href="#1-ggml-georgi-gerganov-machine-learning" title="Permanent link">&para;</a></h2>
+<p>C library for machine learning inference, optimized for CPU execution of LLMs.</p>
+<p><strong>Key Features</strong>: <br>
+- Pure C/C++ (no Python runtime)
+- CPU-optimized kernels (AVX2, AVX512, NEON)
+- 4-bit to 16-bit quantization
+- Memory-mapped model loading
+- Apple Metal, CUDA, OpenCL backends</p>
+<hr />
+<hr />
+<h2 id="gguf-ggml-universal-format">GGUF (GGML Universal Format)<a class="headerlink" href="#gguf-ggml-universal-format" title="Permanent link">&para;</a></h2>
+<p>Successor to GGML format (deprecated). Single-file model container.</p>
+<h3 id="file-structure">File Structure<a class="headerlink" href="#file-structure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>[Header]
+- Magic number: &quot;GGUF&quot;
+- Version
+- Tensor count, KV metadata count
+
+[Metadata]
+- Model hyperparameters
+- Tokenizer config
+- Quantization scheme
+- Author, license, etc.
+
+[Tensor Info]
+- Name, dimensions, type, offset
+
+[Tensor Data]
+- Actual quantized weights (memory-mapped)
 </code></pre></div>
+<hr />
+<h3 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Single file</strong>: All model data + config in one .gguf</li>
+<li><strong>Memory mapping</strong>: Load multi-GB models instantly, use minimal RAM</li>
+<li><strong>Extensible</strong>: KV metadata for any additional info</li>
+<li><strong>Backward compatible</strong>: Old GGML loaders fail safely</li>
+</ul>
+<hr />
+<hr />
+<h2 id="quantization-types">Quantization Types<a class="headerlink" href="#quantization-types" title="Permanent link">&para;</a></h2>
+<h3 id="k-quantization-k-quants">K-Quantization (K-quants)<a class="headerlink" href="#k-quantization-k-quants" title="Permanent link">&para;</a></h3>
+<p>Optimized 2-6 bit quantization schemes:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Bits</th>
+<th>Description</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q2_K</td>
+<td>~2.5</td>
+<td>Extreme compression</td>
+<td>Large models on limited RAM</td>
+</tr>
+<tr>
+<td>Q3_K_S</td>
+<td>~3.4</td>
+<td>Small, less accurate</td>
+<td>Acceptable quality loss</td>
+</tr>
+<tr>
+<td>Q3_K_M</td>
+<td>~3.7</td>
+<td>Medium quality</td>
+<td>Balanced</td>
+</tr>
+<tr>
+<td>Q4_K_S</td>
+<td>~4.0</td>
+<td>Small, good quality</td>
+<td>Recommended default</td>
+</tr>
+<tr>
+<td>Q4_K_M</td>
+<td>~4.5</td>
+<td>Medium, best quality</td>
+<td>Best 4-bit option</td>
+</tr>
+<tr>
+<td>Q5_K_S</td>
+<td>~5.0</td>
+<td>Small, very good</td>
+<td>Low loss</td>
+</tr>
+<tr>
+<td>Q6_K</td>
+<td>~6.0</td>
+<td>High quality</td>
+<td>Near-FP16 quality</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="legacy-quantization">Legacy Quantization<a class="headerlink" href="#legacy-quantization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Q4_0: Original 4-bit (group size 32)</li>
+<li>Q4_1: 4-bit with per-group min (better than Q4_0)</li>
+<li>Q5_0, Q5_1: 5-bit variants</li>
+<li>Q8_0: INT8 quantization</li>
+</ul>
+<hr />
+<h3 id="importance-matrix-i-quants">Importance Matrix (I-quants)<a class="headerlink" href="#importance-matrix-i-quants" title="Permanent link">&para;</a></h3>
+<p>Uses importance scores to allocate more bits to salient weights:
+- <code>IQ3_XXS</code>: 3-bit with importance weighting
+- <code>IQ4_XS</code>: 4-bit with importance weighting</p>
+<hr />
+<hr />
+<h2 id="llamacpp">llama.cpp<a class="headerlink" href="#llamacpp" title="Permanent link">&para;</a></h2>
+<p>Reference implementation for GGUF inference.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Convert HF model to GGUF</span>
+python<span class="w"> </span>convert-hf-to-gguf.py<span class="w"> </span>model_path<span class="w"> </span>--outtype<span class="w"> </span>q4_K_M
+
+<span class="c1"># Inference</span>
+./main<span class="w"> </span>-m<span class="w"> </span>model.gguf<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Prompt&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-n<span class="w"> </span><span class="m">512</span><span class="w"> </span><span class="se">\ </span><span class="w">             </span><span class="c1"># Max tokens</span>
+<span class="w">  </span>-c<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\ </span><span class="w">            </span><span class="c1"># Context length</span>
+<span class="w">  </span>-t<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\ </span><span class="w">               </span><span class="c1"># Threads</span>
+<span class="w">  </span>--mlock<span class="w">               </span><span class="c1"># Lock in RAM (prevent swapping)</span>
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="cpu-optimizations">CPU Optimizations<a class="headerlink" href="#cpu-optimizations" title="Permanent link">&para;</a></h2>
+<h3 id="kernel-fusion">Kernel Fusion<a class="headerlink" href="#kernel-fusion" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>attention = softmax(QK^T/√d) @ V
+</code></pre></div>
+Fused into single kernel instead of 3 separate ops.</p>
+<hr />
+<h3 id="cache-friendly-layout">Cache-Friendly Layout<a class="headerlink" href="#cache-friendly-layout" title="Permanent link">&para;</a></h3>
+<p>Reorder tensors for sequential memory access. Dramatic speedup on CPU.</p>
+<hr />
+<h3 id="quantized-matrix-multiply">Quantized Matrix Multiply<a class="headerlink" href="#quantized-matrix-multiply" title="Permanent link">&para;</a></h3>
+<p>Custom AVX2/AVX512 kernels for INT4/INT8 GEMM. 4-8× faster than naive C.</p>
+<hr />
+<hr />
+<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
+<p><strong>M2 Max (Metal)</strong>: <br>
+- 7B Q4_K_M: ~40 tokens/sec
+- 13B Q4_K_M: ~25 tokens/sec</p>
+<p><strong>AMD 5950X (16-core)</strong>: <br>
+- 7B Q4_K_M: ~30 tokens/sec
+- 13B Q4_K_M: ~15 tokens/sec</p>
+<hr />
+<hr />
+<h2 id="common-interview-questions">Common Interview Questions<a class="headerlink" href="#common-interview-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q1: Why GGUF instead of safetensors or PyTorch?</strong> <br>
+A: GGUF designed for inference, not training. Memory-mapped loading, quantization metadata embedded, optimized for llama.cpp ecosystem.</p>
+<hr />
+<p><strong>Q2: What's memory mapping and why does it matter?</strong> <br>
+A: OS maps file directly to virtual memory. Model loads "instantly" because data stays on disk until accessed. Enables running larger models than RAM.</p>
+<hr />
+<p><strong>Q3: Why CPU inference for LLMs?</strong> <br>
+A: Consumer hardware accessibility. Most users don't have high-end GPUs. CPUs have large memory, enabling bigger models with quantization.</p>
+<hr />
+<p><strong>Q4: What's the quality difference between Q4_K_M and Q8_0?</strong> <br>
+A: Q8_0: ~99% of FP16 quality. Q4_K_M: ~95-97%. For chat, Q4_K_M usually indistinguishable. For precise tasks, Q8_0 safer.</p>
+<hr />
+<p><strong>Q5: How do K-quants improve on original Q4_0?</strong> <br>
+A: Better block structure, per-block scales and mins, optimized for specific bit rates. Q4_K_M beats Q4_0 quality while being similar size.</p>
+<hr />
+<p><strong>Q6: Can GGUF models be used outside llama.cpp?</strong> <br>
+A: Yes. Libraries: llama-cpp-python (Python), whisper.cpp (audio), GPT4All, Ollama, LM Studio all support GGUF.</p>
+<hr />
+<p><strong>Q7: What's the tradeoff between Q4_K_S and Q4_K_M?</strong> <br>
+A: Q4_K_S: Smaller (~4.0 bpw), faster. Q4_K_M: Slightly larger (~4.5 bpw), better quality. Difference: ~0.3 PPL for 7B models.</p>
+<hr />
+<p><strong>Q8: Why multiple quantization types instead of just one?</strong> <br>
+A: Different hardware, use cases, quality requirements. Q2_K for extreme memory constraints, Q6_K for quality-critical applications, Q4_K_M for general use.</p>
+<hr />
+<p><strong>Q9: What's "bpw" (bits per weight)?</strong> <br>
+A: Effective bits including quantization metadata overhead. Q4_K_M is labeled "4-bit" but actually ~4.5 bpw due to scales/mins storage.</p>
+<hr />
 
 
 
