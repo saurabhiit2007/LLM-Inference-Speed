@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../vllm/">
+        <link rel="prev" href="../tensorrt_llm/">
       
       
-        <link rel="next" href="../triton_inference_server/">
+        <link rel="next" href="../deepspeed_inference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -74,6 +74,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#1-overview" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -982,6 +987,261 @@
   
   
     <li class="md-nav__item">
+      <a href="../tensorrt_llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TensorRT LLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Text Generation Inference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Text Generation Inference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Streaming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Batching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flashattention-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      FlashAttention Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quantization-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Quantization Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-model-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Model Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-distributed-serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Distributed Serving
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Distributed Serving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safetensors-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safetensors Format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-production-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Production Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Production Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Observability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safety-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker &amp; Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-grammar-constrained-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Grammar-Constrained Generation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../deepspeed_inference/" class="md-nav__link">
         
   
@@ -1005,12 +1265,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensorrt_llm/" class="md-nav__link">
+      <a href="../triton_inference_server/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    TensorRT LLM
+    Triton Inference Server
     
   </span>
   
@@ -1048,46 +1308,15 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Text Generation Inference
-    
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
-      <a href="../triton_inference_server/" class="md-nav__link">
+      <a href="../framework_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Triton Inference Server
+    Framework Comparison
     
   </span>
   
@@ -1145,6 +1374,185 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#token-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Streaming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Batching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flashattention-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      FlashAttention Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quantization-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Quantization Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-model-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Model Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-distributed-serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Distributed Serving
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Distributed Serving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safetensors-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safetensors Format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-production-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Production Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Production Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Observability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safety-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker &amp; Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-grammar-constrained-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Grammar-Constrained Generation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1164,7 +1572,128 @@
 
   <h1>Text Generation Inference</h1>
 
-
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p><strong>Hugging Face's production serving solution</strong> <br>
+- Written in Rust for performance and safety
+- Python bindings for model loading
+- Focus: Stability, HuggingFace ecosystem integration, ease of deployment</p>
+<hr />
+<hr />
+<h2 id="2-core-architecture">2. Core Architecture<a class="headerlink" href="#2-core-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="token-streaming">Token Streaming<a class="headerlink" href="#token-streaming" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Server-Sent Events (SSE) for real-time streaming</li>
+<li>Low-latency first-token time</li>
+<li>Optimized for chat applications</li>
+</ul>
+<h3 id="continuous-batching">Continuous Batching<a class="headerlink" href="#continuous-batching" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Dynamic batching like vLLM</li>
+<li>Request prioritization support</li>
+<li>Smart scheduling for mixed workloads</li>
+</ul>
+<h3 id="flashattention-integration">FlashAttention Integration<a class="headerlink" href="#flashattention-integration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Uses FlashAttention for memory-efficient attention</li>
+<li>Custom kernels for specific model architectures</li>
+<li>Optimized for both prefill and decode</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-quantization-features">3. Quantization Features<a class="headerlink" href="#3-quantization-features" title="Permanent link">&para;</a></h2>
+<p><strong>Built-in Quantization:</strong> <br>
+- bitsandbytes (INT8, NF4)
+- GPTQ (INT4, INT8)
+- AWQ (INT4)
+- EETQ (INT8, FP8-like)</p>
+<p><strong>No separate build step</strong> - quantization at runtime</p>
+<hr />
+<hr />
+<h2 id="4-model-support">4. Model Support<a class="headerlink" href="#4-model-support" title="Permanent link">&para;</a></h2>
+<p><strong>Broad Architecture Coverage:</strong> <br>
+- All major HuggingFace models out-of-box
+- Automatic architecture detection
+- Custom model support via transformers library</p>
+<p><strong>Specializations:</strong> <br>
+- Mistral/Mixtral with custom kernels
+- Llama (1, 2, 3) optimizations
+- Falcon, Starcoder optimizations</p>
+<hr />
+<hr />
+<h2 id="5-distributed-serving">5. Distributed Serving<a class="headerlink" href="#5-distributed-serving" title="Permanent link">&para;</a></h2>
+<h3 id="tensor-parallelism">Tensor Parallelism<a class="headerlink" href="#tensor-parallelism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multi-GPU inference with automatic sharding</li>
+<li>Based on custom Rust implementation</li>
+<li>Lower overhead than Python-based solutions</li>
+</ul>
+<h3 id="safetensors-format">Safetensors Format<a class="headerlink" href="#safetensors-format" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Lazy loading with mmap</li>
+<li>Fast cold starts</li>
+<li>Memory-efficient weight loading</li>
+</ul>
+<hr />
+<hr />
+<h2 id="6-production-features">6. Production Features<a class="headerlink" href="#6-production-features" title="Permanent link">&para;</a></h2>
+<h3 id="monitoring-observability">Monitoring &amp; Observability<a class="headerlink" href="#monitoring-observability" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prometheus metrics endpoint</li>
+<li>Request/token-level tracing</li>
+<li>Queue depth, batch size, latency metrics</li>
+</ul>
+<h3 id="safety-features">Safety Features<a class="headerlink" href="#safety-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Request validation and sanitization</li>
+<li>Token limit enforcement</li>
+<li>Grammar/JSON schema validation</li>
+<li>Repetition penalty controls</li>
+</ul>
+<h3 id="docker-kubernetes">Docker &amp; Kubernetes<a class="headerlink" href="#docker-kubernetes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Official Docker images</li>
+<li>Helm charts for K8s deployment</li>
+<li>Auto-scaling support with metrics</li>
+</ul>
+<hr />
+<hr />
+<h2 id="7-grammar-constrained-generation">7. Grammar-Constrained Generation<a class="headerlink" href="#7-grammar-constrained-generation" title="Permanent link">&para;</a></h2>
+<p><strong>Unique Feature vs Competitors:</strong> <br>
+- Force model to follow regex patterns
+- JSON schema validation during generation
+- Prevents malformed outputs</p>
+<p>Example: Generate only valid JSON with specific schema</p>
+<hr />
+<hr />
+<h2 id="8-performance-characteristics">8. Performance Characteristics<a class="headerlink" href="#8-performance-characteristics" title="Permanent link">&para;</a></h2>
+<p><strong>Strengths:</strong> <br>
+- Fast cold start (Rust + safetensors)
+- Stable long-running deployments
+- Lower memory overhead than Python frameworks</p>
+<p><strong>Trade-offs:</strong> <br>
+- Slightly lower peak throughput vs TensorRT-LLM
+- Less aggressive optimizations vs vLLM's latest features</p>
+<hr />
+<hr />
+<h2 id="9-interview-qa">9. Interview Q&amp;A<a class="headerlink" href="#9-interview-qa" title="Permanent link">&para;</a></h2>
+<p><strong>Q: Why choose TGI over vLLM?</strong> <br>
+A: TGI for production stability, HuggingFace integration, and grammar constraints. vLLM for maximum throughput and cutting-edge features like multi-LoRA.</p>
+<hr />
+<p><strong>Q: How does TGI handle model updates?</strong> <br>
+A: Hot-swapping not supported. Deploy new instances and gradually shift traffic. Safetensors format enables fast restarts (&lt;30s for most models).</p>
+<hr />
+<p><strong>Q: What's TGI's approach to KV cache management?</strong> <br>
+A: Uses FlashAttention's memory-efficient approach rather than paging. Simpler but less flexible than vLLM's PagedAttention for extreme multi-tenancy.</p>
+<hr />
+<p><strong>Q: How does grammar-constrained generation work?</strong> <br>
+A: Token sampling filtered by regex/grammar rules. If next token violates constraint, it's masked and next-best token chosen. Slight performance overhead but guarantees format compliance.</p>
+<hr />
+<p><strong>Q: Why Rust for inference serving?</strong> <br>
+A: Memory safety without garbage collection pauses, zero-cost abstractions, excellent async performance. Critical for long-running production services with 99.9% uptime requirements.</p>
+<hr />
+<p><strong>Q: How does TGI handle request timeouts?</strong> <br>
+A: Cancellation tokens propagate through async runtime. Partial generation discarded immediately, freeing batch slot for new requests. No "zombie" requests blocking GPU.</p>
+<hr />
 
 
 

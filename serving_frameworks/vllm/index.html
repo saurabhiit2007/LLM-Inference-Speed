@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../tensorrt_llm/">
+        <link rel="prev" href="../triton_inference_server/">
       
       
-        <link rel="next" href="../text_generation_inference/">
+        <link rel="next" href="../framework_comparison/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-overview" class="md-skip">
+        <a href="#1-core-innovation-pagedattention" class="md-skip">
           Skip to content
         </a>
       
@@ -987,6 +987,52 @@
   
   
     <li class="md-nav__item">
+      <a href="../tensorrt_llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TensorRT LLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../text_generation_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Text Generation Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../deepspeed_inference/" class="md-nav__link">
         
   
@@ -1010,12 +1056,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensorrt_llm/" class="md-nav__link">
+      <a href="../triton_inference_server/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    TensorRT LLM
+    Triton Inference Server
     
   </span>
   
@@ -1079,28 +1125,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
+  <a href="#1-core-innovation-pagedattention" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Overview
+      1. Core Innovation: PagedAttention
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-the-kv-cache-bottleneck-in-llm-inference" class="md-nav__link">
+  <a href="#2-continuous-batching" class="md-nav__link">
     <span class="md-ellipsis">
-      2. The KV Cache Bottleneck in LLM Inference
+      2. Continuous Batching
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. The KV Cache Bottleneck in LLM Inference">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-prefill-vs-decode-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Prefill vs Decode Phases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-modern-features-2025-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Modern Features (2025-2026)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Modern Features (2025-2026)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-why-the-kv-cache-dominates" class="md-nav__link">
+  <a href="#speculative-decoding" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1 Why the KV Cache Dominates
+      Speculative Decoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-prefix-caching-apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Prefix Caching (APC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-lora-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-LoRA Support
     </span>
   </a>
   
@@ -1112,129 +1194,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-the-core-technology-pagedattention" class="md-nav__link">
+  <a href="#5-memory-pressure-handling" class="md-nav__link">
     <span class="md-ellipsis">
-      3. The Core Technology: PagedAttention
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. The Core Technology: PagedAttention">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-problem-fragmentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      The Problem: Fragmentation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#the-solution-pagedattention" class="md-nav__link">
-    <span class="md-ellipsis">
-      The Solution: PagedAttention
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-scheduling-continuous-batching" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Scheduling: Continuous Batching
+      5. Memory Pressure Handling
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-modern-2025-2026-advanced-features" class="md-nav__link">
+  <a href="#6-interview-qa" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Modern (2025-2026) Advanced Features
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Modern (2025-2026) Advanced Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-speculative-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      A. Speculative Decoding
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-automatic-prefix-caching-apc" class="md-nav__link">
-    <span class="md-ellipsis">
-      B. Automatic Prefix Caching (APC)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-multi-lora-support" class="md-nav__link">
-    <span class="md-ellipsis">
-      C. Multi-LoRA Support
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-prefill-vs-decode-performance-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Prefill vs Decode: Performance Characteristics
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-memory-pressure-and-preemption" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Memory Pressure and Preemption
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-architectural-comparison" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Architectural Comparison
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-useful-memory-approximation" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Useful Memory Approximation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-as" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q &amp; As
+      6. Interview Q&amp;A
     </span>
   </a>
   
@@ -1256,35 +1227,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../text_generation_inference/" class="md-nav__link">
+      <a href="../framework_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Text Generation Inference
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../triton_inference_server/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Triton Inference Server
+    Framework Comparison
     
   </span>
   
@@ -1349,28 +1297,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
+  <a href="#1-core-innovation-pagedattention" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Overview
+      1. Core Innovation: PagedAttention
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-the-kv-cache-bottleneck-in-llm-inference" class="md-nav__link">
+  <a href="#2-continuous-batching" class="md-nav__link">
     <span class="md-ellipsis">
-      2. The KV Cache Bottleneck in LLM Inference
+      2. Continuous Batching
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. The KV Cache Bottleneck in LLM Inference">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-prefill-vs-decode-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Prefill vs Decode Phases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-modern-features-2025-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Modern Features (2025-2026)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Modern Features (2025-2026)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-why-the-kv-cache-dominates" class="md-nav__link">
+  <a href="#speculative-decoding" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1 Why the KV Cache Dominates
+      Speculative Decoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-prefix-caching-apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Prefix Caching (APC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-lora-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-LoRA Support
     </span>
   </a>
   
@@ -1382,129 +1366,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-the-core-technology-pagedattention" class="md-nav__link">
+  <a href="#5-memory-pressure-handling" class="md-nav__link">
     <span class="md-ellipsis">
-      3. The Core Technology: PagedAttention
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. The Core Technology: PagedAttention">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-problem-fragmentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      The Problem: Fragmentation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#the-solution-pagedattention" class="md-nav__link">
-    <span class="md-ellipsis">
-      The Solution: PagedAttention
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-scheduling-continuous-batching" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Scheduling: Continuous Batching
+      5. Memory Pressure Handling
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-modern-2025-2026-advanced-features" class="md-nav__link">
+  <a href="#6-interview-qa" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Modern (2025-2026) Advanced Features
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Modern (2025-2026) Advanced Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-speculative-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      A. Speculative Decoding
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-automatic-prefix-caching-apc" class="md-nav__link">
-    <span class="md-ellipsis">
-      B. Automatic Prefix Caching (APC)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-multi-lora-support" class="md-nav__link">
-    <span class="md-ellipsis">
-      C. Multi-LoRA Support
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-prefill-vs-decode-performance-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Prefill vs Decode: Performance Characteristics
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-memory-pressure-and-preemption" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Memory Pressure and Preemption
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-architectural-comparison" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Architectural Comparison
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-useful-memory-approximation" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Useful Memory Approximation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-as" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q &amp; As
+      6. Interview Q&amp;A
     </span>
   </a>
   
@@ -1531,67 +1404,38 @@
 
   <h1>vLLM</h1>
 
-<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
-<p><strong>vLLM</strong> is an open-source inference engine optimized for high-throughput, low-latency serving of large language models. Its core innovation, <strong>PagedAttention</strong>, rethinks KV cache management by applying principles similar to virtual memory systems in operating systems.</p>
-<p>The key contribution of vLLM is not faster kernels alone, but <strong>dramatically improved GPU memory utilization</strong>, enabling higher batch sizes, better multi-tenancy, and more predictable latency under load.</p>
+<h2 id="1-core-innovation-pagedattention">1. Core Innovation: PagedAttention<a class="headerlink" href="#1-core-innovation-pagedattention" title="Permanent link">&para;</a></h2>
+<p><strong>Problem:</strong> Traditional engines pre-allocate contiguous memory for max sequence length <br>
+- 60-80% GPU memory wasted on over-reservation
+- Internal fragmentation from unused allocated space</p>
+<p><strong>Solution:</strong> Paged memory management for KV cache <br>
+- KV cache split into fixed-size blocks (pages)
+- Non-contiguous physical memory mapped via block tables
+- Reduces waste to &lt;4%, enables 2-3x larger batch sizes</p>
+<p><strong>Memory Formula:</strong> <br>
+<div class="highlight"><pre><span></span><code>KV Memory ≈ 2 × L × T × H × D_h × B
+</code></pre></div></p>
+<p>For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token <br>
+- 2k tokens → ~1 GB
+- 8k tokens → ~4 GB</p>
 <hr />
 <hr />
-<h2 id="2-the-kv-cache-bottleneck-in-llm-inference">2. The KV Cache Bottleneck in LLM Inference<a class="headerlink" href="#2-the-kv-cache-bottleneck-in-llm-inference" title="Permanent link">&para;</a></h2>
-<h3 id="21-why-the-kv-cache-dominates">2.1 Why the KV Cache Dominates<a class="headerlink" href="#21-why-the-kv-cache-dominates" title="Permanent link">&para;</a></h3>
-<p>During autoregressive decoding, each generated token appends <strong>Key and Value tensors</strong> for every transformer layer. Over long sequences or many concurrent requests, the KV cache quickly becomes the dominant consumer of GPU memory.</p>
-<p>Key properties:
-- Grows linearly with sequence length
-- Must be retained across decoding steps
-- Is memory-bandwidth bound during decode</p>
+<h2 id="2-continuous-batching">2. Continuous Batching<a class="headerlink" href="#2-continuous-batching" title="Permanent link">&para;</a></h2>
+<p><strong>vs Static Batching:</strong> Waits for entire batch to complete before accepting new requests</p>
+<p><strong>vLLM Approach:</strong> Iteration-level scheduling <br>
+- New requests fill slots freed by completed sequences immediately
+- Eliminates GPU idle time ("bubbles")
+- Increases throughput by 20-30%</p>
 <hr />
 <hr />
-<h2 id="3-the-core-technology-pagedattention">3. The Core Technology: PagedAttention<a class="headerlink" href="#3-the-core-technology-pagedattention" title="Permanent link">&para;</a></h2>
-<p>The KV cache (the memory storing previous tokens to predict the next one) is the primary bottleneck in scaling LLMs.</p>
-<h3 id="the-problem-fragmentation">The Problem: Fragmentation<a class="headerlink" href="#the-problem-fragmentation" title="Permanent link">&para;</a></h3>
-<p>Standard inference engines allocate a contiguous "max-length" chunk of memory for every request.</p>
-<ul>
-<li><strong>Over-reservation:</strong> Reserving 2048 tokens for a request that only generates 50.</li>
-<li><strong>Internal Fragmentation:</strong> Memory wasted inside the reserved block.</li>
-<li><strong>Waste:</strong> Up to 60-80% of VRAM is often left unused but "reserved."</li>
-</ul>
-<h3 id="the-solution-pagedattention">The Solution: PagedAttention<a class="headerlink" href="#the-solution-pagedattention" title="Permanent link">&para;</a></h3>
-<p>vLLM breaks the KV cache into fixed-size <strong>blocks</strong> (pages).</p>
-<ul>
-<li><strong>Logical Blocks:</strong> Sequential tokens in the prompt.</li>
-<li><strong>Physical Blocks:</strong> Non-contiguous memory addresses on the GPU.</li>
-<li><strong>Block Table:</strong> A mapping system that allows the model to access these blocks as if they were one continuous string.</li>
-</ul>
-<p><strong>Result:</strong> Waste is reduced to <strong>&lt;4%</strong>, allowing for significantly larger batch sizes.</p>
-<hr />
-<hr />
-<h2 id="4-scheduling-continuous-batching">4. Scheduling: Continuous Batching<a class="headerlink" href="#4-scheduling-continuous-batching" title="Permanent link">&para;</a></h2>
-<p>Traditional engines use "Static Batching," where the entire batch must finish before new requests start.</p>
-<ul>
-<li><strong>Iteration-Level Scheduling:</strong> vLLM schedules at the level of individual iterations. </li>
-<li><strong>Mechanism:</strong> As soon as one sequence in a batch hits an <code>&lt;EOS&gt;</code> (End of Sentence) token, a new request from the queue is inserted into its spot in the next iteration.</li>
-<li><strong>Outcome:</strong> Eliminates "bubbles" (idle time) in GPU utilization.</li>
-</ul>
-<hr />
-<hr />
-<h2 id="5-modern-2025-2026-advanced-features">5. Modern (2025-2026) Advanced Features<a class="headerlink" href="#5-modern-2025-2026-advanced-features" title="Permanent link">&para;</a></h2>
-<h3 id="a-speculative-decoding">A. Speculative Decoding<a class="headerlink" href="#a-speculative-decoding" title="Permanent link">&para;</a></h3>
-<p>vLLM implements speculative decoding where a <strong>smaller draft model</strong> (e.g., a 100M parameter model) predicts several tokens, and a <strong>larger target model</strong> (e.g., Llama 3 70B) verifies them in a single pass.
-* <strong>Benefit:</strong> Reduces latency by 2-3x for heavy models.</p>
-<h3 id="b-automatic-prefix-caching-apc">B. Automatic Prefix Caching (APC)<a class="headerlink" href="#b-automatic-prefix-caching-apc" title="Permanent link">&para;</a></h3>
-<p>For RAG or multi-turn chat, vLLM caches the KV blocks of common prefixes (like system prompts).
-* If two users share the same 1,000-token system prompt, vLLM stores it <strong>once</strong> in physical memory, and both requests point to the same blocks.</p>
-<h3 id="c-multi-lora-support">C. Multi-LoRA Support<a class="headerlink" href="#c-multi-lora-support" title="Permanent link">&para;</a></h3>
-<p>vLLM can serve one base model with hundreds of different fine-tuned "adapters" (LoRAs) simultaneously. 
-* It uses specialized <strong>SGMV (Shrink-Generalized Matrix-Vector)</strong> kernels to compute multiple different LoRAs in a single batch without a significant performance hit.</p>
-<hr />
-<hr />
-<h2 id="6-prefill-vs-decode-performance-characteristics">6. Prefill vs Decode: Performance Characteristics<a class="headerlink" href="#6-prefill-vs-decode-performance-characteristics" title="Permanent link">&para;</a></h2>
+<h2 id="3-prefill-vs-decode-phases">3. Prefill vs Decode Phases<a class="headerlink" href="#3-prefill-vs-decode-phases" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Phase</th>
-<th>Characteristics</th>
+<th>Processing</th>
 <th>Bottleneck</th>
+<th>vLLM Optimization</th>
 </tr>
 </thead>
 <tbody>
@@ -1599,96 +1443,64 @@
 <td>Prefill</td>
 <td>Parallel over tokens</td>
 <td>Compute-bound</td>
+<td>Chunked prefill</td>
 </tr>
 <tr>
 <td>Decode</td>
-<td>Sequential token-by-token</td>
-<td>Memory-bandwidth-bound</td>
+<td>Sequential per token</td>
+<td>Memory-bandwidth</td>
+<td>PagedAttention</td>
 </tr>
 </tbody>
 </table>
-<p>vLLM introduces <strong>Chunked Prefill</strong> to prevent long prompts from blocking decode for other users.</p>
+<p><strong>Chunked Prefill:</strong> Breaks large prompts into chunks to prevent blocking decode operations</p>
 <hr />
 <hr />
-<h2 id="8-memory-pressure-and-preemption">8. Memory Pressure and Preemption<a class="headerlink" href="#8-memory-pressure-and-preemption" title="Permanent link">&para;</a></h2>
-<p>When GPU memory becomes constrained, vLLM supports <strong>preemption</strong> strategies:</p>
+<h2 id="4-modern-features-2025-2026">4. Modern Features (2025-2026)<a class="headerlink" href="#4-modern-features-2025-2026" title="Permanent link">&para;</a></h2>
+<h3 id="speculative-decoding">Speculative Decoding<a class="headerlink" href="#speculative-decoding" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Swap:</strong> Move KV blocks to CPU memory</li>
-<li><strong>Recompute:</strong> Drop KV blocks and recompute them later</li>
+<li>Small draft model generates k tokens</li>
+<li>Large target model verifies in single forward pass</li>
+<li>2-3x latency reduction for heavy models</li>
 </ul>
-<p>Recompute trades extra compute for lower memory pressure and is often preferred on fast GPUs.</p>
 <hr />
-<hr />
-<h2 id="9-architectural-comparison">9. Architectural Comparison<a class="headerlink" href="#9-architectural-comparison" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Feature</th>
-<th style="text-align: left;">vLLM</th>
-<th style="text-align: left;">Hugging Face TGI</th>
-<th style="text-align: left;">NVIDIA TensorRT-LLM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Memory Mgmt</strong></td>
-<td style="text-align: left;">PagedAttention</td>
-<td style="text-align: left;">FlashAttention</td>
-<td style="text-align: left;">Paged KV Cache</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Ease of Use</strong></td>
-<td style="text-align: left;">High (Pythonic)</td>
-<td style="text-align: left;">Medium (Rust/Go)</td>
-<td style="text-align: left;">Low (Complex Build)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Best For</strong></td>
-<td style="text-align: left;">General Throughput</td>
-<td style="text-align: left;">Stability/HF ecosystem</td>
-<td style="text-align: left;">Peak NVIDIA Perf</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<hr />
-<h2 id="10-useful-memory-approximation">10. Useful Memory Approximation<a class="headerlink" href="#10-useful-memory-approximation" title="Permanent link">&para;</a></h2>
-<p>Approximate KV cache memory usage in bytes:</p>
-<div class="arithmatex">\[
-\text{KV Memory} \;\approx\; 2 \times L \times T \times H \times D_h \times B
-\]</div>
-<p>Where:
-- 2 accounts for <strong>Keys and Values</strong>
-- <span class="arithmatex">\(L\)</span> is the number of layers<br />
-- <span class="arithmatex">\(H\)</span> is the number of attention heads 
-- <span class="arithmatex">\(B\)</span> is the number of bytes per element (2 for FP16, 1 for FP8)
-- <span class="arithmatex">\(D_h\)</span> is the per-head hidden dimension
-- <span class="arithmatex">\(T\)</span> is the sequence length (number of cached tokens)</p>
-<p><strong>Example:</strong></p>
-<p>For <strong>Llama-3 8B</strong>:</p>
+<h3 id="automatic-prefix-caching-apc">Automatic Prefix Caching (APC)<a class="headerlink" href="#automatic-prefix-caching-apc" title="Permanent link">&para;</a></h3>
 <ul>
-<li><span class="arithmatex">\(L = 32\)</span></li>
-<li><span class="arithmatex">\(D_{\text{model}} = 4096\)</span></li>
-<li><span class="arithmatex">\(B = 2\)</span> (FP16)</li>
+<li>Shared KV blocks for common prefixes (system prompts, RAG contexts)</li>
+<li>Multiple requests reference same physical memory</li>
+<li>Critical for multi-turn chat and RAG applications</li>
 </ul>
-<p>Per token KV cache memory:</p>
-<div class="arithmatex">\[
-2 \times 32 \times 4096 \times 2
-\approx 524{,}288 \text{ bytes} \approx 0.5 \text{ MB}
-\]</div>
-<p>Approximate totals:
-- 2k tokens → ~1 GB KV cache
-- 8k tokens → ~4 GB KV cache</p>
-<p>This linear scaling with sequence length explains why <strong>KV cache memory becomes the dominant bottleneck</strong> and motivates techniques such as <strong>PagedAttention</strong> in vLLM.</p>
+<hr />
+<h3 id="multi-lora-support">Multi-LoRA Support<a class="headerlink" href="#multi-lora-support" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Serve base model + hundreds of LoRA adapters simultaneously</li>
+<li>SGMV kernels enable batched computation across different adapters</li>
+<li>Ideal for multi-tenant SaaS deployments</li>
+</ul>
 <hr />
 <hr />
-<h2 id="q-as">Q &amp; As<a class="headerlink" href="#q-as" title="Permanent link">&para;</a></h2>
-<p><strong>Q1: How does vLLM handle a situation where the GPU runs out of memory during a request?</strong>
-* <strong>A:</strong> It uses <strong>Preemption</strong>. It can either "Swap" (move blocks to CPU RAM) or "Recompute" (drop the blocks and re-calculate them later when memory is free).</p>
-<p><strong>Q2: What is the difference between the 'Prefill' and 'Decode' phases?</strong>
-* <strong>A:</strong> <strong>Prefill</strong> processes the input prompt (parallel/compute-bound). <strong>Decode</strong> generates tokens one by one (sequential/memory-bound). vLLM uses <strong>Chunked Prefill</strong> to prevent large prompts from stalling the generation of other users.</p>
-<p><strong>Q3: Why is vLLM better for multi-tenant SaaS?</strong>
-* <strong>A:</strong> Because of PagedAttention and Multi-LoRA support. It allows hosting many different "specialized" models on a single GPU cluster with minimal overhead.</p>
+<h2 id="5-memory-pressure-handling">5. Memory Pressure Handling<a class="headerlink" href="#5-memory-pressure-handling" title="Permanent link">&para;</a></h2>
+<p><strong>Preemption Strategies:</strong>
+1. <strong>Swap:</strong> Move KV blocks to CPU memory (slower, preserves compute)
+2. <strong>Recompute:</strong> Drop blocks and recalculate later (faster on modern GPUs)</p>
+<p>Strategy selection based on GPU compute vs memory bandwidth ratio.</p>
+<hr />
+<hr />
+<h2 id="6-interview-qa">6. Interview Q&amp;A<a class="headerlink" href="#6-interview-qa" title="Permanent link">&para;</a></h2>
+<p><strong>Q: Why does PagedAttention improve throughput?</strong> <br>
+A: Eliminates memory fragmentation, allowing more concurrent requests to fit in GPU memory. With 60-80% waste reduced to &lt;4%, effective batch size increases 2-3x.</p>
+<hr />
+<p><strong>Q: When is prefill the bottleneck vs decode?</strong> <br>
+A: Prefill dominates for short outputs with long prompts (summarization). Decode dominates for long generations (creative writing). vLLM uses chunked prefill to balance both.</p>
+<hr />
+<p><strong>Q: How does vLLM handle variable-length sequences in a batch?</strong> <br>
+A: Continuous batching removes completed sequences and adds new ones at iteration boundaries. Block tables allow each sequence to use non-contiguous memory independently.</p>
+<hr />
+<p><strong>Q: Why use recompute over swap for preemption?</strong> <br>
+A: On H100/A100 GPUs with high compute, recomputing KV cache is faster than PCIe transfer to CPU. Swap preferred for older GPUs or when CPU memory is abundant.</p>
+<hr />
+<p><strong>Q: How does APC differ from traditional caching?</strong> <br>
+A: Traditional caching stores entire request results. APC caches KV blocks at sub-request granularity, enabling partial reuse across different requests with shared prefixes.</p>
 <hr />
 
 

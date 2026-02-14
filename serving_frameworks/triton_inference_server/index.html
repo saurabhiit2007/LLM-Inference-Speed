@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../text_generation_inference/">
+        <link rel="prev" href="../deepspeed_inference/">
       
       
-        <link rel="next" href="../..">
+        <link rel="next" href="../vllm/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -74,6 +74,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#1-overview" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -982,58 +987,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../deepspeed_inference/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DeepSpeed Inference
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../tensorrt_llm/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     TensorRT LLM
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../vllm/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    vLLM
     
   </span>
   
@@ -1071,6 +1030,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../deepspeed_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DeepSpeed Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1080,6 +1062,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Triton Inference Server
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1093,6 +1088,279 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Repository
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-llm-specific-features-2024-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. LLM-Specific Features (2024-2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. LLM-Specific Features (2024-2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vllm-backend-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      vLLM Backend Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tensorrt-llm-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      TensorRT-LLM Backend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-advanced-serving-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Advanced Serving Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Advanced Serving Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-ensembles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Ensembles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Batching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequence-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sequence Batching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Model Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-scaling-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Scaling &amp; Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Scaling &amp; Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Native
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-instance-serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Instance Serving
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-metrics-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Metrics &amp; Observability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Performance Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concurrent-model-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concurrent Model Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instance Groups
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vllm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vLLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../framework_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Comparison
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1145,6 +1413,224 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Repository
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-llm-specific-features-2024-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. LLM-Specific Features (2024-2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. LLM-Specific Features (2024-2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vllm-backend-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      vLLM Backend Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tensorrt-llm-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      TensorRT-LLM Backend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-advanced-serving-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Advanced Serving Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Advanced Serving Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-ensembles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Ensembles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Batching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequence-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sequence Batching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Model Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-scaling-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Scaling &amp; Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Scaling &amp; Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes Native
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-instance-serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Instance Serving
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-metrics-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Metrics &amp; Observability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Performance Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concurrent-model-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concurrent Model Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instance Groups
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1164,7 +1650,143 @@
 
   <h1>Triton Inference Server</h1>
 
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p><strong>NVIDIA's general-purpose inference server</strong> <br>
+- Framework-agnostic (PyTorch, TensorFlow, ONNX, TensorRT)
+- Not LLM-specific, but increasingly optimized for them
+- Focus: Enterprise deployment, multi-model serving, complex pipelines</p>
+<hr />
+<hr />
+<h2 id="2-core-architecture">2. Core Architecture<a class="headerlink" href="#2-core-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="backend-system">Backend System<a class="headerlink" href="#backend-system" title="Permanent link">&para;</a></h3>
+<p><strong>Pluggable backends for different frameworks:</strong>
+- Python backend (custom inference logic)
+- PyTorch backend (TorchScript models)
+- TensorRT backend (TensorRT engines)
+- vLLM backend (integration added 2024)</p>
+<p><strong>Benefit:</strong> Mix different model types in same server</p>
+<hr />
+<h3 id="model-repository">Model Repository<a class="headerlink" href="#model-repository" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Centralized model storage (local/S3/GCS/Azure)</li>
+<li>Version management</li>
+<li>Hot-reloading of model versions</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-llm-specific-features-2024-2025">3. LLM-Specific Features (2024-2025)<a class="headerlink" href="#3-llm-specific-features-2024-2025" title="Permanent link">&para;</a></h2>
+<h3 id="vllm-backend-integration">vLLM Backend Integration<a class="headerlink" href="#vllm-backend-integration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Uses vLLM engine under the hood</li>
+<li>Triton API layer on top</li>
+<li>Get vLLM's PagedAttention + Triton's enterprise features</li>
+</ul>
+<hr />
+<h3 id="tensorrt-llm-backend">TensorRT-LLM Backend<a class="headerlink" href="#tensorrt-llm-backend" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Native integration with TensorRT-LLM engines</li>
+<li>Maximum performance for NVIDIA GPUs</li>
+<li>Requires pre-built TensorRT-LLM engines</li>
+</ul>
+<hr />
+<hr />
+<h2 id="4-advanced-serving-capabilities">4. Advanced Serving Capabilities<a class="headerlink" href="#4-advanced-serving-capabilities" title="Permanent link">&para;</a></h2>
+<h3 id="model-ensembles">Model Ensembles<a class="headerlink" href="#model-ensembles" title="Permanent link">&para;</a></h3>
+<p><strong>Multi-stage pipelines as single endpoint:</strong>
+- Preprocessing → Embedding → LLM → Postprocessing
+- Automatic scheduling between stages
+- Example: RAG pipeline with retrieval + generation</p>
+<h3 id="dynamic-batching">Dynamic Batching<a class="headerlink" href="#dynamic-batching" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Accumulates requests up to max batch size</li>
+<li>Timeout-based flushing</li>
+<li>More basic than vLLM/TGI continuous batching</li>
+</ul>
+<h3 id="sequence-batching">Sequence Batching<a class="headerlink" href="#sequence-batching" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For stateful models (e.g., streaming LLMs)</li>
+<li>Maintains state across multiple requests</li>
+<li>Useful for chat applications</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-model-configuration">5. Model Configuration<a class="headerlink" href="#5-model-configuration" title="Permanent link">&para;</a></h2>
+<p><strong>Model config.pbtxt example:</strong> <br>
+<div class="highlight"><pre><span></span><code><span class="n">backend</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;vllm&quot;</span>
+<span class="n">max_batch_size</span><span class="o">:</span><span class="w"> </span><span class="mi">32</span>
 
+<span class="n">instance_group</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span>
+<span class="w">  </span><span class="n">count</span><span class="o">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">kind</span><span class="o">:</span><span class="w"> </span><span class="n">KIND_GPU</span>
+<span class="p">}]</span>
+
+<span class="n">parameters</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">key</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;max_tokens&quot;</span>
+<span class="w">  </span><span class="n">value</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">string_value</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;2048&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<hr />
+<h2 id="6-scaling-deployment">6. Scaling &amp; Deployment<a class="headerlink" href="#6-scaling-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="kubernetes-native">Kubernetes Native<a class="headerlink" href="#kubernetes-native" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Official Helm charts</li>
+<li>Horizontal Pod Autoscaler support</li>
+<li>Integration with Istio/Envoy for traffic management</li>
+</ul>
+<h3 id="multi-instance-serving">Multi-Instance Serving<a class="headerlink" href="#multi-instance-serving" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multiple model instances per GPU</li>
+<li>Rate limiting and priority queues</li>
+<li>Request routing based on model version</li>
+</ul>
+<hr />
+<hr />
+<h2 id="7-metrics-observability">7. Metrics &amp; Observability<a class="headerlink" href="#7-metrics-observability" title="Permanent link">&para;</a></h2>
+<p><strong>Comprehensive Monitoring:</strong> <br>
+- Prometheus metrics (latency, throughput, queue depth)
+- Per-model and per-version metrics
+- GPU utilization tracking
+- Inference count, batch statistics</p>
+<p><strong>Tracing:</strong> <br>
+- OpenTelemetry support
+- Request-level tracing through pipeline stages</p>
+<hr />
+<hr />
+<h2 id="8-performance-optimization">8. Performance Optimization<a class="headerlink" href="#8-performance-optimization" title="Permanent link">&para;</a></h2>
+<h3 id="concurrent-model-execution">Concurrent Model Execution<a class="headerlink" href="#concurrent-model-execution" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multiple models on same GPU (if memory allows)</li>
+<li>Scheduler balances execution</li>
+<li>Useful for A/B testing</li>
+</ul>
+<h3 id="instance-groups">Instance Groups<a class="headerlink" href="#instance-groups" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multiple instances of same model</li>
+<li>Load balancing across instances</li>
+<li>Can specify different GPUs per instance</li>
+</ul>
+<hr />
+<hr />
+<h2 id="9-interview-qa">9. Interview Q&amp;A<a class="headerlink" href="#9-interview-qa" title="Permanent link">&para;</a></h2>
+<p><strong>Q: When to use Triton over vLLM/TGI?</strong> <br>
+A: When you need multi-framework support, complex model pipelines, or enterprise features (model versioning, ensembles). For pure LLM serving, vLLM/TGI are simpler.</p>
+<hr />
+<p><strong>Q: How does Triton's vLLM backend differ from standalone vLLM?</strong> <br>
+A: Same core engine, but Triton adds: model versioning, ensemble pipelines, enterprise monitoring, multi-framework support. Trade-off: extra abstraction layer with slight overhead.</p>
+<hr />
+<p><strong>Q: What's the benefit of model ensembles?</strong> <br>
+A: Single API call for multi-stage pipelines. Triton handles scheduling, batching, and data passing between stages. Reduces latency vs multiple network hops.</p>
+<hr />
+<p><strong>Q: How does dynamic batching work in Triton?</strong> <br>
+A: Accumulates requests for up to max_batch_size or max_delay_ms. Simpler than continuous batching (no iteration-level scheduling). Better for CV/audio models than LLMs.</p>
+<hr />
+<p><strong>Q: Why use Triton for LLMs when vLLM exists?</strong> <br>
+A: Multi-model serving (embeddings + LLM + reranker), existing NVIDIA infrastructure, need for A/B testing across model versions, enterprise governance requirements.</p>
+<hr />
+<p><strong>Q: How does Triton handle model updates?</strong> <br>
+A: Model repository polling detects new versions. Can load new version without stopping server. Traffic routing supports gradual rollout (e.g., 90% v1, 10% v2).</p>
+<hr />
 
 
 

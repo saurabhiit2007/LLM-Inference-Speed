@@ -75,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#1-why-batching-matters" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -696,6 +701,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Batching Strategies
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -707,6 +725,482 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-batching-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Why Batching Matters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-static-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Static Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Static Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dynamic-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dynamic Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Dynamic Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-continuous-batching-iteration-level-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Continuous Batching (Iteration-Level Scheduling)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Continuous Batching (Iteration-Level Scheduling)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-innovation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Innovation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Impact
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trade-offs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trade-offs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-chunked-prefill" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Chunked Prefill
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Chunked Prefill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Challenges
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-speculative-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Speculative Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Speculative Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-level-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch-Level Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-prefix-caching-in-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Prefix Caching in Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Prefix Caching in Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-prefix-caching-apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Prefix Caching (APC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-level-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch-Level Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-mixed-batch-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Mixed Batch Scheduling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Mixed Batch Scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naive-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naive Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimized-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimized Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitfuse-deepspeed-fastgen" class="md-nav__link">
+    <span class="md-ellipsis">
+      SplitFuse (DeepSpeed-FastGen)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-batch-size-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Batch Size Selection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Batch Size Selection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Factors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heuristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adaptive-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adaptive Batching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-multi-query-batching-mqagqa-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Multi-Query Batching (MQA/GQA Context)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Multi-Query Batching (MQA/GQA Context)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relevance-to-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relevance to Batching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -990,58 +1484,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../serving_frameworks/deepspeed_inference/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DeepSpeed Inference
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../serving_frameworks/tensorrt_llm/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     TensorRT LLM
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../serving_frameworks/vllm/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    vLLM
     
   </span>
   
@@ -1082,12 +1530,81 @@
   
   
     <li class="md-nav__item">
+      <a href="../serving_frameworks/deepspeed_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DeepSpeed Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../serving_frameworks/triton_inference_server/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Triton Inference Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serving_frameworks/vllm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vLLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serving_frameworks/framework_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Comparison
     
   </span>
   
@@ -1145,6 +1662,473 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-batching-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Why Batching Matters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-static-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Static Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Static Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dynamic-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dynamic Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Dynamic Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-continuous-batching-iteration-level-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Continuous Batching (Iteration-Level Scheduling)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Continuous Batching (Iteration-Level Scheduling)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-innovation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Innovation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Impact
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trade-offs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trade-offs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-chunked-prefill" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Chunked Prefill
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Chunked Prefill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Challenges
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-speculative-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Speculative Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Speculative Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanism_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mechanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-level-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch-Level Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-prefix-caching-in-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Prefix Caching in Batching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Prefix Caching in Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-prefix-caching-apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Prefix Caching (APC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-level-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch-Level Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-mixed-batch-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Mixed Batch Scheduling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Mixed Batch Scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naive-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naive Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimized-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimized Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitfuse-deepspeed-fastgen" class="md-nav__link">
+    <span class="md-ellipsis">
+      SplitFuse (DeepSpeed-FastGen)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-batch-size-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Batch Size Selection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Batch Size Selection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Factors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heuristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adaptive-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adaptive Batching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-multi-query-batching-mqagqa-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Multi-Query Batching (MQA/GQA Context)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Multi-Query Batching (MQA/GQA Context)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relevance-to-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relevance to Batching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1164,11 +2148,312 @@
 
   <h1>Batching Strategies</h1>
 
-<p>static-batching.md
-│   ├── dynamic-batching.md
-│   ├── continuous-batching.md
-│   ├── in-flight-batching.md
-│   └── prefix-caching.md</p>
+<h2 id="1-why-batching-matters">1. Why Batching Matters<a class="headerlink" href="#1-why-batching-matters" title="Permanent link">&para;</a></h2>
+<p><strong>GPU Utilization Problem:</strong> <br>
+- Single request uses &lt;10% of GPU compute capacity
+- Memory bandwidth underutilized
+- Expensive hardware sitting idle</p>
+<p><strong>Batching Solution:</strong> <br>
+- Process multiple requests simultaneously
+- Amortize memory access costs
+- Achieve 5-10x throughput improvement</p>
+<p><strong>Key Constraint:</strong> GPU memory limits batch size (primarily KV cache)</p>
+<hr />
+<hr />
+<h2 id="2-static-batching">2. Static Batching<a class="headerlink" href="#2-static-batching" title="Permanent link">&para;</a></h2>
+<h3 id="mechanism">Mechanism<a class="headerlink" href="#mechanism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Accumulate N requests</li>
+<li>Process entire batch together</li>
+<li>Wait for ALL sequences to complete before accepting new requests</li>
+</ul>
+<hr />
+<h3 id="characteristics">Characteristics<a class="headerlink" href="#characteristics" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Batch: [Req1: 100 tokens, Req2: 20 tokens, Req3: 80 tokens]
+All requests wait until Req1 (longest) completes
+GPU idle during Req2, Req3 completion
+</code></pre></div>
+<p><strong>Throughput:</strong> Improved vs single request<br />
+<strong>Latency:</strong> High variance (tail latency problem)<br />
+<strong>GPU Utilization:</strong> Poor (bubbles after short sequences finish)</p>
+<hr />
+<h3 id="when-to-use">When to Use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Offline batch processing</li>
+<li>Known sequence lengths</li>
+<li>Latency not critical</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-dynamic-batching">3. Dynamic Batching<a class="headerlink" href="#3-dynamic-batching" title="Permanent link">&para;</a></h2>
+<h3 id="mechanism_1">Mechanism<a class="headerlink" href="#mechanism_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Accumulate requests up to max_batch_size OR max_delay</li>
+<li>Whichever comes first triggers batch execution</li>
+<li>Still waits for full batch completion before next batch</li>
+</ul>
+<hr />
+<h3 id="key-parameters">Key Parameters<a class="headerlink" href="#key-parameters" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">max_batch_size</span> <span class="o">=</span> <span class="mi">32</span>      <span class="c1"># Maximum requests per batch</span>
+<span class="n">max_delay_ms</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># Maximum wait time</span>
+</code></pre></div>
+<p><strong>Improvement over Static:</strong>
+- Balances latency and throughput
+- Reduces wait time for batch formation</p>
+<p><strong>Still Limited:</strong>
+- Batch-level scheduling (not iteration-level)
+- GPU idle time after short sequences complete</p>
+<hr />
+<h3 id="when-to-use_1">When to Use<a class="headerlink" href="#when-to-use_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Services with moderate traffic</li>
+<li>Simpler implementation than continuous batching</li>
+<li>Good for non-LLM models (CV, audio)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="4-continuous-batching-iteration-level-scheduling">4. Continuous Batching (Iteration-Level Scheduling)<a class="headerlink" href="#4-continuous-batching-iteration-level-scheduling" title="Permanent link">&para;</a></h2>
+<h3 id="core-innovation">Core Innovation<a class="headerlink" href="#core-innovation" title="Permanent link">&para;</a></h3>
+<p><strong>Iteration-Level Scheduling:</strong> Schedule at each decode step, not batch level</p>
+<hr />
+<h3 id="mechanism_2">Mechanism<a class="headerlink" href="#mechanism_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Initial Batch: [Req1, Req2, Req3, Req4]
+
+Iteration 1: All generate token 1
+Iteration 2: All generate token 2
+Iteration 3: Req2 completes → Req5 joins → [Req1, Req3, Req4, Req5]
+Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7]
+...
+</code></pre></div>
+<p><strong>Key Benefit:</strong> No GPU idle time, slots filled immediately</p>
+<hr />
+<h3 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h3>
+<p><strong>Sequence Completion Detection:</strong> <br>
+- Monitor for EOS tokens
+- Max length reached
+- User cancellation</p>
+<p><strong>Slot Management:</strong> <br>
+- Free KV cache blocks immediately
+- Add waiting request to batch
+- Update attention masks</p>
+<p><strong>Memory Efficiency:</strong> <br>
+- Works best with PagedAttention (vLLM)
+- Non-contiguous memory allocation
+- Independent per-sequence management</p>
+<hr />
+<h3 id="performance-impact">Performance Impact<a class="headerlink" href="#performance-impact" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Throughput:</strong> +20-30% vs dynamic batching</li>
+<li><strong>Latency:</strong> Lower average, more consistent tail latency</li>
+<li><strong>GPU Utilization:</strong> 80-95% (vs 50-70% for static)</li>
+</ul>
+<hr />
+<h3 id="trade-offs">Trade-offs<a class="headerlink" href="#trade-offs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Complex implementation</li>
+<li>Variable batch size per iteration</li>
+<li>Requires sophisticated memory management</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-chunked-prefill">5. Chunked Prefill<a class="headerlink" href="#5-chunked-prefill" title="Permanent link">&para;</a></h2>
+<h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h3>
+<p><strong>Long prompts block decode:</strong> <br>
+<div class="highlight"><pre><span></span><code>Prompt: 10,000 tokens (prefill) → 50 iterations
+Short prompts: waiting in queue
+Decode operations: starved
+</code></pre></div></p>
+<hr />
+<h3 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h3>
+<p>Break prefill into chunks, interleave with decode</p>
+<hr />
+<h3 id="mechanism_3">Mechanism<a class="headerlink" href="#mechanism_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Iteration 1: Chunk 1 of long prompt (512 tokens)
+Iteration 2: Decode for ongoing requests
+Iteration 3: Chunk 2 of long prompt (512 tokens)
+Iteration 4: Decode for ongoing requests
+...
+</code></pre></div>
+<p><strong>Parameters:</strong>
+- <code>max_prefill_tokens</code>: Tokens to prefill per iteration
+- Balances prefill throughput vs decode latency</p>
+<hr />
+<h3 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prevents large prompts from causing latency spikes</li>
+<li>Better tail latency for decode operations</li>
+<li>More predictable service times</li>
+</ul>
+<hr />
+<h3 id="implementation-challenges">Implementation Challenges<a class="headerlink" href="#implementation-challenges" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Partial KV cache management</li>
+<li>Attention mask complexity</li>
+<li>Scheduling overhead</li>
+</ul>
+<hr />
+<hr />
+<h2 id="6-speculative-batching">6. Speculative Batching<a class="headerlink" href="#6-speculative-batching" title="Permanent link">&para;</a></h2>
+<h3 id="concept">Concept<a class="headerlink" href="#concept" title="Permanent link">&para;</a></h3>
+<p>Combine speculative decoding with batching</p>
+<hr />
+<h3 id="mechanism_4">Mechanism<a class="headerlink" href="#mechanism_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Draft Phase:</strong> Small model predicts k tokens for all requests in batch</li>
+<li><strong>Verification Phase:</strong> Large model verifies all k tokens in single pass</li>
+<li><strong>Accept/Reject:</strong> Keep correct tokens, retry from first error</li>
+</ol>
+<hr />
+<h3 id="batch-level-optimization">Batch-Level Optimization<a class="headerlink" href="#batch-level-optimization" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Without Speculation: 5 iterations for 5 tokens
+With Speculation (k=5): 1 iteration (if all accepted)
+Effective Speedup: 2-3x for batch
+</code></pre></div>
+<hr />
+<h3 id="challenges">Challenges<a class="headerlink" href="#challenges" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Variable acceptance rates across requests</li>
+<li>Synchronization points</li>
+<li>Draft model overhead</li>
+</ul>
+<hr />
+<hr />
+<h2 id="7-prefix-caching-in-batching">7. Prefix Caching in Batching<a class="headerlink" href="#7-prefix-caching-in-batching" title="Permanent link">&para;</a></h2>
+<h3 id="problem_1">Problem<a class="headerlink" href="#problem_1" title="Permanent link">&para;</a></h3>
+<p>Repeated prefixes waste computation</p>
+<div class="highlight"><pre><span></span><code>User1: [System Prompt] + User Query 1
+User2: [System Prompt] + User Query 2
+User3: [System Prompt] + User Query 3
+</code></pre></div>
+<hr />
+<h3 id="solution_1">Solution<a class="headerlink" href="#solution_1" title="Permanent link">&para;</a></h3>
+<p><strong>Share KV cache blocks for common prefixes</strong></p>
+<hr />
+<h3 id="automatic-prefix-caching-apc">Automatic Prefix Caching (APC)<a class="headerlink" href="#automatic-prefix-caching-apc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hash prompt prefixes</li>
+<li>Reuse physical memory blocks</li>
+<li>Multiple requests point to same KV cache</li>
+</ul>
+<hr />
+<h3 id="batch-level-benefits">Batch-Level Benefits<a class="headerlink" href="#batch-level-benefits" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Without APC:
+  3 requests × 1000-token system prompt = 3000 tokens in KV cache
+
+With APC:
+  3 requests share 1000-token KV cache = 1000 tokens total
+  Effective batch size: 3x larger
+</code></pre></div>
+<hr />
+<h3 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multi-turn chat (common history)</li>
+<li>RAG (shared context documents)</li>
+<li>Agent frameworks (repeated tool descriptions)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="8-mixed-batch-scheduling">8. Mixed Batch Scheduling<a class="headerlink" href="#8-mixed-batch-scheduling" title="Permanent link">&para;</a></h2>
+<h3 id="challenge">Challenge<a class="headerlink" href="#challenge" title="Permanent link">&para;</a></h3>
+<p>Different request types have different characteristics:</p>
+<ul>
+<li><strong>Prefill:</strong> Compute-bound, parallel</li>
+<li><strong>Decode:</strong> Memory-bound, sequential</li>
+</ul>
+<hr />
+<h3 id="naive-approach">Naive Approach<a class="headerlink" href="#naive-approach" title="Permanent link">&para;</a></h3>
+<p>Separate batches for prefill and decode → Underutilization</p>
+<hr />
+<h3 id="optimized-approach">Optimized Approach<a class="headerlink" href="#optimized-approach" title="Permanent link">&para;</a></h3>
+<p><strong>Mixed batches with resource allocation:</strong> <br></p>
+<div class="highlight"><pre><span></span><code>GPU Resources:
+  80% compute → Prefill operations
+  20% memory bandwidth → Decode operations
+
+Single iteration:
+  Process prefill chunks (compute-heavy)
+  Process decode steps (memory-heavy)
+  Overlap when possible
+</code></pre></div>
+<hr />
+<h3 id="splitfuse-deepspeed-fastgen">SplitFuse (DeepSpeed-FastGen)<a class="headerlink" href="#splitfuse-deepspeed-fastgen" title="Permanent link">&para;</a></h3>
+<p>Dynamic algorithm that:
+1. Monitors compute vs memory utilization
+2. Adjusts prefill chunk size
+3. Balances prefill/decode in each iteration</p>
+<hr />
+<hr />
+<h2 id="9-batch-size-selection">9. Batch Size Selection<a class="headerlink" href="#9-batch-size-selection" title="Permanent link">&para;</a></h2>
+<h3 id="factors">Factors<a class="headerlink" href="#factors" title="Permanent link">&para;</a></h3>
+<p><strong>Memory Constraint:</strong> <br></p>
+<div class="highlight"><pre><span></span><code>Available Memory = Model Weights + KV Cache + Activations
+KV Cache = batch_size × seq_len × kv_memory_per_token
+</code></pre></div>
+<p><strong>Optimal Batch Size:</strong> <br>
+- Too small → GPU underutilized
+- Too large → OOM, increased latency</p>
+<hr />
+<h3 id="heuristics">Heuristics<a class="headerlink" href="#heuristics" title="Permanent link">&para;</a></h3>
+<p><strong>For Decode:</strong> <br>
+<div class="highlight"><pre><span></span><code>optimal_batch_size = GPU_memory / (model_size + max_seq_len × kv_per_token)
+</code></pre></div></p>
+<p><strong>For Prefill:</strong>
+<div class="highlight"><pre><span></span><code>Limited by compute, not memory
+Larger batches better (up to memory limit)
+</code></pre></div></p>
+<hr />
+<h3 id="adaptive-batching">Adaptive Batching<a class="headerlink" href="#adaptive-batching" title="Permanent link">&para;</a></h3>
+<p>Monitor queue depth and adjust:</p>
+<ul>
+<li>High queue → Increase batch size (if memory allows)</li>
+<li>Low latency requirement → Decrease batch size</li>
+<li>Balance throughput vs latency SLO</li>
+</ul>
+<hr />
+<hr />
+<h2 id="10-multi-query-batching-mqagqa-context">10. Multi-Query Batching (MQA/GQA Context)<a class="headerlink" href="#10-multi-query-batching-mqagqa-context" title="Permanent link">&para;</a></h2>
+<h3 id="relevance-to-batching">Relevance to Batching<a class="headerlink" href="#relevance-to-batching" title="Permanent link">&para;</a></h3>
+<p><strong>Multi-Query Attention (MQA):</strong>
+- Fewer KV heads → Smaller KV cache
+- Enables larger batch sizes</p>
+<p><strong>Grouped-Query Attention (GQA):</strong>
+- Middle ground between MHA and MQA
+- Llama 3, Mistral use GQA</p>
+<hr />
+<h3 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Llama 2 (MHA): 32 heads for K, 32 for V
+Llama 3 (GQA): 8 KV heads, 32 Q heads
+
+KV Cache Reduction: 4x
+Batch Size Increase: ~4x at same memory
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="11-interview-qa">11. Interview Q&amp;A<a class="headerlink" href="#11-interview-qa" title="Permanent link">&para;</a></h2>
+<p><strong>Q: Why is continuous batching better than dynamic batching?</strong> <br>
+A: Dynamic batching schedules at batch level, causing GPU idle time when short sequences complete. Continuous batching schedules at iteration level, immediately filling freed slots with new requests. This eliminates bubbles and improves throughput by 20-30%.</p>
+<hr />
+<p><strong>Q: What's the trade-off between batch size and latency?</strong> <br>
+A: Larger batches increase throughput but also increase latency per request (more compute per iteration, longer queue wait times). Optimal batch size depends on SLO requirements and whether you're optimizing for throughput or latency.</p>
+<hr />
+<p><strong>Q: How does chunked prefill prevent latency spikes?</strong> <br>
+A: Without chunking, a 10k token prefill blocks the GPU for many iterations, starving decode operations. Chunked prefill breaks it into smaller pieces (e.g., 512 tokens) and interleaves with decode, keeping decode latency predictable.</p>
+<hr />
+<p><strong>Q: Why does prefix caching improve effective batch size?</strong> <br>
+A: Common prefixes (system prompts, RAG contexts) are stored once in memory and shared across requests. If 10 requests share a 1k token prefix, you save 9k tokens of KV cache, allowing 9 more requests to fit in the same memory.</p>
+<hr />
+<p><strong>Q: When would you use static batching instead of continuous batching?</strong> <br>
+A: Offline batch processing with known sequence lengths, where latency doesn't matter and implementation simplicity is valued. For production online serving, continuous batching is almost always better.</p>
+<hr />
+<p><strong>Q: How does speculative decoding interact with batching?</strong> <br>
+A: Draft model generates k tokens for entire batch, then target model verifies all in parallel. Benefit multiplies across batch. Challenge is handling variable acceptance rates—some sequences may accept all k tokens while others reject after first token.</p>
+<hr />
+<p><strong>Q: What determines the optimal prefill chunk size?</strong> <br>
+A: Balance between prefill throughput and decode latency. Smaller chunks (256-512 tokens) minimize decode latency impact but reduce prefill efficiency. Larger chunks (1024-2048) maximize prefill throughput but can cause latency spikes. Typically tuned based on workload mix.</p>
+<hr />
+<p><strong>Q: Why does continuous batching require PagedAttention or similar?</strong> <br>
+A: Variable batch sizes per iteration need dynamic memory allocation. Traditional contiguous allocation can't handle requests joining/leaving mid-batch efficiently. Paged memory allows independent per-sequence management without fragmentation.</p>
+<hr />
 
 
 

@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../deepspeed_inference/">
+        <link rel="prev" href="../../quantization/quantization_tradeoffs/">
       
       
-        <link rel="next" href="../vllm/">
+        <link rel="next" href="../text_generation_inference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -74,6 +74,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#1-core-architecture" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -979,29 +984,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../deepspeed_inference/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DeepSpeed Inference
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1011,6 +993,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    TensorRT LLM
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1024,29 +1019,161 @@
 
       </a>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../vllm/" class="md-nav__link">
         
-  
-  
-  <span class="md-ellipsis">
-    vLLM
-    
-  </span>
-  
 
-      </a>
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Core Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-key-technologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Key Technologies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Key Technologies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-in-flight-batching-continuous-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. In-flight Batching (Continuous Batching)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-paged-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Paged KV Cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-kernel-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Kernel Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-flashattention-fp8-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. FlashAttention &amp; FP8 Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quantization-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Quantization Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-model-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Model Parallelism
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Model Parallelism">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combined-tppp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combined TP+PP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-engine-building-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Engine Building Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-multi-gpu-inference-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Multi-GPU Inference Modes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1082,12 +1209,81 @@
   
   
     <li class="md-nav__item">
+      <a href="../deepspeed_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DeepSpeed Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../triton_inference_server/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Triton Inference Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vllm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vLLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../framework_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Comparison
     
   </span>
   
@@ -1145,6 +1341,152 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Core Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-key-technologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Key Technologies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Key Technologies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-in-flight-batching-continuous-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. In-flight Batching (Continuous Batching)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-paged-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Paged KV Cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-kernel-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Kernel Fusion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-flashattention-fp8-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. FlashAttention &amp; FP8 Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quantization-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Quantization Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-model-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Model Parallelism
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Model Parallelism">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combined-tppp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combined TP+PP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-engine-building-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Engine Building Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-multi-gpu-inference-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Multi-GPU Inference Modes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1164,7 +1506,103 @@
 
   <h1>TensorRT LLM</h1>
 
-
+<h2 id="1-core-architecture">1. Core Architecture<a class="headerlink" href="#1-core-architecture" title="Permanent link">&para;</a></h2>
+<p><strong>NVIDIA's optimization stack</strong> for LLM inference on their GPUs <br>
+- Built on TensorRT for kernel-level optimization
+- Focuses on extracting maximum performance from NVIDIA hardware
+- Trade-off: Complex setup vs peak performance</p>
+<hr />
+<hr />
+<h2 id="2-key-technologies">2. Key Technologies<a class="headerlink" href="#2-key-technologies" title="Permanent link">&para;</a></h2>
+<h3 id="1-in-flight-batching-continuous-batching">1. In-flight Batching (Continuous Batching)<a class="headerlink" href="#1-in-flight-batching-continuous-batching" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Similar to vLLM's approach</li>
+<li>Dynamically adds/removes requests during execution</li>
+<li>Optimized specifically for NVIDIA GPU scheduling</li>
+</ul>
+<h3 id="2-paged-kv-cache">2. Paged KV Cache<a class="headerlink" href="#2-paged-kv-cache" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inspired by vLLM's PagedAttention</li>
+<li>NVIDIA-optimized memory management</li>
+<li>Custom CUDA kernels for memory operations</li>
+</ul>
+<h3 id="3-kernel-fusion">3. Kernel Fusion<a class="headerlink" href="#3-kernel-fusion" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Combines multiple operations into single kernels</li>
+<li>Reduces memory transfers between GPU operations</li>
+<li>Examples: LayerNorm+Residual, QKV projection fusion</li>
+</ul>
+<h3 id="4-flashattention-fp8-support">4. FlashAttention &amp; FP8 Support<a class="headerlink" href="#4-flashattention-fp8-support" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Integrated FlashAttention-2 for memory-efficient attention</li>
+<li>Native FP8 quantization on Hopper GPUs (H100)</li>
+<li>2x throughput vs FP16 with minimal accuracy loss</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-quantization-support">3. Quantization Support<a class="headerlink" href="#3-quantization-support" title="Permanent link">&para;</a></h2>
+<p><strong>Weight-Only Quantization:</strong> <br>
+- INT8/INT4 weights, FP16 activations
+- 2-4x memory reduction
+- GPTQ, AWQ methods supported</p>
+<p><strong>Activation Quantization:</strong> <br>
+- FP8 (Hopper GPUs only)
+- SmoothQuant for INT8 activations</p>
+<hr />
+<hr />
+<h2 id="4-model-parallelism">4. Model Parallelism<a class="headerlink" href="#4-model-parallelism" title="Permanent link">&para;</a></h2>
+<h3 id="tensor-parallelism">Tensor Parallelism<a class="headerlink" href="#tensor-parallelism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Splits model layers across GPUs</li>
+<li>Low-latency (intra-node communication)</li>
+<li>Best for latency-sensitive serving</li>
+</ul>
+<h3 id="pipeline-parallelism">Pipeline Parallelism<a class="headerlink" href="#pipeline-parallelism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Splits model vertically into stages</li>
+<li>Higher throughput for large batches</li>
+<li>Micro-batching to reduce bubbles</li>
+</ul>
+<h3 id="combined-tppp">Combined TP+PP<a class="headerlink" href="#combined-tppp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Multi-dimensional parallelism</li>
+<li>Example: 8-way TP × 4-way PP for 32 GPUs</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-engine-building-process">5. Engine Building Process<a class="headerlink" href="#5-engine-building-process" title="Permanent link">&para;</a></h2>
+<p><strong>Two-Step Workflow:</strong> <br>
+1. <strong>Build:</strong> Model → Optimized TensorRT engine (slow, one-time)
+2. <strong>Runtime:</strong> Load engine → Inference (fast)</p>
+<p><strong>Key considerations:</strong> <br>
+- Engines are GPU-specific (H100 engine ≠ A100 engine)
+- Rebuild required for different batch sizes or sequence lengths
+- Trade flexibility for maximum performance</p>
+<hr />
+<hr />
+<h2 id="6-multi-gpu-inference-modes">6. Multi-GPU Inference Modes<a class="headerlink" href="#6-multi-gpu-inference-modes" title="Permanent link">&para;</a></h2>
+<p><strong>KV Cache Transfer Optimization:</strong>
+- Custom NCCL/NVLink operations for KV cache
+- Overlaps communication with computation
+- Critical for tensor parallel setups</p>
+<hr />
+<hr />
+<h2 id="7-interview-qa">7. Interview Q&amp;A<a class="headerlink" href="#7-interview-qa" title="Permanent link">&para;</a></h2>
+<p><strong>Q: When to choose TensorRT-LLM over vLLM?</strong> <br>
+A: When you need absolute maximum throughput on NVIDIA GPUs and can handle complex setup. vLLM for ease of use and flexibility; TensorRT-LLM for peak performance.</p>
+<hr />
+<p><strong>Q: Why is engine building necessary?</strong> <br>
+A: TensorRT optimizes compute graphs at compile time (kernel selection, fusion, memory layout). This specialization achieves maximum performance but loses runtime flexibility.</p>
+<hr />
+<p><strong>Q: How does TensorRT-LLM handle dynamic shapes?</strong> <br>
+A: Uses optimization profiles with min/max ranges during build. Runtime performance varies by how well actual inputs match the profile. Too wide a range reduces optimization effectiveness.</p>
+<hr />
+<p><strong>Q: What's the FP8 accuracy impact?</strong> <br>
+A: On Hopper GPUs with proper calibration, &lt;1% accuracy degradation for most models. Requires per-tensor scaling and careful quantization of outlier features.</p>
+<hr />
+<p><strong>Q: Why does TensorRT-LLM require specific CUDA versions?</strong> <br>
+A: Tightly integrated with CUDA toolkit for custom kernel launches, memory management, and GPU-specific optimizations. Newer releases exploit latest CUDA features (e.g., Hopper's Tensor Memory Accelerator).</p>
+<hr />
 
 
 

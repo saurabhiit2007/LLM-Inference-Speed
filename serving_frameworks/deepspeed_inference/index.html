@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../../quantization/quantization_tradeoffs/">
+        <link rel="prev" href="../text_generation_inference/">
       
       
-        <link rel="next" href="../tensorrt_llm/">
+        <link rel="next" href="../triton_inference_server/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -74,6 +74,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#1-overview" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -979,6 +984,52 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../tensorrt_llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TensorRT LLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../text_generation_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Text Generation Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -988,6 +1039,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    DeepSpeed Inference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1001,6 +1065,215 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-innovations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Innovations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Innovations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deepspeed-mii" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeepSpeed-MII
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      ZeRO-Inference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-kernel-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Kernel Optimizations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Kernel Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-cuda-kernels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom CUDA Kernels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inference-specialized-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inference-Specialized Ops
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-quantization-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Quantization Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Quantization Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#int8-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      INT8 Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixed-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed Precision
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Model Parallelism
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Model Parallelism">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deepspeed-fastgen-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. DeepSpeed-FastGen (2024+)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. DeepSpeed-FastGen (2024+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#splitfuse-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      SplitFuse Algorithm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-inference-engine-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Inference Engine Initialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1013,12 +1286,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensorrt_llm/" class="md-nav__link">
+      <a href="../triton_inference_server/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    TensorRT LLM
+    Triton Inference Server
     
   </span>
   
@@ -1059,35 +1332,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../text_generation_inference/" class="md-nav__link">
+      <a href="../framework_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Text Generation Inference
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../triton_inference_server/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Triton Inference Server
+    Framework Comparison
     
   </span>
   
@@ -1145,6 +1395,206 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-innovations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Innovations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Innovations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deepspeed-mii" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeepSpeed-MII
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      ZeRO-Inference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-kernel-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Kernel Optimizations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Kernel Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-cuda-kernels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom CUDA Kernels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inference-specialized-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inference-Specialized Ops
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-quantization-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Quantization Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Quantization Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#int8-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      INT8 Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixed-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed Precision
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Model Parallelism
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Model Parallelism">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tensor-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensor Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deepspeed-fastgen-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. DeepSpeed-FastGen (2024+)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. DeepSpeed-FastGen (2024+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#splitfuse-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      SplitFuse Algorithm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-inference-engine-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Inference Engine Initialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Q&amp;A
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1164,7 +1614,128 @@
 
   <h1>DeepSpeed Inference</h1>
 
-
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p><strong>Microsoft's inference optimization library</strong> <br>
+- Part of the larger DeepSpeed training ecosystem
+- Focus: Multi-GPU inference, kernel optimizations, quantization
+- Integrated with DeepSpeed-MII (Model Implementations for Inference)</p>
+<hr />
+<hr />
+<h2 id="2-core-innovations">2. Core Innovations<a class="headerlink" href="#2-core-innovations" title="Permanent link">&para;</a></h2>
+<h3 id="deepspeed-mii">DeepSpeed-MII<a class="headerlink" href="#deepspeed-mii" title="Permanent link">&para;</a></h3>
+<p><strong>High-level serving framework</strong> built on DeepSpeed-Inference
+- REST API server
+- Dynamic batching
+- Multi-GPU tensor parallelism
+- Lower-level alternative to vLLM/TGI</p>
+<h3 id="zero-inference">ZeRO-Inference<a class="headerlink" href="#zero-inference" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Adapts ZeRO training optimizations for inference</li>
+<li>Offloading strategies for large models</li>
+<li>CPU/NVMe offloading when GPU memory insufficient</li>
+</ul>
+<hr />
+<hr />
+<h2 id="3-kernel-optimizations">3. Kernel Optimizations<a class="headerlink" href="#3-kernel-optimizations" title="Permanent link">&para;</a></h2>
+<h3 id="custom-cuda-kernels">Custom CUDA Kernels<a class="headerlink" href="#custom-cuda-kernels" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Optimized Transformer layers</li>
+<li>Attention mechanisms (pre-FlashAttention era)</li>
+<li>Fused operations (LayerNorm+Residual, etc.)</li>
+</ul>
+<p><strong>Note:</strong> Some kernels now superseded by FlashAttention and newer libraries</p>
+<h3 id="inference-specialized-ops">Inference-Specialized Ops<a class="headerlink" href="#inference-specialized-ops" title="Permanent link">&para;</a></h3>
+<ul>
+<li>KV cache management (simpler than vLLM's paging)</li>
+<li>Optimized softmax for long sequences</li>
+<li>Custom GEMM operations</li>
+</ul>
+<hr />
+<hr />
+<h2 id="4-quantization-support">4. Quantization Support<a class="headerlink" href="#4-quantization-support" title="Permanent link">&para;</a></h2>
+<h3 id="int8-quantization">INT8 Quantization<a class="headerlink" href="#int8-quantization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Symmetric/asymmetric quantization</li>
+<li>Per-channel or per-tensor</li>
+<li>ZeroQuant for activation quantization</li>
+</ul>
+<h3 id="mixed-precision">Mixed Precision<a class="headerlink" href="#mixed-precision" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FP16/BF16 computation</li>
+<li>INT8 weights with FP16 activations</li>
+<li>Automatic mixed precision selection</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-model-parallelism">5. Model Parallelism<a class="headerlink" href="#5-model-parallelism" title="Permanent link">&para;</a></h2>
+<h3 id="tensor-parallelism">Tensor Parallelism<a class="headerlink" href="#tensor-parallelism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Column/row parallelism for linear layers</li>
+<li>Optimized communication patterns</li>
+<li>Supports pipeline parallelism combination</li>
+</ul>
+<h3 id="pipeline-parallelism">Pipeline Parallelism<a class="headerlink" href="#pipeline-parallelism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Micro-batching for throughput</li>
+<li>1F1B (one-forward-one-backward) scheduling adapted for inference</li>
+<li>Good for extremely large models (&gt;100B parameters)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="6-deepspeed-fastgen-2024">6. DeepSpeed-FastGen (2024+)<a class="headerlink" href="#6-deepspeed-fastgen-2024" title="Permanent link">&para;</a></h2>
+<p><strong>Latest addition:</strong> Dynamic SplitFuse scheduling  <br>
+- Combines prefill and decode in single batch
+- Similar to vLLM's chunked prefill concept
+- Claimed improvements over naive continuous batching</p>
+<h3 id="splitfuse-algorithm">SplitFuse Algorithm<a class="headerlink" href="#splitfuse-algorithm" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Split long prefills into chunks</li>
+<li>Fuse with decode operations</li>
+<li>Balance compute resources dynamically</li>
+</ol>
+<p><strong>Benefit:</strong> Reduces tail latency for long prompts</p>
+<hr />
+<hr />
+<h2 id="7-inference-engine-initialization">7. Inference Engine Initialization<a class="headerlink" href="#7-inference-engine-initialization" title="Permanent link">&para;</a></h2>
+<p><strong>Simplified API:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">deepspeed</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">deepspeed</span><span class="o">.</span><span class="n">init_inference</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">tensor_parallel</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tp_size&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span>
+    <span class="n">replace_with_kernel_inject</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<p><strong>replace_with_kernel_inject:</strong> Swaps model ops with DeepSpeed optimized kernels</p>
+<hr />
+<hr />
+<h2 id="8-performance-characteristics">8. Performance Characteristics<a class="headerlink" href="#8-performance-characteristics" title="Permanent link">&para;</a></h2>
+<p><strong>Strengths:</strong> <br>
+- Good for research/prototyping
+- Integrated training-to-inference workflow
+- Strong multi-GPU support</p>
+<p><strong>Limitations:</strong> <br>
+- Less production-hardened than TGI/vLLM
+- Smaller community/ecosystem
+- Kernel optimizations lag behind latest research</p>
+<hr />
+<hr />
+<h2 id="9-interview-qa">9. Interview Q&amp;A<a class="headerlink" href="#9-interview-qa" title="Permanent link">&para;</a></h2>
+<p><strong>Q: When to use DeepSpeed-Inference vs vLLM?</strong> <br>
+A: DeepSpeed-Inference for research environments with existing DeepSpeed training pipelines. vLLM for production serving with better memory efficiency and throughput.</p>
+<hr />
+<p><strong>Q: What is ZeRO-Inference's offloading strategy?</strong> <br>
+A: Hierarchical offloading: GPU → CPU RAM → NVMe SSD. Brings parameters into GPU on-demand. Enables inference of models larger than GPU memory but with latency penalty.</p>
+<hr />
+<p><strong>Q: How does DeepSpeed-FastGen compare to vLLM's continuous batching?</strong>
+A: Both use iteration-level scheduling. FastGen adds SplitFuse for better prefill/decode balance. vLLM has more mature PagedAttention for memory efficiency. Performance similar in practice.</p>
+<hr />
+<p><strong>Q: Why isn't DeepSpeed-Inference as popular as vLLM for serving?</strong> <br>
+A: Later entry to production serving space, less focus on ease-of-use, smaller ecosystem. Primarily adopted by users already in DeepSpeed training ecosystem.</p>
+<hr />
+<p><strong>Q: What's the role of kernel injection?</strong> <br>
+A: Automatically replaces PyTorch operations with optimized DeepSpeed kernels at runtime. Transparent acceleration without model code changes. Trade-off: may have compatibility issues with custom model architectures.</p>
+<hr />
 
 
 
