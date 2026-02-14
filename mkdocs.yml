@@ -37,14 +37,14 @@ nav:
       - Memory Compute Tradeoffs: ./fundamentals/memory_compute_tradeoffs.md
   - Attention Optimization:
       - Flash Attention: ./attention_optimization/flash_attention.md
-      - Flash Attention 2: ./attention_optimization/flash_attention.md
+      - Flash Attention 2: ./attention_optimization/flash_attention_2.md
       - KV Caching: ./attention_optimization/kv_caching.md
-      - vLLM: ./attention_optimization/vllm.md
+      - Paged Attention: ./attention_optimization/paged_attention.md
   - Decoding Strategies:
       - Greedy Decoding: ./decoding_strategies/greedy_decoding.md
       - Beam Search: ./decoding_strategies/beam_search.md
       - Sampling Methods: ./decoding_strategies/sampling_methods.md
-      - Speculative Decoding: ./attention_optimization/speculative_decoding.md
+      - Speculative Decoding: ./decoding_strategies/speculative_decoding.md
   - Batching Strategies: ./batching_strategies.md
   - Quantization:
       - Quantization Basics: ./quantization/quantization_basics.md
