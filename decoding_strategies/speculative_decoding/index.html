@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../sampling_methods/">
+      
+      
+        <link rel="next" href="../../batching_strategies/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Speculative Decoding - Interview Prep Guide - Fine-Tuning Methods Documentation</title>
+        <title>Speculative Decoding - Fine-Tuning Methods Documentation</title>
       
     
     
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Speculative Decoding - Interview Prep Guide
+              Speculative Decoding
             
           </span>
         </div>
@@ -475,12 +479,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/flash_attention/" class="md-nav__link">
+      <a href="../../attention_optimization/flash_attention_2/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Flash Attention
+    Flash Attention 2
     
   </span>
   
@@ -521,12 +525,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/vllm.md" class="md-nav__link">
+      <a href="../../attention_optimization/paged_attention/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    vLLM
+    Paged Attention
     
   </span>
   
@@ -548,20 +552,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -577,7 +581,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Decoding Strategies
@@ -657,10 +661,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../attention_optimization/speculative_decoding.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Speculative Decoding
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -671,6 +697,491 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-problem-with-standard-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Problem with Standard Decoding
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Problem with Standard Decoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sequential-bottleneck" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sequential Bottleneck
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-how-speculative-decoding-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. How Speculative Decoding Works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. How Speculative Decoding Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Idea
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visual-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-step-by-step-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Step-by-Step Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Step-by-Step Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-draft-proposes-k-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Draft Proposes K Tokens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-target-verifies-all-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Target Verifies All Tokens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-accept-or-reject-each-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Accept or Reject Each Token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-handle-rejection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Handle Rejection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-why-its-faster" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Why It's Faster
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Why It&#39;s Faster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#speedup-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Speedup Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-parallel-verification-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Parallel Verification Works
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-why-its-exact-not-approximate" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Why It's Exact (Not Approximate)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Why It&#39;s Exact (Not Approximate)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rejection-sampling-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rejection Sampling Proof
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-rejection-happens" class="md-nav__link">
+    <span class="md-ellipsis">
+      When Rejection Happens
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-practical-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Practical Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Practical Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#draft-model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Draft Model Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draft-length-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      Draft Length K
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceptance-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acceptance Rate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-interaction-with-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Interaction with KV Cache
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Interaction with KV Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kv-cache-in-both-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      KV Cache in Both Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Interview Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Interview Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-what-is-speculative-decoding-and-why-is-it-faster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1: What is speculative decoding and why is it faster?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-does-speculative-decoding-produce-exact-or-approximate-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2: Does speculative decoding produce exact or approximate results?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-why-cant-you-just-run-the-target-model-in-parallel-for-k-tokens-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3: Why can't you just run the target model in parallel for K tokens directly?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-how-does-the-target-model-verify-k-tokens-in-one-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4: How does the target model verify K tokens in one pass?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-what-happens-when-a-draft-token-is-rejected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5: What happens when a draft token is rejected?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-what-determines-the-acceptance-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6: What determines the acceptance rate?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-how-do-you-choose-the-draft-length-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q7: How do you choose the draft length K?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-does-speculative-decoding-reduce-total-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q8: Does speculative decoding reduce total FLOPs?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q9-can-you-use-greedy-decoding-for-the-draft-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q9: Can you use greedy decoding for the draft model?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q10-how-does-speculative-decoding-interact-with-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q10: How does speculative decoding interact with KV cache?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-variants-and-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Variants and Extensions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Variants and Extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#medusa-multi-head-speculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medusa / Multi-Head Speculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookahead-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lookahead Decoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staged-speculative-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staged Speculative Decoding
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-key-takeaways-for-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Key Takeaways for Interviews
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-when-to-use-speculative-decoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. When to Use Speculative Decoding
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. When to Use Speculative Decoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Good Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-beneficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Less Beneficial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 

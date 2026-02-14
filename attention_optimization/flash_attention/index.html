@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="./">
+        <link rel="prev" href="../../fundamentals/memory_compute_tradeoffs/">
       
       
-        <link rel="next" href="../kv_caching/">
+        <link rel="next" href="../flash_attention_2/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -772,316 +772,20 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Flash Attention
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../flash_attention_2/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Flash Attention
+    Flash Attention 2
     
   </span>
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-why-standard-attention-is-slow" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Why Standard Attention is Slow
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Why Standard Attention is Slow">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#problem-1-quadratic-memory-growth" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 1: Quadratic Memory Growth
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-2-excessive-memory-traffic" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 2: Excessive Memory Traffic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-3-numerical-instability-in-fp16" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 3: Numerical Instability in FP16
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-how-flashattention-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. How FlashAttention Works
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. How FlashAttention Works">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-tiling" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.1 Tiling
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-kernel-fusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.2 Kernel Fusion
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-online-softmax" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.3 Online Softmax
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-performance-impact" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Performance Impact
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Performance Impact">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#memory-complexity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Memory Complexity
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#speedup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Speedup
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#when-flashattention-helps-most" class="md-nav__link">
-    <span class="md-ellipsis">
-      When FlashAttention Helps Most
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Interview Questions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Interview Questions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q1-why-is-flashattention-faster-than-standard-attention" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q1: Why is FlashAttention faster than standard attention?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q2-does-flashattention-approximate-attention" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q2: Does FlashAttention approximate attention?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q3-explain-online-softmax-why-is-it-needed" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q3: Explain online softmax. Why is it needed?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q4-what-is-the-memory-complexity-of-flashattention-vs-standard-attention" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q4: What is the memory complexity of FlashAttention vs standard attention?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q5-can-flashattention-be-used-for-any-attention-mechanism" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5: Can FlashAttention be used for any attention mechanism?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q6-why-does-flashattention-require-modern-gpus" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q6: Why does FlashAttention require modern GPUs?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q7-walk-through-how-flashattention-processes-a-single-tile-pair" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q7: Walk through how FlashAttention processes a single tile pair.
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q8-what-trade-offs-does-flashattention-make" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q8: What trade-offs does FlashAttention make?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q9-how-does-tiling-affect-the-computational-complexity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q9: How does tiling affect the computational complexity?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q10-can-you-explain-the-difference-between-shared-memory-and-global-memory" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q10: Can you explain the difference between shared memory and global memory?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-key-takeaways-for-interviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1117,12 +821,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../vllm.md" class="md-nav__link">
+      <a href="../paged_attention/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    vLLM
+    Paged Attention
     
   </span>
   
@@ -1256,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../speculative_decoding.md" class="md-nav__link">
+      <a href="../../decoding_strategies/speculative_decoding/" class="md-nav__link">
         
   
   

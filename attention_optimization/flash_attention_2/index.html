@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../flash_attention/">
+      
+      
+        <link rel="next" href="../kv_caching/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Flash attention 2 - Fine-Tuning Methods Documentation</title>
+        <title>Flash Attention 2 - Fine-Tuning Methods Documentation</title>
       
     
     
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Flash attention 2
+              Flash Attention 2
             
           </span>
         </div>
@@ -409,20 +413,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -438,7 +442,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Attention Optimization
@@ -472,20 +476,349 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../flash_attention/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Flash Attention 2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Flash Attention
+    Flash Attention 2
     
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-what-was-wrong-with-flashattention-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. What Was Wrong with FlashAttention-1?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. What Was Wrong with FlashAttention-1?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-1-poor-work-partitioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 1: Poor Work Partitioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-2-non-coalesced-memory-accesses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 2: Non-Coalesced Memory Accesses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-3-limited-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3: Limited Parallelism
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-key-improvements-in-flashattention-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Key Improvements in FlashAttention-2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Key Improvements in FlashAttention-2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-better-parallelism-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Better Parallelism Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-improved-work-partitioning-within-thread-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Improved Work Partitioning Within Thread Blocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-memory-access-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Memory Access Optimizations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-performance-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Performance Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Performance Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#speedup-over-flashattention-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Speedup Over FlashAttention-1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-utilization" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Utilization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Implementation Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Implementation Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#thread-block-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thread Block Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Interview Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Interview Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-whats-the-main-difference-between-flashattention-1-and-flashattention-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1: What's the main difference between FlashAttention-1 and FlashAttention-2?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-does-flashattention-2-change-the-algorithm-or-just-the-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2: Does FlashAttention-2 change the algorithm or just the implementation?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-why-does-parallelizing-across-kv-tiles-improve-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3: Why does parallelizing across KV tiles improve performance?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-whats-the-trade-off-with-this-increased-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4: What's the trade-off with this increased parallelism?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-how-does-flashattention-2-handle-the-accumulation-of-partial-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5: How does FlashAttention-2 handle the accumulation of partial results?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-what-gpu-features-does-flashattention-2-rely-on-more-heavily" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6: What GPU features does FlashAttention-2 rely on more heavily?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-why-doesnt-flashattention-2-achieve-100-of-peak-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q7: Why doesn't FlashAttention-2 achieve 100% of peak FLOPS?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-how-does-sequence-length-affect-fa-2s-speedup-over-fa-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q8: How does sequence length affect FA-2's speedup over FA-1?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q9-can-flashattention-2s-techniques-be-applied-to-other-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q9: Can FlashAttention-2's techniques be applied to other operations?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q10-whats-the-memory-complexity-of-flashattention-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q10: What's the memory complexity of FlashAttention-2?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-flashattention-1-vs-flashattention-2-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. FlashAttention-1 vs FlashAttention-2 Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-key-takeaways-for-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Key Takeaways for Interviews
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -521,12 +854,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../vllm.md" class="md-nav__link">
+      <a href="../paged_attention/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    vLLM
+    Paged Attention
     
   </span>
   
@@ -660,7 +993,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../speculative_decoding.md" class="md-nav__link">
+      <a href="../../decoding_strategies/speculative_decoding/" class="md-nav__link">
         
   
   
@@ -1477,7 +1810,7 @@
   
 
 
-  <h1>Flash attention 2</h1>
+  <h1>Flash Attention 2</h1>
 
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
 <p>FlashAttention-2 is an improved version of FlashAttention that achieves <strong>2x speedup</strong> over FlashAttention-1 through better GPU utilization. It maintains the same exact attention computation while being even faster and more efficient.</p>

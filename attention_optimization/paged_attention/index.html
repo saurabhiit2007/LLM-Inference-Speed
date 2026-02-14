@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../kv_caching/">
+      
+      
+        <link rel="next" href="../../decoding_strategies/greedy_decoding/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Paged attention - Fine-Tuning Methods Documentation</title>
+        <title>Paged Attention - Fine-Tuning Methods Documentation</title>
       
     
     
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Paged attention
+              Paged Attention
             
           </span>
         </div>
@@ -409,20 +413,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -438,7 +442,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Attention Optimization
@@ -475,12 +479,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../flash_attention/" class="md-nav__link">
+      <a href="../flash_attention_2/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Flash Attention
+    Flash Attention 2
     
   </span>
   
@@ -518,20 +522,391 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../vllm.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Paged Attention
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    vLLM
+    Paged Attention
     
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-kv-cache-memory-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The KV Cache Memory Problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The KV Cache Memory Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is KV Cache?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems-with-traditional-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problems with Traditional KV Cache
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems with Traditional KV Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-1-memory-fragmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 1: Memory Fragmentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-2-no-memory-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 2: No Memory Sharing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-3-static-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3: Static Allocation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-how-pagedattention-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. How PagedAttention Works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. How PagedAttention Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-core-concept-paging" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Core Concept: Paging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-block-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Block Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-dynamic-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Dynamic Allocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-memory-sharing-via-copy-on-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Memory Sharing via Copy-on-Write
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-attention-computation-with-paging" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Attention Computation with Paging
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-performance-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Performance Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Performance Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memory-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throughput-improvement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Throughput Improvement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Interview Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Interview Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-what-problem-does-pagedattention-solve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1: What problem does PagedAttention solve?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-how-is-pagedattention-similar-to-os-virtual-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2: How is PagedAttention similar to OS virtual memory?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-whats-a-typical-block-size-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3: What's a typical block size and why?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-how-does-pagedattention-enable-memory-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4: How does PagedAttention enable memory sharing?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-whats-the-overhead-of-block-table-lookups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q5: What's the overhead of block table lookups?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-how-does-pagedattention-improve-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q6: How does PagedAttention improve throughput?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-what-happens-when-we-run-out-of-physical-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q7: What happens when we run out of physical blocks?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-can-pagedattention-work-with-flashattention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q8: Can PagedAttention work with FlashAttention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q9-whats-the-difference-between-block-size-and-tile-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q9: What's the difference between block size and tile size?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q10-what-are-the-limitations-of-pagedattention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q10: What are the limitations of PagedAttention?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pagedattention-in-practice-vllm" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. PagedAttention in Practice (vLLM)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. PagedAttention in Practice (vLLM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases-where-it-shines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases Where It Shines
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-key-takeaways-for-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Key Takeaways for Interviews
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Comparison Table
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -660,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../speculative_decoding.md" class="md-nav__link">
+      <a href="../../decoding_strategies/speculative_decoding/" class="md-nav__link">
         
   
   
@@ -1519,7 +1894,7 @@
   
 
 
-  <h1>Paged attention</h1>
+  <h1>Paged Attention</h1>
 
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
 <p>PagedAttention is a memory management technique for efficient LLM serving that stores KV cache in non-contiguous memory blocks (pages). It's the core innovation behind vLLM, enabling <strong>near-zero waste</strong> in KV cache memory and higher throughput.</p>
