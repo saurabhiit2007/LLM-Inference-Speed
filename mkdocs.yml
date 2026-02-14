@@ -56,11 +56,12 @@ nav:
       - GGUF GGML: ./quantization/gguf_ggml.md
       - Quantization Tradeoffs: ./quantization/quantization_tradeoffs.md
   - Serving Frameworks:
-      - DeepSpeed Inference: ./serving_frameworks/deepspeed_inference.md
       - TensorRT LLM: ./serving_frameworks/tensorrt_llm.md
-      - vLLM: ./serving_frameworks/vllm.md
       - Text Generation Inference: ./serving_frameworks/text_generation_inference.md
+      - DeepSpeed Inference: ./serving_frameworks/deepspeed_inference.md
       - Triton Inference Server: ./serving_frameworks/triton_inference_server.md
+      - vLLM: ./serving_frameworks/vllm.md
+      - Framework Comparison: ./serving_frameworks/framework_comparison.md
   - References: index.md
 
 markdown_extensions:
