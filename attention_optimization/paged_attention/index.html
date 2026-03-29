@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A technical reference for LoRA, QLoRA, and other fine-tuning techniques.">
+        <meta name="description" content="A technical reference for improving the inference speed of LLMs.">
       
       
         <meta name="author" content="Saurabh Goyal">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Paged Attention - Fine-Tuning Methods Documentation</title>
+        <title>Paged Attention - LLM Inference Speedup</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-header__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+    <a href="../.." title="LLM Inference Speedup" class="md-header__button md-logo" aria-label="LLM Inference Speedup" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -106,7 +106,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Fine-Tuning Methods Documentation
+            LLM Inference Speedup
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -189,7 +189,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/saurabhiit2007/LLM-Finetuning" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/saurabhiit2007/LLM-Inference-Speed" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -225,17 +225,17 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Fine-Tuning Methods Documentation" class="md-nav__button md-logo" aria-label="Fine-Tuning Methods Documentation" data-md-component="logo">
+    <a href="../.." title="LLM Inference Speedup" class="md-nav__button md-logo" aria-label="LLM Inference Speedup" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Fine-Tuning Methods Documentation
+    LLM Inference Speedup
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/saurabhiit2007/LLM-Finetuning" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/saurabhiit2007/LLM-Inference-Speed" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -590,22 +590,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-is-kv-cache" class="md-nav__link">
+  <a href="#21-what-is-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      What is KV Cache?
+      2.1 What is KV Cache?
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#problems-with-traditional-kv-cache" class="md-nav__link">
+  <a href="#22-problems-with-traditional-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      Problems with Traditional KV Cache
+      2.2 Problems with Traditional KV Cache
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Problems with Traditional KV Cache">
+    <nav class="md-nav" aria-label="2.2 Problems with Traditional KV Cache">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1562,22 +1562,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-is-kv-cache" class="md-nav__link">
+  <a href="#21-what-is-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      What is KV Cache?
+      2.1 What is KV Cache?
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#problems-with-traditional-kv-cache" class="md-nav__link">
+  <a href="#22-problems-with-traditional-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      Problems with Traditional KV Cache
+      2.2 Problems with Traditional KV Cache
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Problems with Traditional KV Cache">
+    <nav class="md-nav" aria-label="2.2 Problems with Traditional KV Cache">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1902,17 +1902,19 @@
 <hr />
 <hr />
 <h2 id="2-the-kv-cache-memory-problem">2. The KV Cache Memory Problem<a class="headerlink" href="#2-the-kv-cache-memory-problem" title="Permanent link">&para;</a></h2>
-<h3 id="what-is-kv-cache">What is KV Cache?<a class="headerlink" href="#what-is-kv-cache" title="Permanent link">&para;</a></h3>
-<p>In autoregressive generation, transformers reuse Key and Value tensors from previous tokens:
-- Without cache: Recompute K, V for all previous tokens at each step (wasteful)
-- With cache: Store K, V tensors and only compute for new token</p>
+<h3 id="21-what-is-kv-cache">2.1 What is KV Cache?<a class="headerlink" href="#21-what-is-kv-cache" title="Permanent link">&para;</a></h3>
+<p>In autoregressive generation, transformers reuse Key and Value tensors from previous tokens:</p>
+<ul>
+<li>Without cache: Recompute K, V for all previous tokens at each step (wasteful)</li>
+<li>With cache: Store K, V tensors and only compute for new token</li>
+</ul>
 <p>For a sequence of length <span class="arithmatex">\(N\)</span> with <span class="arithmatex">\(L\)</span> layers, <span class="arithmatex">\(H\)</span> heads, and dimension <span class="arithmatex">\(d\)</span>:
 $$
 \text{KV cache size} = 2 \times N \times L \times H \times d
 $$</p>
 <p><strong>Example:</strong> LLaMA-13B with 2048 tokens ≈ 800 MB per sequence</p>
 <hr />
-<h3 id="problems-with-traditional-kv-cache">Problems with Traditional KV Cache<a class="headerlink" href="#problems-with-traditional-kv-cache" title="Permanent link">&para;</a></h3>
+<h3 id="22-problems-with-traditional-kv-cache">2.2 Problems with Traditional KV Cache<a class="headerlink" href="#22-problems-with-traditional-kv-cache" title="Permanent link">&para;</a></h3>
 <h4 id="problem-1-memory-fragmentation">Problem 1: Memory Fragmentation<a class="headerlink" href="#problem-1-memory-fragmentation" title="Permanent link">&para;</a></h4>
 <p><strong>Issue:</strong> Must pre-allocate contiguous memory for maximum sequence length</p>
 <div class="highlight"><pre><span></span><code>Sequence 1: [████████░░░░] (800 tokens, allocated for 2048)
@@ -1947,10 +1949,12 @@ Sequence 3: [██████░░░░░░] (600 tokens, allocated for 20
                          ↓
 Physical memory:  [Block 0] → [Block 5] → [Block 2] (non-contiguous)
 </code></pre></div>
-<p><strong>Key properties:</strong>
-- Block size: Typically 16-64 tokens
-- Blocks can be anywhere in physical memory
-- Mapping tracked via <strong>block table</strong> (like OS page table)</p>
+<p><strong>Key properties:</strong></p>
+<ul>
+<li>Block size: Typically 16-64 tokens</li>
+<li>Blocks can be anywhere in physical memory</li>
+<li>Mapping tracked via <strong>block table</strong> (like OS page table)</li>
+</ul>
 <hr />
 <h3 id="32-block-table">3.2 Block Table<a class="headerlink" href="#32-block-table" title="Permanent link">&para;</a></h3>
 <p>Each sequence has a block table mapping logical blocks to physical blocks:</p>
@@ -1976,10 +1980,12 @@ Sequence 2:
     <span class="n">output</span> <span class="o">=</span> <span class="n">paged_attention</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">sequence</span><span class="o">.</span><span class="n">block_table</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">output</span>
 </code></pre></div>
-<p><strong>Benefits:</strong>
-- Only allocate what's actually used
-- No pre-allocation for max length
-- Memory freed immediately when sequence completes</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Only allocate what's actually used</li>
+<li>No pre-allocation for max length</li>
+<li>Memory freed immediately when sequence completes</li>
+</ul>
 <hr />
 <h3 id="34-memory-sharing-via-copy-on-write">3.4 Memory Sharing via Copy-on-Write<a class="headerlink" href="#34-memory-sharing-via-copy-on-write" title="Permanent link">&para;</a></h3>
 <p>Multiple sequences can share blocks (read-only):</p>
@@ -1990,11 +1996,13 @@ Sequence 2:
 Seq 1: [Block 0] → [Block 3: &quot;Hello → &quot;]
 Seq 2: [Block 0] → [Block 5: &quot;Goodbye → &quot;]
 </code></pre></div>
-<p>When modifying a shared block → <strong>copy-on-write</strong>:
-1. Allocate new physical block
-2. Copy contents
-3. Update block table
-4. Modify the copy</p>
+<p>When modifying a shared block → <strong>copy-on-write</strong>:</p>
+<ol>
+<li>Allocate new physical block</li>
+<li>Copy contents</li>
+<li>Update block table</li>
+<li>Modify the copy</li>
+</ol>
 <hr />
 <hr />
 <h2 id="4-attention-computation-with-paging">4. Attention Computation with Paging<a class="headerlink" href="#4-attention-computation-with-paging" title="Permanent link">&para;</a></h2>
@@ -2041,67 +2049,85 @@ Seq 2: [Block 0] → [Block 5: &quot;Goodbye → &quot;]
 <p><strong>Answer:</strong> PagedAttention solves memory fragmentation and waste in KV cache management. Traditional approaches pre-allocate contiguous memory for max sequence length, wasting 60-80% of memory. PagedAttention uses non-contiguous blocks allocated on-demand, achieving 80-95% utilization and enabling 2-4x higher throughput.</p>
 <hr />
 <h3 id="q2-how-is-pagedattention-similar-to-os-virtual-memory">Q2: How is PagedAttention similar to OS virtual memory?<a class="headerlink" href="#q2-how-is-pagedattention-similar-to-os-virtual-memory" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Both use paging:
-- <strong>Virtual memory:</strong> Maps virtual addresses to physical pages via page table
-- <strong>PagedAttention:</strong> Maps logical KV cache positions to physical blocks via block table</p>
+<p><strong>Answer:</strong> Both use paging:</p>
+<ul>
+<li><strong>Virtual memory:</strong> Maps virtual addresses to physical pages via page table</li>
+<li><strong>PagedAttention:</strong> Maps logical KV cache positions to physical blocks via block table</li>
+</ul>
 <p>Both enable non-contiguous allocation, on-demand paging, and copy-on-write sharing.</p>
 <hr />
 <h3 id="q3-whats-a-typical-block-size-and-why">Q3: What's a typical block size and why?<a class="headerlink" href="#q3-whats-a-typical-block-size-and-why" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Typically <strong>16-64 tokens</strong>. Trade-offs:
-- <strong>Too small:</strong> High block table overhead, more lookups during attention
-- <strong>Too large:</strong> Internal fragmentation (wasted space within partially-filled blocks)
-- <strong>Sweet spot:</strong> 16-64 balances overhead vs. fragmentation (similar to OS page sizes like 4KB)</p>
+<p><strong>Answer:</strong> Typically <strong>16-64 tokens</strong>. Trade-offs:</p>
+<ul>
+<li><strong>Too small:</strong> High block table overhead, more lookups during attention</li>
+<li><strong>Too large:</strong> Internal fragmentation (wasted space within partially-filled blocks)</li>
+<li><strong>Sweet spot:</strong> 16-64 balances overhead vs. fragmentation (similar to OS page sizes like 4KB)</li>
+</ul>
 <hr />
 <h3 id="q4-how-does-pagedattention-enable-memory-sharing">Q4: How does PagedAttention enable memory sharing?<a class="headerlink" href="#q4-how-does-pagedattention-enable-memory-sharing" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Multiple sequences can point to the same physical blocks (read-only). Common use cases:
-- <strong>Shared prompts:</strong> All sequences share blocks containing the same prompt
-- <strong>Parallel sampling:</strong> Multiple outputs from same prompt share prefix blocks
-- <strong>Beam search:</strong> Different beams share common prefix</p>
+<p><strong>Answer:</strong> Multiple sequences can point to the same physical blocks (read-only). Common use cases:</p>
+<ul>
+<li><strong>Shared prompts:</strong> All sequences share blocks containing the same prompt</li>
+<li><strong>Parallel sampling:</strong> Multiple outputs from same prompt share prefix blocks</li>
+<li><strong>Beam search:</strong> Different beams share common prefix</li>
+</ul>
 <p>When a shared block needs modification → <strong>copy-on-write</strong>: allocate new block, copy contents, update that sequence's block table.</p>
 <hr />
 <h3 id="q5-whats-the-overhead-of-block-table-lookups">Q5: What's the overhead of block table lookups?<a class="headerlink" href="#q5-whats-the-overhead-of-block-table-lookups" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Minimal (&lt;5% typically) because:
-- Block tables are small (fits in cache)
-- Lookups are simple integer indexing
-- Attention computation dominates (matrix ops on blocks)
-- Modern GPUs handle indirection efficiently</p>
+<p><strong>Answer:</strong> Minimal (&lt;5% typically) because:</p>
+<ul>
+<li>Block tables are small (fits in cache)</li>
+<li>Lookups are simple integer indexing</li>
+<li>Attention computation dominates (matrix ops on blocks)</li>
+<li>Modern GPUs handle indirection efficiently</li>
+</ul>
 <p>The memory savings far outweigh this small overhead.</p>
 <hr />
 <h3 id="q6-how-does-pagedattention-improve-throughput">Q6: How does PagedAttention improve throughput?<a class="headerlink" href="#q6-how-does-pagedattention-improve-throughput" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> By reducing memory waste:
-1. Traditional: Can fit 10 sequences (60% waste)
-2. PagedAttention: Can fit 25 sequences (10% waste) in same memory
-3. Bigger batches → better GPU utilization → higher throughput</p>
+<p><strong>Answer:</strong> By reducing memory waste:</p>
+<ol>
+<li>Traditional: Can fit 10 sequences (60% waste)</li>
+<li>PagedAttention: Can fit 25 sequences (10% waste) in same memory</li>
+<li>Bigger batches → better GPU utilization → higher throughput</li>
+</ol>
 <p>Typical improvement: <strong>2-4x</strong> more requests/second.</p>
 <hr />
 <h3 id="q7-what-happens-when-we-run-out-of-physical-blocks">Q7: What happens when we run out of physical blocks?<a class="headerlink" href="#q7-what-happens-when-we-run-out-of-physical-blocks" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Memory management strategies:
-- <strong>Preemption:</strong> Evict lower-priority sequences, save their state
-- <strong>Swapping:</strong> Move blocks to CPU memory (like OS swap)
-- <strong>Recomputation:</strong> Drop blocks and recompute if needed
-- <strong>Blocking:</strong> Wait until blocks free up</p>
+<p><strong>Answer:</strong> Memory management strategies:</p>
+<ul>
+<li><strong>Preemption:</strong> Evict lower-priority sequences, save their state</li>
+<li><strong>Swapping:</strong> Move blocks to CPU memory (like OS swap)</li>
+<li><strong>Recomputation:</strong> Drop blocks and recompute if needed</li>
+<li><strong>Blocking:</strong> Wait until blocks free up</li>
+</ul>
 <p>vLLM typically uses preemption for fairness and efficiency.</p>
 <hr />
 <h3 id="q8-can-pagedattention-work-with-flashattention">Q8: Can PagedAttention work with FlashAttention?<a class="headerlink" href="#q8-can-pagedattention-work-with-flashattention" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Yes! They're complementary:
-- <strong>FlashAttention:</strong> Optimizes attention computation (tiling, kernel fusion)
-- <strong>PagedAttention:</strong> Optimizes KV cache memory management (paging, sharing)</p>
+<p><strong>Answer:</strong> Yes! They're complementary:</p>
+<ul>
+<li><strong>FlashAttention:</strong> Optimizes attention computation (tiling, kernel fusion)</li>
+<li><strong>PagedAttention:</strong> Optimizes KV cache memory management (paging, sharing)</li>
+</ul>
 <p>You can use both together: FlashAttention for fast computation, PagedAttention for efficient memory. vLLM does exactly this.</p>
 <hr />
 <h3 id="q9-whats-the-difference-between-block-size-and-tile-size">Q9: What's the difference between block size and tile size?<a class="headerlink" href="#q9-whats-the-difference-between-block-size-and-tile-size" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>Block size (PagedAttention):</strong> Memory management granularity (16-64 tokens)
-  - Determines allocation unit for KV cache storage
-- <strong>Tile size (FlashAttention):</strong> Computation granularity (128-256 tokens)
-  - Determines how much data loads into shared memory at once</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Block size (PagedAttention):</strong> Memory management granularity (16-64 tokens)</li>
+<li>Determines allocation unit for KV cache storage</li>
+<li><strong>Tile size (FlashAttention):</strong> Computation granularity (128-256 tokens)</li>
+<li>Determines how much data loads into shared memory at once</li>
+</ul>
 <p>They're independent concepts operating at different levels (memory management vs computation).</p>
 <hr />
 <h3 id="q10-what-are-the-limitations-of-pagedattention">Q10: What are the limitations of PagedAttention?<a class="headerlink" href="#q10-what-are-the-limitations-of-pagedattention" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>Complexity:</strong> More complex implementation than contiguous allocation
-- <strong>Indirection overhead:</strong> Small cost from block table lookups
-- <strong>GPU kernel changes:</strong> Requires custom attention kernels that understand block tables
-- <strong>Internal fragmentation:</strong> Last block in sequence may be partially empty</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Complexity:</strong> More complex implementation than contiguous allocation</li>
+<li><strong>Indirection overhead:</strong> Small cost from block table lookups</li>
+<li><strong>GPU kernel changes:</strong> Requires custom attention kernels that understand block tables</li>
+<li><strong>Internal fragmentation:</strong> Last block in sequence may be partially empty</li>
+</ul>
 <p>Despite these, benefits (2-4x throughput) far outweigh costs for LLM serving.</p>
 <hr />
 <hr />
