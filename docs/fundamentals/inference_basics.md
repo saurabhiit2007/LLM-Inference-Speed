@@ -71,6 +71,7 @@ Overhead = CUDA context, fragmentation (~10-20%)
 ```
 
 **Example: LLaMA-2-7B (FP16)**
+
 - Weights: 7B × 2 = 14 GB
 - KV cache (batch=1, seq=2048): ~1 GB
 - Activations: ~0.5-1 GB
@@ -90,6 +91,7 @@ Overhead = CUDA context, fragmentation (~10-20%)
 ---
 
 **Q: How does batch size affect inference?**
+
 - Prefill: Higher batch increases compute, remains compute-bound
 - Decode: Higher batch increases memory for KV cache, can become compute-bound with large batches
 - Sweet spot: Balance between throughput and latency

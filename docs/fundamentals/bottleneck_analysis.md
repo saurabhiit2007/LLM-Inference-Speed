@@ -3,16 +3,19 @@
 ### The Three Primary Bottlenecks
 
 **1. Compute-Bound**
+
 - GPU cores underutilized
 - Not enough arithmetic operations
 - Common in: Prefill phase, large batches
 
 **2. Memory-Bound**
+
 - GPU cores waiting for data
 - Memory bandwidth saturated
 - Common in: Decode phase, small batches
 
 **3. Overhead-Bound**
+
 - Framework/system overhead dominates
 - Kernel launch latency
 - Common in: Very small models, batch=1
@@ -81,6 +84,7 @@ Low Mem% (<40%) → Compute or overhead-bound
 ```bash
 ncu --set full -o profile python inference.py
 ```
+
 - Shows compute vs memory bottleneck per kernel
 - Identifies optimization opportunities
 

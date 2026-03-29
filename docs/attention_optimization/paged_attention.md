@@ -10,9 +10,10 @@ PagedAttention is a memory management technique for efficient LLM serving that s
 
 ## 2. The KV Cache Memory Problem
 
-### What is KV Cache?
+### 2.1 What is KV Cache?
 
 In autoregressive generation, transformers reuse Key and Value tensors from previous tokens:
+
 - Without cache: Recompute K, V for all previous tokens at each step (wasteful)
 - With cache: Store K, V tensors and only compute for new token
 
@@ -25,7 +26,7 @@ $$
 
 ---
 
-### Problems with Traditional KV Cache
+### 2.2 Problems with Traditional KV Cache
 
 #### Problem 1: Memory Fragmentation
 **Issue:** Must pre-allocate contiguous memory for maximum sequence length
@@ -71,6 +72,7 @@ Physical memory:  [Block 0] → [Block 5] → [Block 2] (non-contiguous)
 ```
 
 **Key properties:**
+
 - Block size: Typically 16-64 tokens
 - Blocks can be anywhere in physical memory
 - Mapping tracked via **block table** (like OS page table)
@@ -111,6 +113,7 @@ def generate_token(sequence):
 ```
 
 **Benefits:**
+
 - Only allocate what's actually used
 - No pre-allocation for max length
 - Memory freed immediately when sequence completes
@@ -131,6 +134,7 @@ Seq 2: [Block 0] → [Block 5: "Goodbye → "]
 ```
 
 When modifying a shared block → **copy-on-write**:
+
 1. Allocate new physical block
 2. Copy contents
 3. Update block table
@@ -195,6 +199,7 @@ def paged_attention(Q, block_table, K_blocks, V_blocks):
 
 ### Q2: How is PagedAttention similar to OS virtual memory?
 **Answer:** Both use paging:
+
 - **Virtual memory:** Maps virtual addresses to physical pages via page table
 - **PagedAttention:** Maps logical KV cache positions to physical blocks via block table
 
@@ -204,6 +209,7 @@ Both enable non-contiguous allocation, on-demand paging, and copy-on-write shari
 
 ### Q3: What's a typical block size and why?
 **Answer:** Typically **16-64 tokens**. Trade-offs:
+
 - **Too small:** High block table overhead, more lookups during attention
 - **Too large:** Internal fragmentation (wasted space within partially-filled blocks)
 - **Sweet spot:** 16-64 balances overhead vs. fragmentation (similar to OS page sizes like 4KB)
@@ -212,6 +218,7 @@ Both enable non-contiguous allocation, on-demand paging, and copy-on-write shari
 
 ### Q4: How does PagedAttention enable memory sharing?
 **Answer:** Multiple sequences can point to the same physical blocks (read-only). Common use cases:
+
 - **Shared prompts:** All sequences share blocks containing the same prompt
 - **Parallel sampling:** Multiple outputs from same prompt share prefix blocks
 - **Beam search:** Different beams share common prefix
@@ -222,6 +229,7 @@ When a shared block needs modification → **copy-on-write**: allocate new block
 
 ### Q5: What's the overhead of block table lookups?
 **Answer:** Minimal (<5% typically) because:
+
 - Block tables are small (fits in cache)
 - Lookups are simple integer indexing
 - Attention computation dominates (matrix ops on blocks)
@@ -233,6 +241,7 @@ The memory savings far outweigh this small overhead.
 
 ### Q6: How does PagedAttention improve throughput?
 **Answer:** By reducing memory waste:
+
 1. Traditional: Can fit 10 sequences (60% waste)
 2. PagedAttention: Can fit 25 sequences (10% waste) in same memory
 3. Bigger batches → better GPU utilization → higher throughput
@@ -243,6 +252,7 @@ Typical improvement: **2-4x** more requests/second.
 
 ### Q7: What happens when we run out of physical blocks?
 **Answer:** Memory management strategies:
+
 - **Preemption:** Evict lower-priority sequences, save their state
 - **Swapping:** Move blocks to CPU memory (like OS swap)
 - **Recomputation:** Drop blocks and recompute if needed
@@ -254,6 +264,7 @@ vLLM typically uses preemption for fairness and efficiency.
 
 ### Q8: Can PagedAttention work with FlashAttention?
 **Answer:** Yes! They're complementary:
+
 - **FlashAttention:** Optimizes attention computation (tiling, kernel fusion)
 - **PagedAttention:** Optimizes KV cache memory management (paging, sharing)
 
@@ -263,6 +274,7 @@ You can use both together: FlashAttention for fast computation, PagedAttention f
 
 ### Q9: What's the difference between block size and tile size?
 **Answer:**
+
 - **Block size (PagedAttention):** Memory management granularity (16-64 tokens)
   - Determines allocation unit for KV cache storage
 - **Tile size (FlashAttention):** Computation granularity (128-256 tokens)
@@ -274,6 +286,7 @@ They're independent concepts operating at different levels (memory management vs
 
 ### Q10: What are the limitations of PagedAttention?
 **Answer:**
+
 - **Complexity:** More complex implementation than contiguous allocation
 - **Indirection overhead:** Small cost from block table lookups
 - **GPU kernel changes:** Requires custom attention kernels that understand block tables
