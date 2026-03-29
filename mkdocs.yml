@@ -1,7 +1,7 @@
-site_name: Fine-Tuning Methods Documentation
-site_description: A technical reference for LoRA, QLoRA, and other fine-tuning techniques.
+site_name: LLM Inference Speedup
+site_description: A technical reference for improving the inference speed of LLMs.
 site_author: Saurabh Goyal
-repo_url: https://github.com/saurabhiit2007/LLM-Finetuning
+repo_url: https://github.com/saurabhiit2007/LLM-Inference-Speed
 theme:
   name: material
   features:

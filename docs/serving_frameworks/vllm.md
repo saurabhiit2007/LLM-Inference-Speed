@@ -1,20 +1,24 @@
 ## 1. Core Innovation: PagedAttention
 
-**Problem:** Traditional engines pre-allocate contiguous memory for max sequence length <br>
+**Problem:** Traditional engines pre-allocate contiguous memory for max sequence length
+
 - 60-80% GPU memory wasted on over-reservation
 - Internal fragmentation from unused allocated space
 
-**Solution:** Paged memory management for KV cache <br>
+**Solution:** Paged memory management for KV cache
+
 - KV cache split into fixed-size blocks (pages)
 - Non-contiguous physical memory mapped via block tables
 - Reduces waste to <4%, enables 2-3x larger batch sizes
 
-**Memory Formula:** <br>
+**Memory Formula:**
+
 ```
 KV Memory ≈ 2 × L × T × H × D_h × B
 ```
 
-For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token <br>
+For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
+
 - 2k tokens → ~1 GB
 - 8k tokens → ~4 GB
 
