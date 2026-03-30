@@ -1071,6 +1071,21 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answer-in-speculative-decoding-using-greedy-decoding-for-the-draft-model-is-not-inherently-wrong-the-rejection-sampling-step-mathematically-guarantees-the-target-models-distribution-is-preserved-regardless-of-how-the-draft-generates-tokens-the-real-concern-is-efficiency-when-the-target-model-samples-stochastically-temperature-0-a-greedy-draft-diverges-more-from-the-targets-distribution-leading-to-lower-acceptance-rates-and-reduced-speedup-if-the-target-itself-uses-greedy-decoding-then-using-greedy-for-the-draft-is-perfectly-fine-and-can-work-very-well-so-the-draft-models-decoding-strategy-is-essentially-a-performance-tuning-choice-greedy-hurts-acceptance-rates-only-when-the-target-is-sampling-not-a-correctness-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Answer: In speculative decoding, using greedy decoding for the draft model is not inherently wrong — the rejection sampling step mathematically guarantees the target model's distribution is preserved regardless of how the draft generates tokens. The real concern is efficiency: when the target model samples stochastically (temperature &gt; 0), a greedy draft diverges more from the target's distribution, leading to lower acceptance rates and reduced speedup. If the target itself uses greedy decoding, then using greedy for the draft is perfectly fine and can work very well. So the draft model's decoding strategy is essentially a performance tuning choice — greedy hurts acceptance rates only when the target is sampling, not a correctness issue.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answer: In speculative decoding, using greedy decoding for the draft model is not inherently wrong — the rejection sampling step mathematically guarantees the target model&#39;s distribution is preserved regardless of how the draft generates tokens. The real concern is efficiency: when the target model samples stochastically (temperature &gt; 0), a greedy draft diverges more from the target&#39;s distribution, leading to lower acceptance rates and reduced speedup. If the target itself uses greedy decoding, then using greedy for the draft is perfectly fine and can work very well. So the draft model&#39;s decoding strategy is essentially a performance tuning choice — greedy hurts acceptance rates only when the target is sampling, not a correctness issue.">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#q10-how-does-speculative-decoding-interact-with-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
@@ -1086,13 +1101,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-variants-and-extensions" class="md-nav__link">
+  <a href="#10-when-to-use-speculative-decoding" class="md-nav__link">
     <span class="md-ellipsis">
-      10. Variants and Extensions
+      10. When to Use Speculative Decoding
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="10. Variants and Extensions">
+    <nav class="md-nav" aria-label="10. When to Use Speculative Decoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Good Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-beneficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Less Beneficial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-variants-and-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Variants and Extensions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Variants and Extensions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1128,51 +1176,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-key-takeaways-for-interviews" class="md-nav__link">
+  <a href="#12-key-takeaways-for-interviews" class="md-nav__link">
     <span class="md-ellipsis">
-      11. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-when-to-use-speculative-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      12. When to Use Speculative Decoding
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="12. When to Use Speculative Decoding">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#good-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Good Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#less-beneficial" class="md-nav__link">
-    <span class="md-ellipsis">
-      ❌ Less Beneficial
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
+      12. Key Takeaways for Interviews
     </span>
   </a>
   
@@ -2038,6 +2044,21 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answer-in-speculative-decoding-using-greedy-decoding-for-the-draft-model-is-not-inherently-wrong-the-rejection-sampling-step-mathematically-guarantees-the-target-models-distribution-is-preserved-regardless-of-how-the-draft-generates-tokens-the-real-concern-is-efficiency-when-the-target-model-samples-stochastically-temperature-0-a-greedy-draft-diverges-more-from-the-targets-distribution-leading-to-lower-acceptance-rates-and-reduced-speedup-if-the-target-itself-uses-greedy-decoding-then-using-greedy-for-the-draft-is-perfectly-fine-and-can-work-very-well-so-the-draft-models-decoding-strategy-is-essentially-a-performance-tuning-choice-greedy-hurts-acceptance-rates-only-when-the-target-is-sampling-not-a-correctness-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Answer: In speculative decoding, using greedy decoding for the draft model is not inherently wrong — the rejection sampling step mathematically guarantees the target model's distribution is preserved regardless of how the draft generates tokens. The real concern is efficiency: when the target model samples stochastically (temperature &gt; 0), a greedy draft diverges more from the target's distribution, leading to lower acceptance rates and reduced speedup. If the target itself uses greedy decoding, then using greedy for the draft is perfectly fine and can work very well. So the draft model's decoding strategy is essentially a performance tuning choice — greedy hurts acceptance rates only when the target is sampling, not a correctness issue.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answer: In speculative decoding, using greedy decoding for the draft model is not inherently wrong — the rejection sampling step mathematically guarantees the target model&#39;s distribution is preserved regardless of how the draft generates tokens. The real concern is efficiency: when the target model samples stochastically (temperature &gt; 0), a greedy draft diverges more from the target&#39;s distribution, leading to lower acceptance rates and reduced speedup. If the target itself uses greedy decoding, then using greedy for the draft is perfectly fine and can work very well. So the draft model&#39;s decoding strategy is essentially a performance tuning choice — greedy hurts acceptance rates only when the target is sampling, not a correctness issue.">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#q10-how-does-speculative-decoding-interact-with-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
@@ -2053,13 +2074,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-variants-and-extensions" class="md-nav__link">
+  <a href="#10-when-to-use-speculative-decoding" class="md-nav__link">
     <span class="md-ellipsis">
-      10. Variants and Extensions
+      10. When to Use Speculative Decoding
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="10. Variants and Extensions">
+    <nav class="md-nav" aria-label="10. When to Use Speculative Decoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Good Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-beneficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Less Beneficial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-variants-and-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Variants and Extensions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Variants and Extensions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2095,51 +2149,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-key-takeaways-for-interviews" class="md-nav__link">
+  <a href="#12-key-takeaways-for-interviews" class="md-nav__link">
     <span class="md-ellipsis">
-      11. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-when-to-use-speculative-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      12. When to Use Speculative Decoding
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="12. When to Use Speculative Decoding">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#good-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Good Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#less-beneficial" class="md-nav__link">
-    <span class="md-ellipsis">
-      ❌ Less Beneficial
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
+      12. Key Takeaways for Interviews
     </span>
   </a>
   
@@ -2170,6 +2182,7 @@
 <p><strong>Key insight:</strong> Instead of 1 token per expensive model call, verify K tokens in one call by having a cheap model guess ahead.</p>
 <p><strong>Typical speedup:</strong> 2-3x latency reduction with no quality loss</p>
 <hr />
+<hr />
 <h2 id="2-the-problem-with-standard-decoding">2. The Problem with Standard Decoding<a class="headerlink" href="#2-the-problem-with-standard-decoding" title="Permanent link">&para;</a></h2>
 <h3 id="sequential-bottleneck">Sequential Bottleneck<a class="headerlink" href="#sequential-bottleneck" title="Permanent link">&para;</a></h3>
 <p>Autoregressive generation is inherently sequential:</p>
@@ -2182,12 +2195,15 @@ P(x_1, x_2, \dots, x_T) = \prod_{t=1}^{T} P(x_t \mid x_{&lt;t})
     <span class="n">next_token</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">logits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># Only use last position</span>
     <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_token</span><span class="p">)</span>         <span class="c1"># Generate 1 token</span>
 </code></pre></div></p>
-<p><strong>Problems:</strong>
-- Generate 1 token per forward pass
-- Model sits mostly idle (memory-bound, not compute-bound)
-- Latency grows linearly with output length
-- KV cache helps computation but doesn't break sequential dependency</p>
+<p><strong>Problems:</strong></p>
+<ul>
+<li>Generate 1 token per forward pass</li>
+<li>Model sits mostly idle (memory-bound, not compute-bound)</li>
+<li>Latency grows linearly with output length</li>
+<li>KV cache helps computation but doesn't break sequential dependency</li>
+</ul>
 <p><strong>Example:</strong> For 100 tokens, need 100 expensive forward passes of the large model.</p>
+<hr />
 <hr />
 <h2 id="3-how-speculative-decoding-works">3. How Speculative Decoding Works<a class="headerlink" href="#3-how-speculative-decoding-works" title="Permanent link">&para;</a></h2>
 <h3 id="core-idea">Core Idea<a class="headerlink" href="#core-idea" title="Permanent link">&para;</a></h3>
@@ -2209,6 +2225,7 @@ Accept? [Paris: ✓] [,: ✓] [which: ✓] [is: ✗]
 Output: &quot;The capital of France is Paris , which&quot;
 Continue from &quot;which&quot; (3 tokens in 1 target pass instead of 3!)
 </code></pre></div>
+<hr />
 <hr />
 <h2 id="4-step-by-step-algorithm">4. Step-by-Step Algorithm<a class="headerlink" href="#4-step-by-step-algorithm" title="Permanent link">&para;</a></h2>
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
@@ -2276,9 +2293,11 @@ p(y_i \mid x, y_{&lt;i}) \quad \text{for } i = 1, \dots, K
 </code></pre></div>
 <p><strong>Stop at first rejection</strong> (can't accept token 3 if token 2 was rejected).</p>
 <h3 id="step-4-handle-rejection">Step 4: Handle Rejection<a class="headerlink" href="#step-4-handle-rejection" title="Permanent link">&para;</a></h3>
-<p>If token <span class="arithmatex">\(j\)</span> is rejected:
-- Discard <span class="arithmatex">\(y_j, y_{j+1}, \dots, y_K\)</span>
-- Sample replacement from target model at position <span class="arithmatex">\(j\)</span>:</p>
+<p>If token <span class="arithmatex">\(j\)</span> is rejected:</p>
+<ul>
+<li>Discard <span class="arithmatex">\(y_j, y_{j+1}, \dots, y_K\)</span></li>
+<li>Sample replacement from target model at position <span class="arithmatex">\(j\)</span>:</li>
+</ul>
 <div class="arithmatex">\[
 x_{\text{next}} \sim p(\cdot \mid x, y_{&lt;j})
 \]</div>
@@ -2293,22 +2312,29 @@ x_{\text{next}} \sim p(\cdot \mid x, y_{&lt;j})
 </code></pre></div>
 <p>If all K tokens accepted, continue with next draft batch.</p>
 <hr />
+<hr />
 <h2 id="5-why-its-faster">5. Why It's Faster<a class="headerlink" href="#5-why-its-faster" title="Permanent link">&para;</a></h2>
 <h3 id="speedup-analysis">Speedup Analysis<a class="headerlink" href="#speedup-analysis" title="Permanent link">&para;</a></h3>
-<p><strong>Standard decoding for N tokens:</strong>
-- N forward passes of target model
-- Cost: <span class="arithmatex">\(N \times C_{\text{target}}\)</span></p>
-<p><strong>Speculative decoding:</strong>
-- Draft proposes K tokens: <span class="arithmatex">\(K \times C_{\text{draft}}\)</span> (cheap)
-- Target verifies in 1 pass: <span class="arithmatex">\(1 \times C_{\text{target}}\)</span>
-- If acceptance rate = <span class="arithmatex">\(\alpha\)</span>, generate <span class="arithmatex">\(\alpha \times K\)</span> tokens per cycle</p>
+<p><strong>Standard decoding for N tokens:</strong></p>
+<ul>
+<li>N forward passes of target model</li>
+<li>Cost: <span class="arithmatex">\(N \times C_{\text{target}}\)</span></li>
+</ul>
+<p><strong>Speculative decoding:</strong></p>
+<ul>
+<li>Draft proposes K tokens: <span class="arithmatex">\(K \times C_{\text{draft}}\)</span> (cheap)</li>
+<li>Target verifies in 1 pass: <span class="arithmatex">\(1 \times C_{\text{target}}\)</span></li>
+<li>If acceptance rate = <span class="arithmatex">\(\alpha\)</span>, generate <span class="arithmatex">\(\alpha \times K\)</span> tokens per cycle</li>
+</ul>
 <p><strong>Expected tokens per target call:</strong>
 $$
 E[\text{tokens}] = 1 + \sum_{i=1}^{K} \alpha^i \approx \frac{1 - \alpha^{K+1}}{1 - \alpha}
 $$</p>
-<p><strong>Example:</strong>
-- <span class="arithmatex">\(K=4\)</span>, <span class="arithmatex">\(\alpha=0.7\)</span> → ~2.4 tokens per target call
-- 2.4× speedup (vs 1 token per call in standard decoding)</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li><span class="arithmatex">\(K=4\)</span>, <span class="arithmatex">\(\alpha=0.7\)</span> → ~2.4 tokens per target call</li>
+<li>2.4× speedup (vs 1 token per call in standard decoding)</li>
+</ul>
 <h3 id="why-parallel-verification-works">Why Parallel Verification Works<a class="headerlink" href="#why-parallel-verification-works" title="Permanent link">&para;</a></h3>
 <p>Transformers compute logits for <strong>all positions</strong> in one pass:
 <div class="highlight"><pre><span></span><code>Input:  [&quot;The&quot;, &quot;cat&quot;, &quot;sat&quot;]
@@ -2319,6 +2345,7 @@ Output: [logits_0, logits_1, logits_2]
 <p>Standard decoding only uses <code>logits_2</code> (last position).<br />
 Speculative decoding uses <code>logits_0</code>, <code>logits_1</code>, <code>logits_2</code> to verify multiple tokens.</p>
 <p><strong>This is not new capability</strong>—it's how Transformers always work during training.</p>
+<hr />
 <hr />
 <h2 id="6-why-its-exact-not-approximate">6. Why It's Exact (Not Approximate)<a class="headerlink" href="#6-why-its-exact-not-approximate" title="Permanent link">&para;</a></h2>
 <h3 id="rejection-sampling-proof">Rejection Sampling Proof<a class="headerlink" href="#rejection-sampling-proof" title="Permanent link">&para;</a></h3>
@@ -2344,49 +2371,68 @@ Target assigns: p(&quot;London&quot;) = 0.3
 </code></pre></div>
 <p>Rejection corrects for draft model errors while maintaining exact target distribution.</p>
 <hr />
+<hr />
 <h2 id="7-practical-considerations">7. Practical Considerations<a class="headerlink" href="#7-practical-considerations" title="Permanent link">&para;</a></h2>
 <h3 id="draft-model-selection">Draft Model Selection<a class="headerlink" href="#draft-model-selection" title="Permanent link">&para;</a></h3>
-<p><strong>Options:</strong>
-1. <strong>Smaller version of target</strong> (e.g., 1B vs 70B parameters)
-2. <strong>Quantized target model</strong> (INT8 vs FP16)
-3. <strong>Distilled model</strong> trained to match target
-4. <strong>Early-exit from target</strong> (use intermediate layers)</p>
-<p><strong>Requirements:</strong>
-- Fast enough (≥10× faster than target)
-- Similar enough to target (high acceptance rate)</p>
+<p><strong>Options:</strong></p>
+<ol>
+<li><strong>Smaller version of target</strong> (e.g., 1B vs 70B parameters)</li>
+<li><strong>Quantized target model</strong> (INT8 vs FP16)</li>
+<li><strong>Distilled model</strong> trained to match target</li>
+<li><strong>Early-exit from target</strong> (use intermediate layers)</li>
+</ol>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Fast enough (≥10× faster than target)</li>
+<li>Similar enough to target (high acceptance rate)</li>
+</ul>
 <h3 id="draft-length-k">Draft Length K<a class="headerlink" href="#draft-length-k" title="Permanent link">&para;</a></h3>
-<p><strong>Trade-off:</strong>
-- <strong>Small K (2-4):</strong> Lower overhead, guaranteed speedup
-- <strong>Large K (8-16):</strong> Higher potential speedup, but more likely to reject</p>
-<p><strong>Optimal K depends on:</strong>
-- Acceptance rate (higher α → larger K beneficial)
-- Draft/target speed ratio
-- Memory constraints</p>
+<p><strong>Trade-off:</strong></p>
+<ul>
+<li><strong>Small K (2-4):</strong> Lower overhead, guaranteed speedup</li>
+<li><strong>Large K (8-16):</strong> Higher potential speedup, but more likely to reject</li>
+</ul>
+<p><strong>Optimal K depends on:</strong></p>
+<ul>
+<li>Acceptance rate (higher α → larger K beneficial)</li>
+<li>Draft/target speed ratio</li>
+<li>Memory constraints</li>
+</ul>
 <p><strong>Typical:</strong> K=4-5 works well in practice</p>
 <h3 id="acceptance-rate">Acceptance Rate<a class="headerlink" href="#acceptance-rate" title="Permanent link">&para;</a></h3>
-<p><strong>Factors affecting α:</strong>
-- Draft-target model similarity
-- Task complexity (simple text → higher α)
-- Prompt context (more context → better draft predictions)</p>
-<p><strong>Typical rates:</strong>
-- Good draft: α=0.7-0.9
-- Poor draft: α=0.3-0.5</p>
+<p><strong>Factors affecting α:</strong></p>
+<ul>
+<li>Draft-target model similarity</li>
+<li>Task complexity (simple text → higher α)</li>
+<li>Prompt context (more context → better draft predictions)</li>
+</ul>
+<p><strong>Typical rates:</strong></p>
+<ul>
+<li>Good draft: α=0.7-0.9</li>
+<li>Poor draft: α=0.3-0.5</li>
+</ul>
 <p><strong>Below α≈0.3:</strong> Speculative decoding may be slower than standard (overhead dominates).</p>
+<hr />
 <hr />
 <h2 id="8-interaction-with-kv-cache">8. Interaction with KV Cache<a class="headerlink" href="#8-interaction-with-kv-cache" title="Permanent link">&para;</a></h2>
 <h3 id="kv-cache-in-both-models">KV Cache in Both Models<a class="headerlink" href="#kv-cache-in-both-models" title="Permanent link">&para;</a></h3>
-<p><strong>Draft model:</strong>
-- Maintains its own KV cache
-- Generates K tokens autoregressively (K cache updates)</p>
-<p><strong>Target model:</strong>
-- Computes KV cache for entire draft window in one pass
-- Accepted tokens' KV states are kept
-- Rejected tokens' KV states are discarded</p>
+<p><strong>Draft model:</strong></p>
+<ul>
+<li>Maintains its own KV cache</li>
+<li>Generates K tokens autoregressively (K cache updates)</li>
+</ul>
+<p><strong>Target model:</strong></p>
+<ul>
+<li>Computes KV cache for entire draft window in one pass</li>
+<li>Accepted tokens' KV states are kept</li>
+<li>Rejected tokens' KV states are discarded</li>
+</ul>
 <h3 id="memory-considerations">Memory Considerations<a class="headerlink" href="#memory-considerations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>Standard decoding: 1 model&#39;s KV cache
 Speculative decoding: 2 models&#39; KV cache (draft + target)
 </code></pre></div>
 <p><strong>Memory cost:</strong> Minimal—draft model is small, so its cache is negligible.</p>
+<hr />
 <hr />
 <h2 id="9-interview-questions">9. Interview Questions<a class="headerlink" href="#9-interview-questions" title="Permanent link">&para;</a></h2>
 <h3 id="q1-what-is-speculative-decoding-and-why-is-it-faster">Q1: What is speculative decoding and why is it faster?<a class="headerlink" href="#q1-what-is-speculative-decoding-and-why-is-it-faster" title="Permanent link">&para;</a></h3>
@@ -2402,39 +2448,64 @@ Speculative decoding: 2 models&#39; KV cache (draft + target)
 <p><strong>Answer:</strong> Transformers naturally compute logits for <strong>all token positions</strong> in a forward pass, not just the last one. Given input [x, y₁, y₂, y₃], the model outputs logits for positions 0, 1, 2, 3. Standard decoding only uses the last position. Speculative decoding uses all positions to compute p(y₁|x), p(y₂|x,y₁), p(y₃|x,y₁,y₂) and compare them with the draft probabilities. This is how Transformers work during training—speculative decoding just reuses this during inference.</p>
 <hr />
 <h3 id="q5-what-happens-when-a-draft-token-is-rejected">Q5: What happens when a draft token is rejected?<a class="headerlink" href="#q5-what-happens-when-a-draft-token-is-rejected" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Stop immediately at the first rejection:
-1. Discard the rejected token and all subsequent draft tokens
-2. Sample a replacement token from the target model at that position
-3. Restart speculation from the new sequence</p>
+<p><strong>Answer:</strong> Stop immediately at the first rejection:</p>
+<ol>
+<li>Discard the rejected token and all subsequent draft tokens</li>
+<li>Sample a replacement token from the target model at that position</li>
+<li>Restart speculation from the new sequence</li>
+</ol>
 <p>For example, if tokens 1,2 are accepted but token 3 is rejected, keep 1,2, sample a new token 3 from target, discard draft tokens 4,5,...,K. This maintains causality and correctness.</p>
 <hr />
 <h3 id="q6-what-determines-the-acceptance-rate">Q6: What determines the acceptance rate?<a class="headerlink" href="#q6-what-determines-the-acceptance-rate" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> How well the draft model matches the target model's distribution:
-- <strong>High similarity</strong> (e.g., quantized version) → α=0.8-0.9 → 2-3× speedup
-- <strong>Moderate similarity</strong> (e.g., smaller architecture) → α=0.5-0.7 → 1.5-2× speedup
-- <strong>Low similarity</strong> → α&lt;0.3 → overhead dominates, possibly slower</p>
+<p><strong>Answer:</strong> How well the draft model matches the target model's distribution:</p>
+<ul>
+<li><strong>High similarity</strong> (e.g., quantized version) → α=0.8-0.9 → 2-3× speedup</li>
+<li><strong>Moderate similarity</strong> (e.g., smaller architecture) → α=0.5-0.7 → 1.5-2× speedup</li>
+<li><strong>Low similarity</strong> → α&lt;0.3 → overhead dominates, possibly slower</li>
+</ul>
 <p>Also affected by task (simple text has higher α) and context (more prompt context helps draft predict better).</p>
 <hr />
 <h3 id="q7-how-do-you-choose-the-draft-length-k">Q7: How do you choose the draft length K?<a class="headerlink" href="#q7-how-do-you-choose-the-draft-length-k" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Trade-off between potential speedup and overhead:
-- <strong>Higher acceptance rate α</strong> → can use larger K (more tokens likely accepted)
-- <strong>Lower α</strong> → use smaller K (avoid wasting computation on rejections)
-- <strong>Typical:</strong> K=4-5 works well across scenarios</p>
+<p><strong>Answer:</strong> Trade-off between potential speedup and overhead:</p>
+<ul>
+<li><strong>Higher acceptance rate α</strong> → can use larger K (more tokens likely accepted)</li>
+<li><strong>Lower α</strong> → use smaller K (avoid wasting computation on rejections)</li>
+<li><strong>Typical:</strong> K=4-5 works well across scenarios</li>
+</ul>
 <p>Formula: Expected tokens per cycle ≈ (1-α^(K+1))/(1-α). Diminishing returns beyond K=5-8 for most acceptance rates.</p>
 <hr />
 <h3 id="q8-does-speculative-decoding-reduce-total-flops">Q8: Does speculative decoding reduce total FLOPs?<a class="headerlink" href="#q8-does-speculative-decoding-reduce-total-flops" title="Permanent link">&para;</a></h3>
 <p><strong>Answer:</strong> No, it <strong>increases</strong> total FLOPs slightly (due to draft model overhead and potential rejections). The speedup comes from <strong>reducing latency</strong>—fewer sequential calls to the expensive target model. It's memory-bound optimization: better GPU utilization by verifying multiple tokens in parallel rather than one at a time. Wall-clock time decreases even though total compute increases.</p>
 <hr />
 <h3 id="q9-can-you-use-greedy-decoding-for-the-draft-model">Q9: Can you use greedy decoding for the draft model?<a class="headerlink" href="#q9-can-you-use-greedy-decoding-for-the-draft-model" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> No, you must <strong>sample</strong> from the draft model and record probabilities q(y_i). The rejection sampling formula requires q(y_i) to compute α = min(1, p(y_i)/q(y_i)). Greedy decoding doesn't provide a probability distribution over sampled tokens—it just picks argmax. Sampling is essential for the mathematical correctness guarantee.</p>
-<hr />
+<h2 id="answer-in-speculative-decoding-using-greedy-decoding-for-the-draft-model-is-not-inherently-wrong-the-rejection-sampling-step-mathematically-guarantees-the-target-models-distribution-is-preserved-regardless-of-how-the-draft-generates-tokens-the-real-concern-is-efficiency-when-the-target-model-samples-stochastically-temperature-0-a-greedy-draft-diverges-more-from-the-targets-distribution-leading-to-lower-acceptance-rates-and-reduced-speedup-if-the-target-itself-uses-greedy-decoding-then-using-greedy-for-the-draft-is-perfectly-fine-and-can-work-very-well-so-the-draft-models-decoding-strategy-is-essentially-a-performance-tuning-choice-greedy-hurts-acceptance-rates-only-when-the-target-is-sampling-not-a-correctness-issue"><strong>Answer:</strong> In speculative decoding, using greedy decoding for the draft model is not inherently wrong — the rejection sampling step mathematically guarantees the target model's distribution is preserved regardless of how the draft generates tokens. The real concern is efficiency: when the target model samples stochastically (temperature &gt; 0), a greedy draft diverges more from the target's distribution, leading to lower acceptance rates and reduced speedup. If the target itself uses greedy decoding, then using greedy for the draft is perfectly fine and can work very well. So the draft model's decoding strategy is essentially a performance tuning choice — greedy hurts acceptance rates only when the target is sampling, not a correctness issue.<a class="headerlink" href="#answer-in-speculative-decoding-using-greedy-decoding-for-the-draft-model-is-not-inherently-wrong-the-rejection-sampling-step-mathematically-guarantees-the-target-models-distribution-is-preserved-regardless-of-how-the-draft-generates-tokens-the-real-concern-is-efficiency-when-the-target-model-samples-stochastically-temperature-0-a-greedy-draft-diverges-more-from-the-targets-distribution-leading-to-lower-acceptance-rates-and-reduced-speedup-if-the-target-itself-uses-greedy-decoding-then-using-greedy-for-the-draft-is-perfectly-fine-and-can-work-very-well-so-the-draft-models-decoding-strategy-is-essentially-a-performance-tuning-choice-greedy-hurts-acceptance-rates-only-when-the-target-is-sampling-not-a-correctness-issue" title="Permanent link">&para;</a></h2>
 <h3 id="q10-how-does-speculative-decoding-interact-with-kv-cache">Q10: How does speculative decoding interact with KV cache?<a class="headerlink" href="#q10-how-does-speculative-decoding-interact-with-kv-cache" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Both models use KV cache:
-- <strong>Draft model:</strong> Maintains its own cache, generates K tokens autoregressively
-- <strong>Target model:</strong> Computes cache for entire draft window in one pass; keeps cache for accepted tokens, discards for rejected ones</p>
+<p><strong>Answer:</strong> Both models use KV cache:</p>
+<ul>
+<li><strong>Draft model:</strong> Maintains its own cache, generates K tokens autoregressively</li>
+<li><strong>Target model:</strong> Computes cache for entire draft window in one pass; keeps cache for accepted tokens, discards for rejected ones</li>
+</ul>
 <p>Memory overhead is minimal since the draft model is small. KV cache improves efficiency (avoids recomputing attention) but doesn't change the algorithm—it's an orthogonal optimization.</p>
 <hr />
-<h2 id="10-variants-and-extensions">10. Variants and Extensions<a class="headerlink" href="#10-variants-and-extensions" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="10-when-to-use-speculative-decoding">10. When to Use Speculative Decoding<a class="headerlink" href="#10-when-to-use-speculative-decoding" title="Permanent link">&para;</a></h2>
+<h3 id="good-use-cases">✅ Good Use Cases<a class="headerlink" href="#good-use-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Latency-critical serving</strong> (chatbots, real-time applications)</li>
+<li><strong>Long-form generation</strong> (more tokens → more opportunities for speedup)</li>
+<li><strong>Good draft model available</strong> (smaller version, quantized, distilled)</li>
+<li><strong>Inference-bound workloads</strong> (not training)</li>
+</ul>
+<h3 id="less-beneficial">❌ Less Beneficial<a class="headerlink" href="#less-beneficial" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Batch inference</strong> (already parallelized across sequences)</li>
+<li><strong>Very short outputs</strong> (overhead not amortized)</li>
+<li><strong>No suitable draft model</strong> (acceptance rate too low)</li>
+<li><strong>Memory-constrained systems</strong> (need to load 2 models)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="11-variants-and-extensions">11. Variants and Extensions<a class="headerlink" href="#11-variants-and-extensions" title="Permanent link">&para;</a></h2>
 <h3 id="medusa-multi-head-speculation">Medusa / Multi-Head Speculation<a class="headerlink" href="#medusa-multi-head-speculation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add multiple prediction heads to draft model</li>
@@ -2454,7 +2525,7 @@ Speculative decoding: 2 models&#39; KV cache (draft + target)
 <li>Can achieve higher acceptance rates</li>
 </ul>
 <hr />
-<h2 id="11-key-takeaways-for-interviews">11. Key Takeaways for Interviews<a class="headerlink" href="#11-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
+<h2 id="12-key-takeaways-for-interviews">12. Key Takeaways for Interviews<a class="headerlink" href="#12-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Main idea:</strong> Draft model proposes K tokens, target verifies all in one pass</li>
 <li><strong>Speedup source:</strong> Multiple tokens per expensive model call (not reduced FLOPs)</li>
@@ -2466,28 +2537,6 @@ Speculative decoding: 2 models&#39; KV cache (draft + target)
 <li><strong>Memory:</strong> Minimal overhead (draft model is small)</li>
 </ol>
 <hr />
-<h2 id="12-when-to-use-speculative-decoding">12. When to Use Speculative Decoding<a class="headerlink" href="#12-when-to-use-speculative-decoding" title="Permanent link">&para;</a></h2>
-<h3 id="good-use-cases">✅ Good Use Cases<a class="headerlink" href="#good-use-cases" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Latency-critical serving</strong> (chatbots, real-time applications)</li>
-<li><strong>Long-form generation</strong> (more tokens → more opportunities for speedup)</li>
-<li><strong>Good draft model available</strong> (smaller version, quantized, distilled)</li>
-<li><strong>Inference-bound workloads</strong> (not training)</li>
-</ul>
-<h3 id="less-beneficial">❌ Less Beneficial<a class="headerlink" href="#less-beneficial" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Batch inference</strong> (already parallelized across sequences)</li>
-<li><strong>Very short outputs</strong> (overhead not amortized)</li>
-<li><strong>No suitable draft model</strong> (acceptance rate too low)</li>
-<li><strong>Memory-constrained systems</strong> (need to load 2 models)</li>
-</ul>
-<hr />
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://arxiv.org/abs/2211.17192">Fast Inference from Transformers via Speculative Decoding</a> - Original paper</li>
-<li><a href="https://arxiv.org/abs/2302.01318">Accelerating Large Language Model Decoding with Speculative Sampling</a> - DeepMind's version</li>
-<li><a href="https://arxiv.org/abs/2401.10774">Medusa: Simple LLM Inference Acceleration with Multiple Decoding Heads</a></li>
-</ul>
 
 
 
