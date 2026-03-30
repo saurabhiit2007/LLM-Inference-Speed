@@ -8,6 +8,8 @@ Greedy decoding selects the token with the **highest probability** at each step 
 
 ---
 
+---
+
 ## 2. How It Works
 
 ### Algorithm
@@ -40,6 +42,8 @@ Given probability distribution after "The cat sat on the":
 
 ---
 
+---
+
 ## 3. Key Characteristics
 
 ### Deterministic
@@ -69,6 +73,8 @@ Better: "I think the best..." (score: 0.4 × 0.7 = 0.28)
 ```
 
 Greedy can't recover from early suboptimal choices.
+
+---
 
 ---
 
@@ -107,40 +113,50 @@ Once the wrong token is chosen, subsequent tokens try to justify it.
 
 ---
 
+---
+
 ## 5. When to Use Greedy Decoding
 
 ### ✅ Good Use Cases
 
 **Deterministic tasks:**
+
 - Math problem solving
 - Code generation (when exact output matters)
 - Factual Q&A with clear answers
 - Translation of standardized text
 
 **Debugging:**
+
 - Baseline comparisons
 - Reproducible testing
 - Fastest inference for quick experiments
 
 **Confident models:**
+
 - When model probability distributions are very peaked
 - Single obvious correct answer
 
 ### ❌ Poor Use Cases
 
 **Creative tasks:**
+
 - Story writing
 - Poetry generation
 - Brainstorming
 
 **Conversational AI:**
+
 - Chatbots
 - Dialogue systems
 - Personality-driven responses
 
 **Long-form generation:**
+
 - Articles, essays
 - Open-ended content
+
+---
 
 ---
 
@@ -166,6 +182,8 @@ Useful when comparing sequences of different lengths (not during decoding itself
 
 ---
 
+---
+
 ## 7. Interview Questions
 
 ### Q1: What is greedy decoding and how does it work?
@@ -185,6 +203,7 @@ Useful when comparing sequences of different lengths (not during decoding itself
 
 ### Q4: How does greedy decoding differ from beam search?
 **Answer:**
+
 - **Greedy:** Keeps only 1 hypothesis (best token at each step)
 - **Beam search:** Keeps K hypotheses (top-K sequences), explores multiple paths
 
@@ -204,6 +223,7 @@ Beam search can recover from locally suboptimal choices by considering alternati
 
 ### Q7: How can you reduce repetition in greedy decoding?
 **Answer:** Common techniques:
+
 1. **Repetition penalty:** Divide logits of previously generated tokens by penalty factor (e.g., 1.2)
 2. **N-gram blocking:** Prevent repeating same N-grams
 3. **Switch to sampling:** Use temperature/top-p for diversity
@@ -213,6 +233,7 @@ Beam search can recover from locally suboptimal choices by considering alternati
 
 ### Q8: What's the computational cost of greedy decoding?
 **Answer:** Very efficient:
+
 - **Per step:** O(V) to find argmax over vocabulary
 - **Total:** O(T × V) for T tokens
 - **Memory:** O(1) for decoding state
@@ -222,6 +243,7 @@ Beam search can recover from locally suboptimal choices by considering alternati
 
 ### Q9: When would you prefer greedy over beam search?
 **Answer:**
+
 - **Latency-critical applications** (greedy is much faster)
 - **Deterministic outputs required** (reproducibility)
 - **Single clear answer** (factual Q&A, simple math)
@@ -236,6 +258,8 @@ Beam search is overkill when diversity isn't needed and the model is confident.
 
 ---
 
+---
+
 ## 8. Comparison with Other Methods
 
 | Aspect | Greedy | Beam Search | Sampling |
@@ -246,6 +270,8 @@ Beam search is overkill when diversity isn't needed and the model is confident.
 | **Repetition** | High risk | Medium risk | Low risk |
 | **Quality** | Variable | Higher | Variable |
 | **Memory** | Minimal | O(K × T) | Minimal |
+
+---
 
 ---
 
@@ -292,6 +318,8 @@ def greedy_decode(model, input_ids, max_length=50):
 
 ---
 
+---
+
 ## 10. Key Takeaways for Interviews
 
 1. **Definition:** Always picks the highest probability token at each step
@@ -304,7 +332,4 @@ def greedy_decode(model, input_ids, max_length=50):
 
 ---
 
-## References
-
-- [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751) - Discusses repetition issues
-- [Hugging Face: Generation Strategies](https://huggingface.co/docs/transformers/generation_strategies)
+---
