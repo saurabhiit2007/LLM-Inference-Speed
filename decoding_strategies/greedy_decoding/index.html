@@ -959,15 +959,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1854,15 +1845,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1886,6 +1868,7 @@
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
 <p>Greedy decoding selects the token with the <strong>highest probability</strong> at each step during autoregressive text generation. It's the simplest and fastest decoding strategy but lacks diversity.</p>
 <p><strong>Key insight:</strong> Local optimization (best token at each step) doesn't guarantee global optimality (best overall sequence).</p>
+<hr />
 <hr />
 <h2 id="2-how-it-works">2. How It Works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
 <h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
@@ -1930,6 +1913,7 @@
 <p><strong>Greedy choice:</strong> <code>mat</code> (highest probability)</p>
 <p><strong>Output:</strong> "The cat sat on the mat"</p>
 <hr />
+<hr />
 <h2 id="3-key-characteristics">3. Key Characteristics<a class="headerlink" href="#3-key-characteristics" title="Permanent link">&para;</a></h2>
 <h3 id="deterministic">Deterministic<a class="headerlink" href="#deterministic" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1957,6 +1941,7 @@ Better: &quot;I think the best...&quot; (score: 0.4 × 0.7 = 0.28)
 </code></pre></div>
 <p>Greedy can't recover from early suboptimal choices.</p>
 <hr />
+<hr />
 <h2 id="4-common-problems">4. Common Problems<a class="headerlink" href="#4-common-problems" title="Permanent link">&para;</a></h2>
 <h3 id="problem-1-repetition-loops">Problem 1: Repetition Loops<a class="headerlink" href="#problem-1-repetition-loops" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>Prompt: &quot;To be or not to&quot;
@@ -1978,32 +1963,46 @@ Output: &quot;Lyon, which is known for...&quot;
 </code></pre></div>
 <p>Once the wrong token is chosen, subsequent tokens try to justify it.</p>
 <hr />
+<hr />
 <h2 id="5-when-to-use-greedy-decoding">5. When to Use Greedy Decoding<a class="headerlink" href="#5-when-to-use-greedy-decoding" title="Permanent link">&para;</a></h2>
 <h3 id="good-use-cases">✅ Good Use Cases<a class="headerlink" href="#good-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Deterministic tasks:</strong>
-- Math problem solving
-- Code generation (when exact output matters)
-- Factual Q&amp;A with clear answers
-- Translation of standardized text</p>
-<p><strong>Debugging:</strong>
-- Baseline comparisons
-- Reproducible testing
-- Fastest inference for quick experiments</p>
-<p><strong>Confident models:</strong>
-- When model probability distributions are very peaked
-- Single obvious correct answer</p>
+<p><strong>Deterministic tasks:</strong></p>
+<ul>
+<li>Math problem solving</li>
+<li>Code generation (when exact output matters)</li>
+<li>Factual Q&amp;A with clear answers</li>
+<li>Translation of standardized text</li>
+</ul>
+<p><strong>Debugging:</strong></p>
+<ul>
+<li>Baseline comparisons</li>
+<li>Reproducible testing</li>
+<li>Fastest inference for quick experiments</li>
+</ul>
+<p><strong>Confident models:</strong></p>
+<ul>
+<li>When model probability distributions are very peaked</li>
+<li>Single obvious correct answer</li>
+</ul>
 <h3 id="poor-use-cases">❌ Poor Use Cases<a class="headerlink" href="#poor-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Creative tasks:</strong>
-- Story writing
-- Poetry generation
-- Brainstorming</p>
-<p><strong>Conversational AI:</strong>
-- Chatbots
-- Dialogue systems
-- Personality-driven responses</p>
-<p><strong>Long-form generation:</strong>
-- Articles, essays
-- Open-ended content</p>
+<p><strong>Creative tasks:</strong></p>
+<ul>
+<li>Story writing</li>
+<li>Poetry generation</li>
+<li>Brainstorming</li>
+</ul>
+<p><strong>Conversational AI:</strong></p>
+<ul>
+<li>Chatbots</li>
+<li>Dialogue systems</li>
+<li>Personality-driven responses</li>
+</ul>
+<p><strong>Long-form generation:</strong></p>
+<ul>
+<li>Articles, essays</li>
+<li>Open-ended content</li>
+</ul>
+<hr />
 <hr />
 <h2 id="6-practical-considerations">6. Practical Considerations<a class="headerlink" href="#6-practical-considerations" title="Permanent link">&para;</a></h2>
 <h3 id="computational-complexity">Computational Complexity<a class="headerlink" href="#computational-complexity" title="Permanent link">&para;</a></h3>
@@ -2022,6 +2021,7 @@ Output: &quot;Lyon, which is known for...&quot;
 <p><strong>Greedy + length normalization:</strong>
 Useful when comparing sequences of different lengths (not during decoding itself).</p>
 <hr />
+<hr />
 <h2 id="7-interview-questions">7. Interview Questions<a class="headerlink" href="#7-interview-questions" title="Permanent link">&para;</a></h2>
 <h3 id="q1-what-is-greedy-decoding-and-how-does-it-work">Q1: What is greedy decoding and how does it work?<a class="headerlink" href="#q1-what-is-greedy-decoding-and-how-does-it-work" title="Permanent link">&para;</a></h3>
 <p><strong>Answer:</strong> Greedy decoding selects the token with the highest probability at each generation step. It's deterministic and fast but locally optimal—it picks the best next token without considering whether this leads to the best overall sequence.</p>
@@ -2033,9 +2033,11 @@ Useful when comparing sequences of different lengths (not during decoding itself
 <p><strong>Answer:</strong> <strong>Lack of diversity and repetition.</strong> Greedy often produces repetitive, generic text because it can't explore alternative paths. Once it makes a suboptimal choice, it can't backtrack, leading to error propagation and repetitive loops.</p>
 <hr />
 <h3 id="q4-how-does-greedy-decoding-differ-from-beam-search">Q4: How does greedy decoding differ from beam search?<a class="headerlink" href="#q4-how-does-greedy-decoding-differ-from-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>Greedy:</strong> Keeps only 1 hypothesis (best token at each step)
-- <strong>Beam search:</strong> Keeps K hypotheses (top-K sequences), explores multiple paths</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Greedy:</strong> Keeps only 1 hypothesis (best token at each step)</li>
+<li><strong>Beam search:</strong> Keeps K hypotheses (top-K sequences), explores multiple paths</li>
+</ul>
 <p>Beam search can recover from locally suboptimal choices by considering alternative sequences. Greedy cannot.</p>
 <hr />
 <h3 id="q5-can-greedy-decoding-produce-the-optimal-sequence">Q5: Can greedy decoding produce the optimal sequence?<a class="headerlink" href="#q5-can-greedy-decoding-produce-the-optimal-sequence" title="Permanent link">&para;</a></h3>
@@ -2045,29 +2047,36 @@ Useful when comparing sequences of different lengths (not during decoding itself
 <p><strong>Answer:</strong> If a token or phrase has slightly higher probability than alternatives, greedy will keep selecting it. For example, in "to be or not to be or not to be...", if "be" consistently has a small probability advantage, the model gets stuck in a loop with no mechanism to escape.</p>
 <hr />
 <h3 id="q7-how-can-you-reduce-repetition-in-greedy-decoding">Q7: How can you reduce repetition in greedy decoding?<a class="headerlink" href="#q7-how-can-you-reduce-repetition-in-greedy-decoding" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Common techniques:
-1. <strong>Repetition penalty:</strong> Divide logits of previously generated tokens by penalty factor (e.g., 1.2)
-2. <strong>N-gram blocking:</strong> Prevent repeating same N-grams
-3. <strong>Switch to sampling:</strong> Use temperature/top-p for diversity
-4. <strong>Beam search:</strong> Explore multiple paths to avoid local minima</p>
+<p><strong>Answer:</strong> Common techniques:</p>
+<ol>
+<li><strong>Repetition penalty:</strong> Divide logits of previously generated tokens by penalty factor (e.g., 1.2)</li>
+<li><strong>N-gram blocking:</strong> Prevent repeating same N-grams</li>
+<li><strong>Switch to sampling:</strong> Use temperature/top-p for diversity</li>
+<li><strong>Beam search:</strong> Explore multiple paths to avoid local minima</li>
+</ol>
 <hr />
 <h3 id="q8-whats-the-computational-cost-of-greedy-decoding">Q8: What's the computational cost of greedy decoding?<a class="headerlink" href="#q8-whats-the-computational-cost-of-greedy-decoding" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Very efficient:
-- <strong>Per step:</strong> O(V) to find argmax over vocabulary
-- <strong>Total:</strong> O(T × V) for T tokens
-- <strong>Memory:</strong> O(1) for decoding state
-- <strong>Fastest</strong> decoding strategy, no beam/sample storage overhead</p>
+<p><strong>Answer:</strong> Very efficient:</p>
+<ul>
+<li><strong>Per step:</strong> O(V) to find argmax over vocabulary</li>
+<li><strong>Total:</strong> O(T × V) for T tokens</li>
+<li><strong>Memory:</strong> O(1) for decoding state</li>
+<li><strong>Fastest</strong> decoding strategy, no beam/sample storage overhead</li>
+</ul>
 <hr />
 <h3 id="q9-when-would-you-prefer-greedy-over-beam-search">Q9: When would you prefer greedy over beam search?<a class="headerlink" href="#q9-when-would-you-prefer-greedy-over-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>Latency-critical applications</strong> (greedy is much faster)
-- <strong>Deterministic outputs required</strong> (reproducibility)
-- <strong>Single clear answer</strong> (factual Q&amp;A, simple math)
-- <strong>Resource-constrained environments</strong> (minimal memory)</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Latency-critical applications</strong> (greedy is much faster)</li>
+<li><strong>Deterministic outputs required</strong> (reproducibility)</li>
+<li><strong>Single clear answer</strong> (factual Q&amp;A, simple math)</li>
+<li><strong>Resource-constrained environments</strong> (minimal memory)</li>
+</ul>
 <p>Beam search is overkill when diversity isn't needed and the model is confident.</p>
 <hr />
 <h3 id="q10-how-does-greedy-decoding-interact-with-temperature">Q10: How does greedy decoding interact with temperature?<a class="headerlink" href="#q10-how-does-greedy-decoding-interact-with-temperature" title="Permanent link">&para;</a></h3>
 <p><strong>Answer:</strong> Greedy decoding <strong>ignores temperature</strong> because it always picks argmax. Temperature only affects sampling-based methods. You can think of greedy as temperature → 0 (infinitely peaked distribution where highest probability → 1.0, others → 0).</p>
+<hr />
 <hr />
 <h2 id="8-comparison-with-other-methods">8. Comparison with Other Methods<a class="headerlink" href="#8-comparison-with-other-methods" title="Permanent link">&para;</a></h2>
 <table>
@@ -2119,6 +2128,7 @@ Useful when comparing sequences of different lengths (not during decoding itself
 </tbody>
 </table>
 <hr />
+<hr />
 <h2 id="9-code-example">9. Code Example<a class="headerlink" href="#9-code-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -2158,6 +2168,7 @@ Useful when comparing sequences of different lengths (not during decoding itself
 <span class="c1"># output = greedy_decode(model, prompt_tokens, max_length=100)</span>
 </code></pre></div>
 <hr />
+<hr />
 <h2 id="10-key-takeaways-for-interviews">10. Key Takeaways for Interviews<a class="headerlink" href="#10-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Definition:</strong> Always picks the highest probability token at each step</li>
@@ -2169,11 +2180,7 @@ Useful when comparing sequences of different lengths (not during decoding itself
 <li><strong>Complexity:</strong> O(T × V) time, O(1) space for decoding</li>
 </ol>
 <hr />
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://arxiv.org/abs/1904.09751">The Curious Case of Neural Text Degeneration</a> - Discusses repetition issues</li>
-<li><a href="https://huggingface.co/docs/transformers/generation_strategies">Hugging Face: Generation Strategies</a></li>
-</ul>
+<hr />
 
 
 
