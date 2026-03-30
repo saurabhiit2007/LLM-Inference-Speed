@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sampling-methods-interview-prep-guide" class="md-skip">
+        <a href="#sampling-methods" class="md-skip">
           Skip to content
         </a>
       
@@ -1060,69 +1060,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-practical-guidelines" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Practical Guidelines
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9. Practical Guidelines">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-most-applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Most Applications
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-creative-writing" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Creative Writing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-factual-qa" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Factual Q&amp;A
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-code-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Code Generation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
     <span class="md-ellipsis">
       10. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
     </span>
   </a>
   
@@ -2023,69 +1963,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-practical-guidelines" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Practical Guidelines
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9. Practical Guidelines">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-most-applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Most Applications
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-creative-writing" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Creative Writing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-factual-qa" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Factual Q&amp;A
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-code-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Code Generation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
     <span class="md-ellipsis">
       10. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
     </span>
   </a>
   
@@ -2110,25 +1990,34 @@
   
 
 
-<h1 id="sampling-methods-interview-prep-guide">Sampling Methods - Interview Prep Guide<a class="headerlink" href="#sampling-methods-interview-prep-guide" title="Permanent link">&para;</a></h1>
+<h1 id="sampling-methods">Sampling Methods<a class="headerlink" href="#sampling-methods" title="Permanent link">&para;</a></h1>
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
 <p>Sampling methods introduce <strong>controlled randomness</strong> into text generation by probabilistically selecting tokens rather than deterministically choosing the highest-probability token. This enables diverse, creative outputs while maintaining coherence.</p>
 <p><strong>Key insight:</strong> The best sequence isn't always the highest-probability one—controlled randomness can produce more natural, interesting text.</p>
-<p><strong>Three main techniques:</strong>
-1. <strong>Temperature sampling</strong> - Controls randomness via scaling
-2. <strong>Top-k sampling</strong> - Samples from top K tokens
-3. <strong>Top-p sampling (nucleus)</strong> - Samples from smallest set with cumulative probability ≥ p</p>
+<p><strong>Three main techniques:</strong></p>
+<ol>
+<li><strong>Temperature sampling</strong> - Controls randomness via scaling</li>
+<li><strong>Top-k sampling</strong> - Samples from top K tokens</li>
+<li><strong>Top-p sampling (nucleus)</strong> - Samples from smallest set with cumulative probability ≥ p</li>
+</ol>
+<hr />
 <hr />
 <h2 id="2-temperature-sampling">2. Temperature Sampling<a class="headerlink" href="#2-temperature-sampling" title="Permanent link">&para;</a></h2>
 <h3 id="21-how-it-works">2.1 How It Works<a class="headerlink" href="#21-how-it-works" title="Permanent link">&para;</a></h3>
 <p>Temperature scales logits before applying softmax, controlling distribution "sharpness":</p>
 <div class="arithmatex">\[\text{P}_i = \frac{e^{z_i/T}}{\sum_j e^{z_j/T}}\]</div>
-<p>Where:
-- <span class="arithmatex">\(z_i\)</span> = logit for token i
-- <span class="arithmatex">\(T\)</span> = temperature (T &gt; 0)
-- <span class="arithmatex">\(T = 1\)</span> → original distribution
-- <span class="arithmatex">\(T &lt; 1\)</span> → sharper (more deterministic)
-- <span class="arithmatex">\(T &gt; 1\)</span> → flatter (more random)</p>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(z_i\)</span> = logit for token i</li>
+<li>
+<p><span class="arithmatex">\(T\)</span> = temperature (T &gt; 0):</p>
+<ul>
+<li><span class="arithmatex">\(T = 1\)</span> → original distribution</li>
+<li><span class="arithmatex">\(T &lt; 1\)</span> → sharper (more deterministic)</li>
+<li><span class="arithmatex">\(T &gt; 1\)</span> → flatter (more random)</li>
+</ul>
+</li>
+</ul>
 <h3 id="22-example">2.2 Example<a class="headerlink" href="#22-example" title="Permanent link">&para;</a></h3>
 <p>Original probabilities after "The cat sat on the":</p>
 <table>
@@ -2188,18 +2077,24 @@
 <p><strong>T=0.5 (Low):</strong> Distribution sharpens → "mat" dominates → near-greedy behavior<br />
 <strong>T=2.0 (High):</strong> Distribution flattens → "moon", "pizza" become viable → more random</p>
 <h3 id="23-extreme-cases">2.3 Extreme Cases<a class="headerlink" href="#23-extreme-cases" title="Permanent link">&para;</a></h3>
-<p><strong>T → 0:</strong>
-- Distribution becomes one-hot (probability → 1.0 for argmax)
-- Equivalent to greedy decoding
-- Zero randomness</p>
-<p><strong>T → ∞:</strong>
-- Uniform distribution (all tokens equally likely)
-- Maximum randomness
-- Often produces gibberish</p>
-<p><strong>Typical values:</strong>
-- <strong>T=0.7:</strong> Focused, coherent (factual Q&amp;A)
-- <strong>T=1.0:</strong> Balanced (default)
-- <strong>T=1.2-1.5:</strong> Creative, diverse (story writing)</p>
+<p><strong>T → 0:</strong></p>
+<ul>
+<li>Distribution becomes one-hot (probability → 1.0 for argmax)</li>
+<li>Equivalent to greedy decoding</li>
+<li>Zero randomness</li>
+</ul>
+<p><strong>T → ∞:</strong></p>
+<ul>
+<li>Uniform distribution (all tokens equally likely)</li>
+<li>Maximum randomness</li>
+<li>Often produces gibberish</li>
+</ul>
+<p><strong>Typical values:</strong></p>
+<ul>
+<li><strong>T=0.7:</strong> Focused, coherent (factual Q&amp;A)</li>
+<li><strong>T=1.0:</strong> Balanced (default)</li>
+<li><strong>T=1.2-1.5:</strong> Creative, diverse (story writing)</li>
+</ul>
 <h3 id="24-code-example">2.4 Code Example<a class="headerlink" href="#24-code-example" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
@@ -2228,6 +2123,7 @@
 <span class="c1"># Usage</span>
 <span class="c1"># next_token = temperature_sampling(model_logits, temperature=1.2)</span>
 </code></pre></div>
+<hr />
 <hr />
 <h2 id="3-top-k-sampling">3. Top-k Sampling<a class="headerlink" href="#3-top-k-sampling" title="Permanent link">&para;</a></h2>
 <h3 id="31-how-it-works">3.1 How It Works<a class="headerlink" href="#31-how-it-works" title="Permanent link">&para;</a></h3>
@@ -2280,26 +2176,34 @@
 </tbody>
 </table>
 <p><strong>Top-k with k=3:</strong></p>
-<p>Kept tokens:
-- mat: 0.40
-- floor: 0.25
-- sofa: 0.15</p>
-<p>Renormalized:
-- mat: 0.40/0.80 = 0.50
-- floor: 0.25/0.80 = 0.31
-- sofa: 0.15/0.80 = 0.19</p>
+<p>Kept tokens:</p>
+<ul>
+<li>mat: 0.40</li>
+<li>floor: 0.25</li>
+<li>sofa: 0.15</li>
+</ul>
+<p>Renormalized:</p>
+<ul>
+<li>mat: 0.40/0.80 = 0.50</li>
+<li>floor: 0.25/0.80 = 0.31</li>
+<li>sofa: 0.15/0.80 = 0.19</li>
+</ul>
 <p>Removed: bed, roof, moon, pizza</p>
 <p><strong>Output:</strong> One of {mat, floor, sofa} with renormalized probabilities</p>
 <h3 id="33-key-limitation-fixed-k">3.3 Key Limitation: Fixed K<a class="headerlink" href="#33-key-limitation-fixed-k" title="Permanent link">&para;</a></h3>
 <p>Top-k doesn't adapt to distribution shape:</p>
-<p><strong>Case 1: Confident model</strong>
-- Probabilities: [0.85, 0.07, 0.03, 0.02, 0.02, 0.01]
-- k=5 → keeps 5 tokens even though model is very confident
-- Inefficient: forces sampling from low-quality tokens</p>
-<p><strong>Case 2: Uncertain model</strong>
-- Probabilities: [0.20, 0.20, 0.20, 0.20, 0.20]
-- k=3 → keeps only 3 tokens, excludes equally valid options
-- Too restrictive: removes valid choices</p>
+<p><strong>Case 1: Confident model</strong></p>
+<ul>
+<li>Probabilities: [0.85, 0.07, 0.03, 0.02, 0.02, 0.01]</li>
+<li>k=5 → keeps 5 tokens even though model is very confident</li>
+<li>Inefficient: forces sampling from low-quality tokens</li>
+</ul>
+<p><strong>Case 2: Uncertain model</strong></p>
+<ul>
+<li>Probabilities: [0.20, 0.20, 0.20, 0.20, 0.20]</li>
+<li>k=3 → keeps only 3 tokens, excludes equally valid options</li>
+<li>Too restrictive: removes valid choices</li>
+</ul>
 <p><strong>Problem:</strong> Same k value for different distribution shapes.</p>
 <h3 id="34-typical-values">3.4 Typical Values<a class="headerlink" href="#34-typical-values" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2341,6 +2245,7 @@
 <span class="c1"># Usage</span>
 <span class="c1"># next_token = top_k_sampling(model_logits, k=40, temperature=0.9)</span>
 </code></pre></div>
+<hr />
 <hr />
 <h2 id="4-top-p-sampling-nucleus-sampling">4. Top-p Sampling (Nucleus Sampling)<a class="headerlink" href="#4-top-p-sampling-nucleus-sampling" title="Permanent link">&para;</a></h2>
 <h3 id="41-how-it-works">4.1 How It Works<a class="headerlink" href="#41-how-it-works" title="Permanent link">&para;</a></h3>
@@ -2400,10 +2305,12 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Top-p with p=0.9:</strong>
-- Keep: mat, floor, sofa, bed (cumulative = 0.90)
-- Remove: roof, moon, pizza
-- Effective k = 4</p>
+<p><strong>Top-p with p=0.9:</strong></p>
+<ul>
+<li>Keep: mat, floor, sofa, bed (cumulative = 0.90)</li>
+<li>Remove: roof, moon, pizza</li>
+<li>Effective k = 4</li>
+</ul>
 <h3 id="43-adaptive-behavior">4.3 Adaptive Behavior<a class="headerlink" href="#43-adaptive-behavior" title="Permanent link">&para;</a></h3>
 <p><strong>Case 1: Confident model</strong>
 <div class="highlight"><pre><span></span><code>Probabilities: [0.85, 0.07, 0.03, 0.02, 0.02, 0.01]
@@ -2469,6 +2376,7 @@ Effective k = 5 (adaptive expansion)
 <span class="c1"># next_token = top_p_sampling(model_logits, p=0.9, temperature=1.0)</span>
 </code></pre></div>
 <hr />
+<hr />
 <h2 id="5-combining-sampling-methods">5. Combining Sampling Methods<a class="headerlink" href="#5-combining-sampling-methods" title="Permanent link">&para;</a></h2>
 <p>In practice, sampling methods are often <strong>combined</strong>:</p>
 <h3 id="common-combination-temperature-top-p">Common Combination: Temperature + Top-p<a class="headerlink" href="#common-combination-temperature-top-p" title="Permanent link">&para;</a></h3>
@@ -2480,10 +2388,12 @@ Effective k = 5 (adaptive expansion)
     <span class="n">token</span> <span class="o">=</span> <span class="n">top_p_sampling</span><span class="p">(</span><span class="n">scaled_logits</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">top_p</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">token</span>
 </code></pre></div>
-<p><strong>Why combine:</strong>
-- Temperature controls overall randomness
-- Top-p prevents sampling from the very long tail
-- Together: controlled creativity with safety</p>
+<p><strong>Why combine:</strong></p>
+<ul>
+<li>Temperature controls overall randomness</li>
+<li>Top-p prevents sampling from the very long tail</li>
+<li>Together: controlled creativity with safety</li>
+</ul>
 <h3 id="other-combinations">Other Combinations<a class="headerlink" href="#other-combinations" title="Permanent link">&para;</a></h3>
 <p><strong>Temperature + Top-k:</strong>
 <div class="highlight"><pre><span></span><code><span class="c1"># Used in some older systems</span>
@@ -2495,33 +2405,47 @@ Effective k = 5 (adaptive expansion)
 <span class="c1"># Less common, top-p usually sufficient</span>
 </code></pre></div></p>
 <hr />
+<hr />
 <h2 id="6-when-to-use-each-method">6. When to Use Each Method<a class="headerlink" href="#6-when-to-use-each-method" title="Permanent link">&para;</a></h2>
 <h3 id="temperature-sampling">Temperature Sampling<a class="headerlink" href="#temperature-sampling" title="Permanent link">&para;</a></h3>
-<p><strong>✅ Use when:</strong>
-- Need simple randomness control
-- Working with other filtering methods (top-k, top-p)
-- Want smooth transition between deterministic and random</p>
-<p><strong>❌ Avoid when:</strong>
-- Used alone (no filtering from tail)
-- Need adaptive behavior</p>
+<p><strong>✅ Use when:</strong></p>
+<ul>
+<li>Need simple randomness control</li>
+<li>Working with other filtering methods (top-k, top-p)</li>
+<li>Want smooth transition between deterministic and random</li>
+</ul>
+<p><strong>❌ Avoid when:</strong></p>
+<ul>
+<li>Used alone (no filtering from tail)</li>
+<li>Need adaptive behavior</li>
+</ul>
 <h3 id="top-k-sampling">Top-k Sampling<a class="headerlink" href="#top-k-sampling" title="Permanent link">&para;</a></h3>
-<p><strong>✅ Use when:</strong>
-- Need simple, predictable diversity control
-- Fixed computational budget (always k tokens)
-- Legacy systems (older standard)</p>
-<p><strong>❌ Avoid when:</strong>
-- Distribution shape varies significantly
-- Need adaptive behavior
-- Modern systems (top-p preferred)</p>
+<p><strong>✅ Use when:</strong></p>
+<ul>
+<li>Need simple, predictable diversity control</li>
+<li>Fixed computational budget (always k tokens)</li>
+<li>Legacy systems (older standard)</li>
+</ul>
+<p><strong>❌ Avoid when:</strong></p>
+<ul>
+<li>Distribution shape varies significantly</li>
+<li>Need adaptive behavior</li>
+<li>Modern systems (top-p preferred)</li>
+</ul>
 <h3 id="top-p-sampling">Top-p Sampling<a class="headerlink" href="#top-p-sampling" title="Permanent link">&para;</a></h3>
-<p><strong>✅ Use when:</strong>
-- Need adaptive diversity
-- Model confidence varies
-- General-purpose text generation
-- Conversational AI, creative writing</p>
-<p><strong>❌ Avoid when:</strong>
-- Need strict determinism
-- Computational constraints (slightly more complex)</p>
+<p><strong>✅ Use when:</strong></p>
+<ul>
+<li>Need adaptive diversity</li>
+<li>Model confidence varies</li>
+<li>General-purpose text generation</li>
+<li>Conversational AI, creative writing</li>
+</ul>
+<p><strong>❌ Avoid when:</strong></p>
+<ul>
+<li>Need strict determinism</li>
+<li>Computational constraints (slightly more complex)</li>
+</ul>
+<hr />
 <hr />
 <h2 id="7-interview-questions">7. Interview Questions<a class="headerlink" href="#7-interview-questions" title="Permanent link">&para;</a></h2>
 <h3 id="q1-what-problem-do-sampling-methods-solve">Q1: What problem do sampling methods solve?<a class="headerlink" href="#q1-what-problem-do-sampling-methods-solve" title="Permanent link">&para;</a></h3>
@@ -2540,10 +2464,12 @@ Effective k = 5 (adaptive expansion)
 <p>This makes top-p more robust across different contexts without hyperparameter tuning.</p>
 <hr />
 <h3 id="q5-can-you-use-temperature05-with-top-p09-together">Q5: Can you use temperature=0.5 with top-p=0.9 together?<a class="headerlink" href="#q5-can-you-use-temperature05-with-top-p09-together" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Yes, and this is common in practice:
-1. Apply temperature=0.5 first → sharpen distribution (reduce randomness)
-2. Apply top-p=0.9 → filter out low-probability tail
-3. Sample from filtered distribution</p>
+<p><strong>Answer:</strong> Yes, and this is common in practice:</p>
+<ol>
+<li>Apply temperature=0.5 first → sharpen distribution (reduce randomness)</li>
+<li>Apply top-p=0.9 → filter out low-probability tail</li>
+<li>Sample from filtered distribution</li>
+</ol>
 <p>Temperature controls overall randomness, top-p prevents sampling gibberish. Together they provide controlled, safe creativity.</p>
 <hr />
 <h3 id="q6-why-not-just-use-temperature-alone">Q6: Why not just use temperature alone?<a class="headerlink" href="#q6-why-not-just-use-temperature-alone" title="Permanent link">&para;</a></h3>
@@ -2557,23 +2483,30 @@ Output: &quot;banana quantum seventh pencil&quot;
 <p>High temperature destroys the model's learned knowledge. Typical max: T=1.5-2.0.</p>
 <hr />
 <h3 id="q8-how-do-you-choose-between-p09-vs-p095">Q8: How do you choose between p=0.9 vs p=0.95?<a class="headerlink" href="#q8-how-do-you-choose-between-p09-vs-p095" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>p=0.9:</strong> More focused, coherent (default for most applications)
-- <strong>p=0.95:</strong> More diverse, creative (for storytelling, brainstorming)</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>p=0.9:</strong> More focused, coherent (default for most applications)</li>
+<li><strong>p=0.95:</strong> More diverse, creative (for storytelling, brainstorming)</li>
+</ul>
 <p>Trade-off: Higher p → more diversity but higher risk of incoherence. Start with 0.9; increase for creativity, decrease for safety. Depends on task requirements.</p>
 <hr />
 <h3 id="q9-whats-the-computational-cost-of-top-p-vs-top-k">Q9: What's the computational cost of top-p vs top-k?<a class="headerlink" href="#q9-whats-the-computational-cost-of-top-p-vs-top-k" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>Top-k:</strong> O(V log k) — partial sort for top-k elements
-- <strong>Top-p:</strong> O(V log V) — full sort to compute cumulative probabilities</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Top-k:</strong> O(V log k) — partial sort for top-k elements</li>
+<li><strong>Top-p:</strong> O(V log V) — full sort to compute cumulative probabilities</li>
+</ul>
 <p>Top-p is slightly more expensive, but the difference is negligible compared to model inference cost. The adaptive benefits of top-p outweigh the small computational overhead.</p>
 <hr />
 <h3 id="q10-why-do-modern-llms-gpt-4-claude-prefer-top-p-over-top-k">Q10: Why do modern LLMs (GPT-4, Claude) prefer top-p over top-k?<a class="headerlink" href="#q10-why-do-modern-llms-gpt-4-claude-prefer-top-p-over-top-k" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> <strong>Adaptivity and robustness.</strong> Top-p automatically adjusts to:
-- Different contexts (formal vs casual)
-- Varying model confidence
-- Different domains (technical vs creative)</p>
+<p><strong>Answer:</strong> <strong>Adaptivity and robustness.</strong> Top-p automatically adjusts to:</p>
+<ul>
+<li>Different contexts (formal vs casual)</li>
+<li>Varying model confidence</li>
+<li>Different domains (technical vs creative)</li>
+</ul>
 <p>This makes it more reliable across diverse use cases without manual tuning. Top-k requires choosing k for each scenario, while top-p with p=0.9 works well universally.</p>
+<hr />
 <hr />
 <h2 id="8-comparison-table">8. Comparison Table<a class="headerlink" href="#8-comparison-table" title="Permanent link">&para;</a></h2>
 <table>
@@ -2631,26 +2564,6 @@ Output: &quot;banana quantum seventh pencil&quot;
 </tbody>
 </table>
 <hr />
-<h2 id="9-practical-guidelines">9. Practical Guidelines<a class="headerlink" href="#9-practical-guidelines" title="Permanent link">&para;</a></h2>
-<h3 id="for-most-applications">For Most Applications<a class="headerlink" href="#for-most-applications" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Recommended defaults</span>
-<span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.8</span><span class="o">-</span><span class="mf">1.0</span>
-<span class="n">top_p</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="c1"># Don&#39;t use top-k with top-p</span>
-</code></pre></div>
-<h3 id="for-creative-writing">For Creative Writing<a class="headerlink" href="#for-creative-writing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">temperature</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">1.5</span>
-<span class="n">top_p</span> <span class="o">=</span> <span class="mf">0.95</span>
-</code></pre></div>
-<h3 id="for-factual-qa">For Factual Q&amp;A<a class="headerlink" href="#for-factual-qa" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">-</span><span class="mf">0.7</span>
-<span class="n">top_p</span> <span class="o">=</span> <span class="mf">0.9</span>
-</code></pre></div>
-<h3 id="for-code-generation">For Code Generation<a class="headerlink" href="#for-code-generation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">-</span><span class="mf">0.5</span>
-<span class="n">top_p</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="c1"># Or just use greedy (temperature=0)</span>
-</code></pre></div>
 <hr />
 <h2 id="10-key-takeaways-for-interviews">10. Key Takeaways for Interviews<a class="headerlink" href="#10-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
 <ol>
@@ -2663,12 +2576,6 @@ Output: &quot;banana quantum seventh pencil&quot;
 <li><strong>Use case:</strong> Sampling for creative/diverse tasks; greedy/beam for deterministic tasks</li>
 </ol>
 <hr />
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://arxiv.org/abs/1904.09751">The Curious Case of Neural Text Degeneration</a> - Introduces nucleus (top-p) sampling</li>
-<li><a href="https://huggingface.co/docs/transformers/generation_strategies">Hugging Face: Generation Strategies</a></li>
-<li><a href="https://platform.openai.com/docs/guides/text-generation">OpenAI API: Sampling Parameters</a></li>
-</ul>
 
 
 
