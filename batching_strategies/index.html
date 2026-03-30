@@ -2149,14 +2149,18 @@
   <h1>Batching Strategies</h1>
 
 <h2 id="1-why-batching-matters">1. Why Batching Matters<a class="headerlink" href="#1-why-batching-matters" title="Permanent link">&para;</a></h2>
-<p><strong>GPU Utilization Problem:</strong> <br>
-- Single request uses &lt;10% of GPU compute capacity
-- Memory bandwidth underutilized
-- Expensive hardware sitting idle</p>
-<p><strong>Batching Solution:</strong> <br>
-- Process multiple requests simultaneously
-- Amortize memory access costs
-- Achieve 5-10x throughput improvement</p>
+<p><strong>GPU Utilization Problem:</strong></p>
+<ul>
+<li>Single request uses &lt;10% of GPU compute capacity</li>
+<li>Memory bandwidth underutilized</li>
+<li>Expensive hardware sitting idle</li>
+</ul>
+<p><strong>Batching Solution:</strong></p>
+<ul>
+<li>Process multiple requests simultaneously</li>
+<li>Amortize memory access costs</li>
+<li>Achieve 5-10x throughput improvement</li>
+</ul>
 <p><strong>Key Constraint:</strong> GPU memory limits batch size (primarily KV cache)</p>
 <hr />
 <hr />
@@ -2197,12 +2201,16 @@ GPU idle during Req2, Req3 completion
 <div class="highlight"><pre><span></span><code><span class="n">max_batch_size</span> <span class="o">=</span> <span class="mi">32</span>      <span class="c1"># Maximum requests per batch</span>
 <span class="n">max_delay_ms</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># Maximum wait time</span>
 </code></pre></div>
-<p><strong>Improvement over Static:</strong>
-- Balances latency and throughput
-- Reduces wait time for batch formation</p>
-<p><strong>Still Limited:</strong>
-- Batch-level scheduling (not iteration-level)
-- GPU idle time after short sequences complete</p>
+<p><strong>Improvement over Static:</strong></p>
+<ul>
+<li>Balances latency and throughput</li>
+<li>Reduces wait time for batch formation</li>
+</ul>
+<p><strong>Still Limited:</strong></p>
+<ul>
+<li>Batch-level scheduling (not iteration-level)</li>
+<li>GPU idle time after short sequences complete</li>
+</ul>
 <hr />
 <h3 id="when-to-use_1">When to Use<a class="headerlink" href="#when-to-use_1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2228,18 +2236,24 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 <p><strong>Key Benefit:</strong> No GPU idle time, slots filled immediately</p>
 <hr />
 <h3 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h3>
-<p><strong>Sequence Completion Detection:</strong> <br>
-- Monitor for EOS tokens
-- Max length reached
-- User cancellation</p>
-<p><strong>Slot Management:</strong> <br>
-- Free KV cache blocks immediately
-- Add waiting request to batch
-- Update attention masks</p>
-<p><strong>Memory Efficiency:</strong> <br>
-- Works best with PagedAttention (vLLM)
-- Non-contiguous memory allocation
-- Independent per-sequence management</p>
+<p><strong>Sequence Completion Detection:</strong></p>
+<ul>
+<li>Monitor for EOS tokens</li>
+<li>Max length reached</li>
+<li>User cancellation</li>
+</ul>
+<p><strong>Slot Management:</strong></p>
+<ul>
+<li>Free KV cache blocks immediately</li>
+<li>Add waiting request to batch</li>
+<li>Update attention masks</li>
+</ul>
+<p><strong>Memory Efficiency:</strong></p>
+<ul>
+<li>Works best with PagedAttention (vLLM)</li>
+<li>Non-contiguous memory allocation</li>
+<li>Independent per-sequence management</li>
+</ul>
 <hr />
 <h3 id="performance-impact">Performance Impact<a class="headerlink" href="#performance-impact" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2258,11 +2272,11 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 <hr />
 <h2 id="5-chunked-prefill">5. Chunked Prefill<a class="headerlink" href="#5-chunked-prefill" title="Permanent link">&para;</a></h2>
 <h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h3>
-<p><strong>Long prompts block decode:</strong> <br>
+<p><strong>Long prompts block decode:</strong></p>
 <div class="highlight"><pre><span></span><code>Prompt: 10,000 tokens (prefill) → 50 iterations
 Short prompts: waiting in queue
 Decode operations: starved
-</code></pre></div></p>
+</code></pre></div>
 <hr />
 <h3 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h3>
 <p>Break prefill into chunks, interleave with decode</p>
@@ -2365,7 +2379,7 @@ With APC:
 <p>Separate batches for prefill and decode → Underutilization</p>
 <hr />
 <h3 id="optimized-approach">Optimized Approach<a class="headerlink" href="#optimized-approach" title="Permanent link">&para;</a></h3>
-<p><strong>Mixed batches with resource allocation:</strong> <br></p>
+<p><strong>Mixed batches with resource allocation:</strong></p>
 <div class="highlight"><pre><span></span><code>GPU Resources:
   80% compute → Prefill operations
   20% memory bandwidth → Decode operations
@@ -2377,30 +2391,34 @@ Single iteration:
 </code></pre></div>
 <hr />
 <h3 id="splitfuse-deepspeed-fastgen">SplitFuse (DeepSpeed-FastGen)<a class="headerlink" href="#splitfuse-deepspeed-fastgen" title="Permanent link">&para;</a></h3>
-<p>Dynamic algorithm that:
-1. Monitors compute vs memory utilization
-2. Adjusts prefill chunk size
-3. Balances prefill/decode in each iteration</p>
+<p>Dynamic algorithm that:</p>
+<ol>
+<li>Monitors compute vs memory utilization</li>
+<li>Adjusts prefill chunk size</li>
+<li>Balances prefill/decode in each iteration</li>
+</ol>
 <hr />
 <hr />
 <h2 id="9-batch-size-selection">9. Batch Size Selection<a class="headerlink" href="#9-batch-size-selection" title="Permanent link">&para;</a></h2>
 <h3 id="factors">Factors<a class="headerlink" href="#factors" title="Permanent link">&para;</a></h3>
-<p><strong>Memory Constraint:</strong> <br></p>
+<p><strong>Memory Constraint:</strong></p>
 <div class="highlight"><pre><span></span><code>Available Memory = Model Weights + KV Cache + Activations
 KV Cache = batch_size × seq_len × kv_memory_per_token
 </code></pre></div>
-<p><strong>Optimal Batch Size:</strong> <br>
-- Too small → GPU underutilized
-- Too large → OOM, increased latency</p>
+<p><strong>Optimal Batch Size:</strong></p>
+<ul>
+<li>Too small → GPU underutilized</li>
+<li>Too large → OOM, increased latency</li>
+</ul>
 <hr />
 <h3 id="heuristics">Heuristics<a class="headerlink" href="#heuristics" title="Permanent link">&para;</a></h3>
-<p><strong>For Decode:</strong> <br>
+<p><strong>For Decode:</strong></p>
 <div class="highlight"><pre><span></span><code>optimal_batch_size = GPU_memory / (model_size + max_seq_len × kv_per_token)
-</code></pre></div></p>
-<p><strong>For Prefill:</strong>
+</code></pre></div>
+<p><strong>For Prefill:</strong></p>
 <div class="highlight"><pre><span></span><code>Limited by compute, not memory
 Larger batches better (up to memory limit)
-</code></pre></div></p>
+</code></pre></div>
 <hr />
 <h3 id="adaptive-batching">Adaptive Batching<a class="headerlink" href="#adaptive-batching" title="Permanent link">&para;</a></h3>
 <p>Monitor queue depth and adjust:</p>
@@ -2413,12 +2431,16 @@ Larger batches better (up to memory limit)
 <hr />
 <h2 id="10-multi-query-batching-mqagqa-context">10. Multi-Query Batching (MQA/GQA Context)<a class="headerlink" href="#10-multi-query-batching-mqagqa-context" title="Permanent link">&para;</a></h2>
 <h3 id="relevance-to-batching">Relevance to Batching<a class="headerlink" href="#relevance-to-batching" title="Permanent link">&para;</a></h3>
-<p><strong>Multi-Query Attention (MQA):</strong>
-- Fewer KV heads → Smaller KV cache
-- Enables larger batch sizes</p>
-<p><strong>Grouped-Query Attention (GQA):</strong>
-- Middle ground between MHA and MQA
-- Llama 3, Mistral use GQA</p>
+<p><strong>Multi-Query Attention (MQA):</strong></p>
+<ul>
+<li>Fewer KV heads → Smaller KV cache</li>
+<li>Enables larger batch sizes</li>
+</ul>
+<p><strong>Grouped-Query Attention (GQA):</strong></p>
+<ul>
+<li>Middle ground between MHA and MQA</li>
+<li>Llama 3, Mistral use GQA</li>
+</ul>
 <hr />
 <h3 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>Llama 2 (MHA): 32 heads for K, 32 for V
