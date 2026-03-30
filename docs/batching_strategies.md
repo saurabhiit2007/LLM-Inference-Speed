@@ -1,11 +1,13 @@
 ## 1. Why Batching Matters
 
-**GPU Utilization Problem:** <br>
+**GPU Utilization Problem:**
+
 - Single request uses <10% of GPU compute capacity
 - Memory bandwidth underutilized
 - Expensive hardware sitting idle
 
-**Batching Solution:** <br>
+**Batching Solution:**
+
 - Process multiple requests simultaneously
 - Amortize memory access costs
 - Achieve 5-10x throughput improvement
@@ -64,10 +66,12 @@ max_delay_ms = 100       # Maximum wait time
 ```
 
 **Improvement over Static:**
+
 - Balances latency and throughput
 - Reduces wait time for batch formation
 
 **Still Limited:**
+
 - Batch-level scheduling (not iteration-level)
 - GPU idle time after short sequences complete
 
@@ -107,17 +111,20 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 
 ### Implementation Details
 
-**Sequence Completion Detection:** <br>
+**Sequence Completion Detection:**
+
 - Monitor for EOS tokens
 - Max length reached
 - User cancellation
 
-**Slot Management:** <br>
+**Slot Management:**
+
 - Free KV cache blocks immediately
 - Add waiting request to batch
 - Update attention masks
 
-**Memory Efficiency:** <br>
+**Memory Efficiency:**
+
 - Works best with PagedAttention (vLLM)
 - Non-contiguous memory allocation
 - Independent per-sequence management
@@ -144,7 +151,8 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 
 ### Problem
 
-**Long prompts block decode:** <br>
+**Long prompts block decode:**
+
 ```
 Prompt: 10,000 tokens (prefill) → 50 iterations
 Short prompts: waiting in queue
@@ -286,7 +294,7 @@ Separate batches for prefill and decode → Underutilization
 ---
 
 ### Optimized Approach
-**Mixed batches with resource allocation:** <br>
+**Mixed batches with resource allocation:**
 
 ```
 GPU Resources:
@@ -303,6 +311,7 @@ Single iteration:
 
 ### SplitFuse (DeepSpeed-FastGen)
 Dynamic algorithm that:
+
 1. Monitors compute vs memory utilization
 2. Adjusts prefill chunk size
 3. Balances prefill/decode in each iteration
@@ -315,14 +324,15 @@ Dynamic algorithm that:
 
 ### Factors
 
-**Memory Constraint:** <br>
+**Memory Constraint:**
 
 ```
 Available Memory = Model Weights + KV Cache + Activations
 KV Cache = batch_size × seq_len × kv_memory_per_token
 ```
 
-**Optimal Batch Size:** <br>
+**Optimal Batch Size:**
+
 - Too small → GPU underutilized
 - Too large → OOM, increased latency
 
@@ -330,12 +340,14 @@ KV Cache = batch_size × seq_len × kv_memory_per_token
 
 ### Heuristics
 
-**For Decode:** <br>
+**For Decode:**
+
 ```
 optimal_batch_size = GPU_memory / (model_size + max_seq_len × kv_per_token)
 ```
 
 **For Prefill:**
+
 ```
 Limited by compute, not memory
 Larger batches better (up to memory limit)
@@ -360,10 +372,12 @@ Monitor queue depth and adjust:
 ### Relevance to Batching
 
 **Multi-Query Attention (MQA):**
+
 - Fewer KV heads → Smaller KV cache
 - Enables larger batch sizes
 
 **Grouped-Query Attention (GQA):**
+
 - Middle ground between MHA and MQA
 - Llama 3, Mistral use GQA
 
