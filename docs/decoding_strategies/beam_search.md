@@ -8,6 +8,8 @@ Beam search maintains **K candidate sequences** (beams) at each decoding step an
 
 ---
 
+---
+
 ## 2. How It Works
 
 ### Algorithm
@@ -48,14 +50,18 @@ def beam_search(model, prompt, beam_width=5, max_length=50):
 ### Core Concepts
 
 **Beam width (K):**
+
 - K=1: Greedy decoding
 - K=5-10: Typical for translation
 - K=50+: Exhaustive (expensive)
 
 **Cumulative log probability:**
+
 - Use log probabilities to avoid numerical underflow
 - Score = log(P₁) + log(P₂) + ... + log(Pₙ)
 - Equivalent to log(P₁ × P₂ × ... × Pₙ)
+
+---
 
 ---
 
@@ -68,6 +74,7 @@ def beam_search(model, prompt, beam_width=5, max_length=50):
 ### Step 1: First Token
 
 Model probabilities:
+
 | Token | Probability | Log Prob |
 |-------|-------------|----------|
 | mat   | 0.40        | -0.92    |
@@ -76,6 +83,7 @@ Model probabilities:
 | bed   | 0.10        | -2.30    |
 
 **Top 3 beams:**
+
 1. "The cat sat on the mat" → score: -0.92
 2. "The cat sat on the floor" → score: -1.39
 3. "The cat sat on the sofa" → score: -1.90
@@ -85,18 +93,22 @@ Model probabilities:
 Expand each beam:
 
 **Beam 1:** "mat" + next token
+
 - "mat ." → -0.92 + (-0.51) = **-1.43**
 - "mat and" → -0.92 + (-1.61) = -2.53
 
 **Beam 2:** "floor" + next token
+
 - "floor ." → -1.39 + (-0.36) = **-1.75**
 - "floor while" → -1.39 + (-1.20) = -2.59
 
 **Beam 3:** "sofa" + next token
+
 - "sofa ." → -1.90 + (-0.41) = -2.31
 - "sofa when" → -1.90 + (-0.51) = **-2.41**
 
 **New top 3 beams:**
+
 1. "The cat sat on the mat ." → -1.43
 2. "The cat sat on the floor ." → -1.75
 3. "The cat sat on the sofa when" → -2.41
@@ -105,10 +117,13 @@ Expand each beam:
 
 ---
 
+---
+
 ## 4. Key Characteristics
 
 ### Explores Multiple Paths
 Unlike greedy, beam search maintains K hypotheses:
+
 - Can recover from locally suboptimal choices
 - Considers alternative continuations
 - Better global optimization
@@ -130,6 +145,8 @@ normalized_score = score / length^α
 # α = 0: no normalization
 # α = 1: full normalization
 ```
+
+---
 
 ---
 
@@ -171,6 +188,8 @@ Beam search produces grammatically perfect but boring text.
 
 ---
 
+---
+
 ## 6. Length Normalization
 
 ### Without Normalization
@@ -190,9 +209,12 @@ beams = sorted(candidates, key=lambda x: normalized_score(x), reverse=True)
 ```
 
 **Effect:**
+
 - Encourages longer, more complete sequences
 - Prevents premature termination
 - Essential for translation and summarization
+
+---
 
 ---
 
@@ -201,6 +223,7 @@ beams = sorted(candidates, key=lambda x: normalized_score(x), reverse=True)
 ### ✅ Good Use Cases
 
 **Structured tasks with clear objectives:**
+
 - Machine translation
 - Automatic speech recognition (ASR)
 - Image captioning
@@ -208,6 +231,7 @@ beams = sorted(candidates, key=lambda x: normalized_score(x), reverse=True)
 - Question answering (extractive)
 
 **When correctness matters more than creativity:**
+
 - Technical documentation generation
 - Code comment generation
 - Medical report generation
@@ -215,15 +239,19 @@ beams = sorted(candidates, key=lambda x: normalized_score(x), reverse=True)
 ### ❌ Poor Use Cases
 
 **Creative or conversational tasks:**
+
 - Story writing
 - Dialogue systems
 - Chatbots
 - Poetry generation
 
 **Tasks requiring diversity:**
+
 - Brainstorming
 - Multiple solution generation
 - Creative writing
+
+---
 
 ---
 
@@ -251,6 +279,8 @@ Add randomness to beam selection for more diversity.
 
 ---
 
+---
+
 ## 9. Interview Questions
 
 ### Q1: What is beam search and how does it differ from greedy decoding?
@@ -260,6 +290,7 @@ Add randomness to beam selection for more diversity.
 
 ### Q2: Why use log probabilities instead of regular probabilities?
 **Answer:** Two reasons:
+
 1. **Numerical stability:** Multiplying many small probabilities (0.3 × 0.4 × 0.2...) quickly underflows to zero in floating point
 2. **Computational efficiency:** Log transforms products to sums: log(P₁ × P₂) = log(P₁) + log(P₂), which is more stable and efficient
 
@@ -277,6 +308,7 @@ Add randomness to beam selection for more diversity.
 
 ### Q5: What's the computational complexity of beam search?
 **Answer:**
+
 - **Time per step:** O(K × V) where K=beam width, V=vocab size
   - Greedy: O(V), so beam is K× slower
 - **Memory:** O(K × T) to store K beams of length T
@@ -288,6 +320,7 @@ Typical K=5-10 for translation, but this 5-10× slowdown is significant.
 
 ### Q6: How do you choose the optimal beam width K?
 **Answer:** Trade-off between quality and speed:
+
 - **K=1:** Greedy (fast, low quality)
 - **K=5-10:** Standard for translation (good balance)
 - **K=50+:** Diminishing returns, very slow
@@ -308,11 +341,13 @@ Empirically, quality plateaus around K=10 for most tasks. Beyond that, you get m
 
 ### Q9: When would you use beam search over sampling methods like top-p?
 **Answer:** Use beam search for:
+
 - **Objective quality metrics** (BLEU, ROUGE) that correlate with likelihood
 - **Structured outputs** (translation, ASR) with one correct answer
 - **Deterministic requirements** (reproducibility)
 
 Use sampling for:
+
 - **Creative tasks** requiring diversity
 - **Conversational AI** needing personality
 - **Open-ended generation** where many good answers exist
@@ -321,6 +356,7 @@ Use sampling for:
 
 ### Q10: How does beam search handle the EOS token?
 **Answer:** When a beam generates EOS (end-of-sequence), it's marked as complete:
+
 1. Complete beams stop expanding
 2. They remain in the candidate pool with their final score
 3. Active beams continue generating
@@ -331,88 +367,9 @@ Some implementations use length normalization to fairly compare complete sequenc
 
 ---
 
-## 10. Code Example
-
-```python
-import torch
-import torch.nn.functional as F
-from typing import List, Tuple
-
-def beam_search(
-    model,
-    input_ids: torch.Tensor,
-    beam_width: int = 5,
-    max_length: int = 50,
-    length_penalty: float = 0.6,
-    eos_token_id: int = 2
-) -> torch.Tensor:
-    """
-    Beam search decoding.
-    
-    Args:
-        model: Language model
-        input_ids: Starting tokens [1, seq_len]
-        beam_width: Number of beams
-        max_length: Maximum sequence length
-        length_penalty: Alpha for length normalization
-        eos_token_id: End of sequence token
-    
-    Returns:
-        Best sequence found
-    """
-    device = input_ids.device
-    batch_size = input_ids.size(0)
-    
-    # Initialize beams: (sequence, score, finished)
-    beams = [(input_ids[0].tolist(), 0.0, False)]
-    
-    for _ in range(max_length):
-        candidates = []
-        
-        for seq, score, finished in beams:
-            if finished:
-                candidates.append((seq, score, finished))
-                continue
-            
-            # Get next token probabilities
-            input_tensor = torch.tensor([seq], device=device)
-            with torch.no_grad():
-                outputs = model(input_tensor)
-                logits = outputs.logits[0, -1, :]
-                log_probs = F.log_softmax(logits, dim=-1)
-            
-            # Expand beam with top-K tokens
-            top_k_probs, top_k_ids = torch.topk(log_probs, beam_width)
-            
-            for prob, token_id in zip(top_k_probs, top_k_ids):
-                new_seq = seq + [token_id.item()]
-                new_score = score + prob.item()
-                is_finished = (token_id.item() == eos_token_id)
-                candidates.append((new_seq, new_score, is_finished))
-        
-        # Apply length penalty and keep top beams
-        def normalized_score(item):
-            seq, score, _ = item
-            penalty = ((5 + len(seq)) / 6) ** length_penalty
-            return score / penalty
-        
-        beams = sorted(candidates, key=normalized_score, reverse=True)[:beam_width]
-        
-        # Early stopping if all beams finished
-        if all(finished for _, _, finished in beams):
-            break
-    
-    # Return best sequence
-    best_seq, _, _ = beams[0]
-    return torch.tensor([best_seq], device=device)
-
-# Usage
-# output = beam_search(model, prompt_ids, beam_width=5)
-```
-
 ---
 
-## 11. Key Takeaways for Interviews
+## 10. Key Takeaways for Interviews
 
 1. **Definition:** Maintains K candidate sequences, keeps top-K by cumulative probability
 2. **Beam width K:** Trade-off between quality (higher K) and speed (lower K)
@@ -424,9 +381,3 @@ def beam_search(
 8. **Complexity:** O(K × V × T) time, O(K × T) space
 
 ---
-
-## References
-
-- [Google's Neural Machine Translation System](https://arxiv.org/abs/1609.08144) - Length normalization formula
-- [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751) - Discusses diversity issues
-- [Diverse Beam Search](https://arxiv.org/abs/1610.02424)
