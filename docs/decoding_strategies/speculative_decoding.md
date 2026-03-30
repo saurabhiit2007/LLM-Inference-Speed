@@ -10,6 +10,8 @@ Speculative decoding reduces **inference latency** in autoregressive LLMs by usi
 
 ---
 
+---
+
 ## 2. The Problem with Standard Decoding
 
 ### Sequential Bottleneck
@@ -29,12 +31,15 @@ for _ in range(max_length):
 ```
 
 **Problems:**
+
 - Generate 1 token per forward pass
 - Model sits mostly idle (memory-bound, not compute-bound)
 - Latency grows linearly with output length
 - KV cache helps computation but doesn't break sequential dependency
 
 **Example:** For 100 tokens, need 100 expensive forward passes of the large model.
+
+---
 
 ---
 
@@ -62,6 +67,8 @@ Accept? [Paris: ✓] [,: ✓] [which: ✓] [is: ✗]
 Output: "The capital of France is Paris , which"
 Continue from "which" (3 tokens in 1 target pass instead of 3!)
 ```
+
+---
 
 ---
 
@@ -153,6 +160,7 @@ for i in range(K):
 ### Step 4: Handle Rejection
 
 If token $j$ is rejected:
+
 - Discard $y_j, y_{j+1}, \dots, y_K$
 - Sample replacement from target model at position $j$:
 
@@ -175,15 +183,19 @@ If all K tokens accepted, continue with next draft batch.
 
 ---
 
+---
+
 ## 5. Why It's Faster
 
 ### Speedup Analysis
 
 **Standard decoding for N tokens:**
+
 - N forward passes of target model
 - Cost: $N \times C_{\text{target}}$
 
 **Speculative decoding:**
+
 - Draft proposes K tokens: $K \times C_{\text{draft}}$ (cheap)
 - Target verifies in 1 pass: $1 \times C_{\text{target}}$
 - If acceptance rate = $\alpha$, generate $\alpha \times K$ tokens per cycle
@@ -194,6 +206,7 @@ E[\text{tokens}] = 1 + \sum_{i=1}^{K} \alpha^i \approx \frac{1 - \alpha^{K+1}}{1
 $$
 
 **Example:**
+
 - $K=4$, $\alpha=0.7$ → ~2.4 tokens per target call
 - 2.4× speedup (vs 1 token per call in standard decoding)
 
@@ -211,6 +224,8 @@ Standard decoding only uses `logits_2` (last position).
 Speculative decoding uses `logits_0`, `logits_1`, `logits_2` to verify multiple tokens.
 
 **This is not new capability**—it's how Transformers always work during training.
+
+---
 
 ---
 
@@ -248,27 +263,33 @@ Rejection corrects for draft model errors while maintaining exact target distrib
 
 ---
 
+---
+
 ## 7. Practical Considerations
 
 ### Draft Model Selection
 
 **Options:**
+
 1. **Smaller version of target** (e.g., 1B vs 70B parameters)
 2. **Quantized target model** (INT8 vs FP16)
 3. **Distilled model** trained to match target
 4. **Early-exit from target** (use intermediate layers)
 
 **Requirements:**
+
 - Fast enough (≥10× faster than target)
 - Similar enough to target (high acceptance rate)
 
 ### Draft Length K
 
 **Trade-off:**
+
 - **Small K (2-4):** Lower overhead, guaranteed speedup
 - **Large K (8-16):** Higher potential speedup, but more likely to reject
 
 **Optimal K depends on:**
+
 - Acceptance rate (higher α → larger K beneficial)
 - Draft/target speed ratio
 - Memory constraints
@@ -278,15 +299,19 @@ Rejection corrects for draft model errors while maintaining exact target distrib
 ### Acceptance Rate
 
 **Factors affecting α:**
+
 - Draft-target model similarity
 - Task complexity (simple text → higher α)
 - Prompt context (more context → better draft predictions)
 
 **Typical rates:**
+
 - Good draft: α=0.7-0.9
 - Poor draft: α=0.3-0.5
 
 **Below α≈0.3:** Speculative decoding may be slower than standard (overhead dominates).
+
+---
 
 ---
 
@@ -295,10 +320,12 @@ Rejection corrects for draft model errors while maintaining exact target distrib
 ### KV Cache in Both Models
 
 **Draft model:**
+
 - Maintains its own KV cache
 - Generates K tokens autoregressively (K cache updates)
 
 **Target model:**
+
 - Computes KV cache for entire draft window in one pass
 - Accepted tokens' KV states are kept
 - Rejected tokens' KV states are discarded
@@ -311,6 +338,8 @@ Speculative decoding: 2 models' KV cache (draft + target)
 ```
 
 **Memory cost:** Minimal—draft model is small, so its cache is negligible.
+
+---
 
 ---
 
@@ -338,6 +367,7 @@ Speculative decoding: 2 models' KV cache (draft + target)
 
 ### Q5: What happens when a draft token is rejected?
 **Answer:** Stop immediately at the first rejection:
+
 1. Discard the rejected token and all subsequent draft tokens
 2. Sample a replacement token from the target model at that position
 3. Restart speculation from the new sequence
@@ -348,6 +378,7 @@ For example, if tokens 1,2 are accepted but token 3 is rejected, keep 1,2, sampl
 
 ### Q6: What determines the acceptance rate?
 **Answer:** How well the draft model matches the target model's distribution:
+
 - **High similarity** (e.g., quantized version) → α=0.8-0.9 → 2-3× speedup
 - **Moderate similarity** (e.g., smaller architecture) → α=0.5-0.7 → 1.5-2× speedup
 - **Low similarity** → α<0.3 → overhead dominates, possibly slower
@@ -358,6 +389,7 @@ Also affected by task (simple text has higher α) and context (more prompt conte
 
 ### Q7: How do you choose the draft length K?
 **Answer:** Trade-off between potential speedup and overhead:
+
 - **Higher acceptance rate α** → can use larger K (more tokens likely accepted)
 - **Lower α** → use smaller K (avoid wasting computation on rejections)
 - **Typical:** K=4-5 works well across scenarios
@@ -372,12 +404,12 @@ Formula: Expected tokens per cycle ≈ (1-α^(K+1))/(1-α). Diminishing returns 
 ---
 
 ### Q9: Can you use greedy decoding for the draft model?
-**Answer:** No, you must **sample** from the draft model and record probabilities q(y_i). The rejection sampling formula requires q(y_i) to compute α = min(1, p(y_i)/q(y_i)). Greedy decoding doesn't provide a probability distribution over sampled tokens—it just picks argmax. Sampling is essential for the mathematical correctness guarantee.
-
+**Answer:** In speculative decoding, using greedy decoding for the draft model is not inherently wrong — the rejection sampling step mathematically guarantees the target model's distribution is preserved regardless of how the draft generates tokens. The real concern is efficiency: when the target model samples stochastically (temperature > 0), a greedy draft diverges more from the target's distribution, leading to lower acceptance rates and reduced speedup. If the target itself uses greedy decoding, then using greedy for the draft is perfectly fine and can work very well. So the draft model's decoding strategy is essentially a performance tuning choice — greedy hurts acceptance rates only when the target is sampling, not a correctness issue.
 ---
 
 ### Q10: How does speculative decoding interact with KV cache?
 **Answer:** Both models use KV cache:
+
 - **Draft model:** Maintains its own cache, generates K tokens autoregressively
 - **Target model:** Computes cache for entire draft window in one pass; keeps cache for accepted tokens, discards for rejected ones
 
@@ -385,7 +417,27 @@ Memory overhead is minimal since the draft model is small. KV cache improves eff
 
 ---
 
-## 10. Variants and Extensions
+---
+
+## 10. When to Use Speculative Decoding
+
+### ✅ Good Use Cases
+- **Latency-critical serving** (chatbots, real-time applications)
+- **Long-form generation** (more tokens → more opportunities for speedup)
+- **Good draft model available** (smaller version, quantized, distilled)
+- **Inference-bound workloads** (not training)
+
+### ❌ Less Beneficial
+- **Batch inference** (already parallelized across sequences)
+- **Very short outputs** (overhead not amortized)
+- **No suitable draft model** (acceptance rate too low)
+- **Memory-constrained systems** (need to load 2 models)
+
+---
+
+---
+
+## 11. Variants and Extensions
 
 ### Medusa / Multi-Head Speculation
 - Add multiple prediction heads to draft model
@@ -404,7 +456,7 @@ Memory overhead is minimal since the draft model is small. KV cache improves eff
 
 ---
 
-## 11. Key Takeaways for Interviews
+## 12. Key Takeaways for Interviews
 
 1. **Main idea:** Draft model proposes K tokens, target verifies all in one pass
 2. **Speedup source:** Multiple tokens per expensive model call (not reduced FLOPs)
@@ -416,25 +468,3 @@ Memory overhead is minimal since the draft model is small. KV cache improves eff
 8. **Memory:** Minimal overhead (draft model is small)
 
 ---
-
-## 12. When to Use Speculative Decoding
-
-### ✅ Good Use Cases
-- **Latency-critical serving** (chatbots, real-time applications)
-- **Long-form generation** (more tokens → more opportunities for speedup)
-- **Good draft model available** (smaller version, quantized, distilled)
-- **Inference-bound workloads** (not training)
-
-### ❌ Less Beneficial
-- **Batch inference** (already parallelized across sequences)
-- **Very short outputs** (overhead not amortized)
-- **No suitable draft model** (acceptance rate too low)
-- **Memory-constrained systems** (need to load 2 models)
-
----
-
-## References
-
-- [Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192) - Original paper
-- [Accelerating Large Language Model Decoding with Speculative Sampling](https://arxiv.org/abs/2302.01318) - DeepMind's version
-- [Medusa: Simple LLM Inference Acceleration with Multiple Decoding Heads](https://arxiv.org/abs/2401.10774)
