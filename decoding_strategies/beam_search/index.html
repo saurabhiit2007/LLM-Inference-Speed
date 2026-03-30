@@ -1031,27 +1031,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-code-example" class="md-nav__link">
+  <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
     <span class="md-ellipsis">
-      10. Code Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-key-takeaways-for-interviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      11. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
+      10. Key Takeaways for Interviews
     </span>
   </a>
   
@@ -1969,27 +1951,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-code-example" class="md-nav__link">
+  <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
     <span class="md-ellipsis">
-      10. Code Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-key-takeaways-for-interviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      11. Key Takeaways for Interviews
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
+      10. Key Takeaways for Interviews
     </span>
   </a>
   
@@ -2018,6 +1982,7 @@
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
 <p>Beam search maintains <strong>K candidate sequences</strong> (beams) at each decoding step and selects the sequence with the highest <strong>cumulative probability</strong>. It balances between greedy decoding (K=1) and exhaustive search (K=vocab_size).</p>
 <p><strong>Key insight:</strong> Explore multiple promising paths simultaneously to avoid getting stuck in locally optimal but globally suboptimal sequences.</p>
+<hr />
 <hr />
 <h2 id="2-how-it-works">2. How It Works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
 <h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
@@ -2053,53 +2018,96 @@
     <span class="k">return</span> <span class="n">beams</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Return best sequence</span>
 </code></pre></div>
 <h3 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h3>
-<p><strong>Beam width (K):</strong>
-- K=1: Greedy decoding
-- K=5-10: Typical for translation
-- K=50+: Exhaustive (expensive)</p>
-<p><strong>Cumulative log probability:</strong>
-- Use log probabilities to avoid numerical underflow
-- Score = log(P₁) + log(P₂) + ... + log(Pₙ)
-- Equivalent to log(P₁ × P₂ × ... × Pₙ)</p>
+<p><strong>Beam width (K):</strong></p>
+<ul>
+<li>K=1: Greedy decoding</li>
+<li>K=5-10: Typical for translation</li>
+<li>K=50+: Exhaustive (expensive)</li>
+</ul>
+<p><strong>Cumulative log probability:</strong></p>
+<ul>
+<li>Use log probabilities to avoid numerical underflow</li>
+<li>Score = log(P₁) + log(P₂) + ... + log(Pₙ)</li>
+<li>Equivalent to log(P₁ × P₂ × ... × Pₙ)</li>
+</ul>
+<hr />
 <hr />
 <h2 id="3-example-walkthrough">3. Example Walkthrough<a class="headerlink" href="#3-example-walkthrough" title="Permanent link">&para;</a></h2>
 <p><strong>Prompt:</strong> "The cat sat on the"</p>
 <p><strong>Beam width:</strong> 3</p>
 <h3 id="step-1-first-token">Step 1: First Token<a class="headerlink" href="#step-1-first-token" title="Permanent link">&para;</a></h3>
-<p>Model probabilities:
-| Token | Probability | Log Prob |
-|-------|-------------|----------|
-| mat   | 0.40        | -0.92    |
-| floor | 0.25        | -1.39    |
-| sofa  | 0.15        | -1.90    |
-| bed   | 0.10        | -2.30    |</p>
-<p><strong>Top 3 beams:</strong>
-1. "The cat sat on the mat" → score: -0.92
-2. "The cat sat on the floor" → score: -1.39
-3. "The cat sat on the sofa" → score: -1.90</p>
+<p>Model probabilities:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Probability</th>
+<th>Log Prob</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mat</td>
+<td>0.40</td>
+<td>-0.92</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>0.25</td>
+<td>-1.39</td>
+</tr>
+<tr>
+<td>sofa</td>
+<td>0.15</td>
+<td>-1.90</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>0.10</td>
+<td>-2.30</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Top 3 beams:</strong></p>
+<ol>
+<li>"The cat sat on the mat" → score: -0.92</li>
+<li>"The cat sat on the floor" → score: -1.39</li>
+<li>"The cat sat on the sofa" → score: -1.90</li>
+</ol>
 <h3 id="step-2-second-token">Step 2: Second Token<a class="headerlink" href="#step-2-second-token" title="Permanent link">&para;</a></h3>
 <p>Expand each beam:</p>
-<p><strong>Beam 1:</strong> "mat" + next token
-- "mat ." → -0.92 + (-0.51) = <strong>-1.43</strong>
-- "mat and" → -0.92 + (-1.61) = -2.53</p>
-<p><strong>Beam 2:</strong> "floor" + next token
-- "floor ." → -1.39 + (-0.36) = <strong>-1.75</strong>
-- "floor while" → -1.39 + (-1.20) = -2.59</p>
-<p><strong>Beam 3:</strong> "sofa" + next token
-- "sofa ." → -1.90 + (-0.41) = -2.31
-- "sofa when" → -1.90 + (-0.51) = <strong>-2.41</strong></p>
-<p><strong>New top 3 beams:</strong>
-1. "The cat sat on the mat ." → -1.43
-2. "The cat sat on the floor ." → -1.75
-3. "The cat sat on the sofa when" → -2.41</p>
+<p><strong>Beam 1:</strong> "mat" + next token</p>
+<ul>
+<li>"mat ." → -0.92 + (-0.51) = <strong>-1.43</strong></li>
+<li>"mat and" → -0.92 + (-1.61) = -2.53</li>
+</ul>
+<p><strong>Beam 2:</strong> "floor" + next token</p>
+<ul>
+<li>"floor ." → -1.39 + (-0.36) = <strong>-1.75</strong></li>
+<li>"floor while" → -1.39 + (-1.20) = -2.59</li>
+</ul>
+<p><strong>Beam 3:</strong> "sofa" + next token</p>
+<ul>
+<li>"sofa ." → -1.90 + (-0.41) = -2.31</li>
+<li>"sofa when" → -1.90 + (-0.51) = <strong>-2.41</strong></li>
+</ul>
+<p><strong>New top 3 beams:</strong></p>
+<ol>
+<li>"The cat sat on the mat ." → -1.43</li>
+<li>"The cat sat on the floor ." → -1.75</li>
+<li>"The cat sat on the sofa when" → -2.41</li>
+</ol>
 <p><strong>Final output:</strong> "The cat sat on the mat."</p>
+<hr />
 <hr />
 <h2 id="4-key-characteristics">4. Key Characteristics<a class="headerlink" href="#4-key-characteristics" title="Permanent link">&para;</a></h2>
 <h3 id="explores-multiple-paths">Explores Multiple Paths<a class="headerlink" href="#explores-multiple-paths" title="Permanent link">&para;</a></h3>
-<p>Unlike greedy, beam search maintains K hypotheses:
-- Can recover from locally suboptimal choices
-- Considers alternative continuations
-- Better global optimization</p>
+<p>Unlike greedy, beam search maintains K hypotheses:</p>
+<ul>
+<li>Can recover from locally suboptimal choices</li>
+<li>Considers alternative continuations</li>
+<li>Better global optimization</li>
+</ul>
 <h3 id="length-bias-problem">Length Bias Problem<a class="headerlink" href="#length-bias-problem" title="Permanent link">&para;</a></h3>
 <p>Longer sequences accumulate more negative log probabilities:
 <div class="highlight"><pre><span></span><code>Seq 1 (length 5): -0.5 + -0.6 + -0.4 + -0.5 + -0.3 = -2.3
@@ -2112,6 +2120,7 @@ Seq 2 (length 3): -0.5 + -0.6 + -0.4 = -1.5
 <span class="c1"># α = 0: no normalization</span>
 <span class="c1"># α = 1: full normalization</span>
 </code></pre></div></p>
+<hr />
 <hr />
 <h2 id="5-common-problems">5. Common Problems<a class="headerlink" href="#5-common-problems" title="Permanent link">&para;</a></h2>
 <h3 id="problem-1-reduced-diversity">Problem 1: Reduced Diversity<a class="headerlink" href="#problem-1-reduced-diversity" title="Permanent link">&para;</a></h3>
@@ -2139,6 +2148,7 @@ Beam (K=5): &quot;a young boy who lived in a small town&quot;
 <li>K=10 → 10× slower than greedy</li>
 </ul>
 <hr />
+<hr />
 <h2 id="6-length-normalization">6. Length Normalization<a class="headerlink" href="#6-length-normalization" title="Permanent link">&para;</a></h2>
 <h3 id="without-normalization">Without Normalization<a class="headerlink" href="#without-normalization" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Shorter sequences preferred</span>
@@ -2152,33 +2162,45 @@ Beam (K=5): &quot;a young boy who lived in a small town&quot;
 <span class="n">normalized</span> <span class="o">=</span> <span class="n">score</span> <span class="o">/</span> <span class="n">length_penalty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 <span class="n">beams</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">normalized_score</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Effect:</strong>
-- Encourages longer, more complete sequences
-- Prevents premature termination
-- Essential for translation and summarization</p>
+<p><strong>Effect:</strong></p>
+<ul>
+<li>Encourages longer, more complete sequences</li>
+<li>Prevents premature termination</li>
+<li>Essential for translation and summarization</li>
+</ul>
+<hr />
 <hr />
 <h2 id="7-when-to-use-beam-search">7. When to Use Beam Search<a class="headerlink" href="#7-when-to-use-beam-search" title="Permanent link">&para;</a></h2>
 <h3 id="good-use-cases">✅ Good Use Cases<a class="headerlink" href="#good-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Structured tasks with clear objectives:</strong>
-- Machine translation
-- Automatic speech recognition (ASR)
-- Image captioning
-- Summarization
-- Question answering (extractive)</p>
-<p><strong>When correctness matters more than creativity:</strong>
-- Technical documentation generation
-- Code comment generation
-- Medical report generation</p>
+<p><strong>Structured tasks with clear objectives:</strong></p>
+<ul>
+<li>Machine translation</li>
+<li>Automatic speech recognition (ASR)</li>
+<li>Image captioning</li>
+<li>Summarization</li>
+<li>Question answering (extractive)</li>
+</ul>
+<p><strong>When correctness matters more than creativity:</strong></p>
+<ul>
+<li>Technical documentation generation</li>
+<li>Code comment generation</li>
+<li>Medical report generation</li>
+</ul>
 <h3 id="poor-use-cases">❌ Poor Use Cases<a class="headerlink" href="#poor-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Creative or conversational tasks:</strong>
-- Story writing
-- Dialogue systems
-- Chatbots
-- Poetry generation</p>
-<p><strong>Tasks requiring diversity:</strong>
-- Brainstorming
-- Multiple solution generation
-- Creative writing</p>
+<p><strong>Creative or conversational tasks:</strong></p>
+<ul>
+<li>Story writing</li>
+<li>Dialogue systems</li>
+<li>Chatbots</li>
+<li>Poetry generation</li>
+</ul>
+<p><strong>Tasks requiring diversity:</strong></p>
+<ul>
+<li>Brainstorming</li>
+<li>Multiple solution generation</li>
+<li>Creative writing</li>
+</ul>
+<hr />
 <hr />
 <h2 id="8-variants-and-improvements">8. Variants and Improvements<a class="headerlink" href="#8-variants-and-improvements" title="Permanent link">&para;</a></h2>
 <h3 id="diverse-beam-search">Diverse Beam Search<a class="headerlink" href="#diverse-beam-search" title="Permanent link">&para;</a></h3>
@@ -2197,14 +2219,17 @@ Beam (K=5): &quot;a young boy who lived in a small town&quot;
 <h3 id="stochastic-beam-search">Stochastic Beam Search<a class="headerlink" href="#stochastic-beam-search" title="Permanent link">&para;</a></h3>
 <p>Add randomness to beam selection for more diversity.</p>
 <hr />
+<hr />
 <h2 id="9-interview-questions">9. Interview Questions<a class="headerlink" href="#9-interview-questions" title="Permanent link">&para;</a></h2>
 <h3 id="q1-what-is-beam-search-and-how-does-it-differ-from-greedy-decoding">Q1: What is beam search and how does it differ from greedy decoding?<a class="headerlink" href="#q1-what-is-beam-search-and-how-does-it-differ-from-greedy-decoding" title="Permanent link">&para;</a></h3>
 <p><strong>Answer:</strong> Beam search maintains K candidate sequences (beams) instead of just one. At each step, it expands all beams, scores all possible continuations, and keeps the top K. This allows exploration of multiple paths and can recover from locally suboptimal choices, unlike greedy which commits to a single path.</p>
 <hr />
 <h3 id="q2-why-use-log-probabilities-instead-of-regular-probabilities">Q2: Why use log probabilities instead of regular probabilities?<a class="headerlink" href="#q2-why-use-log-probabilities-instead-of-regular-probabilities" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Two reasons:
-1. <strong>Numerical stability:</strong> Multiplying many small probabilities (0.3 × 0.4 × 0.2...) quickly underflows to zero in floating point
-2. <strong>Computational efficiency:</strong> Log transforms products to sums: log(P₁ × P₂) = log(P₁) + log(P₂), which is more stable and efficient</p>
+<p><strong>Answer:</strong> Two reasons:</p>
+<ol>
+<li><strong>Numerical stability:</strong> Multiplying many small probabilities (0.3 × 0.4 × 0.2...) quickly underflows to zero in floating point</li>
+<li><strong>Computational efficiency:</strong> Log transforms products to sums: log(P₁ × P₂) = log(P₁) + log(P₂), which is more stable and efficient</li>
+</ol>
 <hr />
 <h3 id="q3-what-is-the-length-bias-problem-in-beam-search">Q3: What is the length bias problem in beam search?<a class="headerlink" href="#q3-what-is-the-length-bias-problem-in-beam-search" title="Permanent link">&para;</a></h3>
 <p><strong>Answer:</strong> Longer sequences accumulate more negative log probabilities, making them score lower than shorter sequences even if they're more complete. For example, a 10-token sequence might score -8.5 while a 5-token incomplete sequence scores -3.2. Length normalization (dividing by sequence length raised to α) addresses this by favoring complete sentences.</p>
@@ -2213,18 +2238,22 @@ Beam (K=5): &quot;a young boy who lived in a small town&quot;
 <p><strong>Answer:</strong> Beam search is <strong>deterministic</strong> and <strong>risk-averse</strong>—it keeps the K highest-probability sequences. This means all beams tend to follow safe, high-probability paths, leading to similar outputs. Rare but creative continuations are discarded early. Sampling methods can explore lower-probability tokens, leading to more diversity.</p>
 <hr />
 <h3 id="q5-whats-the-computational-complexity-of-beam-search">Q5: What's the computational complexity of beam search?<a class="headerlink" href="#q5-whats-the-computational-complexity-of-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong>
-- <strong>Time per step:</strong> O(K × V) where K=beam width, V=vocab size
-  - Greedy: O(V), so beam is K× slower
-- <strong>Memory:</strong> O(K × T) to store K beams of length T
-- <strong>Total:</strong> For T steps, O(K × V × T) time</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Time per step:</strong> O(K × V) where K=beam width, V=vocab size</li>
+<li>Greedy: O(V), so beam is K× slower</li>
+<li><strong>Memory:</strong> O(K × T) to store K beams of length T</li>
+<li><strong>Total:</strong> For T steps, O(K × V × T) time</li>
+</ul>
 <p>Typical K=5-10 for translation, but this 5-10× slowdown is significant.</p>
 <hr />
 <h3 id="q6-how-do-you-choose-the-optimal-beam-width-k">Q6: How do you choose the optimal beam width K?<a class="headerlink" href="#q6-how-do-you-choose-the-optimal-beam-width-k" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Trade-off between quality and speed:
-- <strong>K=1:</strong> Greedy (fast, low quality)
-- <strong>K=5-10:</strong> Standard for translation (good balance)
-- <strong>K=50+:</strong> Diminishing returns, very slow</p>
+<p><strong>Answer:</strong> Trade-off between quality and speed:</p>
+<ul>
+<li><strong>K=1:</strong> Greedy (fast, low quality)</li>
+<li><strong>K=5-10:</strong> Standard for translation (good balance)</li>
+<li><strong>K=50+:</strong> Diminishing returns, very slow</li>
+</ul>
 <p>Empirically, quality plateaus around K=10 for most tasks. Beyond that, you get marginal gains for significant computational cost.</p>
 <hr />
 <h3 id="q7-can-beam-search-guarantee-finding-the-optimal-sequence">Q7: Can beam search guarantee finding the optimal sequence?<a class="headerlink" href="#q7-can-beam-search-guarantee-finding-the-optimal-sequence" title="Permanent link">&para;</a></h3>
@@ -2234,102 +2263,32 @@ Beam (K=5): &quot;a young boy who lived in a small town&quot;
 <p><strong>Answer:</strong> Diverse beam search forces different beam groups to explore different areas of the search space by penalizing similarity. It's useful when you need multiple distinct outputs (e.g., generating K different translations or summaries). Standard beam search often produces K very similar sequences, which isn't helpful for diversity.</p>
 <hr />
 <h3 id="q9-when-would-you-use-beam-search-over-sampling-methods-like-top-p">Q9: When would you use beam search over sampling methods like top-p?<a class="headerlink" href="#q9-when-would-you-use-beam-search-over-sampling-methods-like-top-p" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Use beam search for:
-- <strong>Objective quality metrics</strong> (BLEU, ROUGE) that correlate with likelihood
-- <strong>Structured outputs</strong> (translation, ASR) with one correct answer
-- <strong>Deterministic requirements</strong> (reproducibility)</p>
-<p>Use sampling for:
-- <strong>Creative tasks</strong> requiring diversity
-- <strong>Conversational AI</strong> needing personality
-- <strong>Open-ended generation</strong> where many good answers exist</p>
+<p><strong>Answer:</strong> Use beam search for:</p>
+<ul>
+<li><strong>Objective quality metrics</strong> (BLEU, ROUGE) that correlate with likelihood</li>
+<li><strong>Structured outputs</strong> (translation, ASR) with one correct answer</li>
+<li><strong>Deterministic requirements</strong> (reproducibility)</li>
+</ul>
+<p>Use sampling for:</p>
+<ul>
+<li><strong>Creative tasks</strong> requiring diversity</li>
+<li><strong>Conversational AI</strong> needing personality</li>
+<li><strong>Open-ended generation</strong> where many good answers exist</li>
+</ul>
 <hr />
 <h3 id="q10-how-does-beam-search-handle-the-eos-token">Q10: How does beam search handle the EOS token?<a class="headerlink" href="#q10-how-does-beam-search-handle-the-eos-token" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> When a beam generates EOS (end-of-sequence), it's marked as complete:
-1. Complete beams stop expanding
-2. They remain in the candidate pool with their final score
-3. Active beams continue generating
-4. Search terminates when all K beams complete or max_length reached
-5. Return the complete beam with highest normalized score</p>
+<p><strong>Answer:</strong> When a beam generates EOS (end-of-sequence), it's marked as complete:</p>
+<ol>
+<li>Complete beams stop expanding</li>
+<li>They remain in the candidate pool with their final score</li>
+<li>Active beams continue generating</li>
+<li>Search terminates when all K beams complete or max_length reached</li>
+<li>Return the complete beam with highest normalized score</li>
+</ol>
 <p>Some implementations use length normalization to fairly compare complete sequences of different lengths.</p>
 <hr />
-<h2 id="10-code-example">10. Code Example<a class="headerlink" href="#10-code-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
-
-<span class="k">def</span> <span class="nf">beam_search</span><span class="p">(</span>
-    <span class="n">model</span><span class="p">,</span>
-    <span class="n">input_ids</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
-    <span class="n">beam_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="n">max_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
-    <span class="n">length_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
-    <span class="n">eos_token_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Beam search decoding.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        model: Language model</span>
-<span class="sd">        input_ids: Starting tokens [1, seq_len]</span>
-<span class="sd">        beam_width: Number of beams</span>
-<span class="sd">        max_length: Maximum sequence length</span>
-<span class="sd">        length_penalty: Alpha for length normalization</span>
-<span class="sd">        eos_token_id: End of sequence token</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Best sequence found</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">device</span>
-    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="c1"># Initialize beams: (sequence, score, finished)</span>
-    <span class="n">beams</span> <span class="o">=</span> <span class="p">[(</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">False</span><span class="p">)]</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
-        <span class="n">candidates</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">seq</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">finished</span> <span class="ow">in</span> <span class="n">beams</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">finished</span><span class="p">:</span>
-                <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">seq</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">finished</span><span class="p">))</span>
-                <span class="k">continue</span>
-
-            <span class="c1"># Get next token probabilities</span>
-            <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">seq</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-                <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
-                <span class="n">logits</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
-                <span class="n">log_probs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-
-            <span class="c1"># Expand beam with top-K tokens</span>
-            <span class="n">top_k_probs</span><span class="p">,</span> <span class="n">top_k_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="n">log_probs</span><span class="p">,</span> <span class="n">beam_width</span><span class="p">)</span>
-
-            <span class="k">for</span> <span class="n">prob</span><span class="p">,</span> <span class="n">token_id</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">top_k_probs</span><span class="p">,</span> <span class="n">top_k_ids</span><span class="p">):</span>
-                <span class="n">new_seq</span> <span class="o">=</span> <span class="n">seq</span> <span class="o">+</span> <span class="p">[</span><span class="n">token_id</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span>
-                <span class="n">new_score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="n">prob</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-                <span class="n">is_finished</span> <span class="o">=</span> <span class="p">(</span><span class="n">token_id</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">eos_token_id</span><span class="p">)</span>
-                <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_seq</span><span class="p">,</span> <span class="n">new_score</span><span class="p">,</span> <span class="n">is_finished</span><span class="p">))</span>
-
-        <span class="c1"># Apply length penalty and keep top beams</span>
-        <span class="k">def</span> <span class="nf">normalized_score</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-            <span class="n">seq</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">item</span>
-            <span class="n">penalty</span> <span class="o">=</span> <span class="p">((</span><span class="mi">5</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">**</span> <span class="n">length_penalty</span>
-            <span class="k">return</span> <span class="n">score</span> <span class="o">/</span> <span class="n">penalty</span>
-
-        <span class="n">beams</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">normalized_score</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">beam_width</span><span class="p">]</span>
-
-        <span class="c1"># Early stopping if all beams finished</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">finished</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">finished</span> <span class="ow">in</span> <span class="n">beams</span><span class="p">):</span>
-            <span class="k">break</span>
-
-    <span class="c1"># Return best sequence</span>
-    <span class="n">best_seq</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">beams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">best_seq</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-
-<span class="c1"># Usage</span>
-<span class="c1"># output = beam_search(model, prompt_ids, beam_width=5)</span>
-</code></pre></div>
 <hr />
-<h2 id="11-key-takeaways-for-interviews">11. Key Takeaways for Interviews<a class="headerlink" href="#11-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
+<h2 id="10-key-takeaways-for-interviews">10. Key Takeaways for Interviews<a class="headerlink" href="#10-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Definition:</strong> Maintains K candidate sequences, keeps top-K by cumulative probability</li>
 <li><strong>Beam width K:</strong> Trade-off between quality (higher K) and speed (lower K)</li>
@@ -2341,12 +2300,6 @@ Beam (K=5): &quot;a young boy who lived in a small town&quot;
 <li><strong>Complexity:</strong> O(K × V × T) time, O(K × T) space</li>
 </ol>
 <hr />
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://arxiv.org/abs/1609.08144">Google's Neural Machine Translation System</a> - Length normalization formula</li>
-<li><a href="https://arxiv.org/abs/1904.09751">The Curious Case of Neural Text Degeneration</a> - Discusses diversity issues</li>
-<li><a href="https://arxiv.org/abs/1610.02424">Diverse Beam Search</a></li>
-</ul>
 
 
 
