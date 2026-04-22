@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#beam-search-interview-prep-guide" class="md-skip">
+        <a href="#1-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -541,6 +541,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -624,8 +647,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -658,8 +679,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -677,363 +696,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-how-it-works" class="md-nav__link">
+  <a href="#2-core-issues" class="md-nav__link">
     <span class="md-ellipsis">
-      2. How It Works
+      2. Core Issues
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. How It Works">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Algorithm
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#core-concepts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Concepts
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-example-walkthrough" class="md-nav__link">
+  <a href="#3-when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Example Walkthrough
+      3. When to Use
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3. Example Walkthrough">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-first-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 1: First Token
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-second-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 2: Second Token
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-key-characteristics" class="md-nav__link">
+  <a href="#4-beam-search-vs-speculative-decoding" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Key Characteristics
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Key Characteristics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#explores-multiple-paths" class="md-nav__link">
-    <span class="md-ellipsis">
-      Explores Multiple Paths
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#length-bias-problem" class="md-nav__link">
-    <span class="md-ellipsis">
-      Length Bias Problem
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-common-problems" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Common Problems
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Common Problems">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#problem-1-reduced-diversity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 1: Reduced Diversity
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-2-generic-outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 2: Generic Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-3-computational-cost" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 3: Computational Cost
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-length-normalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Length Normalization
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Length Normalization">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#without-normalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      Without Normalization
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-normalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      With Normalization
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-when-to-use-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. When to Use Beam Search
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. When to Use Beam Search">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#good-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Good Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#poor-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ❌ Poor Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-variants-and-improvements" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Variants and Improvements
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="8. Variants and Improvements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#diverse-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Diverse Beam Search
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#constrained-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Constrained Beam Search
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stochastic-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stochastic Beam Search
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Interview Questions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9. Interview Questions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q1-what-is-beam-search-and-how-does-it-differ-from-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q1: What is beam search and how does it differ from greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q2-why-use-log-probabilities-instead-of-regular-probabilities" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q2: Why use log probabilities instead of regular probabilities?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q3-what-is-the-length-bias-problem-in-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q3: What is the length bias problem in beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q4-why-does-beam-search-produce-less-diverse-outputs-than-sampling" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q4: Why does beam search produce less diverse outputs than sampling?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q5-whats-the-computational-complexity-of-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5: What's the computational complexity of beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q6-how-do-you-choose-the-optimal-beam-width-k" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q6: How do you choose the optimal beam width K?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q7-can-beam-search-guarantee-finding-the-optimal-sequence" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q7: Can beam search guarantee finding the optimal sequence?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q8-what-is-diverse-beam-search-and-when-is-it-useful" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q8: What is diverse beam search and when is it useful?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q9-when-would-you-use-beam-search-over-sampling-methods-like-top-p" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q9: When would you use beam search over sampling methods like top-p?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q10-how-does-beam-search-handle-the-eos-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q10: How does beam search handle the EOS token?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Key Takeaways for Interviews
+      4. Beam Search vs Speculative Decoding
     </span>
   </a>
   
@@ -1532,6 +1215,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1546,12 +1368,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1578,8 +1422,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1597,363 +1439,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-how-it-works" class="md-nav__link">
+  <a href="#2-core-issues" class="md-nav__link">
     <span class="md-ellipsis">
-      2. How It Works
+      2. Core Issues
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. How It Works">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Algorithm
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#core-concepts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Concepts
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-example-walkthrough" class="md-nav__link">
+  <a href="#3-when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Example Walkthrough
+      3. When to Use
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3. Example Walkthrough">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-first-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 1: First Token
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-second-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 2: Second Token
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-key-characteristics" class="md-nav__link">
+  <a href="#4-beam-search-vs-speculative-decoding" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Key Characteristics
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Key Characteristics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#explores-multiple-paths" class="md-nav__link">
-    <span class="md-ellipsis">
-      Explores Multiple Paths
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#length-bias-problem" class="md-nav__link">
-    <span class="md-ellipsis">
-      Length Bias Problem
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-common-problems" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Common Problems
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Common Problems">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#problem-1-reduced-diversity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 1: Reduced Diversity
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-2-generic-outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 2: Generic Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-3-computational-cost" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 3: Computational Cost
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-length-normalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Length Normalization
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Length Normalization">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#without-normalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      Without Normalization
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-normalization" class="md-nav__link">
-    <span class="md-ellipsis">
-      With Normalization
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-when-to-use-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. When to Use Beam Search
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. When to Use Beam Search">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#good-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Good Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#poor-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ❌ Poor Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-variants-and-improvements" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Variants and Improvements
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="8. Variants and Improvements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#diverse-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Diverse Beam Search
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#constrained-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Constrained Beam Search
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stochastic-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stochastic Beam Search
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. Interview Questions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9. Interview Questions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q1-what-is-beam-search-and-how-does-it-differ-from-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q1: What is beam search and how does it differ from greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q2-why-use-log-probabilities-instead-of-regular-probabilities" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q2: Why use log probabilities instead of regular probabilities?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q3-what-is-the-length-bias-problem-in-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q3: What is the length bias problem in beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q4-why-does-beam-search-produce-less-diverse-outputs-than-sampling" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q4: Why does beam search produce less diverse outputs than sampling?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q5-whats-the-computational-complexity-of-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5: What's the computational complexity of beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q6-how-do-you-choose-the-optimal-beam-width-k" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q6: How do you choose the optimal beam width K?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q7-can-beam-search-guarantee-finding-the-optimal-sequence" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q7: Can beam search guarantee finding the optimal sequence?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q8-what-is-diverse-beam-search-and-when-is-it-useful" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q8: What is diverse beam search and when is it useful?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q9-when-would-you-use-beam-search-over-sampling-methods-like-top-p" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q9: When would you use beam search over sampling methods like top-p?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q10-how-does-beam-search-handle-the-eos-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q10: How does beam search handle the EOS token?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Key Takeaways for Interviews
+      4. Beam Search vs Speculative Decoding
     </span>
   </a>
   
@@ -1978,328 +1484,46 @@
   
 
 
-<h1 id="beam-search-interview-prep-guide">Beam Search - Interview Prep Guide<a class="headerlink" href="#beam-search-interview-prep-guide" title="Permanent link">&para;</a></h1>
+  <h1>Beam Search</h1>
+
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
-<p>Beam search maintains <strong>K candidate sequences</strong> (beams) at each decoding step and selects the sequence with the highest <strong>cumulative probability</strong>. It balances between greedy decoding (K=1) and exhaustive search (K=vocab_size).</p>
-<p><strong>Key insight:</strong> Explore multiple promising paths simultaneously to avoid getting stuck in locally optimal but globally suboptimal sequences.</p>
-<hr />
-<hr />
-<h2 id="2-how-it-works">2. How It Works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
-<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">beam_search</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">beam_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-    <span class="c1"># Initialize: One beam with the prompt</span>
-    <span class="n">beams</span> <span class="o">=</span> <span class="p">[(</span><span class="n">prompt</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)]</span>  <span class="c1"># (sequence, cumulative_log_prob)</span>
-
-    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
-        <span class="n">candidates</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="c1"># Expand each beam</span>
-        <span class="k">for</span> <span class="n">seq</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">beams</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">EOS</span><span class="p">:</span>  <span class="c1"># Completed sequence</span>
-                <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">seq</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
-                <span class="k">continue</span>
-
-            <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-            <span class="n">probs</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>
-
-            <span class="c1"># Consider all tokens</span>
-            <span class="k">for</span> <span class="n">token_id</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">probs</span><span class="p">):</span>
-                <span class="n">new_seq</span> <span class="o">=</span> <span class="n">seq</span> <span class="o">+</span> <span class="p">[</span><span class="n">token_id</span><span class="p">]</span>
-                <span class="n">new_score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>  <span class="c1"># Cumulative log probability</span>
-                <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_seq</span><span class="p">,</span> <span class="n">new_score</span><span class="p">))</span>
-
-        <span class="c1"># Keep top K beams</span>
-        <span class="n">beams</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">beam_width</span><span class="p">]</span>
-
-        <span class="c1"># Stop if all beams are complete</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">EOS</span> <span class="k">for</span> <span class="n">seq</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">beams</span><span class="p">):</span>
-            <span class="k">break</span>
-
-    <span class="k">return</span> <span class="n">beams</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Return best sequence</span>
+<p>Beam search maintains K candidate sequences (beams) at each decode step, retaining only the top K by cumulative log-probability. It trades compute for better global optimality compared to greedy.</p>
+<div class="highlight"><pre><span></span><code>score(sequence) = Σ log P(tokent | token&lt;t)
 </code></pre></div>
-<h3 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h3>
-<p><strong>Beam width (K):</strong></p>
-<ul>
-<li>K=1: Greedy decoding</li>
-<li>K=5-10: Typical for translation</li>
-<li>K=50+: Exhaustive (expensive)</li>
-</ul>
-<p><strong>Cumulative log probability:</strong></p>
-<ul>
-<li>Use log probabilities to avoid numerical underflow</li>
-<li>Score = log(P₁) + log(P₂) + ... + log(Pₙ)</li>
-<li>Equivalent to log(P₁ × P₂ × ... × Pₙ)</li>
-</ul>
+<p>K=1 reduces to greedy decoding. Typical values: K=4–6 for translation/ASR.</p>
 <hr />
+<h2 id="2-core-issues">2. Core Issues<a class="headerlink" href="#2-core-issues" title="Permanent link">&para;</a></h2>
+<p><strong>Length bias:</strong> Longer sequences accumulate more negative log-probabilities and score lower than shorter ones — even if they are better continuations. Fix: length normalisation <code>score / length^α</code> (α ≈ 0.6–0.8).</p>
+<p><strong>Low diversity:</strong> All K beams tend to share high-probability prefixes and diverge only in minor ways. The output set looks nearly identical. Diverse beam search adds a penalty for overlap across beams, but remains less effective than sampling for open-ended generation.</p>
+<p><strong>Compute cost:</strong> K × V candidates evaluated per step vs V for greedy; KV cache memory scales K×. At K=5 this is 5× the decode cost.</p>
 <hr />
-<h2 id="3-example-walkthrough">3. Example Walkthrough<a class="headerlink" href="#3-example-walkthrough" title="Permanent link">&para;</a></h2>
-<p><strong>Prompt:</strong> "The cat sat on the"</p>
-<p><strong>Beam width:</strong> 3</p>
-<h3 id="step-1-first-token">Step 1: First Token<a class="headerlink" href="#step-1-first-token" title="Permanent link">&para;</a></h3>
-<p>Model probabilities:</p>
+<h2 id="3-when-to-use">3. When to Use<a class="headerlink" href="#3-when-to-use" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Token</th>
-<th>Probability</th>
-<th>Log Prob</th>
+<th>Use beam search</th>
+<th>Prefer sampling</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>mat</td>
-<td>0.40</td>
-<td>-0.92</td>
+<td>Machine translation</td>
+<td>Chatbots, dialogue</td>
 </tr>
 <tr>
-<td>floor</td>
-<td>0.25</td>
-<td>-1.39</td>
+<td>ASR transcription</td>
+<td>Creative writing</td>
 </tr>
 <tr>
-<td>sofa</td>
-<td>0.15</td>
-<td>-1.90</td>
-</tr>
-<tr>
-<td>bed</td>
-<td>0.10</td>
-<td>-2.30</td>
+<td>Structured / extractive QA</td>
+<td>Open-ended generation</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Top 3 beams:</strong></p>
-<ol>
-<li>"The cat sat on the mat" → score: -0.92</li>
-<li>"The cat sat on the floor" → score: -1.39</li>
-<li>"The cat sat on the sofa" → score: -1.90</li>
-</ol>
-<h3 id="step-2-second-token">Step 2: Second Token<a class="headerlink" href="#step-2-second-token" title="Permanent link">&para;</a></h3>
-<p>Expand each beam:</p>
-<p><strong>Beam 1:</strong> "mat" + next token</p>
-<ul>
-<li>"mat ." → -0.92 + (-0.51) = <strong>-1.43</strong></li>
-<li>"mat and" → -0.92 + (-1.61) = -2.53</li>
-</ul>
-<p><strong>Beam 2:</strong> "floor" + next token</p>
-<ul>
-<li>"floor ." → -1.39 + (-0.36) = <strong>-1.75</strong></li>
-<li>"floor while" → -1.39 + (-1.20) = -2.59</li>
-</ul>
-<p><strong>Beam 3:</strong> "sofa" + next token</p>
-<ul>
-<li>"sofa ." → -1.90 + (-0.41) = -2.31</li>
-<li>"sofa when" → -1.90 + (-0.51) = <strong>-2.41</strong></li>
-</ul>
-<p><strong>New top 3 beams:</strong></p>
-<ol>
-<li>"The cat sat on the mat ." → -1.43</li>
-<li>"The cat sat on the floor ." → -1.75</li>
-<li>"The cat sat on the sofa when" → -2.41</li>
-</ol>
-<p><strong>Final output:</strong> "The cat sat on the mat."</p>
+<p><strong>In modern LLM serving, beam search is almost never used.</strong> Continuous batching systems assume each sequence generates one token per iteration — beam search would require K parallel sequences per user request, multiplying KV cache cost and breaking iteration-level scheduling. It remains relevant in offline tasks (translation, ASR) but not in interactive LLM APIs.</p>
 <hr />
-<hr />
-<h2 id="4-key-characteristics">4. Key Characteristics<a class="headerlink" href="#4-key-characteristics" title="Permanent link">&para;</a></h2>
-<h3 id="explores-multiple-paths">Explores Multiple Paths<a class="headerlink" href="#explores-multiple-paths" title="Permanent link">&para;</a></h3>
-<p>Unlike greedy, beam search maintains K hypotheses:</p>
-<ul>
-<li>Can recover from locally suboptimal choices</li>
-<li>Considers alternative continuations</li>
-<li>Better global optimization</li>
-</ul>
-<h3 id="length-bias-problem">Length Bias Problem<a class="headerlink" href="#length-bias-problem" title="Permanent link">&para;</a></h3>
-<p>Longer sequences accumulate more negative log probabilities:
-<div class="highlight"><pre><span></span><code>Seq 1 (length 5): -0.5 + -0.6 + -0.4 + -0.5 + -0.3 = -2.3
-Seq 2 (length 3): -0.5 + -0.6 + -0.4 = -1.5
-</code></pre></div></p>
-<p>Seq 2 has higher score despite being incomplete!</p>
-<p><strong>Solution: Length normalization</strong>
-<div class="highlight"><pre><span></span><code><span class="n">normalized_score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">/</span> <span class="n">length</span><span class="o">^</span><span class="n">α</span>
-<span class="c1"># α = 0.6-0.8 typical</span>
-<span class="c1"># α = 0: no normalization</span>
-<span class="c1"># α = 1: full normalization</span>
-</code></pre></div></p>
-<hr />
-<hr />
-<h2 id="5-common-problems">5. Common Problems<a class="headerlink" href="#5-common-problems" title="Permanent link">&para;</a></h2>
-<h3 id="problem-1-reduced-diversity">Problem 1: Reduced Diversity<a class="headerlink" href="#problem-1-reduced-diversity" title="Permanent link">&para;</a></h3>
-<p>All beams often converge to similar outputs:</p>
-<div class="highlight"><pre><span></span><code>Prompt: &quot;I think that&quot;
-
-Beam 1: &quot;I think that we should focus on...&quot;
-Beam 2: &quot;I think that we need to consider...&quot;
-Beam 3: &quot;I think that this is important...&quot;
-</code></pre></div>
-<p>All beams start with safe, high-probability tokens → similar continuations.</p>
-<p><strong>Why:</strong> Beam search favors <strong>safe, high-probability paths</strong> over <strong>diverse, creative paths</strong>.</p>
-<h3 id="problem-2-generic-outputs">Problem 2: Generic Outputs<a class="headerlink" href="#problem-2-generic-outputs" title="Permanent link">&para;</a></h3>
-<p>In open-ended generation:
-<div class="highlight"><pre><span></span><code>Prompt: &quot;Tell me a story about&quot;
-
-Greedy: &quot;a boy who lived in&quot;
-Beam (K=5): &quot;a young boy who lived in a small town&quot;
-</code></pre></div></p>
-<p>Beam search produces grammatically perfect but boring text.</p>
-<h3 id="problem-3-computational-cost">Problem 3: Computational Cost<a class="headerlink" href="#problem-3-computational-cost" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Memory:</strong> O(K × T × V) for storing beam candidates</li>
-<li><strong>Time:</strong> O(K × V) per step (vs O(V) for greedy)</li>
-<li>K=10 → 10× slower than greedy</li>
-</ul>
-<hr />
-<hr />
-<h2 id="6-length-normalization">6. Length Normalization<a class="headerlink" href="#6-length-normalization" title="Permanent link">&para;</a></h2>
-<h3 id="without-normalization">Without Normalization<a class="headerlink" href="#without-normalization" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Shorter sequences preferred</span>
-<span class="n">beams</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="with-normalization">With Normalization<a class="headerlink" href="#with-normalization" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">length_penalty</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">((</span><span class="mi">5</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">**</span> <span class="n">alpha</span>  <span class="c1"># Google NMT formula</span>
-
-<span class="c1"># Normalized score</span>
-<span class="n">normalized</span> <span class="o">=</span> <span class="n">score</span> <span class="o">/</span> <span class="n">length_penalty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-<span class="n">beams</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">normalized_score</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Effect:</strong></p>
-<ul>
-<li>Encourages longer, more complete sequences</li>
-<li>Prevents premature termination</li>
-<li>Essential for translation and summarization</li>
-</ul>
-<hr />
-<hr />
-<h2 id="7-when-to-use-beam-search">7. When to Use Beam Search<a class="headerlink" href="#7-when-to-use-beam-search" title="Permanent link">&para;</a></h2>
-<h3 id="good-use-cases">✅ Good Use Cases<a class="headerlink" href="#good-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Structured tasks with clear objectives:</strong></p>
-<ul>
-<li>Machine translation</li>
-<li>Automatic speech recognition (ASR)</li>
-<li>Image captioning</li>
-<li>Summarization</li>
-<li>Question answering (extractive)</li>
-</ul>
-<p><strong>When correctness matters more than creativity:</strong></p>
-<ul>
-<li>Technical documentation generation</li>
-<li>Code comment generation</li>
-<li>Medical report generation</li>
-</ul>
-<h3 id="poor-use-cases">❌ Poor Use Cases<a class="headerlink" href="#poor-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Creative or conversational tasks:</strong></p>
-<ul>
-<li>Story writing</li>
-<li>Dialogue systems</li>
-<li>Chatbots</li>
-<li>Poetry generation</li>
-</ul>
-<p><strong>Tasks requiring diversity:</strong></p>
-<ul>
-<li>Brainstorming</li>
-<li>Multiple solution generation</li>
-<li>Creative writing</li>
-</ul>
-<hr />
-<hr />
-<h2 id="8-variants-and-improvements">8. Variants and Improvements<a class="headerlink" href="#8-variants-and-improvements" title="Permanent link">&para;</a></h2>
-<h3 id="diverse-beam-search">Diverse Beam Search<a class="headerlink" href="#diverse-beam-search" title="Permanent link">&para;</a></h3>
-<p>Force beams to be dissimilar using diversity penalty:
-<div class="highlight"><pre><span></span><code><span class="n">diversity_penalty</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="k">for</span> <span class="n">beam_group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-    <span class="c1"># Penalize tokens already chosen by other groups</span>
-    <span class="n">adjusted_score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">-</span> <span class="n">diversity_penalty</span> <span class="o">*</span> <span class="n">overlap_count</span>
-</code></pre></div></p>
-<h3 id="constrained-beam-search">Constrained Beam Search<a class="headerlink" href="#constrained-beam-search" title="Permanent link">&para;</a></h3>
-<p>Force inclusion of specific tokens/phrases:
-<div class="highlight"><pre><span></span><code><span class="c1"># E.g., must include &quot;climate change&quot; in summary</span>
-<span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;climate&quot;</span><span class="p">,</span> <span class="s2">&quot;change&quot;</span><span class="p">]</span>
-<span class="c1"># Only keep beams that satisfy constraints</span>
-</code></pre></div></p>
-<h3 id="stochastic-beam-search">Stochastic Beam Search<a class="headerlink" href="#stochastic-beam-search" title="Permanent link">&para;</a></h3>
-<p>Add randomness to beam selection for more diversity.</p>
-<hr />
-<hr />
-<h2 id="9-interview-questions">9. Interview Questions<a class="headerlink" href="#9-interview-questions" title="Permanent link">&para;</a></h2>
-<h3 id="q1-what-is-beam-search-and-how-does-it-differ-from-greedy-decoding">Q1: What is beam search and how does it differ from greedy decoding?<a class="headerlink" href="#q1-what-is-beam-search-and-how-does-it-differ-from-greedy-decoding" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Beam search maintains K candidate sequences (beams) instead of just one. At each step, it expands all beams, scores all possible continuations, and keeps the top K. This allows exploration of multiple paths and can recover from locally suboptimal choices, unlike greedy which commits to a single path.</p>
-<hr />
-<h3 id="q2-why-use-log-probabilities-instead-of-regular-probabilities">Q2: Why use log probabilities instead of regular probabilities?<a class="headerlink" href="#q2-why-use-log-probabilities-instead-of-regular-probabilities" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Two reasons:</p>
-<ol>
-<li><strong>Numerical stability:</strong> Multiplying many small probabilities (0.3 × 0.4 × 0.2...) quickly underflows to zero in floating point</li>
-<li><strong>Computational efficiency:</strong> Log transforms products to sums: log(P₁ × P₂) = log(P₁) + log(P₂), which is more stable and efficient</li>
-</ol>
-<hr />
-<h3 id="q3-what-is-the-length-bias-problem-in-beam-search">Q3: What is the length bias problem in beam search?<a class="headerlink" href="#q3-what-is-the-length-bias-problem-in-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Longer sequences accumulate more negative log probabilities, making them score lower than shorter sequences even if they're more complete. For example, a 10-token sequence might score -8.5 while a 5-token incomplete sequence scores -3.2. Length normalization (dividing by sequence length raised to α) addresses this by favoring complete sentences.</p>
-<hr />
-<h3 id="q4-why-does-beam-search-produce-less-diverse-outputs-than-sampling">Q4: Why does beam search produce less diverse outputs than sampling?<a class="headerlink" href="#q4-why-does-beam-search-produce-less-diverse-outputs-than-sampling" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Beam search is <strong>deterministic</strong> and <strong>risk-averse</strong>—it keeps the K highest-probability sequences. This means all beams tend to follow safe, high-probability paths, leading to similar outputs. Rare but creative continuations are discarded early. Sampling methods can explore lower-probability tokens, leading to more diversity.</p>
-<hr />
-<h3 id="q5-whats-the-computational-complexity-of-beam-search">Q5: What's the computational complexity of beam search?<a class="headerlink" href="#q5-whats-the-computational-complexity-of-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong></p>
-<ul>
-<li><strong>Time per step:</strong> O(K × V) where K=beam width, V=vocab size</li>
-<li>Greedy: O(V), so beam is K× slower</li>
-<li><strong>Memory:</strong> O(K × T) to store K beams of length T</li>
-<li><strong>Total:</strong> For T steps, O(K × V × T) time</li>
-</ul>
-<p>Typical K=5-10 for translation, but this 5-10× slowdown is significant.</p>
-<hr />
-<h3 id="q6-how-do-you-choose-the-optimal-beam-width-k">Q6: How do you choose the optimal beam width K?<a class="headerlink" href="#q6-how-do-you-choose-the-optimal-beam-width-k" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Trade-off between quality and speed:</p>
-<ul>
-<li><strong>K=1:</strong> Greedy (fast, low quality)</li>
-<li><strong>K=5-10:</strong> Standard for translation (good balance)</li>
-<li><strong>K=50+:</strong> Diminishing returns, very slow</li>
-</ul>
-<p>Empirically, quality plateaus around K=10 for most tasks. Beyond that, you get marginal gains for significant computational cost.</p>
-<hr />
-<h3 id="q7-can-beam-search-guarantee-finding-the-optimal-sequence">Q7: Can beam search guarantee finding the optimal sequence?<a class="headerlink" href="#q7-can-beam-search-guarantee-finding-the-optimal-sequence" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> No. Beam search is a <strong>heuristic</strong> that prunes the search space. It only explores the top K paths at each step, potentially discarding paths that could lead to the globally optimal sequence later. Full exhaustive search (K=|V|^T) is computationally infeasible, so beam search is a practical approximation.</p>
-<hr />
-<h3 id="q8-what-is-diverse-beam-search-and-when-is-it-useful">Q8: What is diverse beam search and when is it useful?<a class="headerlink" href="#q8-what-is-diverse-beam-search-and-when-is-it-useful" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Diverse beam search forces different beam groups to explore different areas of the search space by penalizing similarity. It's useful when you need multiple distinct outputs (e.g., generating K different translations or summaries). Standard beam search often produces K very similar sequences, which isn't helpful for diversity.</p>
-<hr />
-<h3 id="q9-when-would-you-use-beam-search-over-sampling-methods-like-top-p">Q9: When would you use beam search over sampling methods like top-p?<a class="headerlink" href="#q9-when-would-you-use-beam-search-over-sampling-methods-like-top-p" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Use beam search for:</p>
-<ul>
-<li><strong>Objective quality metrics</strong> (BLEU, ROUGE) that correlate with likelihood</li>
-<li><strong>Structured outputs</strong> (translation, ASR) with one correct answer</li>
-<li><strong>Deterministic requirements</strong> (reproducibility)</li>
-</ul>
-<p>Use sampling for:</p>
-<ul>
-<li><strong>Creative tasks</strong> requiring diversity</li>
-<li><strong>Conversational AI</strong> needing personality</li>
-<li><strong>Open-ended generation</strong> where many good answers exist</li>
-</ul>
-<hr />
-<h3 id="q10-how-does-beam-search-handle-the-eos-token">Q10: How does beam search handle the EOS token?<a class="headerlink" href="#q10-how-does-beam-search-handle-the-eos-token" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> When a beam generates EOS (end-of-sequence), it's marked as complete:</p>
-<ol>
-<li>Complete beams stop expanding</li>
-<li>They remain in the candidate pool with their final score</li>
-<li>Active beams continue generating</li>
-<li>Search terminates when all K beams complete or max_length reached</li>
-<li>Return the complete beam with highest normalized score</li>
-</ol>
-<p>Some implementations use length normalization to fairly compare complete sequences of different lengths.</p>
-<hr />
-<hr />
-<h2 id="10-key-takeaways-for-interviews">10. Key Takeaways for Interviews<a class="headerlink" href="#10-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Definition:</strong> Maintains K candidate sequences, keeps top-K by cumulative probability</li>
-<li><strong>Beam width K:</strong> Trade-off between quality (higher K) and speed (lower K)</li>
-<li><strong>Length normalization:</strong> Essential to prevent bias toward shorter sequences</li>
-<li><strong>Pros:</strong> Better than greedy, explores alternatives, good for structured tasks</li>
-<li><strong>Cons:</strong> Computationally expensive (K× slower), low diversity, generic outputs</li>
-<li><strong>Best for:</strong> Translation, ASR, captioning, summarization</li>
-<li><strong>Worst for:</strong> Creative writing, dialogue, brainstorming</li>
-<li><strong>Complexity:</strong> O(K × V × T) time, O(K × T) space</li>
-</ol>
-<hr />
+<h2 id="4-beam-search-vs-speculative-decoding">4. Beam Search vs Speculative Decoding<a class="headerlink" href="#4-beam-search-vs-speculative-decoding" title="Permanent link">&para;</a></h2>
+<p>Both involve multiple sequences, but the goals differ: beam search explores K candidates to find the best sequence; speculative decoding uses a draft model to propose tokens that the target model verifies, aiming for the same output distribution but faster. They are not interchangeable.</p>
 
 
 

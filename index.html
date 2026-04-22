@@ -13,8 +13,8 @@
       
       
       
-        <link rel="prev" href="serving_frameworks/framework_comparison/">
       
+        <link rel="next" href="fundamentals/inference_basics/">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#llm-inference-speed" class="md-skip">
           Skip to content
         </a>
       
@@ -303,18 +303,87 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#contents" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Contents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentals
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#attention-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attention Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoding-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decoding Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batching-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batching Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serving-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serving Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-time-compute-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test-Time Compute Scaling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#key-mental-models" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      Key Mental Models
     </span>
   </a>
   
@@ -589,6 +658,29 @@
   
   <span class="md-ellipsis">
     Paged Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
     
   </span>
   
@@ -1176,6 +1268,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1187,80 +1302,158 @@
       
   
   
+  
+  
     
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
       
         
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
+        
           
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
-    Home
+    Test-Time Compute Scaling
     
   </span>
   
 
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="test_time_compute/compute_optimal_inference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Compute Optimal Inference
     
   </span>
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
     
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+  
+  
+    <li class="md-nav__item">
+      <a href="test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
-        <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commands
-    </span>
-  </a>
+    </li>
   
-</li>
+
+    
       
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project layout
-    </span>
-  </a>
+      
   
-</li>
-      
-    </ul>
   
-</nav>
+  
+  
+    <li class="md-nav__item">
+      <a href="qa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
       
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1292,18 +1485,87 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#contents" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Contents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentals
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#attention-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attention Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoding-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decoding Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batching-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batching Strategies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serving-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serving Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-time-compute-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test-Time Compute Scaling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#key-mental-models" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      Key Mental Models
     </span>
   </a>
   
@@ -1328,21 +1590,234 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<h1 id="llm-inference-speed">LLM Inference Speed<a class="headerlink" href="#llm-inference-speed" title="Permanent link">&para;</a></h1>
+<p>A technical reference for how large language models are served efficiently — covering the algorithms, hardware trade-offs, and frameworks that determine inference latency, throughput, and cost.</p>
+<hr />
+<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
+<h3 id="fundamentals">Fundamentals<a class="headerlink" href="#fundamentals" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="fundamentals/inference_basics/">Inference Basics</a></td>
+<td>Autoregressive generation, prefill vs decode phases, KV cache, memory sizing</td>
+</tr>
+<tr>
+<td><a href="fundamentals/bottleneck_analysis/">Bottleneck Analysis</a></td>
+<td>Roofline model, compute-bound vs memory-bound, profiling</td>
+</tr>
+<tr>
+<td><a href="fundamentals/latency_vs_throughput/">Latency vs Throughput</a></td>
+<td>TTFT, TPOT, throughput, batch size trade-offs</td>
+</tr>
+<tr>
+<td><a href="fundamentals/memory_compute_tradeoffs/">Memory &amp; Compute Trade-offs</a></td>
+<td>GPU memory hierarchy, bandwidth limits, model size arithmetic</td>
+</tr>
+</tbody>
+</table>
+<h3 id="attention-optimization">Attention Optimization<a class="headerlink" href="#attention-optimization" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="attention_optimization/flash_attention/">Flash Attention</a></td>
+<td>Tiling, kernel fusion, online softmax, IO complexity</td>
+</tr>
+<tr>
+<td><a href="attention_optimization/flash_attention_2/">Flash Attention 2</a></td>
+<td>Improved parallelism, reduced synchronization, H100 gains</td>
+</tr>
+<tr>
+<td><a href="attention_optimization/kv_caching/">KV Caching</a></td>
+<td>Cache mechanics, memory cost, GQA/MQA variants</td>
+</tr>
+<tr>
+<td><a href="attention_optimization/paged_attention/">Paged Attention</a></td>
+<td>Block tables, non-contiguous KV storage, copy-on-write</td>
+</tr>
+<tr>
+<td><a href="attention_optimization/prefix_caching/">Prefix Caching</a></td>
+<td>KV-cache reuse across requests with shared prefixes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="decoding-strategies">Decoding Strategies<a class="headerlink" href="#decoding-strategies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="decoding_strategies/greedy_decoding/">Greedy Decoding</a></td>
+<td>Argmax selection, repetition, when it works</td>
+</tr>
+<tr>
+<td><a href="decoding_strategies/beam_search/">Beam Search</a></td>
+<td>Top-k beam tracking, length bias, diversity</td>
+</tr>
+<tr>
+<td><a href="decoding_strategies/sampling_methods/">Sampling Methods</a></td>
+<td>Temperature, top-k, top-p (nucleus), combinations</td>
+</tr>
+<tr>
+<td><a href="decoding_strategies/speculative_decoding/">Speculative Decoding</a></td>
+<td>Draft-then-verify, rejection sampling, 2–3× latency reduction</td>
+</tr>
+</tbody>
+</table>
+<h3 id="batching-strategies">Batching Strategies<a class="headerlink" href="#batching-strategies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="batching_strategies/">Batching Strategies</a></td>
+<td>Static, dynamic, continuous batching, chunked prefill</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quantization">Quantization<a class="headerlink" href="#quantization" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="quantization/quantization_basics/">Quantization Basics</a></td>
+<td>PTQ vs QAT, symmetric/asymmetric, per-tensor/per-channel</td>
+</tr>
+<tr>
+<td><a href="quantization/int8_quantization/">INT8 Quantization</a></td>
+<td>LLM.int8(), mixed-precision, hardware support</td>
+</tr>
+<tr>
+<td><a href="quantization/int4_quantization/">INT4 Quantization</a></td>
+<td>Group quantization, NF4, double quantization</td>
+</tr>
+<tr>
+<td><a href="quantization/gptq/">GPTQ</a></td>
+<td>Optimal brain quantization, lazy batch updates</td>
+</tr>
+<tr>
+<td><a href="quantization/awq/">AWQ</a></td>
+<td>Activation-aware weight quantization, salient channel protection</td>
+</tr>
+<tr>
+<td><a href="quantization/smoothquant/">SmoothQuant</a></td>
+<td>Activation outlier smoothing, migration strength</td>
+</tr>
+<tr>
+<td><a href="quantization/gguf_ggml/">GGUF / GGML</a></td>
+<td>CPU inference, K-quantization types, llama.cpp</td>
+</tr>
+<tr>
+<td><a href="quantization/quantization_tradeoffs/">Quantization Trade-offs</a></td>
+<td>Method selection decision tree, memory vs quality spectrum</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving-frameworks">Serving Frameworks<a class="headerlink" href="#serving-frameworks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="serving_frameworks/vllm/">vLLM</a></td>
+<td>PagedAttention, continuous batching, prefix caching</td>
+</tr>
+<tr>
+<td><a href="serving_frameworks/tensorrt_llm/">TensorRT-LLM</a></td>
+<td>Kernel fusion, quantization, NVIDIA GPU optimisation</td>
+</tr>
+<tr>
+<td><a href="serving_frameworks/text_generation_inference/">Text Generation Inference</a></td>
+<td>Rust backend, token streaming, grammar-constrained generation</td>
+</tr>
+<tr>
+<td><a href="serving_frameworks/deepspeed_inference/">DeepSpeed Inference</a></td>
+<td>ZeRO-Inference, kernel optimisations, model parallelism</td>
+</tr>
+<tr>
+<td><a href="serving_frameworks/triton_inference_server/">Triton Inference Server</a></td>
+<td>Multi-backend, ensemble models, Kubernetes integration</td>
+</tr>
+<tr>
+<td><a href="serving_frameworks/framework_comparison/">Framework Comparison</a></td>
+<td>Decision tree, feature matrix, multi-GPU trade-offs</td>
+</tr>
+<tr>
+<td><a href="serving_frameworks/disaggregated_prefill_decode/">Disaggregated Prefill-Decode</a></td>
+<td>Separate GPU pools for prefill and decode; Mooncake, DistServe</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-time-compute-scaling">Test-Time Compute Scaling<a class="headerlink" href="#test-time-compute-scaling" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="test_time_compute/compute_optimal_inference/">Compute-Optimal Inference</a></td>
+<td>Power laws, parallel vs sequential scaling, o1/R1</td>
+</tr>
+<tr>
+<td><a href="test_time_compute/best_of_n_sampling/">Best-of-N Sampling</a></td>
+<td>Algorithm, reward models, cost vs quality trade-offs</td>
+</tr>
+<tr>
+<td><a href="test_time_compute/orm_prm/">ORMs &amp; PRMs</a></td>
+<td>Step-level vs outcome scoring, tree search, training data</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-mental-models">Key Mental Models<a class="headerlink" href="#key-mental-models" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Inference has two distinct phases:
+
+  Prefill (prompt processing)          Decode (token generation)
+  ─────────────────────────            ──────────────────────────
+  • Processes all input tokens          • Generates 1 token per step
+    in parallel                         • Reuses KV cache
+  • Compute-bound                       • Memory-bandwidth-bound
+  • Time ∝ prompt length²               • Time ∝ output length × model size
+  • Optimised by FlashAttention         • Optimised by batching,
+                                          quantization, speculative decoding
 </code></pre></div>
+<p><strong>The decode phase is almost always the bottleneck in production.</strong> Reducing its memory-bandwidth pressure — via quantization, GQA, paged attention, and continuous batching — is where most inference engineering effort goes.</p>
+<hr />
+<ul>
+<li><a href="qa/">Interview Q&amp;A</a> — Curated questions and answers across all topics</li>
+<li><a href="references/">References</a> — Papers, tools, and benchmarks cited in this knowledge base</li>
+</ul>
 
 
 

@@ -541,6 +541,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1016,15 +1039,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#11-common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      11. Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1288,6 +1302,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1302,12 +1455,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1464,15 +1639,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#11-common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      11. Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1598,32 +1764,6 @@
     <span class="n">version</span><span class="o">=</span><span class="s2">&quot;GEMM&quot;</span>  <span class="c1"># Inference kernel</span>
 <span class="p">)</span>
 </code></pre></div>
-<hr />
-<hr />
-<h2 id="11-common-interview-questions">11. Common Interview Questions<a class="headerlink" href="#11-common-interview-questions" title="Permanent link">&para;</a></h2>
-<p><strong>Q1: How does AWQ differ from GPTQ philosophically?</strong> <br>
-A: GPTQ compensates errors across all weights. AWQ protects important weights from error in the first place. Prevention vs. compensation.</p>
-<hr />
-<p><strong>Q2: Why is AWQ faster to quantize?</strong> <br>
-A: No iterative weight updates or Hessian computation. Just statistics collection + grid search for scales. Embarrassingly parallel.</p>
-<hr />
-<p><strong>Q3: What's the "1% salient weights" finding?</strong> <br>
-A: 1% of weight channels (those with highest activation magnitude) contribute disproportionately. Protecting them preserves 90%+ of model quality.</p>
-<hr />
-<p><strong>Q4: How are scales applied at inference?</strong> <br>
-A: Mathematically equivalent to scale weights (expensive) or scale activations (cheap). AWQ scales activations: <code>(W/s) @ X = (W) @ (X/s)</code>.</p>
-<hr />
-<p><strong>Q5: Can AWQ work for INT8?</strong> <br>
-A: Yes, but less beneficial. INT8 already preserves most weights well. AWQ's advantage is strongest at 3-4 bits where bit budget is tight.</p>
-<hr />
-<p><strong>Q6: What's the memory overhead of scales?</strong> <br>
-A: Per-channel FP16 scales: 0.1-0.2% overhead. Negligible compared to 8× weight reduction.</p>
-<hr />
-<p><strong>Q7: AWQ vs. SmoothQuant?</strong> <br>
-A: SmoothQuant smooths activations for easier quantization. AWQ protects important weights. Can be combined: SmoothQuant for activation quantization, AWQ for weights.</p>
-<hr />
-<p><strong>Q8: Why grid search for scales?</strong> <br>
-A: Closed-form solution doesn't exist for optimal scales. Grid search over reasonable range [0.5, 1.5] is fast and effective. Can use gradient-based for better results but slower.</p>
 <hr />
 
 

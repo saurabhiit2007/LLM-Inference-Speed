@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../../attention_optimization/paged_attention/">
+        <link rel="prev" href="../../attention_optimization/prefix_caching/">
       
       
         <link rel="next" href="../beam_search/">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#greedy-decoding-interview-prep-guide" class="md-skip">
+        <a href="#1-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -541,6 +541,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -601,8 +624,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -635,8 +656,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -654,306 +673,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-how-it-works" class="md-nav__link">
+  <a href="#2-key-problems" class="md-nav__link">
     <span class="md-ellipsis">
-      2. How It Works
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. How It Works">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Algorithm
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-key-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Key Characteristics
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Key Characteristics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#deterministic" class="md-nav__link">
-    <span class="md-ellipsis">
-      Deterministic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#myopic-short-sighted" class="md-nav__link">
-    <span class="md-ellipsis">
-      Myopic (Short-sighted)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-common-problems" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Common Problems
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Common Problems">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#problem-1-repetition-loops" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 1: Repetition Loops
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-2-generic-outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 2: Generic Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-3-early-mistakes-propagate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 3: Early Mistakes Propagate
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-when-to-use-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. When to Use Greedy Decoding
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. When to Use Greedy Decoding">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#good-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Good Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#poor-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ❌ Poor Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-practical-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Practical Considerations
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Practical Considerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#computational-complexity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Computational Complexity
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Modifications
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Interview Questions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Interview Questions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q1-what-is-greedy-decoding-and-how-does-it-work" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q1: What is greedy decoding and how does it work?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q2-why-is-greedy-decoding-called-greedy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q2: Why is greedy decoding called "greedy"?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q3-whats-the-main-disadvantage-of-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q3: What's the main disadvantage of greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q4-how-does-greedy-decoding-differ-from-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q4: How does greedy decoding differ from beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q5-can-greedy-decoding-produce-the-optimal-sequence" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5: Can greedy decoding produce the optimal sequence?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q6-why-does-greedy-decoding-cause-repetition" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q6: Why does greedy decoding cause repetition?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q7-how-can-you-reduce-repetition-in-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q7: How can you reduce repetition in greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q8-whats-the-computational-cost-of-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q8: What's the computational cost of greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q9-when-would-you-prefer-greedy-over-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q9: When would you prefer greedy over beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q10-how-does-greedy-decoding-interact-with-temperature" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q10: How does greedy decoding interact with temperature?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-comparison-with-other-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Comparison with Other Methods
+      2. Key Problems
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-code-example" class="md-nav__link">
+  <a href="#3-when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      9. Code Example
+      3. When to Use
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
+  <a href="#4-cost" class="md-nav__link">
     <span class="md-ellipsis">
-      10. Key Takeaways for Interviews
+      4. Cost
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-relation-to-temperature-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Relation to Temperature Sampling
     </span>
   </a>
   
@@ -1475,6 +1224,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1489,12 +1377,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1521,8 +1431,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1540,306 +1448,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-how-it-works" class="md-nav__link">
+  <a href="#2-key-problems" class="md-nav__link">
     <span class="md-ellipsis">
-      2. How It Works
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. How It Works">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Algorithm
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-key-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Key Characteristics
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Key Characteristics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#deterministic" class="md-nav__link">
-    <span class="md-ellipsis">
-      Deterministic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#myopic-short-sighted" class="md-nav__link">
-    <span class="md-ellipsis">
-      Myopic (Short-sighted)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-common-problems" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Common Problems
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Common Problems">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#problem-1-repetition-loops" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 1: Repetition Loops
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-2-generic-outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 2: Generic Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#problem-3-early-mistakes-propagate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem 3: Early Mistakes Propagate
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-when-to-use-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. When to Use Greedy Decoding
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. When to Use Greedy Decoding">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#good-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Good Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#poor-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      ❌ Poor Use Cases
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-practical-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Practical Considerations
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Practical Considerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#computational-complexity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Computational Complexity
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Modifications
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Interview Questions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Interview Questions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#q1-what-is-greedy-decoding-and-how-does-it-work" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q1: What is greedy decoding and how does it work?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q2-why-is-greedy-decoding-called-greedy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q2: Why is greedy decoding called "greedy"?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q3-whats-the-main-disadvantage-of-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q3: What's the main disadvantage of greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q4-how-does-greedy-decoding-differ-from-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q4: How does greedy decoding differ from beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q5-can-greedy-decoding-produce-the-optimal-sequence" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q5: Can greedy decoding produce the optimal sequence?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q6-why-does-greedy-decoding-cause-repetition" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q6: Why does greedy decoding cause repetition?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q7-how-can-you-reduce-repetition-in-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q7: How can you reduce repetition in greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q8-whats-the-computational-cost-of-greedy-decoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q8: What's the computational cost of greedy decoding?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q9-when-would-you-prefer-greedy-over-beam-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q9: When would you prefer greedy over beam search?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#q10-how-does-greedy-decoding-interact-with-temperature" class="md-nav__link">
-    <span class="md-ellipsis">
-      Q10: How does greedy decoding interact with temperature?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-comparison-with-other-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Comparison with Other Methods
+      2. Key Problems
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-code-example" class="md-nav__link">
+  <a href="#3-when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      9. Code Example
+      3. When to Use
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-key-takeaways-for-interviews" class="md-nav__link">
+  <a href="#4-cost" class="md-nav__link">
     <span class="md-ellipsis">
-      10. Key Takeaways for Interviews
+      4. Cost
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-relation-to-temperature-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Relation to Temperature Sampling
     </span>
   </a>
   
@@ -1864,323 +1502,27 @@
   
 
 
-<h1 id="greedy-decoding-interview-prep-guide">Greedy Decoding - Interview Prep Guide<a class="headerlink" href="#greedy-decoding-interview-prep-guide" title="Permanent link">&para;</a></h1>
+  <h1>Greedy Decoding</h1>
+
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
-<p>Greedy decoding selects the token with the <strong>highest probability</strong> at each step during autoregressive text generation. It's the simplest and fastest decoding strategy but lacks diversity.</p>
-<p><strong>Key insight:</strong> Local optimization (best token at each step) doesn't guarantee global optimality (best overall sequence).</p>
-<hr />
-<hr />
-<h2 id="2-how-it-works">2. How It Works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
-<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">greedy_decode</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">max_length</span><span class="p">):</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="n">prompt</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
-        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>  <span class="c1"># Shape: (vocab_size,)</span>
-        <span class="n">next_token</span> <span class="o">=</span> <span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>  <span class="c1"># Pick highest probability</span>
-        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_token</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">next_token</span> <span class="o">==</span> <span class="n">EOS</span><span class="p">:</span>
-            <span class="k">break</span>
-    <span class="k">return</span> <span class="n">tokens</span>
-</code></pre></div>
-<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
-<p>Given probability distribution after "The cat sat on the":</p>
-<table>
-<thead>
-<tr>
-<th>Token</th>
-<th>Probability</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mat</td>
-<td>0.40</td>
-</tr>
-<tr>
-<td>floor</td>
-<td>0.25</td>
-</tr>
-<tr>
-<td>sofa</td>
-<td>0.15</td>
-</tr>
-<tr>
-<td>bed</td>
-<td>0.10</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Greedy choice:</strong> <code>mat</code> (highest probability)</p>
-<p><strong>Output:</strong> "The cat sat on the mat"</p>
-<hr />
-<hr />
-<h2 id="3-key-characteristics">3. Key Characteristics<a class="headerlink" href="#3-key-characteristics" title="Permanent link">&para;</a></h2>
-<h3 id="deterministic">Deterministic<a class="headerlink" href="#deterministic" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Same input → always same output</li>
-<li>No randomness involved</li>
-<li>Fully reproducible</li>
-</ul>
-<h3 id="myopic-short-sighted">Myopic (Short-sighted)<a class="headerlink" href="#myopic-short-sighted" title="Permanent link">&para;</a></h3>
-<p>Each decision is locally optimal but may lead to suboptimal sequences:</p>
-<div class="highlight"><pre><span></span><code>Step 1: &quot;I think&quot; → model assigns:
-  - &quot;that&quot; (0.6)
-  - &quot;the&quot; (0.4)
-
-Greedy picks: &quot;that&quot;
-
-Step 2: &quot;I think that&quot; → model assigns:
-  - &quot;is&quot; (0.3)
-  - &quot;maybe&quot; (0.25)
-
-But if we had picked &quot;the&quot; at step 1:
-  &quot;I think the&quot; → &quot;best&quot; (0.7)
-
-Final: &quot;I think that is...&quot; (score: 0.6 × 0.3 = 0.18)
-Better: &quot;I think the best...&quot; (score: 0.4 × 0.7 = 0.28)
-</code></pre></div>
-<p>Greedy can't recover from early suboptimal choices.</p>
-<hr />
-<hr />
-<h2 id="4-common-problems">4. Common Problems<a class="headerlink" href="#4-common-problems" title="Permanent link">&para;</a></h2>
-<h3 id="problem-1-repetition-loops">Problem 1: Repetition Loops<a class="headerlink" href="#problem-1-repetition-loops" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Prompt: &quot;To be or not to&quot;
-Output: &quot;be or not to be or not to be or not to be...&quot;
-</code></pre></div>
-<p><strong>Why:</strong> If "be" has slightly higher probability than alternatives at each step, greedy gets stuck.</p>
-<h3 id="problem-2-generic-outputs">Problem 2: Generic Outputs<a class="headerlink" href="#problem-2-generic-outputs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Prompt: &quot;Write a creative story about&quot;
-Greedy: &quot;a boy who lived in a small town and went to school...&quot;
-</code></pre></div>
-<p>Always picks safe, high-probability continuations → boring text.</p>
-<h3 id="problem-3-early-mistakes-propagate">Problem 3: Early Mistakes Propagate<a class="headerlink" href="#problem-3-early-mistakes-propagate" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Prompt: &quot;The capital of France is&quot;
-If model assigns:
-  - &quot;Paris&quot; (0.45)
-  - &quot;Lyon&quot; (0.46)  ← greedy picks this (wrong!)
-
-Output: &quot;Lyon, which is known for...&quot;
-</code></pre></div>
-<p>Once the wrong token is chosen, subsequent tokens try to justify it.</p>
-<hr />
-<hr />
-<h2 id="5-when-to-use-greedy-decoding">5. When to Use Greedy Decoding<a class="headerlink" href="#5-when-to-use-greedy-decoding" title="Permanent link">&para;</a></h2>
-<h3 id="good-use-cases">✅ Good Use Cases<a class="headerlink" href="#good-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Deterministic tasks:</strong></p>
-<ul>
-<li>Math problem solving</li>
-<li>Code generation (when exact output matters)</li>
-<li>Factual Q&amp;A with clear answers</li>
-<li>Translation of standardized text</li>
-</ul>
-<p><strong>Debugging:</strong></p>
-<ul>
-<li>Baseline comparisons</li>
-<li>Reproducible testing</li>
-<li>Fastest inference for quick experiments</li>
-</ul>
-<p><strong>Confident models:</strong></p>
-<ul>
-<li>When model probability distributions are very peaked</li>
-<li>Single obvious correct answer</li>
-</ul>
-<h3 id="poor-use-cases">❌ Poor Use Cases<a class="headerlink" href="#poor-use-cases" title="Permanent link">&para;</a></h3>
-<p><strong>Creative tasks:</strong></p>
-<ul>
-<li>Story writing</li>
-<li>Poetry generation</li>
-<li>Brainstorming</li>
-</ul>
-<p><strong>Conversational AI:</strong></p>
-<ul>
-<li>Chatbots</li>
-<li>Dialogue systems</li>
-<li>Personality-driven responses</li>
-</ul>
-<p><strong>Long-form generation:</strong></p>
-<ul>
-<li>Articles, essays</li>
-<li>Open-ended content</li>
-</ul>
-<hr />
-<hr />
-<h2 id="6-practical-considerations">6. Practical Considerations<a class="headerlink" href="#6-practical-considerations" title="Permanent link">&para;</a></h2>
-<h3 id="computational-complexity">Computational Complexity<a class="headerlink" href="#computational-complexity" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Time:</strong> O(T × V) where T = sequence length, V = vocab size</li>
-<li><strong>Space:</strong> O(1) for decoding state (minimal memory)</li>
-<li><strong>Fastest</strong> among all decoding strategies</li>
-</ul>
-<h3 id="modifications">Modifications<a class="headerlink" href="#modifications" title="Permanent link">&para;</a></h3>
-<p><strong>Greedy + repetition penalty:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">greedy_with_penalty</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">previous_tokens</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="mf">1.2</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">previous_tokens</span><span class="p">:</span>
-        <span class="n">logits</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">/=</span> <span class="n">penalty</span>  <span class="c1"># Reduce probability of repeated tokens</span>
-    <span class="k">return</span> <span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>
-</code></pre></div></p>
-<p><strong>Greedy + length normalization:</strong>
-Useful when comparing sequences of different lengths (not during decoding itself).</p>
-<hr />
-<hr />
-<h2 id="7-interview-questions">7. Interview Questions<a class="headerlink" href="#7-interview-questions" title="Permanent link">&para;</a></h2>
-<h3 id="q1-what-is-greedy-decoding-and-how-does-it-work">Q1: What is greedy decoding and how does it work?<a class="headerlink" href="#q1-what-is-greedy-decoding-and-how-does-it-work" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Greedy decoding selects the token with the highest probability at each generation step. It's deterministic and fast but locally optimal—it picks the best next token without considering whether this leads to the best overall sequence.</p>
-<hr />
-<h3 id="q2-why-is-greedy-decoding-called-greedy">Q2: Why is greedy decoding called "greedy"?<a class="headerlink" href="#q2-why-is-greedy-decoding-called-greedy" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> It's "greedy" because it makes the locally optimal choice at each step (highest probability token) without considering future consequences. Like the greedy algorithm paradigm, it optimizes immediate reward rather than global optimality.</p>
-<hr />
-<h3 id="q3-whats-the-main-disadvantage-of-greedy-decoding">Q3: What's the main disadvantage of greedy decoding?<a class="headerlink" href="#q3-whats-the-main-disadvantage-of-greedy-decoding" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> <strong>Lack of diversity and repetition.</strong> Greedy often produces repetitive, generic text because it can't explore alternative paths. Once it makes a suboptimal choice, it can't backtrack, leading to error propagation and repetitive loops.</p>
-<hr />
-<h3 id="q4-how-does-greedy-decoding-differ-from-beam-search">Q4: How does greedy decoding differ from beam search?<a class="headerlink" href="#q4-how-does-greedy-decoding-differ-from-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong></p>
-<ul>
-<li><strong>Greedy:</strong> Keeps only 1 hypothesis (best token at each step)</li>
-<li><strong>Beam search:</strong> Keeps K hypotheses (top-K sequences), explores multiple paths</li>
-</ul>
-<p>Beam search can recover from locally suboptimal choices by considering alternative sequences. Greedy cannot.</p>
-<hr />
-<h3 id="q5-can-greedy-decoding-produce-the-optimal-sequence">Q5: Can greedy decoding produce the optimal sequence?<a class="headerlink" href="#q5-can-greedy-decoding-produce-the-optimal-sequence" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Not necessarily. Greedy finds a <strong>locally optimal</strong> sequence but not necessarily <strong>globally optimal</strong>. The highest-probability sequence might require choosing a lower-probability token early on that leads to much higher probabilities later.</p>
-<hr />
-<h3 id="q6-why-does-greedy-decoding-cause-repetition">Q6: Why does greedy decoding cause repetition?<a class="headerlink" href="#q6-why-does-greedy-decoding-cause-repetition" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> If a token or phrase has slightly higher probability than alternatives, greedy will keep selecting it. For example, in "to be or not to be or not to be...", if "be" consistently has a small probability advantage, the model gets stuck in a loop with no mechanism to escape.</p>
-<hr />
-<h3 id="q7-how-can-you-reduce-repetition-in-greedy-decoding">Q7: How can you reduce repetition in greedy decoding?<a class="headerlink" href="#q7-how-can-you-reduce-repetition-in-greedy-decoding" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Common techniques:</p>
-<ol>
-<li><strong>Repetition penalty:</strong> Divide logits of previously generated tokens by penalty factor (e.g., 1.2)</li>
-<li><strong>N-gram blocking:</strong> Prevent repeating same N-grams</li>
-<li><strong>Switch to sampling:</strong> Use temperature/top-p for diversity</li>
-<li><strong>Beam search:</strong> Explore multiple paths to avoid local minima</li>
-</ol>
-<hr />
-<h3 id="q8-whats-the-computational-cost-of-greedy-decoding">Q8: What's the computational cost of greedy decoding?<a class="headerlink" href="#q8-whats-the-computational-cost-of-greedy-decoding" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Very efficient:</p>
-<ul>
-<li><strong>Per step:</strong> O(V) to find argmax over vocabulary</li>
-<li><strong>Total:</strong> O(T × V) for T tokens</li>
-<li><strong>Memory:</strong> O(1) for decoding state</li>
-<li><strong>Fastest</strong> decoding strategy, no beam/sample storage overhead</li>
-</ul>
-<hr />
-<h3 id="q9-when-would-you-prefer-greedy-over-beam-search">Q9: When would you prefer greedy over beam search?<a class="headerlink" href="#q9-when-would-you-prefer-greedy-over-beam-search" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong></p>
-<ul>
-<li><strong>Latency-critical applications</strong> (greedy is much faster)</li>
-<li><strong>Deterministic outputs required</strong> (reproducibility)</li>
-<li><strong>Single clear answer</strong> (factual Q&amp;A, simple math)</li>
-<li><strong>Resource-constrained environments</strong> (minimal memory)</li>
-</ul>
-<p>Beam search is overkill when diversity isn't needed and the model is confident.</p>
-<hr />
-<h3 id="q10-how-does-greedy-decoding-interact-with-temperature">Q10: How does greedy decoding interact with temperature?<a class="headerlink" href="#q10-how-does-greedy-decoding-interact-with-temperature" title="Permanent link">&para;</a></h3>
-<p><strong>Answer:</strong> Greedy decoding <strong>ignores temperature</strong> because it always picks argmax. Temperature only affects sampling-based methods. You can think of greedy as temperature → 0 (infinitely peaked distribution where highest probability → 1.0, others → 0).</p>
-<hr />
-<hr />
-<h2 id="8-comparison-with-other-methods">8. Comparison with Other Methods<a class="headerlink" href="#8-comparison-with-other-methods" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Aspect</th>
-<th>Greedy</th>
-<th>Beam Search</th>
-<th>Sampling</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Speed</strong></td>
-<td>Fastest</td>
-<td>Slow (K× cost)</td>
-<td>Fast</td>
-</tr>
-<tr>
-<td><strong>Diversity</strong></td>
-<td>None</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-<tr>
-<td><strong>Determinism</strong></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td><strong>Repetition</strong></td>
-<td>High risk</td>
-<td>Medium risk</td>
-<td>Low risk</td>
-</tr>
-<tr>
-<td><strong>Quality</strong></td>
-<td>Variable</td>
-<td>Higher</td>
-<td>Variable</td>
-</tr>
-<tr>
-<td><strong>Memory</strong></td>
-<td>Minimal</td>
-<td>O(K × T)</td>
-<td>Minimal</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<hr />
-<h2 id="9-code-example">9. Code Example<a class="headerlink" href="#9-code-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
-
-<span class="k">def</span> <span class="nf">greedy_decode</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Simple greedy decoding implementation.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        model: Language model with forward() method</span>
-<span class="sd">        input_ids: Starting token IDs (tensor)</span>
-<span class="sd">        max_length: Maximum sequence length</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Generated token IDs</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">generated</span> <span class="o">=</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
-        <span class="c1"># Get logits for next token</span>
-        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">generated</span><span class="p">)</span>
-            <span class="n">logits</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># Last token logits</span>
-
-        <span class="c1"># Greedy selection</span>
-        <span class="n">next_token</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="c1"># Append to sequence</span>
-        <span class="n">generated</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">generated</span><span class="p">,</span> <span class="n">next_token</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-        <span class="c1"># Check for EOS</span>
-        <span class="k">if</span> <span class="n">next_token</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">:</span>
-            <span class="k">break</span>
-
-    <span class="k">return</span> <span class="n">generated</span>
-
-<span class="c1"># Usage</span>
-<span class="c1"># output = greedy_decode(model, prompt_tokens, max_length=100)</span>
+<p>Greedy decoding selects the highest-probability token at every step — the simplest and fastest decoding strategy.</p>
+<div class="highlight"><pre><span></span><code>next_token = argmax P(token | context)
 </code></pre></div>
 <hr />
+<h2 id="2-key-problems">2. Key Problems<a class="headerlink" href="#2-key-problems" title="Permanent link">&para;</a></h2>
+<p><strong>Myopia:</strong> Local optimality at each step does not guarantee global optimality. Choosing token A (prob 0.6) over B (prob 0.4) now can foreclose a much better sequence reachable only via B.</p>
+<p><strong>Repetition loops:</strong> If one token consistently scores highest, greedy gets stuck: <em>"be or not to be or not to be..."</em></p>
+<p><strong>Generic outputs:</strong> Always picking the safe, high-probability continuation produces flat, predictable text with no diversity.</p>
 <hr />
-<h2 id="10-key-takeaways-for-interviews">10. Key Takeaways for Interviews<a class="headerlink" href="#10-key-takeaways-for-interviews" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Definition:</strong> Always picks the highest probability token at each step</li>
-<li><strong>Pros:</strong> Fast, deterministic, simple, reproducible</li>
-<li><strong>Cons:</strong> No diversity, repetitive, locally optimal only</li>
-<li><strong>Main problem:</strong> Repetition loops and generic outputs</li>
-<li><strong>Best for:</strong> Deterministic tasks, debugging, factual Q&amp;A</li>
-<li><strong>Worst for:</strong> Creative writing, conversations, long-form generation</li>
-<li><strong>Complexity:</strong> O(T × V) time, O(1) space for decoding</li>
-</ol>
+<h2 id="3-when-to-use">3. When to Use<a class="headerlink" href="#3-when-to-use" title="Permanent link">&para;</a></h2>
+<p><strong>Use greedy when:</strong> determinism is required (reproducible testing, CI pipelines), the task has a single correct answer (structured extraction, simple factual Q&amp;A), or speed is the only concern.</p>
+<p><strong>Do not use for:</strong> chatbots, creative writing, open-ended generation — use temperature + top-p instead.</p>
 <hr />
+<h2 id="4-cost">4. Cost<a class="headerlink" href="#4-cost" title="Permanent link">&para;</a></h2>
+<p>O(V) per step (argmax over vocabulary) — essentially free compared to the model forward pass. Fastest of all decoding strategies; no extra KV cache overhead.</p>
 <hr />
+<h2 id="5-relation-to-temperature-sampling">5. Relation to Temperature Sampling<a class="headerlink" href="#5-relation-to-temperature-sampling" title="Permanent link">&para;</a></h2>
+<p>Greedy decoding is equivalent to temperature sampling with T → 0: as temperature approaches zero, the softmax distribution collapses to a one-hot on the argmax token.</p>
 
 
 

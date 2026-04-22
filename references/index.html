@@ -13,25 +13,23 @@
       
       
       
-        <link rel="prev" href="../int4_quantization/">
+        <link rel="prev" href="../qa/">
       
       
-        <link rel="next" href="../awq/">
       
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
     
     
       
-        <title>GPTQ - LLM Inference Speedup</title>
+        <title>References - LLM Inference Speedup</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -50,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-paper" class="md-skip">
+        <a href="#references" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="LLM Inference Speedup" class="md-header__button md-logo" aria-label="LLM Inference Speedup" data-md-component="logo">
+    <a href=".." title="LLM Inference Speedup" class="md-header__button md-logo" aria-label="LLM Inference Speedup" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GPTQ
+              References
             
           </span>
         </div>
@@ -225,7 +223,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="LLM Inference Speedup" class="md-nav__button md-logo" aria-label="LLM Inference Speedup" data-md-component="logo">
+    <a href=".." title="LLM Inference Speedup" class="md-nav__button md-logo" aria-label="LLM Inference Speedup" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -255,7 +253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -317,7 +315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fundamentals/inference_basics/" class="md-nav__link">
+      <a href="../fundamentals/inference_basics/" class="md-nav__link">
         
   
   
@@ -340,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fundamentals/bottleneck_analysis/" class="md-nav__link">
+      <a href="../fundamentals/bottleneck_analysis/" class="md-nav__link">
         
   
   
@@ -363,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fundamentals/latency_vs_throughput/" class="md-nav__link">
+      <a href="../fundamentals/latency_vs_throughput/" class="md-nav__link">
         
   
   
@@ -386,7 +384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fundamentals/memory_compute_tradeoffs/" class="md-nav__link">
+      <a href="../fundamentals/memory_compute_tradeoffs/" class="md-nav__link">
         
   
   
@@ -456,7 +454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/flash_attention/" class="md-nav__link">
+      <a href="../attention_optimization/flash_attention/" class="md-nav__link">
         
   
   
@@ -479,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/flash_attention_2/" class="md-nav__link">
+      <a href="../attention_optimization/flash_attention_2/" class="md-nav__link">
         
   
   
@@ -502,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/kv_caching/" class="md-nav__link">
+      <a href="../attention_optimization/kv_caching/" class="md-nav__link">
         
   
   
@@ -525,7 +523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/paged_attention/" class="md-nav__link">
+      <a href="../attention_optimization/paged_attention/" class="md-nav__link">
         
   
   
@@ -548,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+      <a href="../attention_optimization/prefix_caching/" class="md-nav__link">
         
   
   
@@ -618,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../decoding_strategies/greedy_decoding/" class="md-nav__link">
+      <a href="../decoding_strategies/greedy_decoding/" class="md-nav__link">
         
   
   
@@ -641,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../decoding_strategies/beam_search/" class="md-nav__link">
+      <a href="../decoding_strategies/beam_search/" class="md-nav__link">
         
   
   
@@ -664,7 +662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../decoding_strategies/sampling_methods/" class="md-nav__link">
+      <a href="../decoding_strategies/sampling_methods/" class="md-nav__link">
         
   
   
@@ -687,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../decoding_strategies/speculative_decoding/" class="md-nav__link">
+      <a href="../decoding_strategies/speculative_decoding/" class="md-nav__link">
         
   
   
@@ -717,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../batching_strategies/" class="md-nav__link">
+      <a href="../batching_strategies/" class="md-nav__link">
         
   
   
@@ -736,20 +734,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -765,7 +763,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Quantization
@@ -779,7 +777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_basics/" class="md-nav__link">
+      <a href="../quantization/quantization_basics/" class="md-nav__link">
         
   
   
@@ -802,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int8_quantization/" class="md-nav__link">
+      <a href="../quantization/int8_quantization/" class="md-nav__link">
         
   
   
@@ -825,7 +823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int4_quantization/" class="md-nav__link">
+      <a href="../quantization/int4_quantization/" class="md-nav__link">
         
   
   
@@ -845,30 +843,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    GPTQ
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../quantization/gptq/" class="md-nav__link">
         
   
   
@@ -879,105 +857,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Paper
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Core Idea
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Algorithm (Simplified)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Specifications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -990,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../awq/" class="md-nav__link">
+      <a href="../quantization/awq/" class="md-nav__link">
         
   
   
@@ -1013,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smoothquant/" class="md-nav__link">
+      <a href="../quantization/smoothquant/" class="md-nav__link">
         
   
   
@@ -1036,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
+      <a href="../quantization/gguf_ggml/" class="md-nav__link">
         
   
   
@@ -1059,7 +938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_tradeoffs/" class="md-nav__link">
+      <a href="../quantization/quantization_tradeoffs/" class="md-nav__link">
         
   
   
@@ -1129,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/tensorrt_llm/" class="md-nav__link">
+      <a href="../serving_frameworks/tensorrt_llm/" class="md-nav__link">
         
   
   
@@ -1152,7 +1031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/text_generation_inference/" class="md-nav__link">
+      <a href="../serving_frameworks/text_generation_inference/" class="md-nav__link">
         
   
   
@@ -1175,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/deepspeed_inference/" class="md-nav__link">
+      <a href="../serving_frameworks/deepspeed_inference/" class="md-nav__link">
         
   
   
@@ -1198,7 +1077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/triton_inference_server/" class="md-nav__link">
+      <a href="../serving_frameworks/triton_inference_server/" class="md-nav__link">
         
   
   
@@ -1221,7 +1100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/vllm/" class="md-nav__link">
+      <a href="../serving_frameworks/vllm/" class="md-nav__link">
         
   
   
@@ -1244,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/framework_comparison/" class="md-nav__link">
+      <a href="../serving_frameworks/framework_comparison/" class="md-nav__link">
         
   
   
@@ -1267,7 +1146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+      <a href="../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
         
   
   
@@ -1337,7 +1216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+      <a href="../test_time_compute/compute_optimal_inference/" class="md-nav__link">
         
   
   
@@ -1360,7 +1239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+      <a href="../test_time_compute/best_of_n_sampling/" class="md-nav__link">
         
   
   
@@ -1383,7 +1262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+      <a href="../test_time_compute/orm_prm/" class="md-nav__link">
         
   
   
@@ -1413,7 +1292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../qa/" class="md-nav__link">
+      <a href="../qa/" class="md-nav__link">
         
   
   
@@ -1432,10 +1311,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../references/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    References
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1446,6 +1347,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attention-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attention Optimization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decoding-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decoding Strategies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serving-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serving Frameworks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-time-compute-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test-Time Compute Scaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disaggregated-prefill-decode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disaggregated Prefill-Decode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmarks-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmarks &amp; Profiling
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1467,6 +1460,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1475,81 +1470,72 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
+  <a href="#attention-optimization" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Paper
+      Attention Optimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
+  <a href="#decoding-strategies" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Core Idea
+      Decoding Strategies
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
+  <a href="#batching" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Algorithm (Simplified)
+      Batching
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
+  <a href="#quantization" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
+      Quantization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
+  <a href="#serving-frameworks" class="md-nav__link">
     <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
+      Serving Frameworks
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
+  <a href="#test-time-compute-scaling" class="md-nav__link">
     <span class="md-ellipsis">
-      Specifications
+      Test-Time Compute Scaling
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
+  <a href="#disaggregated-prefill-decode" class="md-nav__link">
     <span class="md-ellipsis">
-      Accuracy
+      Disaggregated Prefill-Decode
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
+  <a href="#benchmarks-profiling" class="md-nav__link">
     <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
+      Benchmarks &amp; Profiling
     </span>
   </a>
   
@@ -1574,111 +1560,63 @@
   
 
 
-  <h1>GPTQ</h1>
-
-<h2 id="1-paper">1. Paper<a class="headerlink" href="#1-paper" title="Permanent link">&para;</a></h2>
-<p>Frantar et al., 2022 - "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"</p>
-<hr />
-<hr />
-<h2 id="2-core-idea">2. Core Idea<a class="headerlink" href="#2-core-idea" title="Permanent link">&para;</a></h2>
-<p>Quantize weights one-by-one while compensating errors in remaining weights using second-order information (Hessian).</p>
-<hr />
-<hr />
-<h2 id="3-algorithm-simplified">3. Algorithm (Simplified)<a class="headerlink" href="#3-algorithm-simplified" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># For each layer&#39;s weight matrix W</span>
-<span class="n">H</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="o">^</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span> <span class="o">/</span> <span class="n">n_samples</span>  <span class="c1"># Hessian (input correlations)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_columns</span><span class="p">):</span>
-    <span class="c1"># Quantize column i</span>
-    <span class="n">w_q</span> <span class="o">=</span> <span class="n">quantize</span><span class="p">(</span><span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">w_q</span>
-
-    <span class="c1"># Distribute error to remaining columns using Hessian</span>
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_q</span>
-</code></pre></div>
-<hr />
-<hr />
-<h2 id="4-key-innovation-optimal-brain-quantization-obq">4. Key Innovation: Optimal Brain Quantization (OBQ)<a class="headerlink" href="#4-key-innovation-optimal-brain-quantization-obq" title="Permanent link">&para;</a></h2>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<h2 id="attention-optimization">Attention Optimization<a class="headerlink" href="#attention-optimization" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Uses second-order Taylor expansion to minimize quantization loss</li>
-<li>Iteratively quantizes weights in order that minimizes Hessian-weighted error</li>
-<li>Compensates each quantization error before next step</li>
+<li>Dao, T. et al. (2022). <strong>FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness.</strong> NeurIPS 2022. <a href="https://arxiv.org/abs/2205.14135">arXiv:2205.14135</a></li>
+<li>Dao, T. (2023). <strong>FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning.</strong> ICLR 2024. <a href="https://arxiv.org/abs/2307.08691">arXiv:2307.08691</a></li>
+<li>Shah, J. et al. (2024). <strong>FlashAttention-3: Fast and Accurate Attention for Hopper GPUs.</strong> <a href="https://arxiv.org/abs/2407.08608">arXiv:2407.08608</a></li>
+<li>Kwon, W. et al. (2023). <strong>Efficient Memory Management for Large Language Model Serving with PagedAttention.</strong> SOSP 2023. <a href="https://arxiv.org/abs/2309.06180">arXiv:2309.06180</a></li>
+<li>Shazeer, N. (2019). <strong>Fast Transformer Decoding: One Write-Head is All You Need (Multi-Query Attention).</strong> <a href="https://arxiv.org/abs/1911.02150">arXiv:1911.02150</a></li>
+<li>Ainslie, J. et al. (2023). <strong>GQA: Training Generalised Multi-Query Transformer Models from Multi-Head Checkpoints.</strong> EMNLP 2023. <a href="https://arxiv.org/abs/2305.13245">arXiv:2305.13245</a></li>
 </ul>
-<hr />
-<hr />
-<h2 id="lazy-batch-updates-efficiency">Lazy Batch Updates (Efficiency)<a class="headerlink" href="#lazy-batch-updates-efficiency" title="Permanent link">&para;</a></h2>
+<h2 id="decoding-strategies">Decoding Strategies<a class="headerlink" href="#decoding-strategies" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Don't update all weights individually</li>
-<li>Process in blocks of 128 columns</li>
-<li>Dramatic speedup with minimal quality loss</li>
+<li>Leviathan, Y. et al. (2023). <strong>Fast Inference from Transformers via Speculative Decoding.</strong> ICML 2023. <a href="https://arxiv.org/abs/2211.17192">arXiv:2211.17192</a></li>
+<li>Chen, C. et al. (2023). <strong>Accelerating Large Language Model Decoding with Speculative Sampling.</strong> <a href="https://arxiv.org/abs/2302.01318">arXiv:2302.01318</a></li>
+<li>Holtzman, A. et al. (2020). <strong>The Curious Case of Neural Text Degeneration (nucleus sampling).</strong> ICLR 2020. <a href="https://arxiv.org/abs/1904.09751">arXiv:1904.09751</a></li>
 </ul>
-<hr />
-<hr />
-<h2 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h2>
+<h2 id="batching">Batching<a class="headerlink" href="#batching" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Calibration</strong>: 128 samples typical</li>
-<li><strong>Time</strong>: 3-4 hours for 175B model on single GPU</li>
-<li><strong>Group Size</strong>: 128 (default), lower for better quality</li>
-<li><strong>Bits</strong>: Designed for 3-4 bit, works for INT8 too</li>
+<li>Yu, G. et al. (2022). <strong>Orca: A Distributed Serving System for Transformer-Based Generative Models (continuous batching).</strong> OSDI 2022.</li>
+<li>Agrawal, A. et al. (2024). <strong>Sarathi-Serve: Efficient LLM Inference by Piggybacking Decodes with Chunked Prefills.</strong> OSDI 2024. <a href="https://arxiv.org/abs/2403.02310">arXiv:2403.02310</a></li>
 </ul>
-<hr />
-<hr />
-<h2 id="accuracy">Accuracy<a class="headerlink" href="#accuracy" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Model</th>
-<th>Bits</th>
-<th>Group Size</th>
-<th>Perplexity Δ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LLaMA-7B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.2</td>
-</tr>
-<tr>
-<td>LLaMA-13B</td>
-<td>3</td>
-<td>128</td>
-<td>+0.9</td>
-</tr>
-<tr>
-<td>OPT-175B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.1</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<hr />
-<h2 id="vs-round-to-nearest-rtn">vs. Round-To-Nearest (RTN)<a class="headerlink" href="#vs-round-to-nearest-rtn" title="Permanent link">&para;</a></h2>
+<h2 id="quantization">Quantization<a class="headerlink" href="#quantization" title="Permanent link">&para;</a></h2>
 <ul>
-<li>RTN: Fast, 5-10% degradation at 4-bit</li>
-<li>GPTQ: Slow quantization, &lt;2% degradation at 4-bit</li>
+<li>Dettmers, T. et al. (2022). <strong>LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale.</strong> NeurIPS 2022. <a href="https://arxiv.org/abs/2208.07339">arXiv:2208.07339</a></li>
+<li>Frantar, E. et al. (2022). <strong>GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers.</strong> ICLR 2023. <a href="https://arxiv.org/abs/2210.17323">arXiv:2210.17323</a></li>
+<li>Lin, J. et al. (2023). <strong>AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration.</strong> MLSys 2024. <a href="https://arxiv.org/abs/2306.00978">arXiv:2306.00978</a></li>
+<li>Xiao, G. et al. (2023). <strong>SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models.</strong> ICML 2023. <a href="https://arxiv.org/abs/2211.10438">arXiv:2211.10438</a></li>
+<li>Dettmers, T. et al. (2023). <strong>QLoRA: Efficient Finetuning of Quantized LLMs.</strong> NeurIPS 2023. <a href="https://arxiv.org/abs/2305.14314">arXiv:2305.14314</a></li>
+<li>Gerganov, G. (2023). <strong>llama.cpp / GGML / GGUF.</strong> <a href="https://github.com/ggml-org/llama.cpp">GitHub</a></li>
 </ul>
-<hr />
-<hr />
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># AutoGPTQ library</span>
-<span class="kn">from</span> <span class="nn">auto_gptq</span> <span class="kn">import</span> <span class="n">AutoGPTQForCausalLM</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">AutoGPTQForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;model_name&quot;</span><span class="p">,</span>
-    <span class="n">quantize_config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">&quot;group_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s2">&quot;desc_act&quot;</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># Activation ordering</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</code></pre></div>
-<hr />
+<h2 id="serving-frameworks">Serving Frameworks<a class="headerlink" href="#serving-frameworks" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>vLLM.</strong> Kwon et al. (2023). <a href="https://github.com/vllm-project/vllm">GitHub</a></li>
+<li><strong>TensorRT-LLM.</strong> NVIDIA (2023). <a href="https://github.com/NVIDIA/TensorRT-LLM">GitHub</a></li>
+<li><strong>Text Generation Inference (TGI).</strong> Hugging Face (2023). <a href="https://github.com/huggingface/text-generation-inference">GitHub</a></li>
+<li><strong>DeepSpeed-Inference.</strong> Aminabadi et al. (2022). <strong>DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale.</strong> SC 2022. <a href="https://arxiv.org/abs/2207.00032">arXiv:2207.00032</a></li>
+<li><strong>Triton Inference Server.</strong> NVIDIA (2022). <a href="https://github.com/triton-inference-server/server">GitHub</a></li>
+</ul>
+<h2 id="test-time-compute-scaling">Test-Time Compute Scaling<a class="headerlink" href="#test-time-compute-scaling" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Lightman, H. et al. (2023). <strong>Let's Verify Step by Step (Process Reward Models).</strong> ICLR 2024. <a href="https://arxiv.org/abs/2305.20050">arXiv:2305.20050</a></li>
+<li>Wang, P. et al. (2024). <strong>Math-Shepherd: Verify and Reinforce LLMs Step-by-Step without Human Annotations.</strong> ACL 2024. <a href="https://arxiv.org/abs/2312.08935">arXiv:2312.08935</a></li>
+<li>Snell, C. et al. (2024). <strong>Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Model Parameters.</strong> <a href="https://arxiv.org/abs/2408.03314">arXiv:2408.03314</a></li>
+<li>DeepSeek-AI (2025). <strong>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.</strong> <a href="https://arxiv.org/abs/2501.12948">arXiv:2501.12948</a></li>
+<li>OpenAI (2024). <strong>OpenAI o1 System Card.</strong> <a href="https://openai.com/index/openai-o1-system-card/">openai.com</a></li>
+</ul>
+<h2 id="disaggregated-prefill-decode">Disaggregated Prefill-Decode<a class="headerlink" href="#disaggregated-prefill-decode" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Qin, R. et al. (2024). <strong>Mooncake: A KVCache-centric Disaggregated Architecture for LLM Serving.</strong> <a href="https://arxiv.org/abs/2407.00079">arXiv:2407.00079</a></li>
+<li>Zhong, Y. et al. (2024). <strong>DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving.</strong> OSDI 2024. <a href="https://arxiv.org/abs/2401.09670">arXiv:2401.09670</a></li>
+</ul>
+<h2 id="benchmarks-profiling">Benchmarks &amp; Profiling<a class="headerlink" href="#benchmarks-profiling" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Williams, S. et al. (2009). <strong>Roofline: An Insightful Visual Performance Model for Multicore Architectures.</strong> CACM 2009.</li>
+<li>NVIDIA (2024). <strong>Nsight Systems / Nsight Compute.</strong> <a href="https://developer.nvidia.com/nsight-systems">developer.nvidia.com</a></li>
+<li><strong>LM Evaluation Harness.</strong> EleutherAI. <a href="https://github.com/EleutherAI/lm-evaluation-harness">GitHub</a></li>
+</ul>
 
 
 
@@ -1733,10 +1671,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "mathjax"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "mathjax"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

@@ -541,6 +541,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1202,15 +1225,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1405,6 +1419,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1419,12 +1572,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1698,15 +1873,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1916,38 +2082,6 @@ Final Layer: FP16 or INT8
 <p><strong>Pros</strong>: Adapts to inputs, better quality
 <strong>Cons</strong>: Runtime overhead (scale computation)
 <strong>Best for</strong>: Varied input distributions, activation quantization</p>
-<hr />
-<hr />
-<h2 id="common-interview-questions">Common Interview Questions<a class="headerlink" href="#common-interview-questions" title="Permanent link">&para;</a></h2>
-<p><strong>Q1: When would you use INT8 over INT4?</strong>
-A: (1) Quality-critical applications where 0.5% matters, (2) Hardware with INT8 acceleration but no INT4, (3) Activations (INT4 activations too lossy).</p>
-<hr />
-<p><strong>Q2: What's the minimum model size for effective quantization?</strong>
-A: ~1B parameters. Smaller models have less redundancy, quantization hurts more. &lt;500M models: stick to FP16.</p>
-<hr />
-<p><strong>Q3: How do you decide between GPTQ and AWQ?</strong>
-A: GPTQ for 3-bit or when quality is paramount. AWQ for 4-bit, faster iteration, production deadlines. Quality difference minimal at 4-bit.</p>
-<hr />
-<p><strong>Q4: What's the biggest failure mode of quantization?</strong>
-A: Outlier channels not handled properly. SmoothQuant, AWQ, or mixed-precision decomposition (LLM.int8()) essential for robust quantization.</p>
-<hr />
-<p><strong>Q5: Can you quantize a fine-tuned model?</strong>
-A: Yes, but better to fine-tune with QLoRA (quantize-aware fine-tuning). Post-hoc quantization of fine-tuned models can be more sensitive than base models.</p>
-<hr />
-<p><strong>Q6: What's the practical lower bound for useful quantization?</strong>
-A: 2-bit with current methods. Below that, quality degrades unacceptably even for large models (70B+). Active research on sub-2-bit.</p>
-<hr />
-<p><strong>Q7: How much quality loss is acceptable?</strong>
-A: Domain-dependent. Chatbots: 2-3% acceptable. Code generation: &lt;1%. Reasoning tasks: &lt;0.5%. Benchmark on your specific use case.</p>
-<hr />
-<p><strong>Q8: Should you quantize KV cache?</strong>
-A: Yes for long context (4K+). INT8 KV cache with SmoothQuant: 2× memory savings, &lt;0.5% quality loss. Critical for 32K+ context.</p>
-<hr />
-<p><strong>Q9: What's the ROI of quantization engineering time?</strong>
-A: High. 4 hours GPTQ quantization → 8× memory reduction → 8× more users per GPU → 8× cost reduction. One-time cost, continuous savings.</p>
-<hr />
-<p><strong>Q10: Biggest misconception about quantization?</strong>
-A: "Lower bits always means faster." Reality: memory-bound scenarios see speedup, compute-bound scenarios don't. Batch size, context length matter more than bit width for speed.</p>
 <hr />
 
 

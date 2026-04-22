@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../int4_quantization/">
+        <link rel="prev" href="../compute_optimal_inference/">
       
       
-        <link rel="next" href="../awq/">
+        <link rel="next" href="../orm_prm/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>GPTQ - LLM Inference Speedup</title>
+        <title>Best-of-N Sampling - LLM Inference Speedup</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-paper" class="md-skip">
+        <a href="#1-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GPTQ
+              Best-of-N Sampling
             
           </span>
         </div>
@@ -736,20 +736,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -765,7 +765,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Quantization
@@ -779,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_basics/" class="md-nav__link">
+      <a href="../../quantization/quantization_basics/" class="md-nav__link">
         
   
   
@@ -802,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int8_quantization/" class="md-nav__link">
+      <a href="../../quantization/int8_quantization/" class="md-nav__link">
         
   
   
@@ -825,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int4_quantization/" class="md-nav__link">
+      <a href="../../quantization/int4_quantization/" class="md-nav__link">
         
   
   
@@ -845,30 +845,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    GPTQ
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../quantization/gptq/" class="md-nav__link">
         
   
   
@@ -879,105 +859,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Paper
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Core Idea
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Algorithm (Simplified)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Specifications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -990,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../awq/" class="md-nav__link">
+      <a href="../../quantization/awq/" class="md-nav__link">
         
   
   
@@ -1013,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smoothquant/" class="md-nav__link">
+      <a href="../../quantization/smoothquant/" class="md-nav__link">
         
   
   
@@ -1036,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
+      <a href="../../quantization/gguf_ggml/" class="md-nav__link">
         
   
   
@@ -1059,7 +940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_tradeoffs/" class="md-nav__link">
+      <a href="../../quantization/quantization_tradeoffs/" class="md-nav__link">
         
   
   
@@ -1294,20 +1175,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
@@ -1323,7 +1204,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Test-Time Compute Scaling
@@ -1337,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+      <a href="../compute_optimal_inference/" class="md-nav__link">
         
   
   
@@ -1357,10 +1238,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1371,6 +1272,78 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Mechanics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-computational-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Computational Cost
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-bon-vs-other-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. BoN vs. Other Techniques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-failure-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Failure Modes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1383,7 +1356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+      <a href="../orm_prm/" class="md-nav__link">
         
   
   
@@ -1475,81 +1448,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
+  <a href="#1-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Paper
+      1. Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
+  <a href="#2-core-mechanics" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Core Idea
+      2. Core Mechanics
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
+  <a href="#3-computational-cost" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Algorithm (Simplified)
+      3. Computational Cost
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
+  <a href="#4-bon-vs-other-techniques" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
+      4. BoN vs. Other Techniques
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
+  <a href="#5-variants" class="md-nav__link">
     <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
+      5. Variants
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
+  <a href="#6-failure-modes" class="md-nav__link">
     <span class="md-ellipsis">
-      Specifications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
+      6. Failure Modes
     </span>
   </a>
   
@@ -1574,111 +1520,112 @@
   
 
 
-  <h1>GPTQ</h1>
+  <h1>Best-of-N Sampling</h1>
 
-<h2 id="1-paper">1. Paper<a class="headerlink" href="#1-paper" title="Permanent link">&para;</a></h2>
-<p>Frantar et al., 2022 - "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"</p>
-<hr />
-<hr />
-<h2 id="2-core-idea">2. Core Idea<a class="headerlink" href="#2-core-idea" title="Permanent link">&para;</a></h2>
-<p>Quantize weights one-by-one while compensating errors in remaining weights using second-order information (Hessian).</p>
-<hr />
-<hr />
-<h2 id="3-algorithm-simplified">3. Algorithm (Simplified)<a class="headerlink" href="#3-algorithm-simplified" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># For each layer&#39;s weight matrix W</span>
-<span class="n">H</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="o">^</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span> <span class="o">/</span> <span class="n">n_samples</span>  <span class="c1"># Hessian (input correlations)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_columns</span><span class="p">):</span>
-    <span class="c1"># Quantize column i</span>
-    <span class="n">w_q</span> <span class="o">=</span> <span class="n">quantize</span><span class="p">(</span><span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">w_q</span>
-
-    <span class="c1"># Distribute error to remaining columns using Hessian</span>
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_q</span>
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p>Best-of-N (BoN) sampling generates N candidate outputs from a model and selects the best one using a reward model or scoring function. It is the simplest form of test-time compute scaling.</p>
+<div class="highlight"><pre><span></span><code>x* = argmax R(xᵢ)  for i ∈ {1, ..., N}
 </code></pre></div>
+<p>Error reduction is approximately exponential: <code>error ∝ e^(-cN)</code> up to a saturation point.</p>
 <hr />
-<hr />
-<h2 id="4-key-innovation-optimal-brain-quantization-obq">4. Key Innovation: Optimal Brain Quantization (OBQ)<a class="headerlink" href="#4-key-innovation-optimal-brain-quantization-obq" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Uses second-order Taylor expansion to minimize quantization loss</li>
-<li>Iteratively quantizes weights in order that minimizes Hessian-weighted error</li>
-<li>Compensates each quantization error before next step</li>
-</ul>
-<hr />
-<hr />
-<h2 id="lazy-batch-updates-efficiency">Lazy Batch Updates (Efficiency)<a class="headerlink" href="#lazy-batch-updates-efficiency" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Don't update all weights individually</li>
-<li>Process in blocks of 128 columns</li>
-<li>Dramatic speedup with minimal quality loss</li>
-</ul>
-<hr />
-<hr />
-<h2 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Calibration</strong>: 128 samples typical</li>
-<li><strong>Time</strong>: 3-4 hours for 175B model on single GPU</li>
-<li><strong>Group Size</strong>: 128 (default), lower for better quality</li>
-<li><strong>Bits</strong>: Designed for 3-4 bit, works for INT8 too</li>
-</ul>
-<hr />
-<hr />
-<h2 id="accuracy">Accuracy<a class="headerlink" href="#accuracy" title="Permanent link">&para;</a></h2>
+<h2 id="2-core-mechanics">2. Core Mechanics<a class="headerlink" href="#2-core-mechanics" title="Permanent link">&para;</a></h2>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>Sample N completions from the model (with temperature sampling for diversity)</li>
+<li>Score each with a reward function R(x)</li>
+<li>Return the highest-scoring completion</li>
+</ol>
+<p><strong>Sampling for diversity:</strong> Use temperature 0.7–1.0 or top-p nucleus sampling. Too-low temperature produces near-identical candidates; diversity is essential for BoN to work.</p>
+<p><strong>Reward function options:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Model</th>
-<th>Bits</th>
-<th>Group Size</th>
-<th>Perplexity Δ</th>
+<th>Type</th>
+<th>Description</th>
+<th>Use case</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>LLaMA-7B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.2</td>
+<td>Trained reward model</td>
+<td>Neural net trained on human preference data</td>
+<td>General quality</td>
 </tr>
 <tr>
-<td>LLaMA-13B</td>
-<td>3</td>
-<td>128</td>
-<td>+0.9</td>
+<td>Rule-based</td>
+<td>Length, format compliance, keyword checks</td>
+<td>Structured outputs</td>
 </tr>
 <tr>
-<td>OPT-175B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.1</td>
+<td>LLM-as-judge</td>
+<td>Another LLM scores quality</td>
+<td>Subjective tasks</td>
+</tr>
+<tr>
+<td>Process Reward Model (PRM)</td>
+<td>Scores each reasoning step</td>
+<td>Math, code, multi-step</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<hr />
-<h2 id="vs-round-to-nearest-rtn">vs. Round-To-Nearest (RTN)<a class="headerlink" href="#vs-round-to-nearest-rtn" title="Permanent link">&para;</a></h2>
+<h2 id="3-computational-cost">3. Computational Cost<a class="headerlink" href="#3-computational-cost" title="Permanent link">&para;</a></h2>
 <ul>
-<li>RTN: Fast, 5-10% degradation at 4-bit</li>
-<li>GPTQ: Slow quantization, &lt;2% degradation at 4-bit</li>
+<li><strong>Time:</strong> O(N × T) where T = generation time per sample</li>
+<li><strong>Space:</strong> O(N × L) where L = average response length</li>
+<li><strong>Parallelizable:</strong> All N samples can be generated in parallel given sufficient GPU memory</li>
 </ul>
+<p><strong>Practical N values:</strong> N=4–16 provides a good quality-cost balance. Beyond N=64–100, gains diminish significantly. Measure empirically on your task.</p>
 <hr />
+<h2 id="4-bon-vs-other-techniques">4. BoN vs. Other Techniques<a class="headerlink" href="#4-bon-vs-other-techniques" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Training Cost</th>
+<th>Inference Cost</th>
+<th>Best Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best-of-N</td>
+<td>None (uses existing reward model)</td>
+<td>High (N×)</td>
+<td>Quick quality boost, verifiable tasks</td>
+</tr>
+<tr>
+<td>Beam Search</td>
+<td>None</td>
+<td>Medium</td>
+<td>Deterministic, high-probability output</td>
+</tr>
+<tr>
+<td>RLHF fine-tuning</td>
+<td>Very high</td>
+<td>Low</td>
+<td>Production at scale</td>
+</tr>
+<tr>
+<td>Speculative decoding</td>
+<td>None</td>
+<td>Lower latency</td>
+<td>Speed, not quality improvement</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BoN vs. beam search:</strong> Beam search is deterministic — it tracks the top-k highest-probability prefixes. BoN samples independently with diversity and uses an external quality metric beyond log-probability.</p>
 <hr />
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># AutoGPTQ library</span>
-<span class="kn">from</span> <span class="nn">auto_gptq</span> <span class="kn">import</span> <span class="n">AutoGPTQForCausalLM</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">AutoGPTQForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;model_name&quot;</span><span class="p">,</span>
-    <span class="n">quantize_config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">&quot;group_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s2">&quot;desc_act&quot;</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># Activation ordering</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</code></pre></div>
+<h2 id="5-variants">5. Variants<a class="headerlink" href="#5-variants" title="Permanent link">&para;</a></h2>
+<p><strong>Weighted BoN:</strong> Combine multiple high-scoring candidates via weighted averaging rather than hard selection — improves robustness when the top-1 reward model score is noisy.</p>
+<p><strong>Adaptive N:</strong> Determine N based on prompt difficulty or reward variance. Easy prompts: N=2–4. Hard reasoning: N=32–64+.</p>
+<p><strong>Process-Based BoN:</strong> Score using a PRM rather than an ORM — evaluates reasoning steps, enabling better selection for math and code. See <a href="../orm_prm/">ORM vs PRM</a>.</p>
+<p><strong>Self-Consistency:</strong> A special case of BoN without a reward model — generate N reasoning chains, take majority vote on the final answer. Works well for classification and math without needing a separate scorer.</p>
 <hr />
+<h2 id="6-failure-modes">6. Failure Modes<a class="headerlink" href="#6-failure-modes" title="Permanent link">&para;</a></h2>
+<p><strong>Reward hacking:</strong> Model exploits weaknesses in the reward model to score highly without genuine quality. Mitigations: ensemble reward models, KL regularisation from base model, diverse reward training data.</p>
+<p><strong>Diminishing returns:</strong> Beyond N*, additional samples provide negligible improvement. Always plot a quality-vs-N curve before committing to large N.</p>
+<p><strong>Latency in production:</strong> N × generation time is too slow for real-time applications. Use <a href="../../decoding_strategies/speculative_decoding/">speculative decoding</a> or distil BoN-selected examples into a fine-tuned model for deployment.</p>
 
 
 

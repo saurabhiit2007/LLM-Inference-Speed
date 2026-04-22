@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../int4_quantization/">
+        <link rel="prev" href="../best_of_n_sampling/">
       
       
-        <link rel="next" href="../awq/">
+        <link rel="next" href="../../qa/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>GPTQ - LLM Inference Speedup</title>
+        <title>ORMs & PRMs - LLM Inference Speedup</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-paper" class="md-skip">
+        <a href="#1-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GPTQ
+              ORMs & PRMs
             
           </span>
         </div>
@@ -736,20 +736,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -765,7 +765,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Quantization
@@ -779,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_basics/" class="md-nav__link">
+      <a href="../../quantization/quantization_basics/" class="md-nav__link">
         
   
   
@@ -802,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int8_quantization/" class="md-nav__link">
+      <a href="../../quantization/int8_quantization/" class="md-nav__link">
         
   
   
@@ -825,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int4_quantization/" class="md-nav__link">
+      <a href="../../quantization/int4_quantization/" class="md-nav__link">
         
   
   
@@ -845,30 +845,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    GPTQ
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../quantization/gptq/" class="md-nav__link">
         
   
   
@@ -879,105 +859,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Paper
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Core Idea
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Algorithm (Simplified)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Specifications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -990,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../awq/" class="md-nav__link">
+      <a href="../../quantization/awq/" class="md-nav__link">
         
   
   
@@ -1013,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smoothquant/" class="md-nav__link">
+      <a href="../../quantization/smoothquant/" class="md-nav__link">
         
   
   
@@ -1036,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
+      <a href="../../quantization/gguf_ggml/" class="md-nav__link">
         
   
   
@@ -1059,7 +940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_tradeoffs/" class="md-nav__link">
+      <a href="../../quantization/quantization_tradeoffs/" class="md-nav__link">
         
   
   
@@ -1294,20 +1175,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
@@ -1323,7 +1204,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Test-Time Compute Scaling
@@ -1337,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+      <a href="../compute_optimal_inference/" class="md-nav__link">
         
   
   
@@ -1360,7 +1241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+      <a href="../best_of_n_sampling/" class="md-nav__link">
         
   
   
@@ -1380,10 +1261,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1394,6 +1295,111 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-orm-vs-prm" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. ORM vs PRM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-how-they-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. How They Work
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. How They Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prm" class="md-nav__link">
+    <span class="md-ellipsis">
+      PRM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-training-data-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Training Data Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-role-in-test-time-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Role in Test-Time Search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-key-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Key Research
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-when-to-use-each" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. When to Use Each
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1475,81 +1481,87 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
+  <a href="#1-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Paper
+      1. Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
+  <a href="#2-orm-vs-prm" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Core Idea
+      2. ORM vs PRM
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
+  <a href="#3-how-they-work" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Algorithm (Simplified)
+      3. How They Work
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. How They Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prm" class="md-nav__link">
+    <span class="md-ellipsis">
+      PRM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-training-data-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Training Data Requirements
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
+  <a href="#5-role-in-test-time-search" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
+      5. Role in Test-Time Search
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
+  <a href="#6-key-research" class="md-nav__link">
     <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
+      6. Key Research
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
+  <a href="#7-when-to-use-each" class="md-nav__link">
     <span class="md-ellipsis">
-      Specifications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
+      7. When to Use Each
     </span>
   </a>
   
@@ -1574,111 +1586,115 @@
   
 
 
-  <h1>GPTQ</h1>
+  <h1>ORMs & PRMs</h1>
 
-<h2 id="1-paper">1. Paper<a class="headerlink" href="#1-paper" title="Permanent link">&para;</a></h2>
-<p>Frantar et al., 2022 - "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"</p>
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p><strong>ORM (Outcome Reward Model)</strong> and <strong>PRM (Process Reward Model)</strong> are two paradigms for scoring model outputs during test-time compute. They differ in granularity: ORMs judge the final answer only; PRMs judge each intermediate reasoning step.</p>
+<p>Both are used to guide <a href="../best_of_n_sampling/">Best-of-N sampling</a> and tree search at inference time.</p>
 <hr />
-<hr />
-<h2 id="2-core-idea">2. Core Idea<a class="headerlink" href="#2-core-idea" title="Permanent link">&para;</a></h2>
-<p>Quantize weights one-by-one while compensating errors in remaining weights using second-order information (Hessian).</p>
-<hr />
-<hr />
-<h2 id="3-algorithm-simplified">3. Algorithm (Simplified)<a class="headerlink" href="#3-algorithm-simplified" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># For each layer&#39;s weight matrix W</span>
-<span class="n">H</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="o">^</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span> <span class="o">/</span> <span class="n">n_samples</span>  <span class="c1"># Hessian (input correlations)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_columns</span><span class="p">):</span>
-    <span class="c1"># Quantize column i</span>
-    <span class="n">w_q</span> <span class="o">=</span> <span class="n">quantize</span><span class="p">(</span><span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">w_q</span>
-
-    <span class="c1"># Distribute error to remaining columns using Hessian</span>
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_q</span>
-</code></pre></div>
-<hr />
-<hr />
-<h2 id="4-key-innovation-optimal-brain-quantization-obq">4. Key Innovation: Optimal Brain Quantization (OBQ)<a class="headerlink" href="#4-key-innovation-optimal-brain-quantization-obq" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Uses second-order Taylor expansion to minimize quantization loss</li>
-<li>Iteratively quantizes weights in order that minimizes Hessian-weighted error</li>
-<li>Compensates each quantization error before next step</li>
-</ul>
-<hr />
-<hr />
-<h2 id="lazy-batch-updates-efficiency">Lazy Batch Updates (Efficiency)<a class="headerlink" href="#lazy-batch-updates-efficiency" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Don't update all weights individually</li>
-<li>Process in blocks of 128 columns</li>
-<li>Dramatic speedup with minimal quality loss</li>
-</ul>
-<hr />
-<hr />
-<h2 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Calibration</strong>: 128 samples typical</li>
-<li><strong>Time</strong>: 3-4 hours for 175B model on single GPU</li>
-<li><strong>Group Size</strong>: 128 (default), lower for better quality</li>
-<li><strong>Bits</strong>: Designed for 3-4 bit, works for INT8 too</li>
-</ul>
-<hr />
-<hr />
-<h2 id="accuracy">Accuracy<a class="headerlink" href="#accuracy" title="Permanent link">&para;</a></h2>
+<h2 id="2-orm-vs-prm">2. ORM vs PRM<a class="headerlink" href="#2-orm-vs-prm" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Model</th>
-<th>Bits</th>
-<th>Group Size</th>
-<th>Perplexity Δ</th>
+<th>Aspect</th>
+<th>ORM</th>
+<th>PRM</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>LLaMA-7B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.2</td>
+<td>Granularity</td>
+<td>Final answer only</td>
+<td>Each reasoning step</td>
 </tr>
 <tr>
-<td>LLaMA-13B</td>
-<td>3</td>
-<td>128</td>
-<td>+0.9</td>
+<td>Feedback</td>
+<td>Single scalar</td>
+<td>Vector of per-step scores</td>
 </tr>
 <tr>
-<td>OPT-175B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.1</td>
+<td>Supervision cost</td>
+<td>Low (binary correct/incorrect)</td>
+<td>High (step-level human annotation)</td>
+</tr>
+<tr>
+<td>Error localisation</td>
+<td>Cannot identify where reasoning fails</td>
+<td>Identifies the failing step</td>
+</tr>
+<tr>
+<td>Tree/beam search</td>
+<td>Poor — only terminal rewards</td>
+<td>Excellent — prunes bad paths early</td>
+</tr>
+<tr>
+<td>Interpretability</td>
+<td>Low</td>
+<td>High</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Analogy:</strong> ORM grades only the final answer on a test. PRM grades the work shown for each step.</p>
 <hr />
+<h2 id="3-how-they-work">3. How They Work<a class="headerlink" href="#3-how-they-work" title="Permanent link">&para;</a></h2>
+<h3 id="orm">ORM<a class="headerlink" href="#orm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">orm_score</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">verify_final_answer</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span>
+</code></pre></div>
+<p>Single forward pass per complete solution. Cheap at inference time.</p>
+<h3 id="prm">PRM<a class="headerlink" href="#prm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">prm_score</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">reasoning_steps</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">verify_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">reasoning_steps</span><span class="p">]</span>
+</code></pre></div>
+<p>One forward pass per step — O(n) passes where n = number of steps. PRM scores are aggregated (min, mean, or product) across steps to rank candidates.</p>
 <hr />
-<h2 id="vs-round-to-nearest-rtn">vs. Round-To-Nearest (RTN)<a class="headerlink" href="#vs-round-to-nearest-rtn" title="Permanent link">&para;</a></h2>
+<h2 id="4-training-data-requirements">4. Training Data Requirements<a class="headerlink" href="#4-training-data-requirements" title="Permanent link">&para;</a></h2>
+<p><strong>ORM:</strong> <code>(problem, complete_solution) → binary label</code>. Straightforward to collect.</p>
+<p><strong>PRM:</strong> <code>(problem, step_1, ..., step_n) → step-level labels</code>. Expensive. Two approaches to reduce annotation cost:</p>
 <ul>
-<li>RTN: Fast, 5-10% degradation at 4-bit</li>
-<li>GPTQ: Slow quantization, &lt;2% degradation at 4-bit</li>
+<li><strong>Math-Shepherd (2024):</strong> Automated step-level annotation using Monte Carlo rollouts — estimate step value by sampling completions and checking final answer correctness.</li>
+<li><strong>Weak-to-strong supervision:</strong> Use a weaker model to generate step labels for a stronger model.</li>
 </ul>
 <hr />
-<hr />
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># AutoGPTQ library</span>
-<span class="kn">from</span> <span class="nn">auto_gptq</span> <span class="kn">import</span> <span class="n">AutoGPTQForCausalLM</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">AutoGPTQForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;model_name&quot;</span><span class="p">,</span>
-    <span class="n">quantize_config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">&quot;group_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s2">&quot;desc_act&quot;</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># Activation ordering</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+<h2 id="5-role-in-test-time-search">5. Role in Test-Time Search<a class="headerlink" href="#5-role-in-test-time-search" title="Permanent link">&para;</a></h2>
+<p>PRMs unlock tree search at inference time:</p>
+<div class="highlight"><pre><span></span><code>Query
+  │
+  ▼
+Generate k partial reasoning paths
+  │
+  ▼
+PRM scores each step → prune low-scoring branches
+  │
+  ▼
+Extend surviving paths → repeat until complete
+  │
+  ▼
+ORM re-scores final candidates → return best
 </code></pre></div>
+<p>This is more efficient than BoN: bad reasoning paths are abandoned early rather than completed before scoring.</p>
 <hr />
+<h2 id="6-key-research">6. Key Research<a class="headerlink" href="#6-key-research" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>"Let's Verify Step by Step" (OpenAI, 2023):</strong> PRMs substantially outperform ORMs on MATH benchmark. Best-of-N with PRM &gt;&gt; Best-of-N with ORM.</li>
+<li><strong>Math-Shepherd (2024):</strong> Automated PRM data collection; reduces human labelling cost.</li>
+<li><strong>DeepSeek R1 (2025):</strong> Trains with RLVR (RL from Verifiable Rewards) — effectively learns an internal ORM signal without a separate model.</li>
+</ul>
+<hr />
+<h2 id="7-when-to-use-each">7. When to Use Each<a class="headerlink" href="#7-when-to-use-each" title="Permanent link">&para;</a></h2>
+<p><strong>Use ORM when:</strong></p>
+<ul>
+<li>Task has clear right/wrong answers</li>
+<li>Limited annotation budget</li>
+<li>Fast inference is required</li>
+</ul>
+<p><strong>Use PRM when:</strong></p>
+<ul>
+<li>Multi-step reasoning (math, code, planning)</li>
+<li>Tree search is in the pipeline</li>
+<li>Interpretability and step-level debugging matter</li>
+<li>Combining with <a href="../best_of_n_sampling/">Best-of-N sampling</a> for complex tasks</li>
+</ul>
 
 
 

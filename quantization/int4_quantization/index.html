@@ -541,6 +541,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -910,15 +933,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1228,6 +1242,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1242,12 +1395,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1344,15 +1519,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1424,26 +1590,6 @@ val1 = (byte &gt;&gt; 4) &amp; 0xF   # Unpack
 <li><strong>Speed</strong>: 1.5-2× faster than INT8 (memory-bound scenarios)</li>
 <li><strong>Accuracy drop</strong>: 3-7% with naive methods, &lt;2% with GPTQ/AWQ</li>
 </ul>
-<hr />
-<hr />
-<h2 id="common-interview-questions">Common Interview Questions<a class="headerlink" href="#common-interview-questions" title="Permanent link">&para;</a></h2>
-<p><strong>Q1: Why not INT4 everywhere if it's 8× smaller?</strong> <br>
-A: Quality degradation becomes significant. Activations especially need higher precision. Still typically use FP16/INT8 for activations.</p>
-<hr />
-<p><strong>Q2: What's the typical group size for INT4?</strong> <br>
-A: 32-128. Smaller = better accuracy but more overhead. 128 is common sweet spot.</p>
-<hr />
-<p><strong>Q3: How does NF4 differ from uniform INT4?</strong> <br>
-A: NF4 uses quantiles of normal distribution as bins instead of uniform spacing. Since weights are normally distributed, this minimizes quantization error.</p>
-<hr />
-<p><strong>Q4: Can you do INT4 quantization without GPTQ/AWQ?</strong> <br>
-A: Yes, but expect 5-10% accuracy drop. Round-to-nearest with group quantization gets you ~3-5% drop. GPTQ/AWQ optimize to &lt;2%.</p>
-<hr />
-<p><strong>Q5: What's the memory breakdown for INT4 model?</strong> <br>
-A: Weights: 4 bits, Scales: ~0.1 bits (with double quantization), KV cache: still FP16/INT8 (separate issue).</p>
-<hr />
-<p><strong>Q6: Why is INT4 harder than INT8 for activations?</strong> <br>
-A: Activations have wider dynamic range and outliers. INT4's 16 values can't capture this without severe clipping or poor resolution.</p>
 <hr />
 
 

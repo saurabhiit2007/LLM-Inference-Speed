@@ -541,6 +541,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1060,15 +1083,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#10-common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1309,6 +1323,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1323,12 +1476,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1506,15 +1681,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#10-common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1649,32 +1815,6 @@
 <span class="c1"># Then quantize with standard tools</span>
 <span class="n">quantized</span> <span class="o">=</span> <span class="n">quantize_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">w_bit</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">a_bit</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 </code></pre></div>
-<hr />
-<hr />
-<h2 id="10-common-interview-questions">10. Common Interview Questions<a class="headerlink" href="#10-common-interview-questions" title="Permanent link">&para;</a></h2>
-<p><strong>Q1: Why do LLM activations have outliers?</strong> <br>
-A: Systematic outliers in specific channels across all tokens, likely due to attention patterns and positional encodings. Some channels accumulate large values.</p>
-<hr />
-<p><strong>Q2: How does smoothing preserve mathematical equivalence?</strong> <br>
-A: Matrix multiplication property: <code>(X/s) @ (W*s) = X @ W</code>. Division and multiplication by same per-channel scales cancel out.</p>
-<hr />
-<p><strong>Q3: Why can't we just clip outliers?</strong> <br>
-A: Clipping loses information and degrades quality significantly (5-10%). Smoothing redistributes dynamic range without information loss.</p>
-<hr />
-<p><strong>Q4: What's the overhead of smoothing at runtime?</strong> <br>
-A: Negligible. Smoothing scales folded into weights offline. Only <code>X/s</code> at runtime (cheap element-wise division before matmul).</p>
-<hr />
-<p><strong>Q5: Does SmoothQuant help with KV cache quantization?</strong> <br>
-A: Yes! KV cache contains activations. Smoothing reduces outliers, enabling INT8 KV cache with minimal quality loss.</p>
-<hr />
-<p><strong>Q6: Why is α=0.5 optimal?</strong> <br>
-A: Balances difficulty migration. Too low → activations still hard. Too high → weights become hard. Geometric mean (0.5) is empirical sweet spot.</p>
-<hr />
-<p><strong>Q7: Can SmoothQuant be applied per-layer?</strong> <br>
-A: Yes, α can be tuned per-layer. Some layers benefit from more aggressive smoothing (α=0.7), others from less (α=0.3).</p>
-<hr />
-<p><strong>Q8: SmoothQuant vs. absmax/percentile scaling?</strong> <br>
-A: Those methods scale after observing outliers. SmoothQuant prevents outliers from forming. More fundamental solution.</p>
 <hr />
 
 

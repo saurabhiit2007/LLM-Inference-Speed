@@ -446,33 +446,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#4-common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-modern-optimizations-2024-2025" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Modern Optimizations (2024-2025)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-key-takeaways" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Key Takeaways
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -680,6 +653,29 @@
   
   <span class="md-ellipsis">
     Paged Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
     
   </span>
   
@@ -1267,6 +1263,145 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving_frameworks/disaggregated_prefill_decode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disaggregated Prefill-Decode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test-Time Compute Scaling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Test-Time Compute Scaling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/compute_optimal_inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compute Optimal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/best_of_n_sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best-of-N Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_time_compute/orm_prm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORMs & PRMs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1281,12 +1416,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../qa/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Interview Q&A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
     
   </span>
   
@@ -1404,33 +1561,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#4-common-interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Common Interview Questions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-modern-optimizations-2024-2025" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Modern Optimizations (2024-2025)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-key-takeaways" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Key Takeaways
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1518,61 +1648,6 @@ Overhead = CUDA context, fragmentation (~10-20%)
 <li>Activations: ~0.5-1 GB</li>
 <li><strong>Total: ~16-17 GB</strong></li>
 </ul>
-<hr />
-<hr />
-<h2 id="4-common-interview-questions">4. Common Interview Questions<a class="headerlink" href="#4-common-interview-questions" title="Permanent link">&para;</a></h2>
-<p><strong>Q: Why is prefill compute-bound and decode memory-bound?</strong></p>
-<ul>
-<li>Prefill: Process many tokens in parallel → high arithmetic intensity, GPU cores saturated</li>
-<li>Decode: Generate 1 token → fetch entire model weights from memory, low compute utilization</li>
-</ul>
-<hr />
-<p><strong>Q: How does batch size affect inference?</strong></p>
-<ul>
-<li>Prefill: Higher batch increases compute, remains compute-bound</li>
-<li>Decode: Higher batch increases memory for KV cache, can become compute-bound with large batches</li>
-<li>Sweet spot: Balance between throughput and latency</li>
-</ul>
-<hr />
-<p><strong>Q: What limits maximum sequence length?</strong></p>
-<ul>
-<li>KV cache memory grows linearly with sequence length</li>
-<li>Attention computation grows quadratically O(n²)</li>
-<li>GPU memory capacity is primary constraint</li>
-</ul>
-<hr />
-<p><strong>Q: Calculate memory for Mistral-7B (FP16) with batch=4, seq=4096?</strong></p>
-<div class="highlight"><pre><span></span><code>Weights: 7B × 2 = 14 GB
-KV cache: 2 × 4 × 4096 × 32 × 128 × 2 × 32 layers ≈ 8 GB
-Total: ~22-24 GB
-</code></pre></div>
-<hr />
-<p><strong>Q: Why can't we parallelize token generation?</strong></p>
-<ul>
-<li>Each token depends on all previous tokens</li>
-<li>Autoregressive dependency prevents parallelization</li>
-<li>Speculative decoding attempts to work around this</li>
-</ul>
-<hr />
-<hr />
-<h2 id="5-modern-optimizations-2024-2025">5. Modern Optimizations (2024-2025)<a class="headerlink" href="#5-modern-optimizations-2024-2025" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Grouped Query Attention (GQA)</strong>: Reduce KV cache by sharing KV heads</li>
-<li><strong>Multi-Query Attention (MQA)</strong>: Single KV head for all queries</li>
-<li><strong>FlashAttention-3</strong>: Fused attention kernel, 2x faster on H100</li>
-<li><strong>Paged Attention (vLLM)</strong>: Non-contiguous KV cache storage</li>
-<li><strong>Continuous Batching</strong>: Dynamic batch assembly for throughput</li>
-</ul>
-<hr />
-<hr />
-<h2 id="6-key-takeaways">6. Key Takeaways<a class="headerlink" href="#6-key-takeaways" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Inference has distinct prefill (parallel) and decode (sequential) phases</li>
-<li>KV cache is crucial for avoiding recomputation but consumes significant memory</li>
-<li>Memory bandwidth is often the bottleneck during decode</li>
-<li>Model size, sequence length, and batch size determine memory requirements</li>
-<li>Understanding the compute vs memory bound distinction is critical</li>
-</ol>
 <hr />
 
 

@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../int4_quantization/">
+        <link rel="prev" href="../paged_attention/">
       
       
-        <link rel="next" href="../awq/">
+        <link rel="next" href="../../decoding_strategies/greedy_decoding/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>GPTQ - LLM Inference Speedup</title>
+        <title>Prefix Caching - LLM Inference Speedup</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-paper" class="md-skip">
+        <a href="#1-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GPTQ
+              Prefix Caching
             
           </span>
         </div>
@@ -413,20 +413,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -442,7 +442,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Attention Optimization
@@ -456,7 +456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/flash_attention/" class="md-nav__link">
+      <a href="../flash_attention/" class="md-nav__link">
         
   
   
@@ -479,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/flash_attention_2/" class="md-nav__link">
+      <a href="../flash_attention_2/" class="md-nav__link">
         
   
   
@@ -502,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/kv_caching/" class="md-nav__link">
+      <a href="../kv_caching/" class="md-nav__link">
         
   
   
@@ -525,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../attention_optimization/paged_attention/" class="md-nav__link">
+      <a href="../paged_attention/" class="md-nav__link">
         
   
   
@@ -545,10 +545,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../attention_optimization/prefix_caching/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Prefix Caching
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -559,6 +579,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. How It Works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-relation-to-paged-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Relation to Paged Attention
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-where-it-helps-most" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Where It Helps Most
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-framework-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Framework Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Limitations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -736,20 +837,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -765,7 +866,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Quantization
@@ -779,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_basics/" class="md-nav__link">
+      <a href="../../quantization/quantization_basics/" class="md-nav__link">
         
   
   
@@ -802,7 +903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int8_quantization/" class="md-nav__link">
+      <a href="../../quantization/int8_quantization/" class="md-nav__link">
         
   
   
@@ -825,7 +926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int4_quantization/" class="md-nav__link">
+      <a href="../../quantization/int4_quantization/" class="md-nav__link">
         
   
   
@@ -845,30 +946,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    GPTQ
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../quantization/gptq/" class="md-nav__link">
         
   
   
@@ -879,105 +960,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Paper
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Core Idea
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Algorithm (Simplified)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Specifications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -990,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../awq/" class="md-nav__link">
+      <a href="../../quantization/awq/" class="md-nav__link">
         
   
   
@@ -1013,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smoothquant/" class="md-nav__link">
+      <a href="../../quantization/smoothquant/" class="md-nav__link">
         
   
   
@@ -1036,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gguf_ggml/" class="md-nav__link">
+      <a href="../../quantization/gguf_ggml/" class="md-nav__link">
         
   
   
@@ -1059,7 +1041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantization_tradeoffs/" class="md-nav__link">
+      <a href="../../quantization/quantization_tradeoffs/" class="md-nav__link">
         
   
   
@@ -1475,81 +1457,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-paper" class="md-nav__link">
+  <a href="#1-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Paper
+      1. Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-core-idea" class="md-nav__link">
+  <a href="#2-how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Core Idea
+      2. How It Works
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-algorithm-simplified" class="md-nav__link">
+  <a href="#3-requirements" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Algorithm (Simplified)
+      3. Requirements
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-key-innovation-optimal-brain-quantization-obq" class="md-nav__link">
+  <a href="#4-relation-to-paged-attention" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Key Innovation: Optimal Brain Quantization (OBQ)
+      4. Relation to Paged Attention
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lazy-batch-updates-efficiency" class="md-nav__link">
+  <a href="#5-where-it-helps-most" class="md-nav__link">
     <span class="md-ellipsis">
-      Lazy Batch Updates (Efficiency)
+      5. Where It Helps Most
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#specifications" class="md-nav__link">
+  <a href="#6-framework-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Specifications
+      6. Framework Support
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#accuracy" class="md-nav__link">
+  <a href="#7-limitations" class="md-nav__link">
     <span class="md-ellipsis">
-      Accuracy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vs-round-to-nearest-rtn" class="md-nav__link">
-    <span class="md-ellipsis">
-      vs. Round-To-Nearest (RTN)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
+      7. Limitations
     </span>
   </a>
   
@@ -1574,111 +1538,112 @@
   
 
 
-  <h1>GPTQ</h1>
+  <h1>Prefix Caching</h1>
 
-<h2 id="1-paper">1. Paper<a class="headerlink" href="#1-paper" title="Permanent link">&para;</a></h2>
-<p>Frantar et al., 2022 - "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"</p>
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<p>Prefix caching (also called prompt caching or KV-cache reuse) avoids recomputing the KV-cache for portions of the prompt that are identical across requests. When a system prompt, few-shot examples, or document is shared between many queries, the attention keys and values for that prefix are computed once and reused.</p>
 <hr />
-<hr />
-<h2 id="2-core-idea">2. Core Idea<a class="headerlink" href="#2-core-idea" title="Permanent link">&para;</a></h2>
-<p>Quantize weights one-by-one while compensating errors in remaining weights using second-order information (Hessian).</p>
-<hr />
-<hr />
-<h2 id="3-algorithm-simplified">3. Algorithm (Simplified)<a class="headerlink" href="#3-algorithm-simplified" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># For each layer&#39;s weight matrix W</span>
-<span class="n">H</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="o">^</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span> <span class="o">/</span> <span class="n">n_samples</span>  <span class="c1"># Hessian (input correlations)</span>
+<h2 id="2-how-it-works">2. How It Works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
+<p>Standard inference computes keys and values for every token in every request — including the system prompt — from scratch.</p>
+<p>With prefix caching:</p>
+<div class="highlight"><pre><span></span><code>Request 1: [system prompt (512 tokens)] + [user query A]
+  → compute KV for all 512 + query-A tokens
+  → cache KV for the 512-token prefix
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_columns</span><span class="p">):</span>
-    <span class="c1"># Quantize column i</span>
-    <span class="n">w_q</span> <span class="o">=</span> <span class="n">quantize</span><span class="p">(</span><span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">w_q</span>
-
-    <span class="c1"># Distribute error to remaining columns using Hessian</span>
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-
-    <span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_q</span>
+Request 2: [system prompt (512 tokens)] + [user query B]
+  → cache HIT: reuse KV for the 512-token prefix
+  → compute KV for query-B tokens only
 </code></pre></div>
+<p>The savings scale with prefix length. A 2048-token system prompt shared across 1000 requests avoids 2048 × 1000 KV computations.</p>
 <hr />
-<hr />
-<h2 id="4-key-innovation-optimal-brain-quantization-obq">4. Key Innovation: Optimal Brain Quantization (OBQ)<a class="headerlink" href="#4-key-innovation-optimal-brain-quantization-obq" title="Permanent link">&para;</a></h2>
+<h2 id="3-requirements">3. Requirements<a class="headerlink" href="#3-requirements" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Uses second-order Taylor expansion to minimize quantization loss</li>
-<li>Iteratively quantizes weights in order that minimizes Hessian-weighted error</li>
-<li>Compensates each quantization error before next step</li>
+<li><strong>Exact prefix match:</strong> The cached prefix must be byte-identical. Even a single token difference misses the cache.</li>
+<li><strong>Static prefix ordering:</strong> The shared prefix must appear at the start of every prompt — variable prefixes cannot be cached.</li>
+<li><strong>KV cache storage:</strong> Cached prefixes occupy GPU or CPU memory. Requires a cache eviction policy (typically LRU).</li>
 </ul>
 <hr />
+<h2 id="4-relation-to-paged-attention">4. Relation to Paged Attention<a class="headerlink" href="#4-relation-to-paged-attention" title="Permanent link">&para;</a></h2>
+<p><a href="../paged_attention/">Paged Attention</a> manages KV-cache memory in fixed-size pages (like OS virtual memory) to eliminate fragmentation and enable flexible allocation across requests.</p>
+<p>Prefix caching layers on top: shared prefixes are stored as shared physical pages, copy-on-write when a request begins to diverge. vLLM implements both together — prefix caching determines which pages to share; paged attention manages their physical allocation.</p>
 <hr />
-<h2 id="lazy-batch-updates-efficiency">Lazy Batch Updates (Efficiency)<a class="headerlink" href="#lazy-batch-updates-efficiency" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Don't update all weights individually</li>
-<li>Process in blocks of 128 columns</li>
-<li>Dramatic speedup with minimal quality loss</li>
-</ul>
-<hr />
-<hr />
-<h2 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Calibration</strong>: 128 samples typical</li>
-<li><strong>Time</strong>: 3-4 hours for 175B model on single GPU</li>
-<li><strong>Group Size</strong>: 128 (default), lower for better quality</li>
-<li><strong>Bits</strong>: Designed for 3-4 bit, works for INT8 too</li>
-</ul>
-<hr />
-<hr />
-<h2 id="accuracy">Accuracy<a class="headerlink" href="#accuracy" title="Permanent link">&para;</a></h2>
+<h2 id="5-where-it-helps-most">5. Where It Helps Most<a class="headerlink" href="#5-where-it-helps-most" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Model</th>
-<th>Bits</th>
-<th>Group Size</th>
-<th>Perplexity Δ</th>
+<th>Use Case</th>
+<th>Shared Prefix</th>
+<th>Speedup</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>LLaMA-7B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.2</td>
+<td>Chatbots with long system prompts</td>
+<td>System prompt repeated every turn</td>
+<td>High</td>
 </tr>
 <tr>
-<td>LLaMA-13B</td>
-<td>3</td>
-<td>128</td>
-<td>+0.9</td>
+<td>RAG with fixed context</td>
+<td>Retrieved documents identical across retries</td>
+<td>High</td>
 </tr>
 <tr>
-<td>OPT-175B</td>
-<td>4</td>
-<td>128</td>
-<td>+0.1</td>
+<td>Few-shot inference</td>
+<td>Same examples prepended to every query</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Multi-turn conversations</td>
+<td>Previous turns are a growing shared prefix</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td>Unique one-off queries</td>
+<td>No shared prefix</td>
+<td>None</td>
 </tr>
 </tbody>
 </table>
 <hr />
+<h2 id="6-framework-support">6. Framework Support<a class="headerlink" href="#6-framework-support" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Prefix Caching Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vLLM</td>
+<td>Yes — automatic prefix caching with paged attention</td>
+</tr>
+<tr>
+<td>TGI (Text Generation Inference)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>TensorRT-LLM</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Anthropic API</td>
+<td>Yes — prompt caching API (explicit cache control)</td>
+</tr>
+<tr>
+<td>OpenAI API</td>
+<td>Automatic for prompts &gt;1024 tokens</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="vs-round-to-nearest-rtn">vs. Round-To-Nearest (RTN)<a class="headerlink" href="#vs-round-to-nearest-rtn" title="Permanent link">&para;</a></h2>
+<h2 id="7-limitations">7. Limitations<a class="headerlink" href="#7-limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li>RTN: Fast, 5-10% degradation at 4-bit</li>
-<li>GPTQ: Slow quantization, &lt;2% degradation at 4-bit</li>
+<li>Cache only valid while the prefix is in memory — evicted under memory pressure</li>
+<li>Adds complexity to cache management (eviction, invalidation)</li>
+<li>No benefit for streaming or single-use prompts</li>
+<li>Cache hit rates depend on traffic patterns — workloads with high prefix diversity get little benefit</li>
 </ul>
-<hr />
-<hr />
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># AutoGPTQ library</span>
-<span class="kn">from</span> <span class="nn">auto_gptq</span> <span class="kn">import</span> <span class="n">AutoGPTQForCausalLM</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">AutoGPTQForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;model_name&quot;</span><span class="p">,</span>
-    <span class="n">quantize_config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">&quot;group_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s2">&quot;desc_act&quot;</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># Activation ordering</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</code></pre></div>
-<hr />
 
 
 
