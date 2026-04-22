@@ -1,4 +1,4 @@
-### 📦1. Self Attention Recap
+## 1. Self Attention Recap
 
 Given hidden states $X \in \mathbb{R}^{T \times d}$:
 
@@ -16,7 +16,7 @@ Autoregressive decoding generates one token at a time with causal masking.
 
 ---
 
-### 📦2. Why KV Cache Is Needed
+## 2. Why KV Cache Is Needed
 
 At decoding step $t$, keys and values for tokens $1 \ldots t-1$ are unchanged but would be recomputed without caching.
 
@@ -24,7 +24,7 @@ This repeated computation dominates inference latency and wastes FLOPs.
 
 ---
 
-### 📦3. KV Cache Mechanism
+## 3. KV Cache Mechanism
 
 For each transformer layer $\ell$:
 
@@ -46,7 +46,7 @@ Only the current token requires new computation.
 
 ---
 
-### 📦4. Toy Example
+## 4. Toy Example
 
 Prompt: "I like neural"
 
@@ -64,7 +64,7 @@ Previously generated tokens are never recomputed.
 
 ---
 
-### 📦5. Complexity Analysis
+## 5. Complexity Analysis
 
 #### Notation
 - $T$: number of generated tokens
@@ -92,7 +92,7 @@ KV caching removes one full factor of $T$ from decoding complexity.
 
 ---
 
-### 📦6. Memory Cost
+## 6. Memory Cost
 
 Each layer stores:
 
@@ -108,9 +108,9 @@ $$
 
 For long context inference, KV cache memory is often the dominant bottleneck.
 
-### 📦7. Inference v/s Training Usage
+## 7. Inference v/s Training Usage
 
-#### 7.1 During Inference
+### 7.1 During Inference
 
 This is the most common and important usage.
 
@@ -130,7 +130,7 @@ This is the most common and important usage.
 - Enables long context generation
 - Essential for streaming and chat systems
 
-#### 7.2 During Training
+### 7.2 During Training
 
 KV caching is not used in standard full sequence training.
 
@@ -142,11 +142,11 @@ KV caching is not used in standard full sequence training.
 
 ---
 
-### 📦8. Scaling KV Cache for Long Context
+## 8. Scaling KV Cache for Long Context
 
 Long context inference is primarily limited by KV cache memory, which grows linearly with sequence length.
 
-#### 8.1 Sliding Window Attention
+### 8.1 Sliding Window Attention
 
 Only retain keys and values for the most recent $W$ tokens:
 
@@ -158,7 +158,7 @@ This bounds memory usage and is commonly used in streaming and chat applications
 
 ---
 
-#### 8.2 KV Cache Quantization
+### 8.2 KV Cache Quantization
 
 KV cache quantization reduces memory usage and memory bandwidth by storing cached keys and values in lower precision formats. This is especially important for long context inference, where KV cache memory dominates total GPU usage.
 
@@ -233,23 +233,23 @@ In practice, value quantization has minimal impact on quality, while aggressive 
 
 ---
 
-#### 8.3 Prefix Caching
+### 8.3 Prefix Caching
 
 When multiple requests share a common prompt prefix, the KV cache for that prefix is computed once and reused across requests. This improves throughput in serving systems with templated prompts.
 
 ---
 
-#### 8.4 Paged KV Cache
+### 8.4 Paged KV Cache
 
 KV cache blocks can be moved between GPU and CPU or NVMe memory. This enables extremely long context lengths while trading off additional latency for cache paging.
 
 ---
 
-### 📦9. Grouped Query Attention (GQA)
+## 9. Grouped Query Attention (GQA)
 
 Grouped Query Attention reduces KV cache size by using fewer key value heads than query heads.
 
-#### 9.1 Head Configuration
+### 9.1 Head Configuration
 
 $$
 H_q > H_k = H_v
@@ -262,7 +262,7 @@ Example:
 
 This reduces KV cache memory by a factor of $H_q / H_k$.
 
-#### 9.2 QK Computation with Mismatched Heads
+### 9.2 QK Computation with Mismatched Heads
 
 Each key value head is shared by a fixed group of query heads.
 
@@ -288,7 +288,7 @@ $$
 
 Keys and values are reused directly without additional projection or averaging.
 
-#### 9.3 Why GQA Is Effective
+### 9.3 Why GQA Is Effective
 
 - Query heads retain expressive power
 - Keys and values capture shared context
@@ -298,7 +298,7 @@ GQA is widely used in production LLMs.
 
 ---
 
-### 📦10. Other Common Optimizations
+## 10. Other Common Optimizations
 
 #### FlashAttention
 

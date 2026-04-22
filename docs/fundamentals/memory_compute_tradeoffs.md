@@ -134,7 +134,7 @@ Used in: LLaMA-2, Mistral, GPT-4 (rumored)
 
 ---
 
-## 4. Recomputation vs Caching
+## 5. Recomputation vs Caching
 
 ### Activation Checkpointing (Training)
 - Not used in inference (no backprop)
@@ -152,7 +152,7 @@ Used in: LLaMA-2, Mistral, GPT-4 (rumored)
 
 ---
 
-## 5. Model Architecture Choices
+## 6. Model Architecture Choices
 
 ### Width vs Depth
 ```
@@ -176,7 +176,7 @@ Deep: More layers, smaller hidden dimensions
 
 ---
 
-## 6. Hardware-Specific Tradeoffs
+## 7. Hardware-Specific Tradeoffs
 
 ### Memory Bandwidth vs Compute
 ```
@@ -203,7 +203,7 @@ H100: 3.4 GB/s per TFLOP
 
 ---
 
-## 7. Memory-Compute Decision Matrix
+## 8. Memory-Compute Decision Matrix
 
 | Technique | Memory Saved | Compute Overhead | Quality Impact |
 |-----------|--------------|------------------|----------------|
@@ -213,128 +213,5 @@ H100: 3.4 GB/s per TFLOP
 | MQA | 32x KV cache | Minimal | 1-2% |
 | KV Cache INT8 | 2x KV cache | +5% | <0.5% |
 | FlashAttention | Minimal | -30% latency | None |
-
----
-
----
-
-## 8. Common Interview Questions
-
-**Q: You have a 70B model but only 40GB GPU memory. What do you do?**
-
-```
-Options:
-1. INT4 quantization: 140GB → 35GB ✓
-2. INT8 + model parallelism across 2 GPUs
-3. Offload layers to CPU (slow, not recommended)
-4. Use smaller model variant (13B/7B)
-```
-
----
-
-**Q: Explain the tradeoff in GQA (Grouped Query Attention)**
-
-- Save memory: Fewer KV heads → smaller KV cache
-- Minimal compute overhead: Attention computation slightly changes
-- Quality: Negligible impact (<0.5% on benchmarks)
-- Production: Widely adopted (Mistral, LLaMA-2)
-
----
-
-**Q: Why is decode phase memory-bound?**
-
-- Single token generation: Low arithmetic intensity
-- Must fetch entire weight matrix from memory
-- Memory bandwidth saturated, compute underutilized
-- **Arithmetic Intensity**: FLOPs / Bytes Loaded ≈ 1-2 (very low)
-
----
-
-**Q: When does quantization hurt performance?**
-
-- Small batch size: Dequant overhead dominates
-- Compute-bound workloads: Adding compute makes it worse
-- Old hardware: No INT8 tensor core support
-- **Generally**: Decode phase on modern GPUs (H100) benefits from quantization
-
----
-
-**Q: Calculate KV cache size: LLaMA-2-70B, batch=16, seq=4096, FP16**
-
-```
-GQA with 8 KV heads (70B uses this)
-2 × 16 × 4096 × 80_layers × 8_heads × 128_dim × 2_bytes
-= 2 × 16 × 4096 × 80 × 8 × 128 × 2
-= 1,073,741,824 bytes ≈ 1 GB per sample × 16 = 16 GB total
-
-(If standard MHA with 64 heads: 128 GB - impractical!)
-```
-
----
-
-**Q: How does FlashAttention affect memory-compute tradeoff?**
-
-- Reduces memory: Avoids materializing full attention matrix
-- Reduces compute time: Fused kernel, better cache locality
-- **Win-win**: Memory AND compute improvement
-- No quality impact (mathematically equivalent)
-
----
-
----
-
-## 9. Modern Techniques (2024-2025)
-
-### AWQ (Activation-Aware Weight Quantization)
-- Protect weights with high activation magnitude
-- Better quality than naive INT4
-- Used in production (Hugging Face TGI)
-
----
-
-### SmoothQuant
-- Migrate difficulty from weights to activations
-- Enables better INT8 quantization
-- Particularly for older models not trained for quantization
-
----
-
-### FP8 (H100)
-- Native FP8 support on Hopper
-- 2x memory saving vs FP16
-- Minimal quality loss
-- **Compute**: Faster than FP16 (2x with tensor cores)
-
----
-
-### QuIP# / AQLM
-- Extreme quantization (2-3 bits)
-- Lattice-based, better than naive 2-bit
-- Research stage, not production yet
-
----
-
----
-
-## 10. Practical Guidelines
-
-1. **Start with INT8**: Minimal quality loss, 2x memory saving
-2. **Use GQA architecture**: If designing new models
-3. **Enable KV cache quantization**: Production-ready in vLLM
-4. **FlashAttention is mandatory**: No downside
-5. **INT4 for large models**: When GPU memory is the constraint
-6. **Monitor quality**: Always benchmark on your task
-
----
-
----
-
-## 11. Key Takeaways
-
-1. Most memory optimizations have negligible compute cost (GQA, FlashAttention)
-2. Quantization is a clear win on modern hardware (INT8 tensor cores)
-3. KV cache often dominates memory in long-context scenarios
-4. Decode phase is memory-bound: Reducing memory access helps latency
-5. Hardware matters: H100 handles quantization overhead better than A100
 
 ---
