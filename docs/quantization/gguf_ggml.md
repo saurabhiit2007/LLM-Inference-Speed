@@ -3,6 +3,7 @@
 C library for machine learning inference, optimized for CPU execution of LLMs.
 
 **Key Features**: <br>
+
 - Pure C/C++ (no Python runtime)
 - CPU-optimized kernels (AVX2, AVX512, NEON)
 - 4-bit to 16-bit quantization
@@ -40,6 +41,7 @@ Successor to GGML format (deprecated). Single-file model container.
 ---
 
 ### Advantages
+
 - **Single file**: All model data + config in one .gguf
 - **Memory mapping**: Load multi-GB models instantly, use minimal RAM
 - **Extensible**: KV metadata for any additional info
@@ -67,6 +69,7 @@ Optimized 2-6 bit quantization schemes:
 ---
 
 ### Legacy Quantization
+
 - Q4_0: Original 4-bit (group size 32)
 - Q4_1: 4-bit with per-group min (better than Q4_0)
 - Q5_0, Q5_1: 5-bit variants
@@ -76,6 +79,7 @@ Optimized 2-6 bit quantization schemes:
 
 ### Importance Matrix (I-quants)
 Uses importance scores to allocate more bits to salient weights:
+
 - `IQ3_XXS`: 3-bit with importance weighting
 - `IQ4_XS`: 4-bit with importance weighting
 
@@ -128,10 +132,12 @@ Custom AVX2/AVX512 kernels for INT4/INT8 GEMM. 4-8× faster than naive C.
 ## Performance
 
 **M2 Max (Metal)**: <br>
+
 - 7B Q4_K_M: ~40 tokens/sec
 - 13B Q4_K_M: ~25 tokens/sec
 
 **AMD 5950X (16-core)**: <br>
+
 - 7B Q4_K_M: ~30 tokens/sec
 - 13B Q4_K_M: ~15 tokens/sec
 

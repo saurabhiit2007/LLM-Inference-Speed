@@ -67,6 +67,7 @@ Previously generated tokens are never recomputed.
 ## 5. Complexity Analysis
 
 #### Notation
+
 - $T$: number of generated tokens
 - $L$: number of transformer layers
 - $H$: number of attention heads

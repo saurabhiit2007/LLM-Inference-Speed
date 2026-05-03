@@ -44,6 +44,7 @@ Sequence 3: [██████░░░░░░] (600 tokens, allocated for 20
 ---
 
 #### Problem 2: No Memory Sharing
+
 - Cannot share KV cache across sequences (even with identical prompts)
 - Parallel sampling requires duplicating entire cache
 - Beam search creates multiple copies
@@ -51,6 +52,7 @@ Sequence 3: [██████░░░░░░] (600 tokens, allocated for 20
 ---
 
 #### Problem 3: Static Allocation
+
 - Must allocate for worst case (max sequence length)
 - Can't dynamically adjust based on actual needs
 - Limits batch size and throughput
@@ -174,15 +176,18 @@ def paged_attention(Q, block_table, K_blocks, V_blocks):
 ## 5. Performance Impact
 
 ### Memory Efficiency
+
 - **Traditional:** 20-40% KV cache utilization (60-80% waste)
 - **PagedAttention:** 80-95% utilization (5-20% waste)
 - **2-3x more sequences** in same memory
 
 ### Throughput Improvement
+
 - vLLM with PagedAttention: **2-4x higher throughput** vs traditional serving
 - Batch size limited by memory → bigger batches with less waste
 
 ### Latency
+
 - Minimal overhead from block table lookups (<5%)
 - Often better latency due to higher batch efficiency
 

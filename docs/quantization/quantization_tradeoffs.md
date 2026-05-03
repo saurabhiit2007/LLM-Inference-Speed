@@ -67,6 +67,7 @@ Final Layer: FP16 or INT8
 ---
 
 ### Rationale
+
 - **FFN**: 66% of parameters, less sensitive → aggressive INT4
 - **Attention**: 33% of parameters, more sensitive → INT8 or careful INT4
 - **Norms/Embeddings**: <1% of parameters → keep FP16
@@ -78,6 +79,7 @@ Final Layer: FP16 or INT8
 ## Mixed Precision Strategies
 
 ### W4A8 (Weight 4-bit, Activation 8-bit)
+
 - Best of both worlds for many use cases
 - Weights: AWQ/GPTQ 4-bit
 - Activations: SmoothQuant INT8
@@ -86,6 +88,7 @@ Final Layer: FP16 or INT8
 ---
 
 ### W8A8 (Both 8-bit)
+
 - Production standard for quality-critical apps
 - 4× memory reduction
 - Hardware-accelerated on all modern platforms
@@ -98,6 +101,7 @@ Final Layer: FP16 or INT8
 ## Hardware Considerations
 
 ### NVIDIA GPUs
+
 - **Tensor Cores**: INT8 (Turing+), INT4 (Hopper)
 - **Recommendation**: INT8 for A100, INT4 for H100
 - **Custom kernels**: AWQ's TinyChat, ExLlamaV2 for GPTQ
@@ -105,6 +109,7 @@ Final Layer: FP16 or INT8
 ---
 
 ### AMD GPUs
+
 - **ROCm**: INT8 support
 - **Recommendation**: INT8, limited INT4 optimization
 - **Ecosystem**: Less mature than NVIDIA
@@ -112,6 +117,7 @@ Final Layer: FP16 or INT8
 ---
 
 ### Apple Silicon
+
 - **Metal**: INT8, INT4 via llama.cpp
 - **Recommendation**: GGUF Q4_K_M or Q6_K
 - **Strength**: Unified memory architecture
@@ -119,6 +125,7 @@ Final Layer: FP16 or INT8
 ---
 
 ### CPU (x86)
+
 - **VNNI (Cascade Lake+)**: INT8 acceleration
 - **AVX512**: INT8/INT4 kernels
 - **Recommendation**: GGUF with llama.cpp, Q4_K_M sweet spot
@@ -130,6 +137,7 @@ Final Layer: FP16 or INT8
 ## Calibration Data Tradeoffs
 
 ### Size
+
 - **100 samples**: Usually sufficient, fast
 - **1000 samples**: Marginal quality improvement
 - **10000 samples**: No additional benefit, waste of time
@@ -137,6 +145,7 @@ Final Layer: FP16 or INT8
 ---
 
 ### Diversity vs. Representativeness
+
 - **In-domain**: Better for specialized models
 - **General (WikiText)**: Better for general models
 - **Mixed**: Best for production

@@ -114,10 +114,12 @@ Result: **Exact same output** as standard attention, but in FP16/BF16 without ov
 ## 4. Performance Impact
 
 ### Memory Complexity
+
 - Standard: $O(N^2)$
 - FlashAttention: $O(N \cdot B)$ where $B$ is tile size
 
 ### Speedup
+
 - 2–4x faster for long sequences on modern GPUs
 - Enables 2–4x longer sequences or larger batch sizes
 

@@ -15,6 +15,7 @@ Techniques that reduce memory often require:
 ## 2. Memory Bottlenecks in LLM Inference
 
 ### 1. Model Weights (Static)
+
 - 70B model in FP16: 140 GB
 - Must fit in GPU memory
 - Loaded repeatedly during decode (memory bandwidth bound)
@@ -22,6 +23,7 @@ Techniques that reduce memory often require:
 ---
 
 ### 2. KV Cache (Dynamic)
+
 - Grows with sequence length and batch size
 - Often largest memory consumer in production
 - **Formula**: `2 × B × S × L × H × D × bytes`
@@ -30,6 +32,7 @@ Techniques that reduce memory often require:
 ---
 
 ### 3. Activations (Temporary)
+
 - Intermediate tensors during forward pass
 - Recomputed in inference (no backprop needed)
 - ~5-10% of total memory
@@ -83,6 +86,7 @@ AWQ: Activation-aware, protects important weights
 ---
 
 ### Mixed Precision
+
 - Keep critical layers in FP16 (first/last, attention)
 - Quantize FFN layers to INT4
 - Balance quality and memory
@@ -118,6 +122,7 @@ Used in: LLaMA-2, Mistral, GPT-4 (rumored)
 ---
 
 ### Paged Attention (vLLM)
+
 - KV cache in non-contiguous "pages" (like OS virtual memory)
 - Eliminates fragmentation
 - Enables ~2x higher batch size for same memory
@@ -126,6 +131,7 @@ Used in: LLaMA-2, Mistral, GPT-4 (rumored)
 ---
 
 ### Multi-Token Prediction
+
 - Cache prefixes for common prompts
 - Reduces redundant computation
 - Memory: Store prompt KV cache (shared across requests)
@@ -137,12 +143,14 @@ Used in: LLaMA-2, Mistral, GPT-4 (rumored)
 ## 5. Recomputation vs Caching
 
 ### Activation Checkpointing (Training)
+
 - Not used in inference (no backprop)
 - Mentioned for completeness
 
 ---
 
 ### Selective Recomputation
+
 - Recompute cheap operations instead of storing
 - Example: Recompute layer norm instead of caching
 - Memory savings: ~10-20%
@@ -168,6 +176,7 @@ Deep: More layers, smaller hidden dimensions
 ---
 
 ### FFN Expansion Ratio
+
 - Standard: `d_ff = 4 × d_model`
 - Smaller ratio (2x or 3x): Less memory, potential quality loss
 - MoE: Sparse activation, more parameters but same compute
@@ -193,6 +202,7 @@ H100: 3.4 GB/s per TFLOP
 ---
 
 ### Tensor Core Utilization
+
 - FP16: Full tensor core speed
 - INT8: 2x faster on Ampere/Hopper with DP4A
 - INT4: 4x faster (requires specialized kernels)

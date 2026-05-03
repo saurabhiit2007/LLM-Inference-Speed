@@ -31,6 +31,7 @@ For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
 **vs Static Batching:** Waits for entire batch to complete before accepting new requests
 
 **vLLM Approach:** Iteration-level scheduling <br>
+
 - New requests fill slots freed by completed sequences immediately
 - Eliminates GPU idle time ("bubbles")
 - Increases throughput by 20-30%
@@ -55,6 +56,7 @@ For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
 ## 4. Modern Features (2025-2026)
 
 ### Speculative Decoding
+
 - Small draft model generates k tokens
 - Large target model verifies in single forward pass
 - 2-3x latency reduction for heavy models
@@ -62,6 +64,7 @@ For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
 ---
 
 ### Automatic Prefix Caching (APC)
+
 - Shared KV blocks for common prefixes (system prompts, RAG contexts)
 - Multiple requests reference same physical memory
 - Critical for multi-turn chat and RAG applications
@@ -69,6 +72,7 @@ For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
 ---
 
 ### Multi-LoRA Support
+
 - Serve base model + hundreds of LoRA adapters simultaneously
 - SGMV kernels enable batched computation across different adapters
 - Ideal for multi-tenant SaaS deployments
@@ -80,6 +84,7 @@ For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
 ## 5. Memory Pressure Handling
 
 **Preemption Strategies:**
+
 1. **Swap:** Move KV blocks to CPU memory (slower, preserves compute)
 2. **Recompute:** Drop blocks and recalculate later (faster on modern GPUs)
 

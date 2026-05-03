@@ -1,6 +1,7 @@
 ## 1. Overview
 
 **NVIDIA's general-purpose inference server** <br>
+
 - Framework-agnostic (PyTorch, TensorFlow, ONNX, TensorRT)
 - Not LLM-specific, but increasingly optimized for them
 - Focus: Enterprise deployment, multi-model serving, complex pipelines
@@ -13,6 +14,7 @@
 
 ### Backend System
 **Pluggable backends for different frameworks:**
+
 - Python backend (custom inference logic)
 - PyTorch backend (TorchScript models)
 - TensorRT backend (TensorRT engines)
@@ -23,6 +25,7 @@
 ---
 
 ### Model Repository
+
 - Centralized model storage (local/S3/GCS/Azure)
 - Version management
 - Hot-reloading of model versions
@@ -34,6 +37,7 @@
 ## 3. LLM-Specific Features (2024-2025)
 
 ### vLLM Backend Integration
+
 - Uses vLLM engine under the hood
 - Triton API layer on top
 - Get vLLM's PagedAttention + Triton's enterprise features
@@ -41,6 +45,7 @@
 ---
 
 ### TensorRT-LLM Backend
+
 - Native integration with TensorRT-LLM engines
 - Maximum performance for NVIDIA GPUs
 - Requires pre-built TensorRT-LLM engines
@@ -53,16 +58,19 @@
 
 ### Model Ensembles
 **Multi-stage pipelines as single endpoint:**
+
 - Preprocessing → Embedding → LLM → Postprocessing
 - Automatic scheduling between stages
 - Example: RAG pipeline with retrieval + generation
 
 ### Dynamic Batching
+
 - Accumulates requests up to max batch size
 - Timeout-based flushing
 - More basic than vLLM/TGI continuous batching
 
 ### Sequence Batching
+
 - For stateful models (e.g., streaming LLMs)
 - Maintains state across multiple requests
 - Useful for chat applications
@@ -96,11 +104,13 @@ parameters: {
 ## 6. Scaling & Deployment
 
 ### Kubernetes Native
+
 - Official Helm charts
 - Horizontal Pod Autoscaler support
 - Integration with Istio/Envoy for traffic management
 
 ### Multi-Instance Serving
+
 - Multiple model instances per GPU
 - Rate limiting and priority queues
 - Request routing based on model version
@@ -112,12 +122,14 @@ parameters: {
 ## 7. Metrics & Observability
 
 **Comprehensive Monitoring:** <br>
+
 - Prometheus metrics (latency, throughput, queue depth)
 - Per-model and per-version metrics
 - GPU utilization tracking
 - Inference count, batch statistics
 
 **Tracing:** <br>
+
 - OpenTelemetry support
 - Request-level tracing through pipeline stages
 
@@ -128,11 +140,13 @@ parameters: {
 ## 8. Performance Optimization
 
 ### Concurrent Model Execution
+
 - Multiple models on same GPU (if memory allows)
 - Scheduler balances execution
 - Useful for A/B testing
 
 ### Instance Groups
+
 - Multiple instances of same model
 - Load balancing across instances
 - Can specify different GPUs per instance

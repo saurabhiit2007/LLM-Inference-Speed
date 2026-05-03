@@ -1,6 +1,7 @@
 ## 1. Overview
 
 **Hugging Face's production serving solution** <br>
+
 - Written in Rust for performance and safety
 - Python bindings for model loading
 - Focus: Stability, HuggingFace ecosystem integration, ease of deployment
@@ -12,16 +13,19 @@
 ## 2. Core Architecture
 
 ### Token Streaming
+
 - Server-Sent Events (SSE) for real-time streaming
 - Low-latency first-token time
 - Optimized for chat applications
 
 ### Continuous Batching
+
 - Dynamic batching like vLLM
 - Request prioritization support
 - Smart scheduling for mixed workloads
 
 ### FlashAttention Integration
+
 - Uses FlashAttention for memory-efficient attention
 - Custom kernels for specific model architectures
 - Optimized for both prefill and decode
@@ -33,6 +37,7 @@
 ## 3. Quantization Features
 
 **Built-in Quantization:** <br>
+
 - bitsandbytes (INT8, NF4)
 - GPTQ (INT4, INT8)
 - AWQ (INT4)
@@ -47,11 +52,13 @@
 ## 4. Model Support
 
 **Broad Architecture Coverage:** <br>
+
 - All major HuggingFace models out-of-box
 - Automatic architecture detection
 - Custom model support via transformers library
 
 **Specializations:** <br>
+
 - Mistral/Mixtral with custom kernels
 - Llama (1, 2, 3) optimizations
 - Falcon, Starcoder optimizations
@@ -63,11 +70,13 @@
 ## 5. Distributed Serving
 
 ### Tensor Parallelism
+
 - Multi-GPU inference with automatic sharding
 - Based on custom Rust implementation
 - Lower overhead than Python-based solutions
 
 ### Safetensors Format
+
 - Lazy loading with mmap
 - Fast cold starts
 - Memory-efficient weight loading
@@ -79,17 +88,20 @@
 ## 6. Production Features
 
 ### Monitoring & Observability
+
 - Prometheus metrics endpoint
 - Request/token-level tracing
 - Queue depth, batch size, latency metrics
 
 ### Safety Features
+
 - Request validation and sanitization
 - Token limit enforcement
 - Grammar/JSON schema validation
 - Repetition penalty controls
 
 ### Docker & Kubernetes
+
 - Official Docker images
 - Helm charts for K8s deployment
 - Auto-scaling support with metrics
@@ -101,6 +113,7 @@
 ## 7. Grammar-Constrained Generation
 
 **Unique Feature vs Competitors:** <br>
+
 - Force model to follow regex patterns
 - JSON schema validation during generation
 - Prevents malformed outputs
@@ -114,11 +127,13 @@ Example: Generate only valid JSON with specific schema
 ## 8. Performance Characteristics
 
 **Strengths:** <br>
+
 - Fast cold start (Rust + safetensors)
 - Stable long-running deployments
 - Lower memory overhead than Python frameworks
 
 **Trade-offs:** <br>
+
 - Slightly lower peak throughput vs TensorRT-LLM
 - Less aggressive optimizations vs vLLM's latest features
 

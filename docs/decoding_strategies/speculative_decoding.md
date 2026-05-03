@@ -75,6 +75,7 @@ Continue from "which" (3 tokens in 1 target pass instead of 3!)
 ## 4. Step-by-Step Algorithm
 
 ### Setup
+
 - **Draft model** $q$: Small, fast (e.g., 1B params)
 - **Target model** $p$: Large, accurate (e.g., 70B params)
 - **Draft length** $K$: Number of tokens to propose (typically 4-8)

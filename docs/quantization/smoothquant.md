@@ -11,6 +11,7 @@ Xiao et al., 2022 - "SmoothQuant: Accurate and Efficient Post-Training Quantizat
 **Activation outliers** make INT8 quantization difficult. Weights quantize well, activations don't.
 
 ### Observation
+
 - Weight range: typically within [-3σ, 3σ]
 - Activation range: 10-100× larger due to systematic outliers in specific channels
 
@@ -71,10 +72,12 @@ W_smooth = W * s  # Fold into weights
 ## 5. Migration Strength α
 
 **α = 0.5**: Balanced migration (default) <br>
+
 - Geometric mean of activation and weight ranges
 - Empirically optimal for most models
 
 **α = 0.75**: More aggressive activation smoothing <br>
+
 - Better for models with severe outliers (OPT)
 
 ---
@@ -109,11 +112,13 @@ SmoothQuant enables **per-tensor** quantization by smoothing outliers beforehand
 ## 8. Integration with Other Methods
 
 **SmoothQuant + AWQ**: <br>
+
 - SmoothQuant for activation INT8
 - AWQ for weight INT4
 - Hybrid W4A8 quantization
 
 **SmoothQuant + LLM.int8()**: <br>
+
 - SmoothQuant pre-processing
 - LLM.int8() for outlier handling
 - Complementary techniques

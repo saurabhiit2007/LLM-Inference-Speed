@@ -32,21 +32,25 @@
 ### Memory Management Approaches
 
 **vLLM (PagedAttention):** <br>
+
 - Paged KV cache with block tables
 - <4% memory waste
 - Best for variable-length sequences
 
 **TensorRT-LLM:** <br>
+
 - Paged KV cache inspired by vLLM
 - NVIDIA-optimized CUDA kernels
 - Tightly coupled with GPU architecture
 
 **TGI:** <br>
+
 - FlashAttention for memory efficiency
 - No paging, simpler approach
 - Good for single-tenant scenarios
 
 **DeepSpeed:** <br>
+
 - Basic KV cache management
 - ZeRO-Inference for CPU/NVMe offloading
 - Suited for extreme model sizes
@@ -56,16 +60,19 @@
 ### Batching Strategies
 
 **Continuous Batching (vLLM, TGI, DeepSpeed-FastGen):** <br>
+
 - Iteration-level scheduling
 - Immediate slot filling
 - 20-30% throughput improvement
 
 **Static Batching (Traditional):** <br>
+
 - Wait for full batch completion
 - Simpler implementation
 - GPU idle time
 
 **Dynamic Batching (Triton):** <br>
+
 - Time-window accumulation
 - Less sophisticated than continuous
 - Still effective for many workloads
@@ -93,6 +100,7 @@
 ### First Token Time to Time (TTFT)
 
 **Best to Worst:** <br>
+
 1. TGI (Rust + safetensors, optimized cold start)
 2. vLLM (Python overhead but chunked prefill)
 3. TensorRT-LLM (engine loading overhead)
@@ -104,6 +112,7 @@
 ### Inter-Token Latency (ITL)
 
 **Best to Worst:** <br>
+
 1. TensorRT-LLM (maximum kernel optimization)
 2. vLLM (PagedAttention efficiency)
 3. TGI (FlashAttention + Rust)
@@ -115,6 +124,7 @@
 ### Throughput (tokens/second)
 
 **Best to Worst:** <br>
+
 1. vLLM (PagedAttention + continuous batching)
 2. TensorRT-LLM (hardware optimization)
 3. TGI (solid continuous batching)
@@ -130,14 +140,17 @@
 ### Tensor Parallelism Performance
 
 **TensorRT-LLM:**  <br>
+
 - Custom NCCL optimizations
 - Lowest latency for TP
 
 **vLLM:** <br>
+
 - Ray-based distribution
 - Good performance, more overhead
 
 **TGI:** <br>
+
 - Rust-based TP implementation
 - Efficient but less optimized than TensorRT
 

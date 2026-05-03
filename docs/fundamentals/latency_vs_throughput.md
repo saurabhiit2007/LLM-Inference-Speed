@@ -1,6 +1,7 @@
 ## 1. Core Concepts
 
 ### Latency
+
 - **Time to complete a single request**
 - Measured in seconds or milliseconds
 - Critical for interactive applications (chatbots, code completion)
@@ -9,6 +10,7 @@
 ---
 
 ### Throughput
+
 - **Number of requests processed per unit time**
 - Measured in tokens/sec or requests/sec
 - Critical for batch processing, high-traffic services
@@ -115,17 +117,20 @@ Utilization = (Actual Throughput) / (Max Theoretical Throughput)
 ## 5. Hardware Considerations
 
 ### A100 (80GB)
+
 - 1,935 GB/s memory bandwidth
 - Good for batch inference
 - Throughput: ~2000 tokens/sec (LLaMA-2-7B, batch=32)
 
 ### H100 (80GB)
+
 - 3,350 GB/s memory bandwidth (1.7x A100)
 - Better for both latency and throughput
 - FlashAttention-3 support
 - Throughput: ~3500 tokens/sec (same setup)
 
 ### L40S / L4
+
 - Lower cost, lower bandwidth
 - Good for latency-optimized serving (small batch)
 - Not ideal for high throughput

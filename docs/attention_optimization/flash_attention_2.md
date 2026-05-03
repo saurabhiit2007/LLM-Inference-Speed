@@ -13,6 +13,7 @@ FlashAttention-2 is an improved version of FlashAttention that achieves **2x spe
 Despite being much faster than standard attention, FlashAttention-1 had suboptimal GPU utilization:
 
 ### Problem 1: Poor Work Partitioning
+
 - Each thread block processed one query tile across all key/value tiles
 - Led to **unbalanced workload** and thread block idle time
 - Didn't fully saturate GPU compute resources
@@ -20,12 +21,14 @@ Despite being much faster than standard attention, FlashAttention-1 had suboptim
 ---
 
 ### Problem 2: Non-Coalesced Memory Accesses
+
 - Memory accesses weren't optimally aligned for GPU memory coalescing
 - Caused unnecessary memory bandwidth waste
 
 ---
 
 ### Problem 3: Limited Parallelism
+
 - Parallelism was only across batch, heads, and query sequence
 - Didn't parallelize across key/value sequence dimension
 
@@ -57,9 +60,11 @@ Thread Block 3 → processes (Q_tile_2, K_tile_1, V_tile_1)
 ### 3.2 Improved Work Partitioning Within Thread Blocks
 
 **FlashAttention-1:** Each warp handled different queries within a tile
+
 - Led to imbalanced work when softmax required different amounts of computation
 
 **FlashAttention-2:** Each warp handles same query, split across K dimension
+
 - More balanced work distribution
 - Better load balancing across warps
 
@@ -78,15 +83,18 @@ Thread Block 3 → processes (Q_tile_2, K_tile_1, V_tile_1)
 ## 4. Performance Impact
 
 ### Speedup Over FlashAttention-1
+
 - **~2x faster** on average for typical sequence lengths
 - Up to **2.3x** on A100 GPUs for long sequences
 - Better scaling with sequence length
 
 ### GPU Utilization
+
 - FlashAttention-1: ~35-50% of peak FLOPS
 - FlashAttention-2: ~50-70% of peak FLOPS
 
 ### Memory Efficiency
+
 - Same $O(N \cdot B)$ memory complexity
 - Better bandwidth utilization due to improved access patterns
 
@@ -111,6 +119,7 @@ for batch_idx in batches:
 ---
 
 ### Synchronization
+
 - Requires careful synchronization when accumulating partial outputs
 - Uses atomic operations or reduction trees to combine results from different KV tiles
 

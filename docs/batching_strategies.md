@@ -21,6 +21,7 @@
 ## 2. Static Batching
 
 ### Mechanism
+
 - Accumulate N requests
 - Process entire batch together
 - Wait for ALL sequences to complete before accepting new requests
@@ -42,6 +43,7 @@ GPU idle during Req2, Req3 completion
 ---
 
 ### When to Use
+
 - Offline batch processing
 - Known sequence lengths
 - Latency not critical
@@ -53,6 +55,7 @@ GPU idle during Req2, Req3 completion
 ## 3. Dynamic Batching
 
 ### Mechanism
+
 - Accumulate requests up to max_batch_size OR max_delay
 - Whichever comes first triggers batch execution
 - Still waits for full batch completion before next batch
@@ -78,6 +81,7 @@ max_delay_ms = 100       # Maximum wait time
 ---
 
 ### When to Use
+
 - Services with moderate traffic
 - Simpler implementation than continuous batching
 - Good for non-LLM models (CV, audio)
@@ -132,6 +136,7 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 ---
 
 ### Performance Impact
+
 - **Throughput:** +20-30% vs dynamic batching
 - **Latency:** Lower average, more consistent tail latency
 - **GPU Utilization:** 80-95% (vs 50-70% for static)
@@ -139,6 +144,7 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 ---
 
 ### Trade-offs
+
 - Complex implementation
 - Variable batch size per iteration
 - Requires sophisticated memory management
@@ -176,12 +182,14 @@ Iteration 4: Decode for ongoing requests
 ```
 
 **Parameters:**
+
 - `max_prefill_tokens`: Tokens to prefill per iteration
 - Balances prefill throughput vs decode latency
 
 ---
 
 ### Benefits
+
 - Prevents large prompts from causing latency spikes
 - Better tail latency for decode operations
 - More predictable service times
@@ -189,6 +197,7 @@ Iteration 4: Decode for ongoing requests
 ---
 
 ### Implementation Challenges
+
 - Partial KV cache management
 - Attention mask complexity
 - Scheduling overhead
@@ -205,6 +214,7 @@ Combine speculative decoding with batching
 ---
 
 ### Mechanism
+
 1. **Draft Phase:** Small model predicts k tokens for all requests in batch
 2. **Verification Phase:** Large model verifies all k tokens in single pass
 3. **Accept/Reject:** Keep correct tokens, retry from first error
@@ -222,6 +232,7 @@ Effective Speedup: 2-3x for batch
 ---
 
 ### Challenges
+
 - Variable acceptance rates across requests
 - Synchronization points
 - Draft model overhead
@@ -250,6 +261,7 @@ User3: [System Prompt] + User Query 3
 ---
 
 ### Automatic Prefix Caching (APC)
+
 - Hash prompt prefixes
 - Reuse physical memory blocks
 - Multiple requests point to same KV cache
@@ -270,6 +282,7 @@ With APC:
 ---
 
 ### Use Cases
+
 - Multi-turn chat (common history)
 - RAG (shared context documents)
 - Agent frameworks (repeated tool descriptions)

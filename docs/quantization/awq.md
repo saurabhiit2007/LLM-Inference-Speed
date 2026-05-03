@@ -92,6 +92,7 @@ Grid search over s ∈ [0.5, 1.5] per channel
 ---
 
 ## 8. Advantages over GPTQ
+
 1. **Speed**: 20-30× faster quantization
 2. **Simplicity**: No Hessian computation
 3. **Hardware-friendly**: Simple per-channel scales
@@ -102,6 +103,7 @@ Grid search over s ∈ [0.5, 1.5] per channel
 
 ## 9. TinyChat Integration
 AWQ includes custom CUDA kernels for efficient INT4 inference:
+
 - Fused dequantization + GEMM
 - 3-4× speedup over FP16 on consumer GPUs
 

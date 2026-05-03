@@ -1,6 +1,7 @@
 ## 1. Core Concepts
 
 ### Autoregressive Generation
+
 - LLMs generate tokens sequentially: P(token_t | token_1, ..., token_{t-1})
 - Each token requires full model forward pass
 - Output of step t becomes input for step t+1
@@ -40,6 +41,7 @@ Total Latency = TTFT + (num_output_tokens × TPOT)
 ## 2. Model Architecture Components
 
 ### Transformer Blocks
+
 - Multi-head self-attention: O(n²d) complexity
 - Feed-forward network: O(nd_ff) where d_ff ≈ 4d
 - Layer normalization
@@ -48,6 +50,7 @@ Total Latency = TTFT + (num_output_tokens × TPOT)
 ---
 
 ### KV Cache
+
 - Stores key/value matrices from previous tokens
 - Size per layer: 2 × batch_size × seq_len × num_heads × head_dim × 2 bytes (FP16)
 - **Example**: LLaMA-2-7B with seq_len=2048, batch=1
