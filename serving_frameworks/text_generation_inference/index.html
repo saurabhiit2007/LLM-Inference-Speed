@@ -1757,10 +1757,12 @@
   <h1>Text Generation Inference</h1>
 
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
-<p><strong>Hugging Face's production serving solution</strong> <br>
-- Written in Rust for performance and safety
-- Python bindings for model loading
-- Focus: Stability, HuggingFace ecosystem integration, ease of deployment</p>
+<p><strong>Hugging Face's production serving solution</strong> <br></p>
+<ul>
+<li>Written in Rust for performance and safety</li>
+<li>Python bindings for model loading</li>
+<li>Focus: Stability, HuggingFace ecosystem integration, ease of deployment</li>
+</ul>
 <hr />
 <hr />
 <h2 id="2-core-architecture">2. Core Architecture<a class="headerlink" href="#2-core-architecture" title="Permanent link">&para;</a></h2>
@@ -1785,23 +1787,29 @@
 <hr />
 <hr />
 <h2 id="3-quantization-features">3. Quantization Features<a class="headerlink" href="#3-quantization-features" title="Permanent link">&para;</a></h2>
-<p><strong>Built-in Quantization:</strong> <br>
-- bitsandbytes (INT8, NF4)
-- GPTQ (INT4, INT8)
-- AWQ (INT4)
-- EETQ (INT8, FP8-like)</p>
+<p><strong>Built-in Quantization:</strong> <br></p>
+<ul>
+<li>bitsandbytes (INT8, NF4)</li>
+<li>GPTQ (INT4, INT8)</li>
+<li>AWQ (INT4)</li>
+<li>EETQ (INT8, FP8-like)</li>
+</ul>
 <p><strong>No separate build step</strong> - quantization at runtime</p>
 <hr />
 <hr />
 <h2 id="4-model-support">4. Model Support<a class="headerlink" href="#4-model-support" title="Permanent link">&para;</a></h2>
-<p><strong>Broad Architecture Coverage:</strong> <br>
-- All major HuggingFace models out-of-box
-- Automatic architecture detection
-- Custom model support via transformers library</p>
-<p><strong>Specializations:</strong> <br>
-- Mistral/Mixtral with custom kernels
-- Llama (1, 2, 3) optimizations
-- Falcon, Starcoder optimizations</p>
+<p><strong>Broad Architecture Coverage:</strong> <br></p>
+<ul>
+<li>All major HuggingFace models out-of-box</li>
+<li>Automatic architecture detection</li>
+<li>Custom model support via transformers library</li>
+</ul>
+<p><strong>Specializations:</strong> <br></p>
+<ul>
+<li>Mistral/Mixtral with custom kernels</li>
+<li>Llama (1, 2, 3) optimizations</li>
+<li>Falcon, Starcoder optimizations</li>
+</ul>
 <hr />
 <hr />
 <h2 id="5-distributed-serving">5. Distributed Serving<a class="headerlink" href="#5-distributed-serving" title="Permanent link">&para;</a></h2>
@@ -1842,21 +1850,27 @@
 <hr />
 <hr />
 <h2 id="7-grammar-constrained-generation">7. Grammar-Constrained Generation<a class="headerlink" href="#7-grammar-constrained-generation" title="Permanent link">&para;</a></h2>
-<p><strong>Unique Feature vs Competitors:</strong> <br>
-- Force model to follow regex patterns
-- JSON schema validation during generation
-- Prevents malformed outputs</p>
+<p><strong>Unique Feature vs Competitors:</strong> <br></p>
+<ul>
+<li>Force model to follow regex patterns</li>
+<li>JSON schema validation during generation</li>
+<li>Prevents malformed outputs</li>
+</ul>
 <p>Example: Generate only valid JSON with specific schema</p>
 <hr />
 <hr />
 <h2 id="8-performance-characteristics">8. Performance Characteristics<a class="headerlink" href="#8-performance-characteristics" title="Permanent link">&para;</a></h2>
-<p><strong>Strengths:</strong> <br>
-- Fast cold start (Rust + safetensors)
-- Stable long-running deployments
-- Lower memory overhead than Python frameworks</p>
-<p><strong>Trade-offs:</strong> <br>
-- Slightly lower peak throughput vs TensorRT-LLM
-- Less aggressive optimizations vs vLLM's latest features</p>
+<p><strong>Strengths:</strong> <br></p>
+<ul>
+<li>Fast cold start (Rust + safetensors)</li>
+<li>Stable long-running deployments</li>
+<li>Lower memory overhead than Python frameworks</li>
+</ul>
+<p><strong>Trade-offs:</strong> <br></p>
+<ul>
+<li>Slightly lower peak throughput vs TensorRT-LLM</li>
+<li>Less aggressive optimizations vs vLLM's latest features</li>
+</ul>
 <hr />
 <hr />
 <h2 id="9-interview-qa">9. Interview Q&amp;A<a class="headerlink" href="#9-interview-qa" title="Permanent link">&para;</a></h2>

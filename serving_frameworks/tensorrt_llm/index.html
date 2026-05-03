@@ -1691,10 +1691,12 @@
   <h1>TensorRT LLM</h1>
 
 <h2 id="1-core-architecture">1. Core Architecture<a class="headerlink" href="#1-core-architecture" title="Permanent link">&para;</a></h2>
-<p><strong>NVIDIA's optimization stack</strong> for LLM inference on their GPUs <br>
-- Built on TensorRT for kernel-level optimization
-- Focuses on extracting maximum performance from NVIDIA hardware
-- Trade-off: Complex setup vs peak performance</p>
+<p><strong>NVIDIA's optimization stack</strong> for LLM inference on their GPUs <br></p>
+<ul>
+<li>Built on TensorRT for kernel-level optimization</li>
+<li>Focuses on extracting maximum performance from NVIDIA hardware</li>
+<li>Trade-off: Complex setup vs peak performance</li>
+</ul>
 <hr />
 <hr />
 <h2 id="2-key-technologies">2. Key Technologies<a class="headerlink" href="#2-key-technologies" title="Permanent link">&para;</a></h2>
@@ -1725,13 +1727,17 @@
 <hr />
 <hr />
 <h2 id="3-quantization-support">3. Quantization Support<a class="headerlink" href="#3-quantization-support" title="Permanent link">&para;</a></h2>
-<p><strong>Weight-Only Quantization:</strong> <br>
-- INT8/INT4 weights, FP16 activations
-- 2-4x memory reduction
-- GPTQ, AWQ methods supported</p>
-<p><strong>Activation Quantization:</strong> <br>
-- FP8 (Hopper GPUs only)
-- SmoothQuant for INT8 activations</p>
+<p><strong>Weight-Only Quantization:</strong> <br></p>
+<ul>
+<li>INT8/INT4 weights, FP16 activations</li>
+<li>2-4x memory reduction</li>
+<li>GPTQ, AWQ methods supported</li>
+</ul>
+<p><strong>Activation Quantization:</strong> <br></p>
+<ul>
+<li>FP8 (Hopper GPUs only)</li>
+<li>SmoothQuant for INT8 activations</li>
+</ul>
 <hr />
 <hr />
 <h2 id="4-model-parallelism">4. Model Parallelism<a class="headerlink" href="#4-model-parallelism" title="Permanent link">&para;</a></h2>
@@ -1755,20 +1761,26 @@
 <hr />
 <hr />
 <h2 id="5-engine-building-process">5. Engine Building Process<a class="headerlink" href="#5-engine-building-process" title="Permanent link">&para;</a></h2>
-<p><strong>Two-Step Workflow:</strong> <br>
-1. <strong>Build:</strong> Model → Optimized TensorRT engine (slow, one-time)
-2. <strong>Runtime:</strong> Load engine → Inference (fast)</p>
-<p><strong>Key considerations:</strong> <br>
-- Engines are GPU-specific (H100 engine ≠ A100 engine)
-- Rebuild required for different batch sizes or sequence lengths
-- Trade flexibility for maximum performance</p>
+<p><strong>Two-Step Workflow:</strong> <br></p>
+<ol>
+<li><strong>Build:</strong> Model → Optimized TensorRT engine (slow, one-time)</li>
+<li><strong>Runtime:</strong> Load engine → Inference (fast)</li>
+</ol>
+<p><strong>Key considerations:</strong> <br></p>
+<ul>
+<li>Engines are GPU-specific (H100 engine ≠ A100 engine)</li>
+<li>Rebuild required for different batch sizes or sequence lengths</li>
+<li>Trade flexibility for maximum performance</li>
+</ul>
 <hr />
 <hr />
 <h2 id="6-multi-gpu-inference-modes">6. Multi-GPU Inference Modes<a class="headerlink" href="#6-multi-gpu-inference-modes" title="Permanent link">&para;</a></h2>
-<p><strong>KV Cache Transfer Optimization:</strong>
-- Custom NCCL/NVLink operations for KV cache
-- Overlaps communication with computation
-- Critical for tensor parallel setups</p>
+<p><strong>KV Cache Transfer Optimization:</strong></p>
+<ul>
+<li>Custom NCCL/NVLink operations for KV cache</li>
+<li>Overlaps communication with computation</li>
+<li>Critical for tensor parallel setups</li>
+</ul>
 <hr />
 <hr />
 <h2 id="7-interview-qa">7. Interview Q&amp;A<a class="headerlink" href="#7-interview-qa" title="Permanent link">&para;</a></h2>

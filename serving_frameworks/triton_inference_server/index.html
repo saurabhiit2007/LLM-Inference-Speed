@@ -1835,19 +1835,23 @@
   <h1>Triton Inference Server</h1>
 
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
-<p><strong>NVIDIA's general-purpose inference server</strong> <br>
-- Framework-agnostic (PyTorch, TensorFlow, ONNX, TensorRT)
-- Not LLM-specific, but increasingly optimized for them
-- Focus: Enterprise deployment, multi-model serving, complex pipelines</p>
+<p><strong>NVIDIA's general-purpose inference server</strong> <br></p>
+<ul>
+<li>Framework-agnostic (PyTorch, TensorFlow, ONNX, TensorRT)</li>
+<li>Not LLM-specific, but increasingly optimized for them</li>
+<li>Focus: Enterprise deployment, multi-model serving, complex pipelines</li>
+</ul>
 <hr />
 <hr />
 <h2 id="2-core-architecture">2. Core Architecture<a class="headerlink" href="#2-core-architecture" title="Permanent link">&para;</a></h2>
 <h3 id="backend-system">Backend System<a class="headerlink" href="#backend-system" title="Permanent link">&para;</a></h3>
-<p><strong>Pluggable backends for different frameworks:</strong>
-- Python backend (custom inference logic)
-- PyTorch backend (TorchScript models)
-- TensorRT backend (TensorRT engines)
-- vLLM backend (integration added 2024)</p>
+<p><strong>Pluggable backends for different frameworks:</strong></p>
+<ul>
+<li>Python backend (custom inference logic)</li>
+<li>PyTorch backend (TorchScript models)</li>
+<li>TensorRT backend (TensorRT engines)</li>
+<li>vLLM backend (integration added 2024)</li>
+</ul>
 <p><strong>Benefit:</strong> Mix different model types in same server</p>
 <hr />
 <h3 id="model-repository">Model Repository<a class="headerlink" href="#model-repository" title="Permanent link">&para;</a></h3>
@@ -1876,10 +1880,12 @@
 <hr />
 <h2 id="4-advanced-serving-capabilities">4. Advanced Serving Capabilities<a class="headerlink" href="#4-advanced-serving-capabilities" title="Permanent link">&para;</a></h2>
 <h3 id="model-ensembles">Model Ensembles<a class="headerlink" href="#model-ensembles" title="Permanent link">&para;</a></h3>
-<p><strong>Multi-stage pipelines as single endpoint:</strong>
-- Preprocessing → Embedding → LLM → Postprocessing
-- Automatic scheduling between stages
-- Example: RAG pipeline with retrieval + generation</p>
+<p><strong>Multi-stage pipelines as single endpoint:</strong></p>
+<ul>
+<li>Preprocessing → Embedding → LLM → Postprocessing</li>
+<li>Automatic scheduling between stages</li>
+<li>Example: RAG pipeline with retrieval + generation</li>
+</ul>
 <h3 id="dynamic-batching">Dynamic Batching<a class="headerlink" href="#dynamic-batching" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Accumulates requests up to max batch size</li>
@@ -1927,14 +1933,18 @@
 <hr />
 <hr />
 <h2 id="7-metrics-observability">7. Metrics &amp; Observability<a class="headerlink" href="#7-metrics-observability" title="Permanent link">&para;</a></h2>
-<p><strong>Comprehensive Monitoring:</strong> <br>
-- Prometheus metrics (latency, throughput, queue depth)
-- Per-model and per-version metrics
-- GPU utilization tracking
-- Inference count, batch statistics</p>
-<p><strong>Tracing:</strong> <br>
-- OpenTelemetry support
-- Request-level tracing through pipeline stages</p>
+<p><strong>Comprehensive Monitoring:</strong> <br></p>
+<ul>
+<li>Prometheus metrics (latency, throughput, queue depth)</li>
+<li>Per-model and per-version metrics</li>
+<li>GPU utilization tracking</li>
+<li>Inference count, batch statistics</li>
+</ul>
+<p><strong>Tracing:</strong> <br></p>
+<ul>
+<li>OpenTelemetry support</li>
+<li>Request-level tracing through pipeline stages</li>
+</ul>
 <hr />
 <hr />
 <h2 id="8-performance-optimization">8. Performance Optimization<a class="headerlink" href="#8-performance-optimization" title="Permanent link">&para;</a></h2>

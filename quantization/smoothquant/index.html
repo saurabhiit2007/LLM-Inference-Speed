@@ -1748,11 +1748,15 @@
 <hr />
 <hr />
 <h2 id="5-migration-strength">5. Migration Strength α<a class="headerlink" href="#5-migration-strength" title="Permanent link">&para;</a></h2>
-<p><strong>α = 0.5</strong>: Balanced migration (default) <br>
-- Geometric mean of activation and weight ranges
-- Empirically optimal for most models</p>
-<p><strong>α = 0.75</strong>: More aggressive activation smoothing <br>
-- Better for models with severe outliers (OPT)</p>
+<p><strong>α = 0.5</strong>: Balanced migration (default) <br></p>
+<ul>
+<li>Geometric mean of activation and weight ranges</li>
+<li>Empirically optimal for most models</li>
+</ul>
+<p><strong>α = 0.75</strong>: More aggressive activation smoothing <br></p>
+<ul>
+<li>Better for models with severe outliers (OPT)</li>
+</ul>
 <hr />
 <hr />
 <h2 id="6-per-token-vs-per-tensor">6. Per-Token vs. Per-Tensor<a class="headerlink" href="#6-per-token-vs-per-tensor" title="Permanent link">&para;</a></h2>
@@ -1792,14 +1796,18 @@
 <hr />
 <hr />
 <h2 id="8-integration-with-other-methods">8. Integration with Other Methods<a class="headerlink" href="#8-integration-with-other-methods" title="Permanent link">&para;</a></h2>
-<p><strong>SmoothQuant + AWQ</strong>: <br>
-- SmoothQuant for activation INT8
-- AWQ for weight INT4
-- Hybrid W4A8 quantization</p>
-<p><strong>SmoothQuant + LLM.int8()</strong>: <br>
-- SmoothQuant pre-processing
-- LLM.int8() for outlier handling
-- Complementary techniques</p>
+<p><strong>SmoothQuant + AWQ</strong>: <br></p>
+<ul>
+<li>SmoothQuant for activation INT8</li>
+<li>AWQ for weight INT4</li>
+<li>Hybrid W4A8 quantization</li>
+</ul>
+<p><strong>SmoothQuant + LLM.int8()</strong>: <br></p>
+<ul>
+<li>SmoothQuant pre-processing</li>
+<li>LLM.int8() for outlier handling</li>
+<li>Complementary techniques</li>
+</ul>
 <hr />
 <hr />
 <h2 id="9-implementation">9. Implementation<a class="headerlink" href="#9-implementation" title="Permanent link">&para;</a></h2>

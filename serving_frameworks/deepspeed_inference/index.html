@@ -1799,19 +1799,23 @@
   <h1>DeepSpeed Inference</h1>
 
 <h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
-<p><strong>Microsoft's inference optimization library</strong> <br>
-- Part of the larger DeepSpeed training ecosystem
-- Focus: Multi-GPU inference, kernel optimizations, quantization
-- Integrated with DeepSpeed-MII (Model Implementations for Inference)</p>
+<p><strong>Microsoft's inference optimization library</strong> <br></p>
+<ul>
+<li>Part of the larger DeepSpeed training ecosystem</li>
+<li>Focus: Multi-GPU inference, kernel optimizations, quantization</li>
+<li>Integrated with DeepSpeed-MII (Model Implementations for Inference)</li>
+</ul>
 <hr />
 <hr />
 <h2 id="2-core-innovations">2. Core Innovations<a class="headerlink" href="#2-core-innovations" title="Permanent link">&para;</a></h2>
 <h3 id="deepspeed-mii">DeepSpeed-MII<a class="headerlink" href="#deepspeed-mii" title="Permanent link">&para;</a></h3>
-<p><strong>High-level serving framework</strong> built on DeepSpeed-Inference
-- REST API server
-- Dynamic batching
-- Multi-GPU tensor parallelism
-- Lower-level alternative to vLLM/TGI</p>
+<p><strong>High-level serving framework</strong> built on DeepSpeed-Inference</p>
+<ul>
+<li>REST API server</li>
+<li>Dynamic batching</li>
+<li>Multi-GPU tensor parallelism</li>
+<li>Lower-level alternative to vLLM/TGI</li>
+</ul>
 <h3 id="zero-inference">ZeRO-Inference<a class="headerlink" href="#zero-inference" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Adapts ZeRO training optimizations for inference</li>
@@ -1867,10 +1871,12 @@
 <hr />
 <hr />
 <h2 id="6-deepspeed-fastgen-2024">6. DeepSpeed-FastGen (2024+)<a class="headerlink" href="#6-deepspeed-fastgen-2024" title="Permanent link">&para;</a></h2>
-<p><strong>Latest addition:</strong> Dynamic SplitFuse scheduling  <br>
-- Combines prefill and decode in single batch
-- Similar to vLLM's chunked prefill concept
-- Claimed improvements over naive continuous batching</p>
+<p><strong>Latest addition:</strong> Dynamic SplitFuse scheduling  <br></p>
+<ul>
+<li>Combines prefill and decode in single batch</li>
+<li>Similar to vLLM's chunked prefill concept</li>
+<li>Claimed improvements over naive continuous batching</li>
+</ul>
 <h3 id="splitfuse-algorithm">SplitFuse Algorithm<a class="headerlink" href="#splitfuse-algorithm" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Split long prefills into chunks</li>
@@ -1894,14 +1900,18 @@
 <hr />
 <hr />
 <h2 id="8-performance-characteristics">8. Performance Characteristics<a class="headerlink" href="#8-performance-characteristics" title="Permanent link">&para;</a></h2>
-<p><strong>Strengths:</strong> <br>
-- Good for research/prototyping
-- Integrated training-to-inference workflow
-- Strong multi-GPU support</p>
-<p><strong>Limitations:</strong> <br>
-- Less production-hardened than TGI/vLLM
-- Smaller community/ecosystem
-- Kernel optimizations lag behind latest research</p>
+<p><strong>Strengths:</strong> <br></p>
+<ul>
+<li>Good for research/prototyping</li>
+<li>Integrated training-to-inference workflow</li>
+<li>Strong multi-GPU support</li>
+</ul>
+<p><strong>Limitations:</strong> <br></p>
+<ul>
+<li>Less production-hardened than TGI/vLLM</li>
+<li>Smaller community/ecosystem</li>
+<li>Kernel optimizations lag behind latest research</li>
+</ul>
 <hr />
 <hr />
 <h2 id="9-interview-qa">9. Interview Q&amp;A<a class="headerlink" href="#9-interview-qa" title="Permanent link">&para;</a></h2>

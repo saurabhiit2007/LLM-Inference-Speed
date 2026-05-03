@@ -1589,6 +1589,7 @@
 <p>Restrict sampling to the k highest-probability tokens, renormalise, then sample.</p>
 <p><strong>Key limitation:</strong> k is fixed regardless of distribution shape. When the model is very confident (one token at 95% probability), k=50 still forces diversity from 49 low-quality alternatives. When uncertain (flat distribution), k=50 may arbitrarily cut off valid options. Top-p solves this.</p>
 <p>Typical values: k=40–50. Largely superseded by top-p in modern systems.</p>
+<p><strong>Sampling from the renormalized distribution:</strong> draw <code>u ~ Uniform(0, 1)</code>, then walk the cumulative distribution and select the first token where the running sum exceeds <code>u</code> — this is inverse CDF sampling, implemented by <code>torch.multinomial</code>. Equivalently, the <strong>Gumbel-max trick</strong> adds Gumbel-distributed noise to the filtered logits and takes the argmax, producing the same categorical distribution without an explicit softmax step.</p>
 <hr />
 <h2 id="4-top-p-nucleus-sampling">4. Top-p (Nucleus) Sampling<a class="headerlink" href="#4-top-p-nucleus-sampling" title="Permanent link">&para;</a></h2>
 <p>Select the smallest set of tokens whose cumulative probability ≥ p, renormalise, then sample.</p>
@@ -1630,7 +1631,7 @@
 </tbody>
 </table>
 <p><strong>Key advantage over top-k:</strong> adapts automatically to model confidence. When the model is certain, the nucleus shrinks to 1–2 tokens. When uncertain, it expands to include many options. This is why top-p is the default in modern inference APIs.</p>
-<p>Typical value: <strong>p=0.9</strong> (OpenAI default). p=0.95 for more diversity; p=0.8 for more focus.</p>
+<p>Typical value: <strong>p=0.9</strong> (OpenAI default). p=0.95 for more diversity; p=0.8 for more focus. The same inverse CDF sampling mechanism applies after the nucleus is renormalized.</p>
 <hr />
 <h2 id="5-production-recipe">5. Production Recipe<a class="headerlink" href="#5-production-recipe" title="Permanent link">&para;</a></h2>
 <p>Standard combination: <strong>temperature + top-p</strong></p>

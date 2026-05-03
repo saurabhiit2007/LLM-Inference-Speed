@@ -1892,36 +1892,50 @@
 <hr />
 <h2 id="3-technical-deep-dive">3. Technical Deep Dive<a class="headerlink" href="#3-technical-deep-dive" title="Permanent link">&para;</a></h2>
 <h3 id="memory-management-approaches">Memory Management Approaches<a class="headerlink" href="#memory-management-approaches" title="Permanent link">&para;</a></h3>
-<p><strong>vLLM (PagedAttention):</strong> <br>
-- Paged KV cache with block tables
-- &lt;4% memory waste
-- Best for variable-length sequences</p>
-<p><strong>TensorRT-LLM:</strong> <br>
-- Paged KV cache inspired by vLLM
-- NVIDIA-optimized CUDA kernels
-- Tightly coupled with GPU architecture</p>
-<p><strong>TGI:</strong> <br>
-- FlashAttention for memory efficiency
-- No paging, simpler approach
-- Good for single-tenant scenarios</p>
-<p><strong>DeepSpeed:</strong> <br>
-- Basic KV cache management
-- ZeRO-Inference for CPU/NVMe offloading
-- Suited for extreme model sizes</p>
+<p><strong>vLLM (PagedAttention):</strong> <br></p>
+<ul>
+<li>Paged KV cache with block tables</li>
+<li>&lt;4% memory waste</li>
+<li>Best for variable-length sequences</li>
+</ul>
+<p><strong>TensorRT-LLM:</strong> <br></p>
+<ul>
+<li>Paged KV cache inspired by vLLM</li>
+<li>NVIDIA-optimized CUDA kernels</li>
+<li>Tightly coupled with GPU architecture</li>
+</ul>
+<p><strong>TGI:</strong> <br></p>
+<ul>
+<li>FlashAttention for memory efficiency</li>
+<li>No paging, simpler approach</li>
+<li>Good for single-tenant scenarios</li>
+</ul>
+<p><strong>DeepSpeed:</strong> <br></p>
+<ul>
+<li>Basic KV cache management</li>
+<li>ZeRO-Inference for CPU/NVMe offloading</li>
+<li>Suited for extreme model sizes</li>
+</ul>
 <hr />
 <h3 id="batching-strategies">Batching Strategies<a class="headerlink" href="#batching-strategies" title="Permanent link">&para;</a></h3>
-<p><strong>Continuous Batching (vLLM, TGI, DeepSpeed-FastGen):</strong> <br>
-- Iteration-level scheduling
-- Immediate slot filling
-- 20-30% throughput improvement</p>
-<p><strong>Static Batching (Traditional):</strong> <br>
-- Wait for full batch completion
-- Simpler implementation
-- GPU idle time</p>
-<p><strong>Dynamic Batching (Triton):</strong> <br>
-- Time-window accumulation
-- Less sophisticated than continuous
-- Still effective for many workloads</p>
+<p><strong>Continuous Batching (vLLM, TGI, DeepSpeed-FastGen):</strong> <br></p>
+<ul>
+<li>Iteration-level scheduling</li>
+<li>Immediate slot filling</li>
+<li>20-30% throughput improvement</li>
+</ul>
+<p><strong>Static Batching (Traditional):</strong> <br></p>
+<ul>
+<li>Wait for full batch completion</li>
+<li>Simpler implementation</li>
+<li>GPU idle time</li>
+</ul>
+<p><strong>Dynamic Batching (Triton):</strong> <br></p>
+<ul>
+<li>Time-window accumulation</li>
+<li>Less sophisticated than continuous</li>
+<li>Still effective for many workloads</li>
+</ul>
 <hr />
 <h3 id="quantization-comparison">Quantization Comparison<a class="headerlink" href="#quantization-comparison" title="Permanent link">&para;</a></h3>
 <table>
@@ -1977,41 +1991,53 @@
 <hr />
 <h2 id="4-latency-characteristics">4. Latency Characteristics<a class="headerlink" href="#4-latency-characteristics" title="Permanent link">&para;</a></h2>
 <h3 id="first-token-time-to-time-ttft">First Token Time to Time (TTFT)<a class="headerlink" href="#first-token-time-to-time-ttft" title="Permanent link">&para;</a></h3>
-<p><strong>Best to Worst:</strong> <br>
-1. TGI (Rust + safetensors, optimized cold start)
-2. vLLM (Python overhead but chunked prefill)
-3. TensorRT-LLM (engine loading overhead)
-4. DeepSpeed-Inference
-5. Triton (abstraction layer overhead)</p>
+<p><strong>Best to Worst:</strong> <br></p>
+<ol>
+<li>TGI (Rust + safetensors, optimized cold start)</li>
+<li>vLLM (Python overhead but chunked prefill)</li>
+<li>TensorRT-LLM (engine loading overhead)</li>
+<li>DeepSpeed-Inference</li>
+<li>Triton (abstraction layer overhead)</li>
+</ol>
 <hr />
 <h3 id="inter-token-latency-itl">Inter-Token Latency (ITL)<a class="headerlink" href="#inter-token-latency-itl" title="Permanent link">&para;</a></h3>
-<p><strong>Best to Worst:</strong> <br>
-1. TensorRT-LLM (maximum kernel optimization)
-2. vLLM (PagedAttention efficiency)
-3. TGI (FlashAttention + Rust)
-4. Triton (depends on backend)
-5. DeepSpeed-Inference</p>
+<p><strong>Best to Worst:</strong> <br></p>
+<ol>
+<li>TensorRT-LLM (maximum kernel optimization)</li>
+<li>vLLM (PagedAttention efficiency)</li>
+<li>TGI (FlashAttention + Rust)</li>
+<li>Triton (depends on backend)</li>
+<li>DeepSpeed-Inference</li>
+</ol>
 <hr />
 <h3 id="throughput-tokenssecond">Throughput (tokens/second)<a class="headerlink" href="#throughput-tokenssecond" title="Permanent link">&para;</a></h3>
-<p><strong>Best to Worst:</strong> <br>
-1. vLLM (PagedAttention + continuous batching)
-2. TensorRT-LLM (hardware optimization)
-3. TGI (solid continuous batching)
-4. Triton + vLLM backend
-5. DeepSpeed-Inference</p>
+<p><strong>Best to Worst:</strong> <br></p>
+<ol>
+<li>vLLM (PagedAttention + continuous batching)</li>
+<li>TensorRT-LLM (hardware optimization)</li>
+<li>TGI (solid continuous batching)</li>
+<li>Triton + vLLM backend</li>
+<li>DeepSpeed-Inference</li>
+</ol>
 <hr />
 <hr />
 <h2 id="5-multi-gpu-considerations">5. Multi-GPU Considerations<a class="headerlink" href="#5-multi-gpu-considerations" title="Permanent link">&para;</a></h2>
 <h3 id="tensor-parallelism-performance">Tensor Parallelism Performance<a class="headerlink" href="#tensor-parallelism-performance" title="Permanent link">&para;</a></h3>
-<p><strong>TensorRT-LLM:</strong>  <br>
-- Custom NCCL optimizations
-- Lowest latency for TP</p>
-<p><strong>vLLM:</strong> <br>
-- Ray-based distribution
-- Good performance, more overhead</p>
-<p><strong>TGI:</strong> <br>
-- Rust-based TP implementation
-- Efficient but less optimized than TensorRT</p>
+<p><strong>TensorRT-LLM:</strong>  <br></p>
+<ul>
+<li>Custom NCCL optimizations</li>
+<li>Lowest latency for TP</li>
+</ul>
+<p><strong>vLLM:</strong> <br></p>
+<ul>
+<li>Ray-based distribution</li>
+<li>Good performance, more overhead</li>
+</ul>
+<p><strong>TGI:</strong> <br></p>
+<ul>
+<li>Rust-based TP implementation</li>
+<li>Efficient but less optimized than TensorRT</li>
+</ul>
 <hr />
 <h3 id="pipeline-parallelism">Pipeline Parallelism<a class="headerlink" href="#pipeline-parallelism" title="Permanent link">&para;</a></h3>
 <ul>

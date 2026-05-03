@@ -1704,12 +1704,14 @@
 
 <h2 id="1-ggml-georgi-gerganov-machine-learning">1. GGML (Georgi Gerganov Machine Learning)<a class="headerlink" href="#1-ggml-georgi-gerganov-machine-learning" title="Permanent link">&para;</a></h2>
 <p>C library for machine learning inference, optimized for CPU execution of LLMs.</p>
-<p><strong>Key Features</strong>: <br>
-- Pure C/C++ (no Python runtime)
-- CPU-optimized kernels (AVX2, AVX512, NEON)
-- 4-bit to 16-bit quantization
-- Memory-mapped model loading
-- Apple Metal, CUDA, OpenCL backends</p>
+<p><strong>Key Features</strong>: <br></p>
+<ul>
+<li>Pure C/C++ (no Python runtime)</li>
+<li>CPU-optimized kernels (AVX2, AVX512, NEON)</li>
+<li>4-bit to 16-bit quantization</li>
+<li>Memory-mapped model loading</li>
+<li>Apple Metal, CUDA, OpenCL backends</li>
+</ul>
 <hr />
 <hr />
 <h2 id="gguf-ggml-universal-format">GGUF (GGML Universal Format)<a class="headerlink" href="#gguf-ggml-universal-format" title="Permanent link">&para;</a></h2>
@@ -1809,9 +1811,11 @@
 </ul>
 <hr />
 <h3 id="importance-matrix-i-quants">Importance Matrix (I-quants)<a class="headerlink" href="#importance-matrix-i-quants" title="Permanent link">&para;</a></h3>
-<p>Uses importance scores to allocate more bits to salient weights:
-- <code>IQ3_XXS</code>: 3-bit with importance weighting
-- <code>IQ4_XS</code>: 4-bit with importance weighting</p>
+<p>Uses importance scores to allocate more bits to salient weights:</p>
+<ul>
+<li><code>IQ3_XXS</code>: 3-bit with importance weighting</li>
+<li><code>IQ4_XS</code>: 4-bit with importance weighting</li>
+</ul>
 <hr />
 <hr />
 <h2 id="llamacpp">llama.cpp<a class="headerlink" href="#llamacpp" title="Permanent link">&para;</a></h2>
@@ -1842,12 +1846,16 @@ Fused into single kernel instead of 3 separate ops.</p>
 <hr />
 <hr />
 <h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
-<p><strong>M2 Max (Metal)</strong>: <br>
-- 7B Q4_K_M: ~40 tokens/sec
-- 13B Q4_K_M: ~25 tokens/sec</p>
-<p><strong>AMD 5950X (16-core)</strong>: <br>
-- 7B Q4_K_M: ~30 tokens/sec
-- 13B Q4_K_M: ~15 tokens/sec</p>
+<p><strong>M2 Max (Metal)</strong>: <br></p>
+<ul>
+<li>7B Q4_K_M: ~40 tokens/sec</li>
+<li>13B Q4_K_M: ~25 tokens/sec</li>
+</ul>
+<p><strong>AMD 5950X (16-core)</strong>: <br></p>
+<ul>
+<li>7B Q4_K_M: ~30 tokens/sec</li>
+<li>13B Q4_K_M: ~15 tokens/sec</li>
+</ul>
 <hr />
 
 

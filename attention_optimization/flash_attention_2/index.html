@@ -1791,11 +1791,15 @@ Thread Block 3 → processes (Q_tile_2, K_tile_1, V_tile_1)
 <p><strong>Benefit:</strong> More thread blocks doing work simultaneously → better GPU occupancy → less idle time</p>
 <hr />
 <h3 id="32-improved-work-partitioning-within-thread-blocks">3.2 Improved Work Partitioning Within Thread Blocks<a class="headerlink" href="#32-improved-work-partitioning-within-thread-blocks" title="Permanent link">&para;</a></h3>
-<p><strong>FlashAttention-1:</strong> Each warp handled different queries within a tile
-- Led to imbalanced work when softmax required different amounts of computation</p>
-<p><strong>FlashAttention-2:</strong> Each warp handles same query, split across K dimension
-- More balanced work distribution
-- Better load balancing across warps</p>
+<p><strong>FlashAttention-1:</strong> Each warp handled different queries within a tile</p>
+<ul>
+<li>Led to imbalanced work when softmax required different amounts of computation</li>
+</ul>
+<p><strong>FlashAttention-2:</strong> Each warp handles same query, split across K dimension</p>
+<ul>
+<li>More balanced work distribution</li>
+<li>Better load balancing across warps</li>
+</ul>
 <hr />
 <h3 id="33-memory-access-optimizations">3.3 Memory Access Optimizations<a class="headerlink" href="#33-memory-access-optimizations" title="Permanent link">&para;</a></h3>
 <ul>
