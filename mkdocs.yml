@@ -64,10 +64,6 @@ nav:
       - vLLM: ./serving_frameworks/vllm.md
       - Framework Comparison: ./serving_frameworks/framework_comparison.md
       - Disaggregated Prefill-Decode: ./serving_frameworks/disaggregated_prefill_decode.md
-  - Test-Time Compute Scaling:
-      - Compute Optimal Inference: ./test_time_compute/compute_optimal_inference.md
-      - Best-of-N Sampling: ./test_time_compute/best_of_n_sampling.md
-      - ORMs & PRMs: ./test_time_compute/orm_prm.md
   - Interview Q&A: qa.md
   - References: references.md
 
