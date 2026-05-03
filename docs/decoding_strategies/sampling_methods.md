@@ -32,6 +32,8 @@ Restrict sampling to the k highest-probability tokens, renormalise, then sample.
 
 Typical values: k=40–50. Largely superseded by top-p in modern systems.
 
+**Sampling from the renormalized distribution:** draw `u ~ Uniform(0, 1)`, then walk the cumulative distribution and select the first token where the running sum exceeds `u` — this is inverse CDF sampling, implemented by `torch.multinomial`. Equivalently, the **Gumbel-max trick** adds Gumbel-distributed noise to the filtered logits and takes the argmax, producing the same categorical distribution without an explicit softmax step.
+
 ---
 
 ## 4. Top-p (Nucleus) Sampling
@@ -50,7 +52,7 @@ Select the smallest set of tokens whose cumulative probability ≥ p, renormalis
 
 **Key advantage over top-k:** adapts automatically to model confidence. When the model is certain, the nucleus shrinks to 1–2 tokens. When uncertain, it expands to include many options. This is why top-p is the default in modern inference APIs.
 
-Typical value: **p=0.9** (OpenAI default). p=0.95 for more diversity; p=0.8 for more focus.
+Typical value: **p=0.9** (OpenAI default). p=0.95 for more diversity; p=0.8 for more focus. The same inverse CDF sampling mechanism applies after the nucleus is renormalized.
 
 ---
 
