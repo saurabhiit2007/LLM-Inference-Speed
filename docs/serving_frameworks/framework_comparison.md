@@ -1,231 +1,95 @@
-## 1. Quick Selection Guide
+# Serving Framework Comparison
 
-| Use Case | Recommended Framework | Rationale |
-|----------|----------------------|-----------|
-| Maximum throughput, multi-tenancy | **vLLM** | PagedAttention, multi-LoRA, continuous batching |
-| Peak NVIDIA GPU performance | **TensorRT-LLM** | Hardware-specific optimization, FP8 support |
-| Production stability, HF ecosystem | **TGI** | Rust reliability, grammar constraints, fast deploys |
-| Research + training integration | **DeepSpeed-Inference** | Unified training/inference, ZeRO-Inference |
-| Multi-model pipelines, enterprise | **Triton** | Framework-agnostic, model versioning, ensembles |
+Every serving framework makes a different bet about what the binding constraint is. Understanding those bets explains why each framework is built the way it is, and which one is right for a given deployment.
 
 ---
 
+## 1. The Design Axes
+
+Each framework optimizes along a primary axis:
+
+| Framework | Primary Axis | Core Mechanism |
+|---|---|---|
+| **vLLM** | Throughput via memory efficiency | PagedAttention eliminates KV cache fragmentation; 2–3× more concurrent requests on the same GPU |
+| **TensorRT-LLM** | Latency via compile-time specialization | GPU-specific compiled engines; kernel fusion + CUDA graphs extract hardware-ceiling performance |
+| **TGI** | Deployment simplicity | Rust router + HuggingFace ecosystem; batteries-included for any HF Hub model |
+| **DeepSpeed Inference** | Model scale beyond GPU VRAM | ZeRO-Inference shards weights across GPU/CPU/NVMe; enables models that don't fit in memory |
+| **Triton** | Multi-model orchestration | Framework-agnostic router wrapping other backends; versioning, pipelines, observability |
+
+These axes are real tradeoffs, not marketing. A framework that optimizes for one axis typically sacrifices on the others.
+
 ---
 
-## 2. Feature Comparison Matrix
+## 2. The Throughput / Latency / Cost Trilemma
+
+The three things every serving deployment wants are:
+
+- **High throughput** (tokens/second across all concurrent users)
+- **Low latency** (time-to-first-token and inter-token latency per user)
+- **Low cost** (GPU-hours per million tokens)
+
+You can't maximize all three simultaneously. The frameworks make different choices:
+
+**vLLM maximizes throughput and cost-efficiency.** PagedAttention packs more concurrent requests into the same GPU memory, so each GPU produces more tokens per second and more tokens per dollar. Per-request latency is acceptable but not the lowest achievable.
+
+**TensorRT-LLM minimizes latency.** Compiled kernels reduce per-token compute time by 8–15% over vLLM at equivalent settings. The cost: a 5–30 minute build cycle per model-GPU combination and an engineering team to maintain it.
+
+**TGI is a Pareto-acceptable choice for teams that want neither extreme.** Solid throughput, acceptable latency, minimal setup. As of 2025, TGI is in maintenance mode — HuggingFace now recommends vLLM or SGLang for new deployments.
+
+**DeepSpeed trades throughput and latency for model scale.** If you need to serve a model that doesn't fit in GPU memory at all, DeepSpeed is often the only option. Accept the latency penalty.
+
+**Triton is orthogonal to this trilemma.** It doesn't change inference performance — it adds orchestration on top of another framework's engine.
+
+---
+
+## 3. Quick Selection Guide
+
+| Scenario | Framework | Reason |
+|---|---|---|
+| New production deployment, single LLM | **vLLM** | Best throughput, active development, multi-LoRA, prefix caching |
+| Fixed NVIDIA hardware, stability matters, max tokens/sec | **TensorRT-LLM** | Hardware-ceiling performance when you can absorb 30-min build cycles |
+| Already running TGI in production | **TGI** | Don't migrate unless you're hitting its limits |
+| Model larger than GPU VRAM, existing DeepSpeed training stack | **DeepSpeed Inference** | ZeRO-Inference is the tool for this specific problem |
+| Multi-model pipeline, model versioning, enterprise observability | **Triton** | Not an engine — wraps vLLM or TensorRT-LLM with enterprise infrastructure |
+| New deployment, exploring alternatives to vLLM | **SGLang** | Emerging competitor; strong performance on structured generation and multi-step programs |
+
+---
+
+## 4. Feature Matrix
 
 | Feature | vLLM | TensorRT-LLM | TGI | DeepSpeed | Triton |
-|---------|------|--------------|-----|-----------|--------|
-| **Memory Efficiency** | ★★★★★ | ★★★★☆ | ★★★☆☆ | ★★★☆☆ | ★★★★☆ (via vLLM) |
-| **Ease of Setup** | ★★★★★ | ★★☆☆☆ | ★★★★★ | ★★★☆☆ | ★★★☆☆ |
-| **Peak Throughput** | ★★★★★ | ★★★★★ | ★★★★☆ | ★★★☆☆ | ★★★★★ (via backends) |
-| **Multi-LoRA** | ★★★★★ | ★★☆☆☆ | ☆☆☆☆☆ | ☆☆☆☆☆ | ★★★★★ (via vLLM) |
-| **Model Support** | ★★★★☆ | ★★★☆☆ | ★★★★★ | ★★★★☆ | ★★★★★ |
-| **Production Maturity** | ★★★★★ | ★★★★☆ | ★★★★★ | ★★★☆☆ | ★★★★★ |
+|---|---|---|---|---|---|
+| PagedAttention / Paged KV | Yes | Yes (NVIDIA-optimized) | No | No | Via backend |
+| Continuous batching | Yes | Yes | Yes | Yes (FastGen) | Via backend |
+| Prefix / APC caching | Yes | Partial | No | No | Via backend |
+| Multi-LoRA serving | Yes | Limited | No | No | Via backend |
+| Grammar-constrained output | Via Outlines | No | Yes (native) | No | Via backend |
+| FP8 (H100+) | Yes | Yes (native) | Yes | No | Via backend |
+| CPU/NVMe weight offloading | No | No | No | Yes | No |
+| Model versioning + A/B | No | No | No | No | Yes (core feature) |
+| Ensemble pipelines | No | No | No | No | Yes (core feature) |
+| Active development | Yes | Yes | Maintenance mode | Limited | Yes |
 
 ---
 
----
+## 5. The Emerging Competitor: SGLang
 
-## 3. Technical Deep Dive
+SGLang (from the Stanford/UC Berkeley group behind vLLM) is a newer framework optimized for multi-step LLM programs — chains of calls, structured generation, and agent loops. Its RadixAttention extends prefix caching to arbitrary tree-structured KV reuse, which dramatically accelerates workloads where multiple requests share overlapping prefixes beyond a simple shared system prompt.
 
-### Memory Management Approaches
-
-**vLLM (PagedAttention):** <br>
-
-- Paged KV cache with block tables
-- <4% memory waste
-- Best for variable-length sequences
-
-**TensorRT-LLM:** <br>
-
-- Paged KV cache inspired by vLLM
-- NVIDIA-optimized CUDA kernels
-- Tightly coupled with GPU architecture
-
-**TGI:** <br>
-
-- FlashAttention for memory efficiency
-- No paging, simpler approach
-- Good for single-tenant scenarios
-
-**DeepSpeed:** <br>
-
-- Basic KV cache management
-- ZeRO-Inference for CPU/NVMe offloading
-- Suited for extreme model sizes
+For straightforward single-turn serving, vLLM and SGLang perform similarly. For agentic workloads with complex prompt trees, SGLang's caching model can provide a substantial advantage. SGLang is worth evaluating for new deployments alongside vLLM.
 
 ---
 
-### Batching Strategies
+## 6. The Common Production Stack
 
-**Continuous Batching (vLLM, TGI, DeepSpeed-FastGen):** <br>
+Most high-traffic production deployments end up at one of two configurations:
 
-- Iteration-level scheduling
-- Immediate slot filling
-- 20-30% throughput improvement
+**Configuration A (most common):**
+vLLM → direct HTTP API → load balancer
 
-**Static Batching (Traditional):** <br>
+Simple, well-understood, low operational overhead. The default choice for teams that don't have specific reasons to go elsewhere.
 
-- Wait for full batch completion
-- Simpler implementation
-- GPU idle time
+**Configuration B (enterprise / NVIDIA-optimized):**
+TensorRT-LLM → Triton → load balancer
 
-**Dynamic Batching (Triton):** <br>
-
-- Time-window accumulation
-- Less sophisticated than continuous
-- Still effective for many workloads
-
----
-
-### Quantization Comparison
-
-| Framework | INT8 | INT4 | FP8 | Methods |
-|-----------|------|------|-----|---------|
-| vLLM | ✓ | ✓ | ✓ | AWQ, GPTQ, SmoothQuant |
-| TensorRT-LLM | ✓ | ✓ | ✓ | Native + AWQ, GPTQ |
-| TGI | ✓ | ✓ | ✓ | bitsandbytes, AWQ, GPTQ, EETQ |
-| DeepSpeed | ✓ | ✓ | ✗ | ZeroQuant |
-| Triton | Depends on backend | | | |
-
-**FP8 Note:** Only on NVIDIA Hopper (H100+), 2x throughput vs FP16
-
----
-
----
-
-## 4. Latency Characteristics
-
-### First Token Time to Time (TTFT)
-
-**Best to Worst:** <br>
-
-1. TGI (Rust + safetensors, optimized cold start)
-2. vLLM (Python overhead but chunked prefill)
-3. TensorRT-LLM (engine loading overhead)
-4. DeepSpeed-Inference
-5. Triton (abstraction layer overhead)
-
----
-
-### Inter-Token Latency (ITL)
-
-**Best to Worst:** <br>
-
-1. TensorRT-LLM (maximum kernel optimization)
-2. vLLM (PagedAttention efficiency)
-3. TGI (FlashAttention + Rust)
-4. Triton (depends on backend)
-5. DeepSpeed-Inference
-
----
-
-### Throughput (tokens/second)
-
-**Best to Worst:** <br>
-
-1. vLLM (PagedAttention + continuous batching)
-2. TensorRT-LLM (hardware optimization)
-3. TGI (solid continuous batching)
-4. Triton + vLLM backend
-5. DeepSpeed-Inference
-
----
-
----
-
-## 5. Multi-GPU Considerations
-
-### Tensor Parallelism Performance
-
-**TensorRT-LLM:**  <br>
-
-- Custom NCCL optimizations
-- Lowest latency for TP
-
-**vLLM:** <br>
-
-- Ray-based distribution
-- Good performance, more overhead
-
-**TGI:** <br>
-
-- Rust-based TP implementation
-- Efficient but less optimized than TensorRT
-
----
-
-### Pipeline Parallelism
-
-- Best support: DeepSpeed-Inference, TensorRT-LLM
-- Limited: vLLM (experimental)
-- Not primary focus: TGI
-
----
-
----
-
-## 6. Production Deployment Factors
-
-### Containerization
-
-**Easiest:** TGI, vLLM (official Docker images, simple configs)  
-**Medium:** Triton (more complex configs)  
-**Complex:** TensorRT-LLM (build dependencies), DeepSpeed
-
----
-
-### Monitoring & Observability
-
-**Most Comprehensive:** Triton > TGI > vLLM > DeepSpeed  
-**Key Metrics:** Queue depth, batch size, KV cache utilization, token throughput
-
----
-
-### Scaling Patterns
-
-**Horizontal (Multiple Instances):** All support, TGI/Triton easiest  
-**Vertical (Bigger GPUs):** TensorRT-LLM extracts most value  
-**Multi-Model:** Triton's core strength
-
----
-
----
-
-## 7. Interview Q&A
-
-**Q: vLLM vs TensorRT-LLM for production?** <br>
-A: vLLM for faster iteration, multi-LoRA, easier ops. TensorRT-LLM when you need absolute maximum throughput and have dedicated ML Eng team for maintenance.
-
----
-
-**Q: Why doesn't everyone use TensorRT-LLM if it's fastest?** <br>
-A: Setup complexity, need to rebuild engines for changes, GPU-specific builds, harder debugging. Speed gain (10-20%) often not worth operational overhead.
-
----
-
-**Q: When is DeepSpeed-Inference the right choice?** <br>
-A: When you're already using DeepSpeed for training and want unified tooling. Or when you need ZeRO-Inference for models larger than GPU memory. Not for general production serving.
-
----
-
-**Q: Can you mix frameworks?** <br>
-A: Yes via Triton backends. Run vLLM for LLM, TensorRT for embeddings, Python backend for custom logic. Single server, unified API.
-
----
-
-**Q: How to choose between vLLM and TGI?** <br>
-A: Similar performance. Choose TGI for HuggingFace integration, grammar constraints, Rust reliability. Choose vLLM for multi-LoRA, latest features, slightly higher throughput.
-
----
-
-**Q: What's the main bottleneck each framework optimizes?** <br>
-A: vLLM → memory fragmentation. TensorRT-LLM → compute efficiency. TGI → deployment stability. DeepSpeed → model size limits. Triton → pipeline complexity.
-
----
-
-**Q: Impact of continuous batching on latency?** <br>
-A: Slightly increases average latency per request (5-10%) but dramatically increases throughput (20-30%). Worth it for high-traffic scenarios, not for latency-critical single-user apps.
-
----
+Maximum GPU utilization, model versioning, enterprise observability. Requires an ML engineering team to maintain engine builds and Triton configurations. Justified at scale where the 8–15% throughput premium compounds into real cost savings.

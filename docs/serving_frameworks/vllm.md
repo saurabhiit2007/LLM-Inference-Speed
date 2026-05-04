@@ -1,122 +1,74 @@
-## 1. Core Innovation: PagedAttention
+# vLLM
 
-**Problem:** Traditional engines pre-allocate contiguous memory for max sequence length
+**Optimization axis: throughput via memory efficiency**
 
-- 60-80% GPU memory wasted on over-reservation
-- Internal fragmentation from unused allocated space
+vLLM is the most widely adopted open-source LLM serving framework. Its central contribution is PagedAttention — a rethink of how GPU memory is allocated for the KV cache that unlocks dramatically larger batch sizes.
 
-**Solution:** Paged memory management for KV cache
+---
 
-- KV cache split into fixed-size blocks (pages)
-- Non-contiguous physical memory mapped via block tables
-- Reduces waste to <4%, enables 2-3x larger batch sizes
+## 1. The Problem It Was Built to Solve
 
-**Memory Formula:**
+Before vLLM, every serving engine pre-allocated a contiguous block of GPU memory for each request's KV cache — sized for the *maximum possible* sequence length. This caused two forms of waste:
+
+- **Reservation waste:** a request generating 200 tokens still holds memory reserved for 2048
+- **Fragmentation:** as requests finish at different times, the freed blocks cannot be recombined for new requests of different sizes
+
+The result: 60–80% of KV cache memory sat unused at any given moment, capping the number of concurrent requests and, therefore, throughput.
+
+---
+
+## 2. Core Insight: PagedAttention
+
+PagedAttention borrows the OS virtual memory idea and applies it to the KV cache.
+
+Instead of one contiguous allocation per request, the KV cache is divided into fixed-size **blocks (pages)** — typically 16 tokens each. A **block table** maps each request's logical KV positions to non-contiguous physical blocks, exactly like a page table in an OS.
 
 ```
-KV Memory ≈ 2 × L × T × H × D_h × B
+Request A:  [Block 3] → [Block 7] → [Block 12]   (scattered, but logically contiguous)
+Request B:  [Block 1] → [Block 9]
+Request C:  [Block 2] → [Block 5] → [Block 8] → [Block 11]
 ```
 
-For Llama-3 8B (L=32, D=4096, FP16): ~0.5 MB per token
-
-- 2k tokens → ~1 GB
-- 8k tokens → ~4 GB
+**Result:** memory waste drops to under 4%, fitting 2–3× more concurrent sequences on the same GPU. Higher concurrency means more tokens generated per second.
 
 ---
 
----
+## 3. Architecture
 
-## 2. Continuous Batching
+### Continuous batching
 
-**vs Static Batching:** Waits for entire batch to complete before accepting new requests
-
-**vLLM Approach:** Iteration-level scheduling <br>
-
-- New requests fill slots freed by completed sequences immediately
-- Eliminates GPU idle time ("bubbles")
-- Increases throughput by 20-30%
-
----
-
----
-
-## 3. Prefill vs Decode Phases
-
-| Phase | Processing | Bottleneck | vLLM Optimization |
-|-------|-----------|------------|-------------------|
-| Prefill | Parallel over tokens | Compute-bound | Chunked prefill |
-| Decode | Sequential per token | Memory-bandwidth | PagedAttention |
-
-**Chunked Prefill:** Breaks large prompts into chunks to prevent blocking decode operations
-
----
-
----
-
-## 4. Modern Features (2025-2026)
-
-### Speculative Decoding
-
-- Small draft model generates k tokens
-- Large target model verifies in single forward pass
-- 2-3x latency reduction for heavy models
-
----
+vLLM schedules at the *iteration* level, not the request level. As soon as one sequence finishes, the freed KV blocks are immediately reassigned and a new request is added to the batch — no GPU idle time between requests.
 
 ### Automatic Prefix Caching (APC)
 
-- Shared KV blocks for common prefixes (system prompts, RAG contexts)
-- Multiple requests reference same physical memory
-- Critical for multi-turn chat and RAG applications
+KV blocks for shared prefixes (system prompts, RAG contexts) are hashed and reused across requests. If 100 concurrent requests share the same 500-token system prompt, that prompt's KV blocks are computed once. This changes the economics of RAG and multi-turn chat dramatically.
+
+### Multi-LoRA serving
+
+vLLM can serve a base model plus hundreds of LoRA adapters simultaneously using SGMV (Segmented Gather-Scatter Matrix-Vector) kernels that batch computation across different adapters. A single GPU can handle multi-tenant deployments where each tenant has a fine-tuned adapter.
+
+### Chunked prefill
+
+Long prompts are split into chunks and interleaved with decode steps, preventing a single large prefill from stalling all decode operations on co-batched requests.
+
+### Memory pressure handling
+
+When the GPU runs out of free blocks, vLLM either **swaps** KV blocks to CPU RAM or **recomputes** them later. On modern GPUs with high compute-to-bandwidth ratios, recomputation is often faster than the PCIe transfer.
 
 ---
 
-### Multi-LoRA Support
+## 4. Tradeoffs
 
-- Serve base model + hundreds of LoRA adapters simultaneously
-- SGMV kernels enable batched computation across different adapters
-- Ideal for multi-tenant SaaS deployments
-
----
-
----
-
-## 5. Memory Pressure Handling
-
-**Preemption Strategies:**
-
-1. **Swap:** Move KV blocks to CPU memory (slower, preserves compute)
-2. **Recompute:** Drop blocks and recalculate later (faster on modern GPUs)
-
-Strategy selection based on GPU compute vs memory bandwidth ratio.
+| | |
+|---|---|
+| **Python overhead** | vLLM's scheduler runs in Python; TensorRT-LLM's compiled CUDA graphs are faster at equivalent concurrency |
+| **No grammar constraints** | Structured output requires external tools (Outlines, Guidance) |
+| **Multi-node TP** | Tensor parallelism via Ray works but has more overhead than TensorRT-LLM's custom NCCL ops |
 
 ---
 
----
+## 5. When to Use
 
-## 6. Interview Q&A
+**Use vLLM when:** you need maximum throughput, multi-tenant serving, or multi-LoRA support and want minimal setup complexity. It is the default production choice for most teams.
 
-**Q: Why does PagedAttention improve throughput?** <br>
-A: Eliminates memory fragmentation, allowing more concurrent requests to fit in GPU memory. With 60-80% waste reduced to <4%, effective batch size increases 2-3x.
-
----
-
-**Q: When is prefill the bottleneck vs decode?** <br>
-A: Prefill dominates for short outputs with long prompts (summarization). Decode dominates for long generations (creative writing). vLLM uses chunked prefill to balance both.
-
----
-
-**Q: How does vLLM handle variable-length sequences in a batch?** <br>
-A: Continuous batching removes completed sequences and adds new ones at iteration boundaries. Block tables allow each sequence to use non-contiguous memory independently.
-
----
-
-**Q: Why use recompute over swap for preemption?** <br>
-A: On H100/A100 GPUs with high compute, recomputing KV cache is faster than PCIe transfer to CPU. Swap preferred for older GPUs or when CPU memory is abundant.
-
----
-
-**Q: How does APC differ from traditional caching?** <br>
-A: Traditional caching stores entire request results. APC caches KV blocks at sub-request granularity, enabling partial reuse across different requests with shared prefixes.
-
----
+**Don't use vLLM when:** you need the absolute lowest per-token latency on fixed NVIDIA hardware and can accept a 20–30 minute engine build cycle — use TensorRT-LLM instead.

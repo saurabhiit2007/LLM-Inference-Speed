@@ -1,137 +1,92 @@
-## 1. Core Architecture
+# TensorRT-LLM
 
-**NVIDIA's optimization stack** for LLM inference on their GPUs <br>
+**Optimization axis: latency via compile-time hardware specialization**
 
-- Built on TensorRT for kernel-level optimization
-- Focuses on extracting maximum performance from NVIDIA hardware
-- Trade-off: Complex setup vs peak performance
+TensorRT-LLM is NVIDIA's inference toolkit that compiles a model into a GPU-specific engine ahead of serving. It consistently benchmarks at the highest per-token throughput of any framework — at the cost of a slow build step and hardware lock-in.
 
 ---
 
----
+## 1. The Problem It Was Built to Solve
 
-## 2. Key Technologies
+Generic inference runtimes (PyTorch, Hugging Face) run models through a general-purpose compute graph. They leave substantial NVIDIA hardware capability unused: Tensor Cores under-utilized, memory operations not fused, CUDA kernels not specialized for the exact GPU generation being targeted.
 
-### 1. In-flight Batching (Continuous Batching)
-
-- Similar to vLLM's approach
-- Dynamically adds/removes requests during execution
-- Optimized specifically for NVIDIA GPU scheduling
-
-### 2. Paged KV Cache
-
-- Inspired by vLLM's PagedAttention
-- NVIDIA-optimized memory management
-- Custom CUDA kernels for memory operations
-
-### 3. Kernel Fusion
-
-- Combines multiple operations into single kernels
-- Reduces memory transfers between GPU operations
-- Examples: LayerNorm+Residual, QKV projection fusion
-
-### 4. FlashAttention & FP8 Support
-
-- Integrated FlashAttention-2 for memory-efficient attention
-- Native FP8 quantization on Hopper GPUs (H100)
-- 2x throughput vs FP16 with minimal accuracy loss
+TensorRT-LLM's answer is to treat inference as a **compilation problem**: take the model once, spend time analyzing and optimizing it for a specific GPU, and then serve from the compiled artifact.
 
 ---
 
----
+## 2. Core Insight: Compile Once, Serve Fast
 
-## 3. Quantization Support
+The build step performs optimizations that are impossible at runtime:
 
-**Weight-Only Quantization:** <br>
+- **Kernel fusion:** merge adjacent ops (e.g., LayerNorm + residual add + QKV projection) into a single CUDA kernel, eliminating intermediate memory writes
+- **CUDA graph capture:** the entire forward pass for a fixed batch shape is recorded as a CUDA graph and replayed with minimal CPU overhead
+- **Hardware-specific instructions:** H100 engines use FP8 Tensor Core instructions that don't exist on A100; A100 engines use INT8 Tensor Cores differently — the compiler selects the right path per GPU generation
+- **Quantization folding:** GPTQ/AWQ quantization constants are folded into the kernel itself rather than applied at runtime
 
-- INT8/INT4 weights, FP16 activations
-- 2-4x memory reduction
-- GPTQ, AWQ methods supported
+```
+Model weights + architecture definition
+          ↓  trtllm-build (5–30 min)
+GPU-specific compiled engine
+          ↓  runtime
+Inference at hardware ceiling
+```
 
-**Activation Quantization:** <br>
-
-- FP8 (Hopper GPUs only)
-- SmoothQuant for INT8 activations
-
----
-
----
-
-## 4. Model Parallelism
-
-### Tensor Parallelism
-
-- Splits model layers across GPUs
-- Low-latency (intra-node communication)
-- Best for latency-sensitive serving
-
-### Pipeline Parallelism
-
-- Splits model vertically into stages
-- Higher throughput for large batches
-- Micro-batching to reduce bubbles
-
-### Combined TP+PP
-
-- Multi-dimensional parallelism
-- Example: 8-way TP × 4-way PP for 32 GPUs
+The compiled engine is opaque and GPU-specific: an H100 engine will not run on an A100.
 
 ---
 
----
+## 3. Architecture
 
-## 5. Engine Building Process
+### Two-step workflow
 
-**Two-Step Workflow:** <br>
+**Build phase (one-time):**
+```bash
+trtllm-build --model_dir ./llama-3-8b \
+             --dtype float16 \
+             --tp_size 1 \
+             --output_dir ./engine
+```
+This generates a `.engine` file specific to the GPU and the chosen precision, batch size range, and sequence length range.
 
-1. **Build:** Model → Optimized TensorRT engine (slow, one-time)
-2. **Runtime:** Load engine → Inference (fast)
+**Runtime phase:**
+```python
+from tensorrt_llm import LLM
+llm = LLM(model="./engine")
+output = llm.generate("The capital of France is")
+```
+The runtime loads the pre-compiled engine and serves with minimal overhead.
 
-**Key considerations:** <br>
+### In-flight batching and paged KV cache
 
-- Engines are GPU-specific (H100 engine ≠ A100 engine)
-- Rebuild required for different batch sizes or sequence lengths
-- Trade flexibility for maximum performance
+TensorRT-LLM adopted continuous batching and a paged KV cache (inspired by vLLM's PagedAttention) with NVIDIA-optimized CUDA kernels. These run faster than vLLM's equivalent because the kernels are compiled for the specific GPU.
 
----
+### FP8 on Hopper GPUs
 
----
+On H100/H200, TensorRT-LLM supports FP8 quantization natively via Hopper's Tensor Memory Accelerator. With proper calibration, FP8 delivers roughly 2× the throughput of FP16 at under 1% accuracy degradation.
 
-## 6. Multi-GPU Inference Modes
+### Model parallelism
 
-**KV Cache Transfer Optimization:**
-
-- Custom NCCL/NVLink operations for KV cache
-- Overlaps communication with computation
-- Critical for tensor parallel setups
-
----
-
----
-
-## 7. Interview Q&A
-
-**Q: When to choose TensorRT-LLM over vLLM?** <br>
-A: When you need absolute maximum throughput on NVIDIA GPUs and can handle complex setup. vLLM for ease of use and flexibility; TensorRT-LLM for peak performance.
+Supports tensor parallelism (TP) and pipeline parallelism (PP) with custom NCCL communication primitives that overlap computation and communication — faster than vLLM's Ray-based TP at high GPU counts.
 
 ---
 
-**Q: Why is engine building necessary?** <br>
-A: TensorRT optimizes compute graphs at compile time (kernel selection, fusion, memory layout). This specialization achieves maximum performance but loses runtime flexibility.
+## 4. Tradeoffs
+
+| | |
+|---|---|
+| **Build time** | 5–30 minutes per model × GPU combination; any change (new quantization, different batch size range) requires a rebuild |
+| **Hardware lock-in** | Engines are non-portable; H100 engines don't run on A100 |
+| **Slower iteration** | Can't hot-swap models; unsuitable for rapid experimentation |
+| **Operational complexity** | Requires ML engineering investment to maintain engine builds across model versions |
+
+The performance advantage over vLLM at equivalent settings is typically 8–15%. Whether that justifies the operational overhead depends on the scale of the deployment.
 
 ---
 
-**Q: How does TensorRT-LLM handle dynamic shapes?** <br>
-A: Uses optimization profiles with min/max ranges during build. Runtime performance varies by how well actual inputs match the profile. Too wide a range reduces optimization effectiveness.
+## 5. When to Use
 
----
+**Use TensorRT-LLM when:** you have a stable, production-hardened model on fixed NVIDIA hardware and need to extract every last token/second — for example, a high-traffic product with a dedicated inference cluster.
 
-**Q: What's the FP8 accuracy impact?** <br>
-A: On Hopper GPUs with proper calibration, <1% accuracy degradation for most models. Requires per-tensor scaling and careful quantization of outlier features.
+**Don't use TensorRT-LLM when:** you're iterating on models frequently, running on non-NVIDIA hardware, or don't have the engineering capacity to maintain engine builds.
 
----
-
-**Q: Why does TensorRT-LLM require specific CUDA versions?** <br>
-A: Tightly integrated with CUDA toolkit for custom kernel launches, memory management, and GPU-specific optimizations. Newer releases exploit latest CUDA features (e.g., Hopper's Tensor Memory Accelerator).
-
----
+**Common production pattern:** pair TensorRT-LLM as the inference backend with Triton Inference Server as the HTTP/gRPC frontend for enterprise-grade observability and model versioning.
