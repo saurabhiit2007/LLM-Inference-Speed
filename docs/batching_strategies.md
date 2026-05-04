@@ -157,12 +157,19 @@ Iteration 4: Req5, Req3 complete → Req6, Req7 join → [Req1, Req4, Req6, Req7
 
 ### Problem
 
-**Long prompts block decode:**
+**Long prompts block decode in continuous batching.**
+
+Continuous batching mixes two fundamentally different GPU operations in the same schedule: *prefill* (processing a new prompt) and *decode* (generating the next token for requests already mid-sequence). These have very different compute profiles:
+
+- **Prefill** processes all prompt tokens in one large forward pass — highly parallel, compute-intensive. A 10,000-token prompt is a single fat GPU operation that takes roughly 50× longer than one decode step.
+- **Decode** is sequential and memory-bandwidth-bound — one token per step, fast.
+
+When a long-prompt request arrives during ongoing decodes, the scheduler runs the full prefill before returning to decode. Every currently-decoding request stalls for the duration — their inter-token latency can spike from ~30ms to 1500ms or more. This is **not** a problem in static batching, where all requests prefill together before any decoding begins and stages never overlap.
 
 ```
-Prompt: 10,000 tokens (prefill) → 50 iterations
-Short prompts: waiting in queue
-Decode operations: starved
+Prompt: 10,000 tokens (prefill) → runs for ~50 decode-step equivalents
+Ongoing decode requests: stalled, inter-token latency spikes
+Short prompts waiting to enter: stuck in queue until prefill finishes
 ```
 
 ---
