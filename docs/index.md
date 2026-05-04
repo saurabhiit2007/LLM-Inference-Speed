@@ -65,13 +65,6 @@ A technical reference for how large language models are served efficiently — c
 | [Framework Comparison](serving_frameworks/framework_comparison.md) | Decision tree, feature matrix, multi-GPU trade-offs |
 | [Disaggregated Prefill-Decode](serving_frameworks/disaggregated_prefill_decode.md) | Separate GPU pools for prefill and decode; Mooncake, DistServe |
 
-### Test-Time Compute Scaling
-
-| Topic | What It Covers |
-|---|---|
-| [Compute-Optimal Inference](test_time_compute/compute_optimal_inference.md) | Power laws, parallel vs sequential scaling, o1/R1 |
-| [Best-of-N Sampling](test_time_compute/best_of_n_sampling.md) | Algorithm, reward models, cost vs quality trade-offs |
-| [ORMs & PRMs](test_time_compute/orm_prm.md) | Step-level vs outcome scoring, tree search, training data |
 
 ---
 
