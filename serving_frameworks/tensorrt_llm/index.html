@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-core-architecture" class="md-skip">
+        <a href="#tensorrt-llm" class="md-skip">
           Skip to content
         </a>
       
@@ -1016,6 +1016,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -1048,6 +1050,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1056,55 +1060,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-core-architecture" class="md-nav__link">
+  <a href="#1-the-problem-it-was-built-to-solve" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Core Architecture
+      1. The Problem It Was Built to Solve
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-key-technologies" class="md-nav__link">
+  <a href="#2-core-insight-compile-once-serve-fast" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Key Technologies
+      2. Core Insight: Compile Once, Serve Fast
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Key Technologies">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-in-flight-batching-continuous-batching" class="md-nav__link">
+  <a href="#two-step-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      1. In-flight Batching (Continuous Batching)
+      Two-step workflow
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-paged-kv-cache" class="md-nav__link">
+  <a href="#in-flight-batching-and-paged-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Paged KV Cache
+      In-flight batching and paged KV cache
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-kernel-fusion" class="md-nav__link">
+  <a href="#fp8-on-hopper-gpus" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Kernel Fusion
+      FP8 on Hopper GPUs
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-flashattention-fp8-support" class="md-nav__link">
+  <a href="#model-parallelism" class="md-nav__link">
     <span class="md-ellipsis">
-      4. FlashAttention &amp; FP8 Support
+      Model parallelism
     </span>
   </a>
   
@@ -1116,78 +1129,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-quantization-support" class="md-nav__link">
+  <a href="#4-tradeoffs" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Quantization Support
+      4. Tradeoffs
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-model-parallelism" class="md-nav__link">
+  <a href="#5-when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Model Parallelism
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Model Parallelism">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tensor-parallelism" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tensor Parallelism
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pipeline-parallelism" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pipeline Parallelism
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#combined-tppp" class="md-nav__link">
-    <span class="md-ellipsis">
-      Combined TP+PP
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-engine-building-process" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Engine Building Process
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-multi-gpu-inference-modes" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Multi-GPU Inference Modes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-interview-qa" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Interview Q&amp;A
+      5. When to Use
     </span>
   </a>
   
@@ -1408,6 +1361,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1416,55 +1371,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-core-architecture" class="md-nav__link">
+  <a href="#1-the-problem-it-was-built-to-solve" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Core Architecture
+      1. The Problem It Was Built to Solve
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-key-technologies" class="md-nav__link">
+  <a href="#2-core-insight-compile-once-serve-fast" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Key Technologies
+      2. Core Insight: Compile Once, Serve Fast
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Key Technologies">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-in-flight-batching-continuous-batching" class="md-nav__link">
+  <a href="#two-step-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      1. In-flight Batching (Continuous Batching)
+      Two-step workflow
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-paged-kv-cache" class="md-nav__link">
+  <a href="#in-flight-batching-and-paged-kv-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Paged KV Cache
+      In-flight batching and paged KV cache
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-kernel-fusion" class="md-nav__link">
+  <a href="#fp8-on-hopper-gpus" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Kernel Fusion
+      FP8 on Hopper GPUs
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-flashattention-fp8-support" class="md-nav__link">
+  <a href="#model-parallelism" class="md-nav__link">
     <span class="md-ellipsis">
-      4. FlashAttention &amp; FP8 Support
+      Model parallelism
     </span>
   </a>
   
@@ -1476,78 +1440,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-quantization-support" class="md-nav__link">
+  <a href="#4-tradeoffs" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Quantization Support
+      4. Tradeoffs
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-model-parallelism" class="md-nav__link">
+  <a href="#5-when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Model Parallelism
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Model Parallelism">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tensor-parallelism" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tensor Parallelism
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pipeline-parallelism" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pipeline Parallelism
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#combined-tppp" class="md-nav__link">
-    <span class="md-ellipsis">
-      Combined TP+PP
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-engine-building-process" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Engine Building Process
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-multi-gpu-inference-modes" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Multi-GPU Inference Modes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-interview-qa" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Interview Q&amp;A
+      5. When to Use
     </span>
   </a>
   
@@ -1572,117 +1476,85 @@
   
 
 
-  <h1>TensorRT LLM</h1>
-
-<h2 id="1-core-architecture">1. Core Architecture<a class="headerlink" href="#1-core-architecture" title="Permanent link">&para;</a></h2>
-<p><strong>NVIDIA's optimization stack</strong> for LLM inference on their GPUs <br></p>
+<h1 id="tensorrt-llm">TensorRT-LLM<a class="headerlink" href="#tensorrt-llm" title="Permanent link">&para;</a></h1>
+<p><strong>Optimization axis: latency via compile-time hardware specialization</strong></p>
+<p>TensorRT-LLM is NVIDIA's inference toolkit that compiles a model into a GPU-specific engine ahead of serving. It consistently benchmarks at the highest per-token throughput of any framework — at the cost of a slow build step and hardware lock-in.</p>
+<hr />
+<h2 id="1-the-problem-it-was-built-to-solve">1. The Problem It Was Built to Solve<a class="headerlink" href="#1-the-problem-it-was-built-to-solve" title="Permanent link">&para;</a></h2>
+<p>Generic inference runtimes (PyTorch, Hugging Face) run models through a general-purpose compute graph. They leave substantial NVIDIA hardware capability unused: Tensor Cores under-utilized, memory operations not fused, CUDA kernels not specialized for the exact GPU generation being targeted.</p>
+<p>TensorRT-LLM's answer is to treat inference as a <strong>compilation problem</strong>: take the model once, spend time analyzing and optimizing it for a specific GPU, and then serve from the compiled artifact.</p>
+<hr />
+<h2 id="2-core-insight-compile-once-serve-fast">2. Core Insight: Compile Once, Serve Fast<a class="headerlink" href="#2-core-insight-compile-once-serve-fast" title="Permanent link">&para;</a></h2>
+<p>The build step performs optimizations that are impossible at runtime:</p>
 <ul>
-<li>Built on TensorRT for kernel-level optimization</li>
-<li>Focuses on extracting maximum performance from NVIDIA hardware</li>
-<li>Trade-off: Complex setup vs peak performance</li>
+<li><strong>Kernel fusion:</strong> merge adjacent ops (e.g., LayerNorm + residual add + QKV projection) into a single CUDA kernel, eliminating intermediate memory writes</li>
+<li><strong>CUDA graph capture:</strong> the entire forward pass for a fixed batch shape is recorded as a CUDA graph and replayed with minimal CPU overhead</li>
+<li><strong>Hardware-specific instructions:</strong> H100 engines use FP8 Tensor Core instructions that don't exist on A100; A100 engines use INT8 Tensor Cores differently — the compiler selects the right path per GPU generation</li>
+<li><strong>Quantization folding:</strong> GPTQ/AWQ quantization constants are folded into the kernel itself rather than applied at runtime</li>
 </ul>
+<div class="highlight"><pre><span></span><code>Model weights + architecture definition
+          ↓  trtllm-build (5–30 min)
+GPU-specific compiled engine
+          ↓  runtime
+Inference at hardware ceiling
+</code></pre></div>
+<p>The compiled engine is opaque and GPU-specific: an H100 engine will not run on an A100.</p>
 <hr />
+<h2 id="3-architecture">3. Architecture<a class="headerlink" href="#3-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="two-step-workflow">Two-step workflow<a class="headerlink" href="#two-step-workflow" title="Permanent link">&para;</a></h3>
+<p><strong>Build phase (one-time):</strong>
+<div class="highlight"><pre><span></span><code>trtllm-build<span class="w"> </span>--model_dir<span class="w"> </span>./llama-3-8b<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--dtype<span class="w"> </span>float16<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--tp_size<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--output_dir<span class="w"> </span>./engine
+</code></pre></div>
+This generates a <code>.engine</code> file specific to the GPU and the chosen precision, batch size range, and sequence length range.</p>
+<p><strong>Runtime phase:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tensorrt_llm</span> <span class="kn">import</span> <span class="n">LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">LLM</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;./engine&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;The capital of France is&quot;</span><span class="p">)</span>
+</code></pre></div>
+The runtime loads the pre-compiled engine and serves with minimal overhead.</p>
+<h3 id="in-flight-batching-and-paged-kv-cache">In-flight batching and paged KV cache<a class="headerlink" href="#in-flight-batching-and-paged-kv-cache" title="Permanent link">&para;</a></h3>
+<p>TensorRT-LLM adopted continuous batching and a paged KV cache (inspired by vLLM's PagedAttention) with NVIDIA-optimized CUDA kernels. These run faster than vLLM's equivalent because the kernels are compiled for the specific GPU.</p>
+<h3 id="fp8-on-hopper-gpus">FP8 on Hopper GPUs<a class="headerlink" href="#fp8-on-hopper-gpus" title="Permanent link">&para;</a></h3>
+<p>On H100/H200, TensorRT-LLM supports FP8 quantization natively via Hopper's Tensor Memory Accelerator. With proper calibration, FP8 delivers roughly 2× the throughput of FP16 at under 1% accuracy degradation.</p>
+<h3 id="model-parallelism">Model parallelism<a class="headerlink" href="#model-parallelism" title="Permanent link">&para;</a></h3>
+<p>Supports tensor parallelism (TP) and pipeline parallelism (PP) with custom NCCL communication primitives that overlap computation and communication — faster than vLLM's Ray-based TP at high GPU counts.</p>
 <hr />
-<h2 id="2-key-technologies">2. Key Technologies<a class="headerlink" href="#2-key-technologies" title="Permanent link">&para;</a></h2>
-<h3 id="1-in-flight-batching-continuous-batching">1. In-flight Batching (Continuous Batching)<a class="headerlink" href="#1-in-flight-batching-continuous-batching" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Similar to vLLM's approach</li>
-<li>Dynamically adds/removes requests during execution</li>
-<li>Optimized specifically for NVIDIA GPU scheduling</li>
-</ul>
-<h3 id="2-paged-kv-cache">2. Paged KV Cache<a class="headerlink" href="#2-paged-kv-cache" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Inspired by vLLM's PagedAttention</li>
-<li>NVIDIA-optimized memory management</li>
-<li>Custom CUDA kernels for memory operations</li>
-</ul>
-<h3 id="3-kernel-fusion">3. Kernel Fusion<a class="headerlink" href="#3-kernel-fusion" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Combines multiple operations into single kernels</li>
-<li>Reduces memory transfers between GPU operations</li>
-<li>Examples: LayerNorm+Residual, QKV projection fusion</li>
-</ul>
-<h3 id="4-flashattention-fp8-support">4. FlashAttention &amp; FP8 Support<a class="headerlink" href="#4-flashattention-fp8-support" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Integrated FlashAttention-2 for memory-efficient attention</li>
-<li>Native FP8 quantization on Hopper GPUs (H100)</li>
-<li>2x throughput vs FP16 with minimal accuracy loss</li>
-</ul>
+<h2 id="4-tradeoffs">4. Tradeoffs<a class="headerlink" href="#4-tradeoffs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Build time</strong></td>
+<td>5–30 minutes per model × GPU combination; any change (new quantization, different batch size range) requires a rebuild</td>
+</tr>
+<tr>
+<td><strong>Hardware lock-in</strong></td>
+<td>Engines are non-portable; H100 engines don't run on A100</td>
+</tr>
+<tr>
+<td><strong>Slower iteration</strong></td>
+<td>Can't hot-swap models; unsuitable for rapid experimentation</td>
+</tr>
+<tr>
+<td><strong>Operational complexity</strong></td>
+<td>Requires ML engineering investment to maintain engine builds across model versions</td>
+</tr>
+</tbody>
+</table>
+<p>The performance advantage over vLLM at equivalent settings is typically 8–15%. Whether that justifies the operational overhead depends on the scale of the deployment.</p>
 <hr />
-<hr />
-<h2 id="3-quantization-support">3. Quantization Support<a class="headerlink" href="#3-quantization-support" title="Permanent link">&para;</a></h2>
-<p><strong>Weight-Only Quantization:</strong> <br></p>
-<ul>
-<li>INT8/INT4 weights, FP16 activations</li>
-<li>2-4x memory reduction</li>
-<li>GPTQ, AWQ methods supported</li>
-</ul>
-<p><strong>Activation Quantization:</strong> <br></p>
-<ul>
-<li>FP8 (Hopper GPUs only)</li>
-<li>SmoothQuant for INT8 activations</li>
-</ul>
-<hr />
-<hr />
-<h2 id="4-model-parallelism">4. Model Parallelism<a class="headerlink" href="#4-model-parallelism" title="Permanent link">&para;</a></h2>
-<h3 id="tensor-parallelism">Tensor Parallelism<a class="headerlink" href="#tensor-parallelism" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Splits model layers across GPUs</li>
-<li>Low-latency (intra-node communication)</li>
-<li>Best for latency-sensitive serving</li>
-</ul>
-<h3 id="pipeline-parallelism">Pipeline Parallelism<a class="headerlink" href="#pipeline-parallelism" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Splits model vertically into stages</li>
-<li>Higher throughput for large batches</li>
-<li>Micro-batching to reduce bubbles</li>
-</ul>
-<h3 id="combined-tppp">Combined TP+PP<a class="headerlink" href="#combined-tppp" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Multi-dimensional parallelism</li>
-<li>Example: 8-way TP × 4-way PP for 32 GPUs</li>
-</ul>
-<hr />
-<hr />
-<h2 id="5-engine-building-process">5. Engine Building Process<a class="headerlink" href="#5-engine-building-process" title="Permanent link">&para;</a></h2>
-<p><strong>Two-Step Workflow:</strong> <br></p>
-<ol>
-<li><strong>Build:</strong> Model → Optimized TensorRT engine (slow, one-time)</li>
-<li><strong>Runtime:</strong> Load engine → Inference (fast)</li>
-</ol>
-<p><strong>Key considerations:</strong> <br></p>
-<ul>
-<li>Engines are GPU-specific (H100 engine ≠ A100 engine)</li>
-<li>Rebuild required for different batch sizes or sequence lengths</li>
-<li>Trade flexibility for maximum performance</li>
-</ul>
-<hr />
-<hr />
-<h2 id="6-multi-gpu-inference-modes">6. Multi-GPU Inference Modes<a class="headerlink" href="#6-multi-gpu-inference-modes" title="Permanent link">&para;</a></h2>
-<p><strong>KV Cache Transfer Optimization:</strong></p>
-<ul>
-<li>Custom NCCL/NVLink operations for KV cache</li>
-<li>Overlaps communication with computation</li>
-<li>Critical for tensor parallel setups</li>
-</ul>
-<hr />
-<hr />
-<h2 id="7-interview-qa">7. Interview Q&amp;A<a class="headerlink" href="#7-interview-qa" title="Permanent link">&para;</a></h2>
-<p><strong>Q: When to choose TensorRT-LLM over vLLM?</strong> <br>
-A: When you need absolute maximum throughput on NVIDIA GPUs and can handle complex setup. vLLM for ease of use and flexibility; TensorRT-LLM for peak performance.</p>
-<hr />
-<p><strong>Q: Why is engine building necessary?</strong> <br>
-A: TensorRT optimizes compute graphs at compile time (kernel selection, fusion, memory layout). This specialization achieves maximum performance but loses runtime flexibility.</p>
-<hr />
-<p><strong>Q: How does TensorRT-LLM handle dynamic shapes?</strong> <br>
-A: Uses optimization profiles with min/max ranges during build. Runtime performance varies by how well actual inputs match the profile. Too wide a range reduces optimization effectiveness.</p>
-<hr />
-<p><strong>Q: What's the FP8 accuracy impact?</strong> <br>
-A: On Hopper GPUs with proper calibration, &lt;1% accuracy degradation for most models. Requires per-tensor scaling and careful quantization of outlier features.</p>
-<hr />
-<p><strong>Q: Why does TensorRT-LLM require specific CUDA versions?</strong> <br>
-A: Tightly integrated with CUDA toolkit for custom kernel launches, memory management, and GPU-specific optimizations. Newer releases exploit latest CUDA features (e.g., Hopper's Tensor Memory Accelerator).</p>
-<hr />
+<h2 id="5-when-to-use">5. When to Use<a class="headerlink" href="#5-when-to-use" title="Permanent link">&para;</a></h2>
+<p><strong>Use TensorRT-LLM when:</strong> you have a stable, production-hardened model on fixed NVIDIA hardware and need to extract every last token/second — for example, a high-traffic product with a dedicated inference cluster.</p>
+<p><strong>Don't use TensorRT-LLM when:</strong> you're iterating on models frequently, running on non-NVIDIA hardware, or don't have the engineering capacity to maintain engine builds.</p>
+<p><strong>Common production pattern:</strong> pair TensorRT-LLM as the inference backend with Triton Inference Server as the HTTP/gRPC frontend for enterprise-grade observability and model versioning.</p>
 
 
 
